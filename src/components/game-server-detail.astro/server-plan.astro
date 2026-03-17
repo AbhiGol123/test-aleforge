@@ -19,7 +19,7 @@ const categories = game?.hasBudget
 async function getDynamicPlans() {
   try {
     const res = await fetch(
-      "plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=plans.json"
+      "https://plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=plans.json"
     );
     if (!res.ok) throw new Error("Failed to fetch plans");
     const allPlans = await res.json();

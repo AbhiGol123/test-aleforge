@@ -49,7 +49,7 @@ export async function getGamesWithMinPrice() {
 
     // ✅ Fetch API games
     const apiRes = await fetch(
-      "plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=games.json"
+      "https://plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=games.json"
     );
 
     if (!apiRes.ok) {

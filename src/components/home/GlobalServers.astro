@@ -1,5 +1,5 @@
 ---
-const res = await fetch("plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=locations.json");
+const res = await fetch("https://plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=locations.json");
 
 const json = res.ok ? await res.json() : {data: []};
 const locations = Array.isArray(json.data) ? json.data : [];
