@@ -1,0 +1,92 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Contact from "@components/sections/contact.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+---
+
+<Layout>
+  <Navigation />
+  <Breadcrumbs />
+  <section class="terms_of_service">
+    <div class="global-padding section-padding">
+      <div class="container-large">
+        <div class="title-wrapper">
+          <span class="overline" data-i18n="privacyPolicyPage.legalInfo">Legal Info</span>
+          <h1 data-i18n="privacyPolicyPage.privacyPolicy">Privacy Policy</h1>
+        </div>
+        <div class="policy-wrapper">
+          <h2>Privacy Policy for AleForge</h2>
+
+          <h3 data-i18n="privacyPolicyPage.iOverview">I. Overview</h3>
+          <p data-i18n="privacyPolicyPage.privacyPolicyExplainsHowAleforge">
+            This Privacy Policy explains how AleForge (“we”, “us”, “our”) collects, uses, stores, and protects your
+            personal information when you access or use our services. By using our platform, you acknowledge and agree
+            to the practices described in this policy.
+          </p>
+          <p>
+            Our services include hosting for various game servers such as Minecraft, ARK, Valheim, and more. We are
+            committed to safeguarding your data and ensuring transparency in how it is handled.
+          </p>
+
+          <h3 data-i18n="privacyPolicyPage.iiInformationCollect">II. Information We Collect</h3>
+          <p data-i18n="privacyPolicyPage.mayCollectFollowingTypesInformation">We may collect the following types of information:</p>
+          <ul>
+            <li data-i18n="privacyPolicyPage.accountInformationNameEmailContact">Account information (name, email, contact details)</li>
+            <li data-i18n="privacyPolicyPage.billingPaymentDetails">Billing and payment details</li>
+            <li data-i18n="privacyPolicyPage.serverUsageDataLogs">Server usage data and logs</li>
+            <li data-i18n="privacyPolicyPage.deviceBrowserIpInformation">Device, browser, and IP information</li>
+            <li data-i18n="privacyPolicyPage.supportMessagesCommunicationHistory">Support messages and communication history</li>
+          </ul>
+
+          <h3 data-i18n="privacyPolicyPage.iiiHowUseInformation">III. How We Use Your Information</h3>
+          <p data-i18n="privacyPolicyPage.useCollectedDataProvideImprove">We use collected data to provide and improve our services, including:</p>
+          <ul>
+            <li data-i18n="privacyPolicyPage.settingUpMaintainingGameServers">Setting up and maintaining game servers</li>
+            <li data-i18n="privacyPolicyPage.processingPaymentsManagingSubscriptions">Processing payments and managing subscriptions</li>
+            <li data-i18n="privacyPolicyPage.respondingSupportRequestsInquiries">Responding to support requests and inquiries</li>
+            <li data-i18n="privacyPolicyPage.enhancingPerformanceSecurityUserExperience">Enhancing performance, security, and user experience</li>
+            <li data-i18n="privacyPolicyPage.preventingFraudEnsuringFairUsage">Preventing fraud and ensuring fair usage</li>
+          </ul>
+
+          <h3 data-i18n="privacyPolicyPage.ivSharingInformation">IV. Sharing of Information</h3>
+          <p data-i18n="privacyPolicyPage.doNotSellPersonalData">
+            We do not sell your personal data. We may share limited information with trusted third parties such as
+            payment processors, infrastructure providers, and support platforms when necessary to operate our services.
+          </p>
+          <p>
+            We may also disclose information if required to comply with legal obligations or protect the rights and
+            safety of our users.
+          </p>
+
+          <h3 data-i18n="privacyPolicyPage.vSecurityMeasures">V. Security Measures</h3>
+          <p data-i18n="privacyPolicyPage.aleforgeImplementsReasonableSecurityPractices">
+            AleForge implements reasonable security practices to safeguard personal data. However, no method of
+            transmission or electronic storage is completely secure. Users are encouraged to maintain strong passwords
+            and protect their account credentials.
+          </p>
+
+          <h3 data-i18n="privacyPolicyPage.viRights">VI. Your Rights</h3>
+          <p data-i18n="privacyPolicyPage.mayRequestFollowingDependingJurisdiction">You may request the following, depending on your jurisdiction:</p>
+          <ul>
+            <li data-i18n="privacyPolicyPage.accessPersonalDataHoldAbout">Access to the personal data we hold about you</li>
+            <li data-i18n="privacyPolicyPage.correctionDeletionInformation">Correction or deletion of your information</li>
+            <li data-i18n="privacyPolicyPage.restrictionsHowDataProcessed">Restrictions on how your data is processed</li>
+            <li data-i18n="privacyPolicyPage.portabilityData">Portability of your data</li>
+          </ul>
+
+          <h3 data-i18n="privacyPolicyPage.viiUpdatesPolicy">VII. Updates to This Policy</h3>
+          <p data-i18n="privacyPolicyPage.aleforgeMayUpdatePrivacyPolicy">
+            AleForge may update this Privacy Policy at any time. Continued use of our services indicates acceptance of
+            the latest version.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Contact />
+</Layout>
+
+<style lang="scss">
+  @use "src/styles/pages/legal.scss" as *;
+</style>

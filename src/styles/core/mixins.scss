@@ -1,0 +1,108 @@
+/* -----------------------------------------
+   BREAKPOINTS
+------------------------------------------ */
+
+$xxl: 1536px;
+$xl: 1280px;
+$lg: 1024px;
+$md: 768px;
+$sm: 640px;
+$xs: 480px;
+
+/* -----------------------------------------
+   MEDIA QUERY MIXINS (Desktop-first)
+------------------------------------------ */
+
+@mixin xxl {
+  @media (max-width: #{$xxl}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (max-width: #{$xl}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (max-width: #{$lg}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (max-width: #{$md}) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (max-width: #{$sm}) {
+    @content;
+  }
+}
+
+@mixin xs {
+  @media (max-width: #{$xs}) {
+    @content;
+  }
+}
+
+/* -----------------------------------------
+   FLEX CENTER
+------------------------------------------ */
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+/* -----------------------------------------
+   HIDE ON MOBILE
+------------------------------------------ */
+
+@mixin hide-mobile {
+  display: none;
+
+  @include md {
+    display: block;
+  }
+}
+
+/* -----------------------------------------
+   RESPONSIVE TYPOGRAPHY (Desktop-first)
+------------------------------------------ */
+
+@mixin type-responsive($xl, $lg, $md, $sm, $xs) {
+  font-size: $xl;
+
+  @include lg {
+    font-size: $lg;
+  }
+
+  @include md {
+    font-size: $md;
+  }
+
+  @include sm {
+    font-size: $sm;
+  }
+
+  @include xs {
+    font-size: $xs;
+  }
+}
+
+/* -----------------------------------------
+   BOttons Base Styles
+------------------------------------------ */
+@mixin button-base {
+  padding: 8px 20px;
+  border-radius: 99px;
+  transition: all 0.4s ease;
+  font-size: 16px;
+}

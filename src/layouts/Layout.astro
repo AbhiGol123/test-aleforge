@@ -1,0 +1,256 @@
+---
+import Footer from "@components/layout/footer.astro";
+import "../styles/theme.css";
+import "../styles/global.css";
+import "../styles/main.scss";
+import i18nEn from "../i18n/site.en.json";
+import i18nEs from "../i18n/site.es.json";
+import i18nNl from "../i18n/site.nl.json";
+import i18nDe from "../i18n/site.de.json";
+
+interface Props {
+  title?: string;
+}
+
+const {title = "AleForge - Game Server Hosting"} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" id="theme-favicon" href="/copper_favicon.png" />
+    
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="stylesheet"
+    />
+
+    <script is:inline>
+      const saved = localStorage.getItem("theme") || "copper";
+      document.documentElement.setAttribute("data-theme", saved);
+
+      //  Update favicon based on theme
+      const favicon = document.getElementById("theme-favicon");
+      if (favicon) {
+        favicon.href = saved === "copper" ? "/copper_favicon.png" : "/blue_favicon.png";
+      }
+     
+    </script>
+  </head>
+
+  <body>
+    <slot />
+    <Footer />
+    <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1"></script>
+
+    <script is:inline>
+      window.addEventListener("load", () => {
+        const lenis = new Lenis({
+          duration: 1.2,
+          smoothWheel: true
+        });
+
+        window.lenis = lenis;
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Handle anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return;
+
+            e.preventDefault();
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              lenis.scrollTo(targetElement);
+            }
+          });
+        });
+      });
+    </script>
+
+    <script is:inline define:vars={{i18nEn, i18nEs, i18nNl, i18nDe}}>
+      const I18N = {
+        en: i18nEn,
+        es: i18nEs,
+        nl: i18nNl,
+        de: i18nDe
+      };
+
+      function normalizeText(value) {
+        return String(value || "").replace(/\s+/g, " ").trim();
+      }
+
+      function buildTranslationMap(targetLang) {
+        const source = I18N.en || {};
+        const target = I18N[targetLang] || source;
+        const map = new Map();
+
+        Object.keys(source).forEach((componentName) => {
+          const srcEntries = source[componentName] || {};
+          const tgtEntries = target[componentName] || srcEntries;
+
+          Object.keys(srcEntries).forEach((key) => {
+            const srcText = normalizeText(srcEntries[key]);
+            if (!srcText) return;
+            map.set(srcText, String(tgtEntries[key] ?? srcEntries[key]));
+          });
+        });
+
+        return map;
+      }
+
+      function getValueByPath(obj, keyPath) {
+        return String(keyPath || "")
+          .split(".")
+          .filter(Boolean)
+          .reduce((acc, key) => (acc && acc[key] != null ? acc[key] : undefined), obj);
+      }
+
+      function localizeInternalLinks(lang) {
+        const supported = ["en", "nl", "de", "es"];
+        const skipPrefixes = ["/assets/", "/favicon", "/robots.txt", "/sitemap", "/manifest", "/api/"];
+
+        document.querySelectorAll("a[href]").forEach((anchor) => {
+          const href = anchor.getAttribute("href");
+          if (!href) return;
+          if (href.startsWith("#")) return;
+          if (/^(mailto:|tel:|https?:|\/\/)/i.test(href)) return;
+          if (!href.startsWith("/")) return;
+          if (anchor.hasAttribute("data-no-lang-prefix")) return;
+          if (skipPrefixes.some((prefix) => href.startsWith(prefix))) return;
+
+          const parts = href.split("/").filter(Boolean);
+          const hasLangPrefix = parts.length > 0 && supported.includes(parts[0]);
+          const basePath = hasLangPrefix ? `/${parts.slice(1).join("/")}` : href;
+          const finalBase = basePath === "/" ? "" : basePath;
+          const localized = `/${lang}${finalBase}`;
+          if (localized !== href) {
+            anchor.setAttribute("href", localized);
+          }
+        });
+      }
+
+      function applyTranslations(lang) {
+        const finalLang = I18N[lang] ? lang : "en";
+        const source = I18N.en || {};
+        const target = I18N[finalLang] || source;
+        const map = buildTranslationMap(finalLang);
+        document.documentElement.setAttribute("lang", finalLang);
+
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const keyPath = el.getAttribute("data-i18n");
+          if (!keyPath) return;
+          const translated = getValueByPath(target, keyPath) ?? getValueByPath(source, keyPath);
+          if (translated == null) return;
+          const text = String(translated);
+          if (el.textContent !== text) {
+            el.textContent = text;
+          }
+        });
+
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        let node = walker.nextNode();
+
+        while (node) {
+          const parentTag = node.parentElement?.tagName;
+          if (parentTag && ["SCRIPT", "STYLE", "NOSCRIPT", "TEXTAREA"].includes(parentTag)) {
+            node = walker.nextNode();
+            continue;
+          }
+
+          const raw = node.nodeValue || "";
+          const normalized = normalizeText(raw);
+          if (normalized && map.has(normalized)) {
+            const translated = map.get(normalized);
+            const leading = raw.match(/^\s*/)?.[0] ?? "";
+            const trailing = raw.match(/\s*$/)?.[0] ?? "";
+            const nextValue = `${leading}${translated}${trailing}`;
+            if (nextValue !== raw) {
+              node.nodeValue = nextValue;
+            }
+          }
+
+          node = walker.nextNode();
+        }
+
+        localizeInternalLinks(finalLang);
+      }
+
+      let pending = null;
+      const observer = new MutationObserver(() => {
+        clearTimeout(pending);
+        pending = setTimeout(() => {
+          const current = localStorage.getItem("siteLang") || "en";
+          applyTranslations(current);
+        }, 40);
+      });
+
+      function initI18n() {
+        const current = localStorage.getItem("siteLang") || "en";
+        applyTranslations(current);
+        observer.observe(document.body, {childList: true, subtree: true});
+
+        window.addEventListener("site-lang-change", (event) => {
+          const nextLang = event?.detail?.lang || "en";
+          applyTranslations(nextLang);
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initI18n);
+      } else {
+        initI18n();
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  html {
+    height: auto;
+  }
+
+  body {
+    height: auto;
+    overflow: auto;
+  }
+
+  html.lenis {
+    height: auto;
+  }
+
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis {
+    scroll-behavior: auto;
+  }
+
+  .lenis-smooth {
+    will-change: transform;
+  }
+</style>

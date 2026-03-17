@@ -1,0 +1,61 @@
+<label class="relative inline-flex items-center cursor-pointer theme-toggle-container">
+  <input type="checkbox" class="sr-only peer theme-toggle-input" />
+
+  <!-- TRACK -->
+  <div class="w-12 h-6 rounded-full transition border border-white/16
+           bg-white/6"></div>
+
+  <!-- KNOB -->
+  <div
+    class="absolute left-1 top-1 w-4 h-4 bg-blue-600 rounded-full
+           transition-all duration-300 peer-checked:translate-x-6 peer-checked:bg-[#A05E2C]"
+  >
+  </div>
+</label>
+
+<script is:inline>
+  (function () {
+    function initTheme() {
+      const toggles = document.querySelectorAll(".theme-toggle-input");
+      const storedTheme = localStorage.getItem("theme") || "copper";
+
+      document.documentElement.setAttribute("data-theme", storedTheme);
+
+      toggles.forEach((toggle) => {
+        // Only add listener if not already initialized
+        if (!toggle.dataset.initialized) {
+          toggle.checked = storedTheme === "copper";
+
+          toggle.addEventListener("change", () => {
+            const newTheme = toggle.checked ? "copper" : "blue";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+
+            // Sync all other toggles on the page
+            document.querySelectorAll(".theme-toggle-input").forEach((t) => {
+              t.checked = newTheme === "copper";
+            });
+          });
+
+          toggle.dataset.initialized = "true";
+        } else {
+          // Just update the checked state if already initialized
+          toggle.checked = storedTheme === "copper";
+        }
+      });
+    }
+
+    // Run on initial load
+    initTheme();
+
+    // Re-init on view transition if using them
+    document.addEventListener("astro:after-swap", initTheme);
+  })();
+</script>
+
+<style>
+  /* make it look clean */
+  .theme-switch .dot {
+    transition: transform 0.3s ease;
+  }
+</style>

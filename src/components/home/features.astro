@@ -1,0 +1,68 @@
+---
+import FeaturesInsideBorders from "@components/sections/features_insideBorders.astro";
+import GlobalServers from "./GlobalServers.astro";
+
+const features = [
+  {
+    icon: "var(--icon-computer)",
+    title: "Enterprise Hardware",
+    desc: "Powered by the latest-gen CPUs and NVMe SSDs for ultra-low latency gaming."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Budget Friendly",
+    desc: "Flexible pricing models starting at just $1.45/slot. Perfect for any budget."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Amazing Support",
+    desc: "Our support team is available 24/7 to help with setup, troubleshooting, and performance."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Premium Locations",
+    desc: "20+ global datacenter locations ensure the lowest ping possible."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "DDoS Protection",
+    desc: "Enterprise-level DDoS protection comes standard with every server."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Instant Setup",
+    desc: "Your game server is live in seconds — no waiting, no hassle."
+  }
+];
+---
+
+<section class="text-[var(--text-primary)]">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="features_section">
+        <GlobalServers />
+        <div class="pb-[5%] xl:pl-[7%] xl:pr-[7%] px-8">
+          <div class="title-wrapper">
+            <h2 class="mb-4">
+              The Number <span class="accent" data-i18n="featuresComponent.1GameHostingWorldwide">#1 Game Hosting Worldwide</span>
+            </h2>
+            <p class="subtitle max-w-3xl mx-auto">
+              Experience unbeatable performance and reliability with AleForge’s game servers — designed for casual
+              players and massive communities alike.
+            </p>
+          </div>
+          <div><FeaturesInsideBorders items={features} data-count="9" /></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features_section {
+    border-color: #FFFFFF/10;
+    border: 2px solid var(--border-mid);
+    border-radius: 30px;
+    background: #0C0D18/12;
+  }
+</style>

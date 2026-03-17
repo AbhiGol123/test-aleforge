@@ -1,0 +1,83 @@
+---
+import {sanity} from "src/lib/sanity";
+const CmsData = await sanity.fetch(`
+  *[_type == "webHostingPage"][0]
+`);
+---
+
+<section class="webHosting_pricing_plans" id="pricing">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="content-wrapper">
+        <div class="title-wrapper">
+          <h2 data-i18n="webhostingpricingComponent.plansPricing">Plans And Pricing</h2>
+          <p class="subtitle">
+            Explore Our Flexible Plans And Pricing Options, That Scale As Your Requirements Grow.
+            <a
+              href="#"
+              class="text-white underline decoration-white underline-offset-4 hover:text-[var(--accent)] transition-colors"
+             data-i18n="webhostingpricingComponent.customPlansCreatedRequest">
+              Custom Plans Created On Request.
+            </a>
+          </p>
+        </div>
+        <div class="Pricing_plans mt-[40px] grid sm:grid-cols-2 bg-transparent xl:grid-cols-4 gap-6">
+          {
+            CmsData.plans.map((plan: any) => (
+              <div
+                class={`relative rounded-[20px] border transition-all duration-500 group flex-1  flex
+                      flex-col overflow-hidden ${
+                        plan.highlight
+                          ? "border-[var(--accent)] shadow-2xl border-2 shadow-[var(--accent)]/10"
+                          : "border-[var(--border-light)] border-2 hover:-translate-y-2"
+                      }`}
+                style="background: var(--web-hosting-card-full-bg-grediant);"
+              >
+                <div class="p-[28px]  flex-1 flex flex-col " style="background: var(--web-hosting-card-grediant);">
+                  <div class="mb-5">
+                    <h3 class="plan_name" style="font-size: 20px; line-height:20px;">
+                      {plan.name}
+                    </h3>
+                    <span class="text-white font-medium text-[50px]">${plan.price}</span>
+                    <small class="text-sm" data-i18n="webhostingpricingComponent.month">/month</small>
+                    <p class="text-[var(--text-muted)] " style="font-size: 16px;">
+                      {plan.description}
+                    </p>
+                  </div>
+
+                  <a href="#" class="button-secondary text-center mb-[10px]">
+                    {" "}
+                    Get started{" "}
+                  </a>
+                </div>
+
+                {/* Bottom Section */}
+                <div class="p-[28px] border-t border-[var(--border-light)]  ">
+                  <div class="space-y-4">
+                    <span class="block text-[14px]  mb-3" data-i18n="webhostingpricingComponent.whatSIncluded">What's Included:</span>
+                    <ul class="space-y-3">
+                      {plan.features.map((feature: any) => (
+                        <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
+                          <span class="material-icons" style="font-size:24px; color:white;">
+                            check_circle
+                          </span>
+                          <span class="text-[15px]" set:html={feature} />
+                        </li>
+                      ))}
+                      <li class="text-[15px] flex items-start gap-3 ">
+                        <span class="material-icons" style="font-size:24px; color:white;">
+                          check_circle
+                        </span>
+                        Powered by <span class="text-[#009639] font-bold text-xl" data-i18n="webhostingpricingComponent.nginx">NGINX</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

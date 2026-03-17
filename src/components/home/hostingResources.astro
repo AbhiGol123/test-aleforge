@@ -1,0 +1,77 @@
+---
+const resources = [
+{
+icon: "var(--icon-knowledge)",
+title: "Knowledge Base",
+desc: "Access setup guides, tutorials, and troubleshooting documentation written by experts.",
+href: "https://help.aleforge.net/"
+},
+{
+icon: "var(--icon-faq)",
+title: "General FAQ",
+desc: "Get answers to frequently asked questions about pricing, setup, and account management.",
+href: "https://help.aleforge.net/"
+},
+{
+icon: "var(--icon-server)",
+title: "Server Status",
+desc: "Check live updates about server uptime, maintenance, and scheduled improvements.",
+href: "/"
+},
+{
+icon: "var(--icon-hosting)",
+title: "Hosting Tools",
+desc: "Manage and monitor your hosting environment easily with built-in management tools.",
+href: "#hostingPlans"
+}
+];
+---
+<section class="hosting_resources">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="flex flex-col lg:flex-row justify-between gap-[40px]">
+
+        <!-- Left -->
+        <div class="space-y-4 text-center md:text-left w-full lg:w-[35%]">
+          <p class="overline" data-i18n="hostingresourcesComponent.hostingResources">Hosting Resources</p>
+
+          <h2  data-i18n="hostingresourcesComponent.everythingNeedAllOnePlace">
+            Everything You Need, 
+            All In One Place
+          </h2>
+
+          <p  data-i18n="hostingresourcesComponent.stayUpDateMakeManaging">
+            Stay up-to-date and make managing your hosting effortless.
+            From setup guides to real-time status updates, everything is just a click away.
+          </p>
+        </div>
+
+        <!-- Right -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-[24px] w-full lg:w-[55%]">
+          {resources.map((r) => (
+          <article class="flex mt-[24px] mr-[24px] gap-[10px]">
+            <!-- Icon using CSS variable -->
+            <div class="w-[40px] h-[40px] bg-contain bg-center bg-no-repeat " style={`background-image: ${r.icon};`}
+              role="img" aria-label={r.title}></div>
+
+            <!-- Text -->
+            <div class="flex-1 flex flex-col justify-start items-stretch gap-[20px] h-full">
+              <div>
+                <h3 class="text-md mb-1 leading-[26px]">{r.title}</h3>
+                <p class="mt-[14px] text-light text-[#dddddd]">{r.desc}</p>
+              </div>
+              <div class="mt-auto">
+                <a href={r.href} class="text-[16px] border-b pb-[10px] " aria-label={`Explore ${r.title}`} data-i18n="hostingresourcesComponent.exploreNow">
+                  Explore Now
+                </a>
+              </div>
+            </div>
+
+          </article>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

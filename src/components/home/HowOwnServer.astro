@@ -1,0 +1,304 @@
+---
+const steps = [
+  {
+    number: 1,
+    title: "Pick Your Perfect Game",
+    text: "Choose from popular titles like Minecraft, Rust, Valheim, and more — we support all your favorites.",
+    link: "/game-server",
+  },
+  {
+    number: 2,
+    title: "Customize Your Plan",
+    text: "Select the performance level that fits your playstyle and community size with flexible pricing.",
+    link: "/game-server",
+  },
+  {
+    number: 3,
+    title: "Launch & Play Instantly",
+    text: "Your server goes live within minutes. Add mods, invite friends, and jump straight into the action.",
+    link: "/game-server",
+  },
+];
+---
+
+<section id="how-own-server" class="how-own-server">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="content-box">
+        <!-- Title -->
+        <div class="title-wrapper">
+          <h2 data-i18n="howownserverComponent.howOwnServer">How Own Server</h2>
+          <p class="subtitle" data-i18n="howownserverComponent.loremIpsumDolorSitAmet">Lorem Ipsum Dolor Sit Amet Consectetur.</p>
+        </div>
+
+        <!-- Steps Container -->
+        <div class="steps-container">
+          {
+            steps.map((step, i) => (
+              <div class="step-item">
+                <!-- Marker (Circle + Line) -->
+                <div class="step-marker">
+                  <div class="circle backdrop-blur-md">
+                    {step.number}
+                  </div>
+                  {i < steps.length - 1 && (
+                    <div class="line">
+                      <div class="line-fill" />
+                    </div>
+                  )}
+                </div>
+
+                <!-- Content -->
+                <div class="step-content">
+                  <h3>{step.title}</h3>
+                  <p>{step.text}</p>
+                  <a href={step.link} class={`button-primary ${i === 0 ? 'button-primary' : 'button-secondary'}`} data-i18n="howownserverComponent.getStarted">
+                    Get started
+                  </a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+
+  .content-box {
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(12, 13, 24, 0.12);
+    backdrop-filter: blur(4px);
+    box-shadow: var(--shadow-card);
+    border-color: var(--border-light);
+
+    @media (max-width: 955px) {
+      padding: 4rem 2rem;
+    }
+  }
+
+  .steps-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-top: 3rem;
+    overflow-x: auto;
+    padding-bottom: 1rem; /* Space for scrollbar */
+
+    @media (max-width: 955px) {
+      flex-direction: column;
+      gap: 3rem;
+      overflow-x: visible;
+      padding-bottom: 0;
+    }
+  }
+
+  .step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+  
+    position: relative;
+    width: 100%;
+  }
+
+  .step-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+
+    @media (max-width: 955px) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+    
+    // Gradient Border Trick
+    border: 1px solid transparent;
+    background: linear-gradient(rgba(11, 12, 21, 0.9), rgba(11, 12, 21, 0.9)) padding-box,
+                linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(221, 221, 221, 0.12) 100%) border-box;
+    
+    color: var(--text-muted);
+    font-weight: 600;
+    z-index: 2;
+    transition: all 0.5s ease;
+    flex-shrink: 0;
+    position: relative;
+    box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.3);
+
+    &.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.6);
+    }
+  }
+
+  .line {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: calc(50% + 4rem); // Start 2.5rem after the center (radius + gap)
+    height: 2px;
+    width: calc(100% - 7rem); // Total width minus the space occupied by circles and gaps
+    transform: translateY(-50%);
+    background-color: #1a1b26;
+    overflow: hidden;
+    z-index: 1;
+
+    @media (max-width: 955px) {
+      display: none;
+    }
+  }
+
+  .line-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(
+      to right,
+      var(--accent),
+      var(--accent-hover),
+      var(--accent)
+    );
+    transition: width 2.8s ease-in-out;
+  }
+
+  .step-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+
+    h3 {
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+
+      @media (max-width: 955px) {
+        margin: 0 auto 0.5rem;
+      }
+    }
+
+    p {
+      color: var(--text-secondary);
+      line-height: 1.625;
+      max-width: 20rem;
+      margin: 0 auto 1.5rem;
+
+      @media (max-width: 955px) {
+        margin: 0 auto 0.9rem;
+        max-width: none;
+      }
+    }
+  }
+
+  .step-btn {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-mid);
+    color: var(--text-secondary);
+    text-decoration: none;
+
+    &.btn-filled {
+      background-color: var(--accent);
+      color: white;
+      border-color: var(--accent);
+
+      &:hover {
+        background-color: var(--accent-hover);
+        color: white;
+      }
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const section = document.querySelector("#how-own-server");
+    if (!section) return;
+
+    const circles = section.querySelectorAll(".circle");
+    const lines = section.querySelectorAll(".line-fill");
+    const buttons = section.querySelectorAll(".step-btn");
+
+    let hasPlayed = false;
+
+    const resetTimeline = () => {
+      circles.forEach((c) => c.classList.remove("active"));
+      buttons.forEach((b) => b.classList.remove("active"));
+      lines.forEach((l) => (l.style.width = "0%"));
+    };
+
+    const activateStep = (index) => {
+      if (circles[index]) circles[index].classList.add("active");
+      if (buttons[index]) buttons[index].classList.add("active");
+    };
+
+    const runTimeline = () => {
+      if (hasPlayed) return;
+      hasPlayed = true;
+
+      resetTimeline();
+
+      // Sequence: Step 1 -> Line 1 -> Step 2 -> Line 2 -> Step 3
+      activateStep(0);
+
+      if (lines[0]) {
+        // Animate first line
+        setTimeout(() => {
+          lines[0].style.width = "100%";
+        }, 500);
+
+        // Activate Step 2 after line finishes
+        setTimeout(() => {
+          activateStep(1);
+
+          if (lines[1]) {
+            // Animate second line
+            lines[1].style.width = "100%";
+
+            // Activate Step 3 after line finishes
+            setTimeout(() => {
+              activateStep(2);
+            }, 2800);
+          }
+        }, 3300); // 500ms delay + 2800ms duration
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) runTimeline();
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(section);
+  });
+</script>

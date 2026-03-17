@@ -1,0 +1,157 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Faq from "@components/sections/faq.astro";
+import Contact from "@components/sections/contact.astro";
+import GlobalServers from "@components/home/GlobalServers.astro";
+import Cpanel from "@components/web-hosting/cpanel.astro";
+import Testimonials from "@components/sections/testimonials.astro";
+import Favorite from "@components/web-hosting/favorite.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import WebHostingPricing from "@components/web-hosting/WebHostingPricing.astro";
+import OneClickApplication from "@components/web-hosting/OneClickApplication.astro";
+import FeaturesInsideBorders from "@components/sections/features_insideBorders.astro";
+
+const features = [
+  {
+    icon: "var(--icon-computer)",
+    title: "Enterprise Hardware",
+    desc: "Powered by the latest-gen CPUs and NVMe SSDs for ultra-low latency gaming."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Budget Friendly",
+    desc: "Flexible pricing models starting at just $1.45/slot. Perfect for any budget."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Amazing Support",
+    desc: "Powered by the latest-gen CPUs and NVMe SSDs for ultra-low latency gaming."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Premium Locations",
+    desc: "20+ global datacenter locations ensure the lowest ping possible."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "DDoS Protection",
+    desc: "Enterprise-level DDoS protection comes standard with every server."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Instant Setup",
+    desc: "Your game server is live in seconds — no waiting, no hassle."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "99.9% Uptime",
+    desc: "Support for servers running the highest possible tick rates."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Public Stats",
+    desc: "Install your mods and their dependencies with our one-click plugin installer."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Quick Deployment",
+    desc: "High-availability means our game servers remain fully operational guaranteed."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Free DDoS Protection",
+    desc: "Locations worldwide for the fastest gaming near you."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Dwarven Machines",
+    desc: "Powerful hardware and networking for smooth play."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Dwarven Tunneling",
+    desc: "All our game servers come equiped with gigabit networking standard."
+  }
+];
+---
+
+<Layout>
+  <div class="header-bg">
+    <Navigation />
+    <Breadcrumbs />
+    <section class="hero">
+      <div class="section-padding global-padding">
+        <div class="container-large">
+          <div class="hero_content_wrapper flex flex-col justify-center text-center max-w-2xl mx-auto gap-[12px]">
+            <h1 data-i18n="webHostingPage.sharedWebHosting">Shared Web Hosting</h1>
+            <p data-i18n="webHostingPage.webHostingDesignedProvideCutting">
+              Web Hosting Designed To Provide Cutting Edge Performance With Free SSL Certificates, And Daily Backups
+              Included By Default.
+            </p>
+            <div class="flex flex-col justify-center mt-[20px]">
+              <div class="btn-wrapper flex flex-col sm:flex-row items-center justify-center gap-4 mb-[10px]">
+                <a href="#pricing" class="button-primary" data-i18n="webHostingPage.seeHostingPackages">See Hosting Packages</a>
+                <a href="/contactUs" class="button-secondary" data-i18n="webHostingPage.getStarted">Get Started</a>
+              </div>
+              <small class="text-[var(--text-muted)]" data-i18n="webHostingPage.riskFreeCancelAnytime">Risk-Free, Cancel Anytime</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <WebHostingPricing />
+    <OneClickApplication />
+  </div>
+  <div class="section-padding global-padding">
+    <div class="container-large rounded-[30px] border border-[var(--border-mid)]">
+      <GlobalServers />
+    </div>
+  </div>
+  <div class="bg-web-hosting-second-img">
+    <Cpanel />
+    <section class="affordable-web-hosting-section">
+      <div class="section-padding global-padding">
+        <div class="max-w-[1200px] mx-auto">
+          <div class="title-wrapper">
+            <h2 data-i18n="webHostingPage.affordableWebHosting">Affordable Web Hosting</h2>
+            <p class="subtitle max-w-4xl mx-auto">
+              We are redefining what is standard in web hosting. No more paying extra for backups, SSL certificates, and
+              much more.
+            </p>
+          </div>
+            <FeaturesInsideBorders items={features} data-count="9" />
+        </div>
+      </div>
+    </section>
+  </div>
+    <Favorite />
+  <div class="hosting_res">
+    <Testimonials />
+    <Faq />
+  </div>
+  <Contact />
+</Layout>
+
+<style>
+  .header-bg {
+    background-image: var(--bg-web-hosting-first-img);
+    background-size: contain;
+    background-position: center 10%;
+    background-repeat: no-repeat;
+  }
+  .bg-web-hosting-second-img {
+    background-image: var(--bg-web-hosting-second-img);
+    background-size: 100% auto;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+
+  .hosting_res {
+    background-image: var(--bg-home-third-img);
+    background-size: contain;
+    background-position: center;
+    background-position: fixed;
+    background-repeat: no-repeat;
+  }
+</style>

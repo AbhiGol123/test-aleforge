@@ -1,0 +1,74 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Pricing from "@components/wordpress-hosting/pricing.astro";
+import Faq from "@components/sections/faq.astro";
+import Contact from "@components/sections/contact.astro";
+import Header from "@components/wordpress-hosting/header.astro";
+import WhyAleforge from "@components/wordpress-hosting/why-choose-aleforge.astro";
+import Performance from "@components/wordpress-hosting/performance.astro";
+import Feature from "@components/wordpress-hosting/feature.astro";
+import PerformanceCard from "@components/wordpress-hosting/performance-card.astro";
+import Comparsion from "@components/wordpress-hosting/comparsion.astro";
+import HostingResources from "@components/home/hostingResources.astro";
+import Rating from "@components/wordpress-hosting/rating.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import Custom from "@components/wordpress-hosting/custom.astro";
+import Security from "@components/wordpress-hosting/security.astro";
+---
+
+<Layout>
+  <div class="bg-wordpress-hosting-first-img">
+    <Navigation />
+    <Breadcrumbs />
+    <Header />
+    <Security />
+  </div>
+  <Pricing />
+  <Custom />
+  <Performance />
+  <div class="web_hosting_res">
+    <Feature />
+    <PerformanceCard />
+  </div>
+  <WhyAleforge />
+  <Rating />
+  <div class="compare_res">
+    <Comparsion />
+    <Faq />
+  </div>
+  <HostingResources />
+  <Contact />
+  <style>
+    .bg-wordpress-hosting-first-img {
+      background-image: var(--bg-wordpress-hosting-first-img);
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+    }
+
+    .discoverTrendingGames {
+      background-image: var(--bg-home-second-img);
+      background-position: bottom;
+      background-repeat: no-repeat;
+    }
+    .hosting_res {
+      background-image: var(--bg-home-third-img);
+      background-size: 100% auto;
+      background-position: bottom;
+      background-repeat: no-repeat;
+    }
+    .web_hosting_res {
+      background-image: var(--bg-wordpress-hosting-second-img);
+      background-size: contain;
+      background-position: bottom;
+      background-repeat: no-repeat;
+    }
+    .compare_res {
+      background-image: var(--bg-wordpress-hosting-third-img);
+      background-size: contain;
+      background-position: bottom;
+      background-position: fixed;
+      background-repeat: no-repeat;
+    }
+  </style>
+</Layout>

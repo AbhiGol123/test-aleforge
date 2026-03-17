@@ -1,0 +1,84 @@
+@use "./mixins" as *;
+@use "./variable" as *;
+
+/* -----------------------------------------
+   HEADINGS (Responsive & Scalable)
+------------------------------------------ */
+
+h1 {
+   word-spacing: -1px;
+   line-height: 1.3em;
+   font-weight: 500;
+   @include type-responsive(56px, 48px, 44px, 40px, 36px);
+}
+
+h2 {
+   font-weight: 500;
+   line-height: 1.3em;
+   margin: 0 !important;
+   @include type-responsive(46px, 40px, 38px, 36px, 34px);
+}
+h3{
+   font-size: 24px;
+}
+
+
+/* -----------------------------------------
+   PARAGRAPHS
+------------------------------------------ */
+
+p {
+   line-height: 1.5;
+   color: var(--text-secondary);
+ font-size: 18px;
+
+   &.small {
+      font-size: 0.875rem;
+      line-height: 1.6;
+   }
+
+   &.large {
+      font-size: 1.125rem;
+      line-height: 1.75;
+   }
+}
+
+/* -----------------------------------------
+   INLINE TEXT
+------------------------------------------ */
+
+span {
+   line-height: inherit;
+
+   &.muted {
+      color: var(--text-muted);
+   }
+
+   &.accent {
+      color: var(--accent);
+   }
+
+   &.bold {
+      font-weight: 600;
+   }
+}
+
+/* -----------------------------------------
+   RESPONSIVE UTILITIES
+------------------------------------------ */
+
+.lead {
+   font-size: 1.125rem;
+   line-height: 1.75;
+   color: var(--text-primary);
+
+   @include md {
+      font-size: 1rem;
+   }
+}
+
+.subtext {
+   font-size: 0.95rem;
+   line-height: 1.6;
+   color: var(--text-muted);
+}

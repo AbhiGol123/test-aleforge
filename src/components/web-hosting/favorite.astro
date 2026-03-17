@@ -1,0 +1,377 @@
+---
+type TabId = "security" | "performance" | "tools";
+
+type Section = {
+  title: string;
+  description?: string;
+  items?: string[];
+};
+
+type AccordionItem = {
+  title: string;
+  open: boolean;
+  sections: Section[];
+};
+
+const tabs: { id: TabId; label: string; icon: "shield" | "zap" | "settings" }[] = [
+  { id: "security", label: "Security & Reliability", icon: "shield" },
+  { id: "performance", label: "Performance & Caching", icon: "zap" },
+  { id: "tools", label: "Tools & Management", icon: "settings" },
+];
+
+const tabData: Record<TabId, AccordionItem[]> = {
+  security: [
+    {
+      title: "Enterprise Backups Included",
+      open: true,
+      sections: [
+        {
+          title: "DDoS Protection",
+          description:
+            "Enterprise-Grade, Always-On DDoS Protection Ensures Your Sites Remain Online.",
+        },
+        {
+          title: "Intelligent Antivirus",
+          items: [
+            "<b>Antivirus</b> – Detects and blocks malware, spyware, redirects and symlinks in real-time.",
+            "<b>Auto-Clean Technology</b> – Automatically repairs infected files and replaces them to avoid downtime.",
+          ],
+        },
+        {
+          title: "Intrusion Prevention",
+          items: [
+            "<b>Firewall</b> – Blocks network, application and protocol-layer attacks automatically.",
+            "<b>CMS Brute Force Protection</b> – Prevents large-scale brute force attacks before they impact your site.",
+            "<b>ModSecurity</b> – Real-time protection against SQL injections, XSS, file upload exploits and more.",
+          ],
+        },
+      ],
+    },
+    {
+      title: "Free SSL Certificates",
+      open: false,
+      sections: [
+        {
+          title: "Automatic Installation",
+          description:
+            "We automatically install and renew Let’s Encrypt SSL certificates for all domains and subdomains.",
+        },
+        {
+          title: "Wildcard Support",
+          description: "Secure all subdomains with a single wildcard certificate at no extra cost.",
+        },
+      ],
+    },
+  ],
+
+  performance: [
+    {
+      title: "NVMe SSD Storage",
+      open: true,
+      sections: [
+        {
+          title: "Lightning-Fast I/O",
+          description: "Up to 200,000 IOPS ensures ultra-fast database queries and file access.",
+        },
+        {
+          title: "Enterprise Reliability",
+          description: "RAID-protected enterprise NVMe drives keep your data safe and fast.",
+        },
+      ],
+    },
+    {
+      title: "LiteSpeed Web Server",
+      open: false,
+      sections: [
+        {
+          title: "High Concurrency",
+          description: "Handle thousands of simultaneous connections with minimal resource usage.",
+        },
+        {
+          title: "HTTP/3 Support",
+          description: "Next-generation HTTP protocol for faster, more reliable connections.",
+        },
+      ],
+    },
+    {
+      title: "Object Caching (Redis)",
+      open: false,
+      sections: [
+        {
+          title: "Database Optimization",
+          description: "Cache frequently accessed data in memory for sub-millisecond performance.",
+        },
+        {
+          title: "Seamless Integration",
+          description: "Enable Redis instantly via control panel or popular CMS plugins.",
+        },
+      ],
+    },
+  ],
+
+  tools: [
+    {
+      title: "Staging Environments",
+      open: true,
+      sections: [
+        {
+          title: "One-Click Cloning",
+          description: "Create a complete copy of your live site in seconds for safe testing.",
+        },
+        {
+          title: "Push to Production",
+          description: "Deploy changes to your live site instantly with one click.",
+        },
+      ],
+    },
+    {
+      title: "Automated Backups",
+      open: false,
+      sections: [
+        {
+          title: "Daily Snapshots",
+          description: "Daily full backups retained securely for up to 30 days.",
+        },
+        {
+          title: "Self-Service Restore",
+          description: "Restore files, databases, or entire accounts instantly.",
+        },
+      ],
+    },
+    {
+      title: "PHP Version Manager",
+      open: false,
+      sections: [
+        {
+          title: "Multiple PHP Versions",
+          description: "Choose PHP versions from 7.4 through 8.3 for full compatibility.",
+        },
+        {
+          title: "Extension Selector",
+          description: "Enable or disable PHP extensions to fine-tune your environment.",
+        },
+      ],
+    },
+  ],
+};
+---
+
+<section class="favorite-section">
+    <div class="section-padding global-padding">
+ <div class="container">
+    <div class="title-wrapper">
+        <h2 data-i18n="favoriteComponent.allFavoriteApplications">All of Your Favorite Applications</h2>
+        <p class="subtitle" data-i18n="favoriteComponent.getStartedCreatingNewSite">Get started creating your new site quickly with one of our 100+ one-click installs.</p>
+    </div>
+    <!-- TABS -->
+    <div class="tabs mt-[50px]">
+      {
+        tabs.map((tab, i) => (
+          <button class={`tab-btn ${i === 0 ? "active" : ""}`} data-tab={tab.id}>
+            {tab.icon === "shield" && <span class="material-symbols-outlined" data-i18n="favoriteComponent.security">security</span>}
+            {tab.icon === "zap" && <span class="material-symbols-outlined" data-i18n="favoriteComponent.bolt">bolt</span>}
+            {tab.icon === "settings" && <span class="material-symbols-outlined" data-i18n="favoriteComponent.settings">settings</span>}
+            <span class="text-[20px]">{tab.label}</span>
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- TAB CONTENT -->
+    <div class="tab-wrapper">
+      {
+        tabs.map((tab, i) => (
+          <div id={`tab-${tab.id}`} class={`tab-content ${i === 0 ? "active" : ""}`}>
+            {tabData[tab.id].map((item) => (
+              <details class="accordion" open={item.open}>
+                <summary>
+                  <span class="accordion-title text-[22px]">{item.title}</span>
+                  <span class="arrow-wrap">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </summary>
+
+                <div class="content">
+                  {item.sections.map((section) => (
+                    <div>
+                      <h4>{section.title}</h4>
+
+                      {section.description && <p>{section.description}</p>}
+
+                      {section.items && (
+                        <ul>
+                          {section.items.map((i) => (
+                            <li set:html={i} />
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </details>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+    </div>
+ 
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".tab-btn");
+  const contents = document.querySelectorAll<HTMLElement>(".tab-content");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const id = tab.dataset.tab;
+      if (!id) return;
+
+      tabs.forEach((t) => t.classList.toggle("active", t === tab));
+      contents.forEach((c) => c.classList.toggle("active", c.id === `tab-${id}`));
+    });
+  });
+</script>
+
+<style>
+  
+  .container {
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: #ccc;
+    cursor: pointer;
+  }
+  .tab-btn.active {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Tab content */
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+
+  /* Accordion */
+  .accordion {
+    background: rgba(45, 48, 78, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(10px);
+  }
+  .accordion summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .accordion summary::-webkit-details-marker {
+    display: none;
+  }
+  .accordion[open] {
+    .accordion-title {
+      color: var(--accent);
+    }
+  }
+
+  /* Arrow wrapper */
+  .arrow-wrap {
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s ease;
+  }
+
+  /* Arrow icon */
+  .arrow-wrap svg {
+    width: 16px;
+    height: 16px;
+    stroke: #ffffff;
+    fill: none;
+    transition:
+      transform 0.35s ease,
+      stroke 0.35s ease;
+  }
+
+  /* OPEN STATE */
+  details[open] .arrow-wrap {
+    background-color: var(--accent-soft);
+  }
+
+  details[open] .arrow-wrap svg {
+    transform: rotate(180deg);
+    color: var(--accent);
+  }
+
+  /* Content animation */
+  .content {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease;
+    padding: 0 24px;
+  }
+  details[open] .content {
+    max-height: 3000px;
+    opacity: 1;
+    padding-bottom: 24px;
+  }
+
+  .content h4 {
+    margin-top: 20px;
+    color: white;
+    font-size: 20px;
+    font-style: italic;
+  }
+  .content p,
+  .content li {
+    color: #rgba(221, 221, 221, 0.8);
+    line-height: 1.6;
+    font-size: 18px;
+    font-weight: 200;
+  }
+  .content ul {
+    margin-top: 12px;
+    padding-left: 18px;
+  }
+    .favorite-section {
+    background-image: var(--bg-web-hosting-third-img);
+   background-position: top 20%;
+    background-repeat: no-repeat;
+    background-size:cover;
+  }
+</style>

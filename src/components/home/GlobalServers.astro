@@ -1,0 +1,207 @@
+---
+const res = await fetch("plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=locations.json");
+
+const json = res.ok ? await res.json() : {data: []};
+const locations = Array.isArray(json.data) ? json.data : [];
+
+import countries from "i18n-iso-countries";
+import en from "i18n-iso-countries/langs/en.json";
+countries.registerLocale(en);
+
+function countryCodeFromName(name: string) {
+  const country = name.split(",").pop()?.trim();
+  return countries.getAlpha2Code(country ?? "", "en")?.toLowerCase() || "us";
+}
+
+/* === MANUAL COORDINATES FOR MAP PINS === */
+const LOCATION_POS: Record<string, {left: string; top: string}> = {
+  lac: {left: "12%", top: "44%"}, // San Jose
+  dtx: {left: "26%", top: "44%"}, // Dallas
+  va: {left: "32%", top: "38%"}, // Virginia
+  chi: {left: "29%", top: "38%"}, // Chicago
+  org: {left: "19%", top: "36%"}, // Oregon
+  gr: {left: "54%", top: "34%"}, // Frankfurt
+  sg: {left: "75%", top: "68%"}, // Singapore
+  au: {left: "88%", top: "80%"} // Sydney
+};
+
+/* === BUILD MAP POINTS === */
+const points = locations
+  .map((l: any) => {
+    const pos = LOCATION_POS[l.id];
+    if (!pos) return null;
+
+    const code = countryCodeFromName(l.name).toUpperCase();
+    const city = l.name.split(",")[0].trim();
+
+    return {
+      id: l.id,
+      name: `${city}, ${code}`,
+      region: l.region,
+      pingURL: l.pingURL,
+      flag: `https://flagcdn.com/w160/${countryCodeFromName(l.name)}.png`,
+      left: pos.left,
+      top: pos.top
+    };
+  })
+  .filter(Boolean);
+---
+
+<section class="globalServers">
+  <div class="section-padding global-padding">
+    <div class="container-large overflow-hidden">
+      <div class="title-wrapper">
+        <h2 data-i18n="globalserversComponent.buildLocallyLaunchWorldwide">Build Locally, Launch Worldwide</h2>
+        <p class="subtitle center">
+          Deploy your game server from any of our <strong>{points.length}+ locations</strong>
+          for the best ping and performance.
+        </p>
+      </div>
+
+      <div class="map">
+        {
+          points.map((p: any) => (
+            <div class="dot" style={`left:${p.left};top:${p.top}`} data-id={p.id} data-ping={p.pingURL}>
+              <div class="tooltip">
+                <img class="flag" src={p.flag} alt="" />
+                <div>
+                  <div class="title">{p.name}</div>
+                  <small class="latency" data-i18n="globalserversComponent.checking">• Checking...</small>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .map {
+    position: relative;
+    aspect-ratio: 1680 / 929;
+    background: var(--map-img) center / cover no-repeat;
+    margin-top: 60px;
+  }
+
+  .dot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: 2px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .dot:hover {
+    z-index: 100;
+  }
+
+  .dot::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: block;
+  }
+
+  .tooltip {
+    position: absolute;
+    bottom: 140%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    width: max-content;
+    z-index: 1;
+  }
+
+  .dot:hover .tooltip {
+    display: flex;
+  }
+
+  .flag {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  .title {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .latency.online {
+    color: #2cff6d;
+  }
+  .latency.offline {
+    color: #ff5c5c;
+  }
+</style>
+
+<script>
+  async function pingServer(url: string, timeout = 3000): Promise<number | null> {
+    return new Promise((resolve) => {
+      const start = performance.now();
+      let ws: WebSocket;
+
+      try {
+        ws = new WebSocket(url);
+      } catch {
+        return resolve(null);
+      }
+
+      const timer = setTimeout(() => {
+        ws.close();
+        resolve(null);
+      }, timeout);
+
+      ws.onopen = () => {
+        const latency = Math.round(performance.now() - start);
+        clearTimeout(timer);
+        ws.close();
+        resolve(latency);
+      };
+
+      ws.onerror = () => {
+        clearTimeout(timer);
+        resolve(null);
+      };
+    });
+  }
+
+  async function measureLatencies() {
+    const dots = document.querySelectorAll<HTMLElement>(".dot");
+
+    await Promise.all(
+      Array.from(dots).map(async (dot) => {
+        const url = dot.dataset.ping;
+        if (!url) return;
+
+        const label = dot.querySelector<HTMLElement>(".latency");
+        if (!label) return;
+
+        const ms = await pingServer(url);
+
+        if (ms !== null) {
+          label.textContent = `• ${ms} ms`;
+          label.classList.add("online");
+        } else {
+          label.textContent = "• Offline";
+          label.classList.add("offline");
+        }
+      })
+    );
+  }
+
+  window.addEventListener("load", measureLatencies);
+</script>

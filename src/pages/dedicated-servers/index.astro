@@ -1,0 +1,62 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import ServerFeature from "@components/dedicated-server/server-feature.astro";
+import Support from "@components/dedicated-server/support.astro";
+import Faq from "@components/sections/faq.astro";
+import Contact from "@components/sections/contact.astro";
+import Header from "@components/dedicated-server/header.astro";
+import Experience from "@components/dedicated-server/experience.astro";
+import Custom from "@components/dedicated-server/custom.astro";
+import WhyAleforge from "@components/dedicated-server/why-aleforge.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import ServerPricing from "@components/dedicated-server/serverList/server-pricing.astro";
+---
+
+<Layout>
+  <div class="bg-dedicated-first-img">
+    <Navigation />
+    <Breadcrumbs />
+    <Header />
+    <ServerPricing />
+  </div>
+  <div class="bg-dedicated-second-img">
+      <ServerFeature />
+      <Experience />
+  </div>
+  <Custom />
+  <WhyAleforge />
+  <div class="dedicated">
+    <Support />
+    <Faq />
+    <Contact />
+  </div>
+</Layout>
+
+<style>
+  .bg-dedicated-first-img {
+    background-image: var(--bg-dedicated-first-img);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center 10%;
+  }
+  .bg-dedicated-second-img {
+    background-image: var(--bg-dedicated-second-img);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  .dedicated {
+    background-image: var(--bg-dedicated-third-img);
+    background-size: contain;
+    background-position: center 30%;
+    background-repeat: no-repeat;
+  }
+  .explore-bg {
+    background-image: var(--bg-control-panel-second-img);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+</style>

@@ -1,0 +1,141 @@
+[33ma7ad079[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfix/review-bugs[m[33m, [m[1;31morigin/khushbu_dev[m[33m, [m[1;32mkhushbu_dev[m[33m)[m minor changes
+[33meb373f4[m lang change build test
+[33mb19e74e[m lang changes logic updated and hero home page translate done
+[33m7d7ba52[m minor changes
+[33mc95b1e8[m remove type module
+[33m49d24c2[m revert path
+[33m8646560[m configstore path test
+[33mf073dd8[m path changes revert
+[33m42ecd59[m path test stores/
+[33m6d1d63c[m minor changes
+[33m09b8d05[m @/stores path check
+[33mdff6f86[m test relative path
+[33m47a7e60[m check for store deploy
+[33m3ad7e88[m added new param in help me to choose button
+[33m495182b[m discover games data dynamic and css changes
+[33m388e314[m carousel dynamic
+[33me0159be[m minor changes
+[33mfb36c65[m added change language dropdown
+[33m2226096[m addons added in checkout
+[33m1e7e7b6[m billing period issue fixed
+[33mf841c25[m addons checkbox issue fixed
+[33ma8275ce[m price calculation and addon update
+[33mdb269fb[m fix store issue
+[33m3d37b32[m minor changes
+[33m916a2c4[m minor changes
+[33m6c86d61[m minor changes
+[33m8d9bb89[m revert
+[33m2748ce4[m minor change
+[33m864376f[m test
+[33m8b6d1c8[m check store
+[33mbdd9a15[m change
+[33m8955b52[m minor changes
+[33m7e73801[m minor changes
+[33m74df6d4[m @stores
+[33me024ea3[m also import in astro front
+[33m66f7bcd[m relative path
+[33m72b73ae[m @stores
+[33m23e4d4c[m try path /stores
+[33m4a5b5e2[m store path try /src
+[33m56ae445[m path updated
+[33m320e0dd[m minor changes
+[33m70eb412[m minor changes
+[33me862f31[m minor changes
+[33mef8ed8b[m added store
+[33m473f6db[m path update
+[33mc2f0208[m path change
+[33m67bd827[m change path of stores
+[33mf8553e2[m selected billing option active ui added
+[33ma644754[m selected game display in preview and also price cal updated
+[33mb24e1b6[m minor bug fixed
+[33m9334ab6[m added limit in mods selection
+[33mf6405bf[m added CMS Game validation
+[33mc606bfb[m update mods depend on slected game have mods or not
+[33m46b2a69[m players bug fixed
+[33m0dc25ae[m remove static gamedata json
+[33mc0ef1fd[m seprate selected game logic
+[33m30fc892[m minor changes
+[33mea43244[m selected tier display in configurator
+[33m506f003[m change tier according game has tier
+[33m9dbdb0f[m tabs logic update and hasbudget added
+[33m77b4a6f[m added hasbudget plan tier field in cms , configstore and hide show inside server plan accordingly hasbudget
+[33m6862520[m build error fixed
+[33mf30a559[m minor bug fixed
+[33m5311c8c[m display game detail from cms new data
+[33m4105c62[m added game schema in sanity
+[33mff2638a[m added tier comparision popup
+[33m1a4f1ac[m added addon modal , learn more button
+[33mb06b7c5[m update check icons
+[33m0d35a21[m minor ui fix
+[33m7a9d7f1[m added addon price data to store and display in preview
+[33maa22f37[m addons filter by billing period added
+[33m2498689[m addons display selected tier wise
+[33m885aa68[m infinite loop issue fixed
+[33mbcd8805[m players bug fixed
+[33mf2585f7[m still work in process
+[33m1cb4097[m added addons
+[33m64cdccc[m minor css changes
+[33m4a70f09[m added Ui of addons
+[33mf1cb98e[m added cursor pointer
+[33m45e85bb[m added compare plans button
+[33ma4586e9[m plan features data print from api
+[33mc5ebc79[m minor changes
+[33mb177cf5[m footer new css changes
+[33m4f61ffd[m replace game name with game id
+[33m834c43d[m pricing plans changes
+[33m3d55e63[m filter games by category
+[33mb0d2964[m minor css changes
+[33m41075c6[m minor changes
+[33m2990ffb[m minor css changes
+[33m5f3bc4a[m seprate configurator components
+[33m1ffa684[m Refactors configurator UI into modular Astro components
+[33m0165311[m Integrates static game data for enhanced server detail pages
+[33m4b7e648[m Updates API endpoints and response parsing for plans and games
+[33md3ff1e4[m Enables static generation for game and blog pages
+[33ma661b6e[m reinstall node modules
+[33m3f7553b[m Removes server adapters and webcoreui for static build
+[33m8f8b6d3[m path changes
+[33mb07db92[m minor changes
+[33m2bb04af[m Adds real-time latency checks to global server map
+[33m5f020a5[m removed  static games  data
+[33m248d572[m delete static data
+[33ma5ca81e[m added sanity CMS
+[33m6f61ac6[m Improves game data fetching with caching and pricing
+[33m86f8845[m Switches to import.meta.glob for routing discovery
+[33m2af2423[m Refactors game pricing logic for consistency
+[33m06e5675[m Refactors platform icons to reusable component
+[33m5f4a9dd[m Refactors game server page with modular game list & improved filters
+[33m6acc4ac[m Refactors timeline UI to use Material icons and improve layout
+[33me03a993[m Merge pull request #49 from formics-io/abhi
+[33m8261f78[m Merge branch 'main' of https://github.com/formics-io/aleforge into abhi
+[33m497d76f[m Merge pull request #50 from formics-io/khushbu_dev
+[33m64f7bbc[m CSS Changes
+[33m7521aaf[m Simplifies timeline logic and streamlines UI updates
+[33m85ea638[m Refactors top bar marquee for simplified structure and UX
+[33me1b9102[m Refactors server map to use i18n country codes
+[33m0cc81bb[m add server comparision
+[33m32cad31[m Merge pull request #48 from formics-io/khushbu_dev
+[33m59cf433[m Merge branch 'main' of github.com:formics-io/aleforge into khushbu_dev
+[33m18fb31f[m Merge pull request #47 from formics-io/abhi
+[33m3ab5416[m fix url bug and change game detail path
+[33m55a86c9[m Merge branch 'main' of https://github.com/formics-io/aleforge into abhi
+[33m2b5dd68[m add icon
+[33m8ae683c[m Merge pull request #46 from formics-io/khushbu_dev
+[33m9468b55[m CSS Changes
+[33m271c434[m css changes
+[33m52f9228[m Merge pull request #45 from formics-io/khushbu_dev
+[33ma7f99ad[m Merge branch 'main' of github.com:formics-io/aleforge into khushbu_dev
+[33md3064ca[m Merge pull request #44 from formics-io/abhi
+[33mc9b59cb[m Code refactor and css changes
+[33m958309e[m server plan api add
+[33me7a8827[m price api call optimization
+[33mc215845[m dynamic route new changes
+[33ma0324d9[m dynamic route error fixed
+[33m48fcea1[m game server list update
+[33me86dd67[m new change
+[33m32b482a[m img path change
+[33mf4c0c02[m build failed fixed
+[33m41d821b[m game server pricing add
+[33m58e5a84[m Merge branch 'main' of https://github.com/formics-io/aleforge into abhi
+[33mf33661c[m auto detect loction add
+[33m5c3c7c2[m Merge pull request #43 from formics-io/khushbu_dev

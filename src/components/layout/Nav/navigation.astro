@@ -1,0 +1,223 @@
+---
+import "./navigation.scss";
+import UtilityBar from "../UtilityBar.astro";
+import Topbar from "../topbar.astro";
+import { getGamesWithMinPrice } from "src/services/gameService";
+import SelectLang from "../SelectLang.astro";
+import { urlFor } from "src/lib/sanityImage";
+import i18nEn from "../../../i18n/site.en.json";
+const games = await getGamesWithMinPrice();
+const navGames = games!.slice(0, 6);
+const navI18n = i18nEn.navigationComponent || {};
+
+const navigation = [
+  {
+    label: "Game Servers",
+    gameDropdown: true,
+    href: "/game-server",
+  },
+  {
+    label: "Hosting",
+    dropdown: [
+      {
+        label: "Web Hosting",
+        href: "/web-hosting",
+        icon: "../../assets/images/icons/General/nav/web.svg",
+      },
+      {
+        label: "WordPress Hosting",
+        href: "/wordpress-hosting",
+        icon: "../../assets/images/icons/General/nav/wordpress.svg",
+      },
+      {
+        label: "Dedicated Servers",
+        href: "/dedicated-servers",
+        icon: "../../assets/images/icons/General/nav/dedicated.svg",
+      },
+    ],
+  },
+  {
+    label: "Company",
+    dropdown: [
+      {
+        label: "About Us",
+        href: "/about",
+        icon: "../../assets/images/icons/General/nav/about.svg",
+      },
+      { label: "Blog", href: "/blog", icon: "../../assets/images/icons/General/nav/blog.svg" },
+      {
+        label: "Control Panel",
+        href: "/control-panel",
+        icon: "../../assets/images/icons/General/nav/control-panel.svg",
+      },
+    ],
+  },
+
+  {
+    label: "Support",
+    dropdown: [
+      {
+        label: "Knowledgebase",
+        href: "https://help.aleforge.net/",
+        icon: "../../assets/images/icons/General/nav/knowledgebase.svg",
+      },
+      {
+        label: "Open Ticket",
+        href: "https://billing.aleforge.net/submitticket.php?step=2&deptid=1",
+        icon: "../../assets/images/icons/General/nav/open-ticket.svg",
+      },
+      {
+        label: "Live Chat",
+        href: "/live-chat",
+        icon: "../../assets/images/icons/General/nav/live.svg",
+      },
+      {
+        label: "Discord Support",
+        href: "https://discord.com/invite/e5aRjKJ",
+        icon: "../../assets/images/icons/General/nav/discord.svg",
+      },
+      {
+        label: "Sales",
+        href: "https://billing.aleforge.net/",
+        icon: "../../assets/images/icons/General/nav/sales.svg",
+      },
+    ],
+  },
+];
+---
+
+<Topbar />
+<nav class="navbar nav-container">
+  <div class="global-padding">
+    <div class="container-large">
+      <UtilityBar />
+      <div class="nav-wrapper">
+        <div class="logo">
+          <a href="/">
+            <div
+              class="h-20 w-48 bg-contain bg-no-repeat bg-left"
+              style="background-image: var(--logo);"
+              role="img"
+              aria-label="Aleforge Logo"
+            >
+            </div>
+          </a>
+        </div>
+        <div class="left-side">
+          <ul class="nav-menu">
+            {
+              navigation.map((item) => (
+                <li
+                  class={`nav-item ${item.dropdown || item.gameDropdown ? "dropdown" : ""} ${
+                    item.gameDropdown ? "game-dropdown" : ""
+                  }`}
+                >
+                  {item.gameDropdown ? (
+                    <>
+                      <button class="nav-link">
+                        {item.label}
+                        <span class="material-icons arrow game-dropdown-arrow">
+                          keyboard_arrow_down
+                        </span>
+                      </button>
+                      <div class="dropdown-menu game-dropdown-menu bg-[#686868]/10 backdrop-blur-[100px]">
+                        <div class="game-grid">
+                          {navGames.map((game: any) => (
+                            <a href={`/${game.name.replace(/\s+/g, "-")}`} class="game-card">
+                              <div class="game-left">
+                                <img
+                                  src={
+                                    game.coverImg
+                                      ? urlFor(game.coverImg)
+                                      : "https://placehold.co/600x800?text=No+Image"
+                                  }
+                                  alt={game.name}
+                                  class="game-icon"
+                                />
+                              </div>
+
+                              <div class="game-right">
+                                <h4 class="game-name">{game.name}</h4>
+                                <p class="game-price">
+                                  Starting at <span>{game.minPrice}</span>
+                                </p>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+
+                        <div class="game-dropdown-footer">
+                          <p class="game-dropdown-text" data-i18n="navigationComponent.dropdownTitle">
+                            {navI18n.dropdownTitle ?? "Browse our full game server list. Find the perfect server for your next world."}
+                          </p>
+                          <a href="/game-server" class="button-primary" data-i18n="navigationComponent.dropdownViewAll">
+                            {navI18n.dropdownViewAll ?? "View All"}
+                          </a>
+                        </div>
+                      </div>
+                      <div class="game-dropdown-footer-mobile">
+                        <p class="game-dropdown-text" data-i18n="navigationComponent.dropdownTitle">
+                          {navI18n.dropdownTitle ?? "Browse our full game server list. Find the perfect server for your next world."}
+                        </p>
+                        <a href="/game-server" class="button-primary" data-i18n="navigationComponent.dropdownViewAll">
+                          {navI18n.dropdownViewAll ?? "View All"}
+                        </a>
+                      </div>
+                    </>
+                  ) : item.dropdown ? (
+                    <>
+                      <button class="nav-link">
+                        {item.label}
+                        <span class="material-icons arrow">keyboard_arrow_down</span>
+                      </button>
+                      <div class="dropdown-menu backdrop-blur-[100px]">
+                        {item.dropdown.map((link) => (
+                          <a href={link.href} class="!flex items-center gap-3">
+                            {link.icon && (
+                              <img
+                                src={link.icon}
+                                alt={link.label}
+                                class="w-5 h-5 object-contain"
+                              />
+                            )}
+                            {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <a href={item.href} class="nav-link">
+                      {item.label}
+                    </a>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <div class="nav-actions hide-on-mobile">
+          <SelectLang />
+
+          <a href="#" class="link hide-on-mobile" data-i18n="navigationComponent.signUp">
+            {navI18n.signUp ?? "Sign up"}
+          </a>
+          <a href="/contactUs" class="button-primary hide-on-mobile" data-i18n="navigationComponent.getStarted">
+            {navI18n.getStarted ?? "Get started"}
+          </a>
+        </div>
+
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  import { initNavigation } from "./navigation.client";
+  initNavigation();
+</script>

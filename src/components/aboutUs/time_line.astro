@@ -1,0 +1,590 @@
+---
+const timelineData = {
+  2018: {
+    year: "2018",
+    title: "The Beginning",
+    description: "AleForge was founded with a vision to revolutionize game server hosting.",
+    events: [
+      {
+        title: "Company Founded",
+        desc: "AleForge officially launched with a mission to provide reliable game hosting.",
+        date: "January 2018"
+      },
+      {
+        title: "First Servers",
+        desc: "Deployed our first game servers with 99.9% uptime guarantee.",
+        date: "March 2018"
+      },
+      {
+        title: "Initial Growth",
+        desc: "Reached 50 customers in the first year.",
+        date: "December 2018"
+      },
+      {
+        title: "Initial Growth",
+        desc: "Reached 50 customers in the first year.",
+        date: "December 2018"
+      }
+    ]
+  },
+  2019: {
+    year: "2019",
+    title: "Year of Initial Growth & Infrastructure Upgrade",
+    description: "Significant expansion and infrastructure improvements.",
+    events: [
+      {
+        title: "Growth",
+        desc: "Reached 100 Customers.",
+        date: "February 2019"
+      },
+      {
+        title: "Service Upgrade",
+        desc: "Upgraded all servers to 1 Gbps (Minimum of 1 GBps symmetrical connection).",
+        date: "April 2019"
+      },
+      {
+        title: "Expand Location",
+        desc: "New Location in Virginia (Expanded locations to the east coast).",
+        date: "August 2019"
+      },
+      {
+        title: "Initial Growth",
+        desc: "Reached 50 customers in the first year.",
+        date: "December 2018"
+      }
+    ]
+  },
+  2020: {
+    year: "2020",
+    title: "Scaling & Innovation",
+    description: "Expanded our services and introduced new features.",
+    events: [
+      {
+        title: "New Features",
+        desc: "Launched advanced control panel with one-click mod installation.",
+        date: "March 2020"
+      },
+      {
+        title: "Customer Milestone",
+        desc: "Surpassed 500 active customers.",
+        date: "July 2020"
+      },
+      {
+        title: "24/7 Support",
+        desc: "Introduced round-the-clock customer support.",
+        date: "October 2020"
+      }
+    ]
+  },
+  2021: {
+    year: "2021",
+    title: "Global Expansion",
+    description: "Extended our reach to international markets.",
+    events: [
+      {
+        title: "European Servers",
+        desc: "Launched data centers in London and Frankfurt.",
+        date: "February 2021"
+      },
+      {
+        title: "DDoS Protection",
+        desc: "Implemented enterprise-grade DDoS protection.",
+        date: "June 2021"
+      },
+      {
+        title: "1000+ Customers",
+        desc: "Celebrated reaching 1000 active customers.",
+        date: "November 2021"
+      }
+    ]
+  },
+  2022: {
+    year: "2022",
+    title: "Technology Leadership",
+    description: "Pioneering new technologies in game hosting.",
+    events: [
+      {
+        title: "AI Integration",
+        desc: "Introduced AI-powered server optimization.",
+        date: "April 2022"
+      },
+      {
+        title: "Asia-Pacific Launch",
+        desc: "Opened servers in Singapore and Tokyo.",
+        date: "August 2022"
+      },
+      {
+        title: "Award Recognition",
+        desc: "Named Best Game Hosting Provider by Gaming Magazine.",
+        date: "December 2022"
+      }
+    ]
+  },
+  2023: {
+    year: "2023",
+    title: "Community Focus",
+    description: "Building stronger connections with our gaming community.",
+    events: [
+      {
+        title: "Community Platform",
+        desc: "Launched dedicated community forums and Discord server.",
+        date: "March 2023"
+      },
+      {
+        title: "Esports Partnership",
+        desc: "Became official hosting partner for major esports tournaments.",
+        date: "July 2023"
+      },
+      {
+        title: "5000+ Customers",
+        desc: "Reached 5000 active customers milestone.",
+        date: "October 2023"
+      }
+    ]
+  },
+  2024: {
+    year: "2024",
+    title: "Innovation & Excellence",
+    description: "Continuing to push boundaries in game hosting technology.",
+    events: [
+      {
+        title: "Next-Gen Hardware",
+        desc: "Upgraded to latest generation servers with NVMe storage.",
+        date: "February 2024"
+      },
+      {
+        title: "Instant Deployment",
+        desc: "Reduced server deployment time to under 60 seconds.",
+        date: "June 2024"
+      },
+      {
+        title: "10,000+ Customers",
+        desc: "Celebrated serving over 10,000 gamers worldwide.",
+        date: "September 2024"
+      }
+    ]
+  },
+  2025: {
+    year: "2025",
+    title: "The Future of Gaming",
+    description: "Leading the next generation of game server hosting.",
+    events: [
+      {
+        title: "Cloud Gaming",
+        desc: "Introduced cloud gaming infrastructure support.",
+        date: "January 2025"
+      },
+      {
+        title: "Green Initiative",
+        desc: "Committed to 100% renewable energy for all data centers.",
+        date: "March 2025"
+      },
+      {
+        title: "50,000+ Gamers",
+        desc: "Now trusted by over 50,000 gamers worldwide.",
+        date: "Ongoing"
+      }
+    ]
+  }
+};
+
+const years = Object.keys(timelineData).map((year, index) => ({
+  year,
+  number: String(index + 1).padStart(2, "0"),
+  status: year === "2019" ? "active" : parseInt(year) < 2019 ? "completed" : "inactive"
+}));
+---
+
+<section class="timeline-section">
+  <div class="global-padding section-padding">
+    <div class="max-w-[1300px] mx-auto">
+      <div class="title-wrapper">
+        <p class="overline" data-i18n="timeLineComponent.timeline">Timeline</p>
+        <h2 data-i18n="timeLineComponent.evolutionAleforge">The Evolution Of AleForge</h2>
+        <p class="subtitle" data-i18n="timeLineComponent.lookBackMilestonesShapedAleforge">
+          A Look Back At The Milestones That Shaped AleForge Into A Trusted Game Hosting Platform — Driven By
+          Technology, Speed, And The Gaming Community We Serve.
+        </p>
+      </div>
+      <div class="timeline-nav-wrapper mt-[60px]">
+        <div class="timeline-items" id="timeline-items">
+          <div class="timeline-track">
+            <div class="track-base"></div>
+            <div
+              class="track-active"
+              style={`width: calc(${
+                ((years.findIndex((y) => y.status === "active") +
+                  (years.findIndex((y) => y.status === "active") === years.length - 1 ? 0 : 0.5)) /
+                  (years.length - 1)) *
+                100
+              }%);`}>
+              <div class="track-dot"></div>
+            </div>
+          </div>
+          {
+            years.map((item, index) => (
+              <div class="timeline-item" data-year={item.year} data-status={item.status} data-index={index}>
+                <div class={`year-node ${item.status}`}>
+                  <span class="year-number text-[16px]">{item.number}</span>
+                  <span class="year-label">{item.year}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="timeline-content">
+        <div class="content-header">
+          <div class="header-info">
+            <h3 id="timeline-title" style="font-size:30px; font-weight:500" data-i18n="timeLineComponent.yearInitialGrowthInfrastructureUpgrade">
+              Year of Initial Growth & Infrastructure Upgrade
+            </h3>
+            <p id="timeline-year" style="color:rgba(221, 221, 221, 1); font-size:16px" data-i18n="timeLineComponent.since2019">SINCE: 2019</p>
+          </div>
+          <div class="nav-controls">
+            <span class="nav-counter bg-[#F7F7F7]/10 px-3 py-1 rounded-full" id="event-counter">1/3</span>
+            <div class="flex">
+              <button type="button" class="nav-btn" id="prev-event-btn" aria-label="Previous Event">
+                <span class="material-symbols-outlined"> chevron_backward </span>
+              </button>
+              <button type="button" class="nav-btn" id="next-event-btn" aria-label="Next Event">
+                <span class="material-symbols-outlined"> chevron_forward </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="cards-grid" id="cards-grid">
+          {
+            timelineData["2019"].events.map((card, index) => (
+              <div class="event-card backdrop-blur-[2px]" data-event-index={index}>
+                <h4 class="card_title">{card.title}</h4>
+                <p class="card-desc">{card.desc}</p>
+                <hr style="margin-top: 16px; margin-bottom:14px; width:100%; border-color: rgba(242, 242, 242, 0.14));" />
+                <div class="card-date">
+                  <span class="material-symbols-outlined">calendar_month</span>
+                  <span>{card.date}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../../styles/core/mixins" as *;
+
+  .timeline-nav-wrapper {
+    margin-bottom: 2rem;
+    height: 130px;
+
+    @include xl {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; // Hide scrollbar for nav, let items scroll? No, nav needs to scroll.
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .timeline-track {
+    position: absolute;
+    top: 50%;
+    left: 5rem;
+    right: 5rem;
+    height: 4px;
+    transform: translateY(-50%);
+    z-index: 5;
+
+    .track-base {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+    }
+
+    .track-active {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 9999px;
+      transition: width 1s ease-out;
+    }
+
+    .track-dot {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 1.125rem;
+      height: 1.125rem;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2.5px solid white;
+      z-index: 50;
+      transform: translate(50%, -50%);
+      box-shadow: 0 0 15px var(--accent);
+      transition: opacity 0.3s ease;
+    }
+  }
+
+  .timeline-items {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 87.5rem;
+    margin: 0 auto;
+    height: 130px;
+
+    @include xl {
+      width: max-content;
+      min-width: 100%;
+      gap: 2rem;
+    }
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 10;
+  }
+
+  .year-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    transition: all 0.5s ease;
+    width: 100px;
+    height: 57px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    font-weight: 500;
+
+    &.active {
+      width: 150px;
+      height: 77px;
+      background: var(--accent);
+      z-index: 20;
+      transform: scale(1);
+      font-size: 26px;
+    }
+
+    &.completed {
+      background: var(--accent);
+      z-index: 10;
+    }
+  }
+
+  .timeline-content {
+    max-width: 87.5rem;
+    margin: 0 auto;
+  }
+
+  .content-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 20px;
+
+    @include md {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .nav-controls {
+    display: flex;
+    align-items: center;
+    justify-items: space-between;
+    gap: 1rem;
+    background: transparent;
+    border-radius: 9999px;
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+
+    @include md {
+      align-self: flex-end;
+    }
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: white;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+
+  .nav-counter {
+    color: #d1d5db;
+    min-width: 2.5rem;
+    text-align: center;
+  }
+
+  .cards-grid {
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding-bottom: 1rem;
+    gap: 10px;
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  :global(.event-card) {
+    background: rgba(45, 48, 78, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.5rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 400px;
+
+    @include md {
+      width: 320px;
+    }
+
+    @include sm {
+      width: 240px;
+      padding: 1.5rem;
+    }
+
+    &.active {
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    :global(.card_title) {
+      font-size: 20px;
+      color: white;
+      font-weight: 400;
+    }
+
+    :global(.card-desc) {
+      font-size: 16px;
+      flex-grow: 1;
+      font-weight: 300;
+    }
+
+    :global(.card-date) {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{timelineData, years}}>
+  const els = {
+    title: document.getElementById("timeline-title"),
+    year: document.getElementById("timeline-year"),
+    counter: document.getElementById("event-counter"),
+    cards: document.getElementById("cards-grid"),
+    items: [...document.querySelectorAll(".timeline-item")],
+    track: document.querySelector(".track-active")
+  };
+  let yearIndex = years.findIndex((y) => y.status === "active");
+  let eventIndex = 0;
+
+  function renderYear(index) {
+    yearIndex = index;
+    eventIndex = 0;
+    const year = years[index].year;
+    const data = timelineData[year];
+    els.title.textContent = data.title;
+    els.year.textContent = `SINCE: ${year}`;
+    els.counter.textContent = `1/${data.events.length}`;
+    els.cards.innerHTML = data.events
+      .map(
+        (e, i) => `
+      <div class="event-card ${i === 0 ? "active" : ""}">
+        <h4 class="card_title">${e.title}</h4>
+        <p class="card-desc">${e.desc}</p>
+                        <hr style="margin-top: 16px; margin-bottom:14px; width:100%; border-color: rgba(242, 242, 242, 0.14);" />
+
+        <div class="card-date">
+        <span class="material-symbols-outlined">
+calendar_month
+</span>
+          <span>${e.date}</span>
+        </div>
+      </div>
+    `
+      )
+      .join("");
+    els.items.forEach((item, i) => {
+      const node = item.querySelector(".year-node");
+      node.className = "year-node " + (i === index ? "active" : i < index ? "completed" : "inactive");
+    });
+    updateTrack();
+  }
+
+  function updateTrack() {
+    const total = els.items.length - 1;
+    const percent = (yearIndex / total) * 100;
+    els.track.style.width = `${percent}%`;
+  }
+
+  function setEvent(index) {
+    const cards = els.cards.children;
+    if (!cards[index]) return;
+
+    [...cards].forEach((c) => c.classList.remove("active"));
+    cards[index].classList.add("active");
+
+    els.cards.scrollTo({
+      left: cards[index].offsetLeft - els.cards.clientWidth / 2 + cards[index].clientWidth / 2,
+      behavior: "smooth"
+    });
+
+    els.counter.textContent = `${index + 1}/${cards.length}`;
+    eventIndex = index;
+  }
+
+  els.items.forEach((item, i) => item.addEventListener("click", () => renderYear(i)));
+  document.getElementById("prev-event-btn").onclick = () => eventIndex > 0 && setEvent(eventIndex - 1);
+  document.getElementById("next-event-btn").onclick = () => setEvent(eventIndex + 1);
+  renderYear(yearIndex);
+</script>

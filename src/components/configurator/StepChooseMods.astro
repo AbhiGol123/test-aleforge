@@ -1,0 +1,269 @@
+
+
+<div id="mods-step" data-step="mods" class="config-step bg-[var(--configurator-bg)] border border-[#FFFFFF]/12 rounded-2xl p-4 md:p-8">
+  <div class="flex items-start gap-4 mb-2">
+    <div
+      class="step-badge  flex-shrink-0 w-12 h-12 text-[34px] rounded-lg bg-[var(--configurator-text)] text-white flex items-center justify-center">
+      4
+    </div>
+    <div class="flex-1">
+      <h4 class="text-white text-[26px]" data-i18n="stepchoosemodsComponent.selectHowManyModsPlan">Select how many mods you plan to run on your server.</h4>
+      <p class="font-[200]" style="font-size: 16px;" data-i18n="stepchoosemodsComponent.setNumberModsWantServer">Set the number of mods you want your server to run.</p>
+    </div>
+  </div>
+
+  <div class="border-b border-[#D9D9D9]/12 mb-4"></div>
+
+  <!-- Mod Slider -->
+  <div class="space-y-2">
+    <div class="grid grid-cols-1 min-[480px]:grid-cols-[1fr_auto_auto] gap-x-4 items-end">
+      <label class="text-[var(--text-secondary)] text-[22px] font-[200]" data-i18n="stepchoosemodsComponent.howManyModsWillUse">How Many Mods Will You Use?</label>
+      <div class="hidden min-[480px]:block text-center w-[3.7rem]">
+        <span class="text-[var(--text-muted)] text-md" data-i18n="stepchoosemodsComponent.min">Min:</span>
+      </div>
+      <div class="hidden min-[480px]:block text-center w-[3.7rem]">
+        <span class="text-[var(--text-muted)] text-md" data-i18n="stepchoosemodsComponent.max">Max:</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 min-[480px]:grid-cols-[1fr_auto_auto] gap-x-4 items-center">
+      <div class="slider-wrapper w-full">
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="1"
+          class="w-full h-3 bg-white/6 border border-white/16 rounded-full appearance-none cursor-pointer slider"
+          id="mods-slider"
+        />
+      </div>
+      <div class="flex flex-row justify-end gap-4 min-[480px]:contents">
+        <div class="flex flex-col items-end min-[480px]:items-center gap-1">
+          <span class="min-[480px]:hidden text-[var(--text-muted)] text-md" data-i18n="stepchoosemodsComponent.min">Min:</span>
+          <div
+            class="slider-value-box bg-[var(--configurator-inner-button)] border border-[var(--accent)] text-[var(--accent)] text-[28px]">
+            0
+          </div>
+        </div>
+        <div class="flex flex-col items-end min-[480px]:items-center gap-1">
+          <span class="min-[480px]:hidden text-[var(--text-muted)] text-md" data-i18n="stepchoosemodsComponent.max">Max:</span>
+          <div
+            class="slider-value-box bg-[var(--configurator-inner-button)] border border-[var(--accent)] text-[var(--accent)] text-[28px]"
+            id="mods-static-value">
+            1
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: 550px) {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+
+  .slider-wrapper {
+    position: relative;
+    flex: 1;
+    width: 100%;
+  }
+
+  .value-box-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .slider-value-box {
+    flex-shrink: 0;
+    width: 3.7rem;
+    height: 3rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  /* Custom Range Slider Styling */
+  .slider {
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 3px solid rgba(255, 255, 255);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+      margin-top: -4px; /* Center thumb: (12px track - 20px thumb) / 2 */
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 3px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    &::-webkit-slider-runnable-track {
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        var(--accent) 0%,
+        var(--accent) var(--value),
+        rgba(255, 255, 255, 0.06) var(--value),
+        rgba(255, 255, 255, 0.06) 100%
+      );
+      border-radius: 9999px;
+      border: none;
+    }
+
+    &::-moz-range-track {
+      height: 100%;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 9999px;
+      border: none;
+    }
+
+    &::-moz-range-progress {
+      background: var(--accent);
+      border-radius: 9999px 0 0 9999px;
+      height: 100%;
+    }
+  
+</style>
+
+
+
+<script >
+  // @ts-nocheck
+  import { configStore, setMods } from "/src/stores/configuratorStore";
+  import { recalculatePrice } from "/src/stores/priceStore";
+
+  const wrapper = document.getElementById("mods-step");
+   const slider = document.getElementById("mods-slider");
+  const valueEl = document.getElementById("mods-value");
+  const displayEl = document.getElementById("mods-display");
+  const staticEl = document.getElementById("mods-static-value");
+
+    if (!slider) {
+    console.warn("[Mods] Slider not found");
+  }
+
+  let hideTimeout;
+
+/* -------------------------
+   VISIBILITY HANDLER
+--------------------------*/
+function updateVisibility(state) {
+  const maxMods = Number(state?.gameData?.maxMods ?? 0);
+  slider.max = maxMods
+  
+
+  if (!wrapper) return;
+
+  if (maxMods > 0) {
+    wrapper.style.display = "";
+  } else {
+    wrapper.style.display = "none";
+  }
+}
+
+/* -------------------------
+   INITIAL STATE
+--------------------------*/
+const initial = configStore.get();
+if (initial) {
+  updateVisibility(initial);
+  
+}
+
+/* -------------------------
+   SUBSCRIBE
+--------------------------*/
+configStore.subscribe((state) => {
+  if (!state) return;
+  updateVisibility(state);
+});
+
+ 
+
+
+
+  /* -------------------------
+     Sync UI from Store
+  --------------------------*/
+  function syncUI() {
+    const { mods } = configStore.get();
+    if (mods == null) return;
+
+    slider.value = mods;
+
+    if (valueEl) valueEl.textContent = mods;
+    if (displayEl) displayEl.textContent = mods;
+    if (staticEl) staticEl.textContent = mods;
+
+    const min = parseInt(slider.min);
+    const max = parseInt(slider.max);
+    const percent = ((mods - min) / (max - min)) * 100;
+    slider.style.setProperty("--value", `${percent}%`);
+  }
+
+  /* -------------------------
+     Initialize Store
+  --------------------------*/
+  const initialValue = parseInt(slider.value || "0");
+  setMods(initialValue);
+
+  syncUI();
+  const unsubscribe = configStore.subscribe(syncUI);
+
+  /* -------------------------
+     UI helpers
+  --------------------------*/
+  function showLabels() {
+    valueEl?.classList.replace("opacity-0", "opacity-100");
+    displayEl?.classList.replace("opacity-0", "opacity-100");
+  }
+
+  function hideLabels() {
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      valueEl?.classList.replace("opacity-100", "opacity-0");
+      displayEl?.classList.replace("opacity-100", "opacity-0");
+    }, 1000);
+  }
+
+  /* -------------------------
+     Slider events
+  --------------------------*/
+  slider.addEventListener("mousedown", showLabels);
+  slider.addEventListener("touchstart", showLabels);
+
+  slider.addEventListener("input", (e) => {
+    const value = parseInt(e.target.value);
+    // console.log("[Mods] Changed:", value);
+    setMods(value);
+    recalculatePrice();
+    showLabels();
+  });
+
+  slider.addEventListener("mouseup", hideLabels);
+  slider.addEventListener("touchend", hideLabels);
+  slider.addEventListener("mouseleave", hideLabels);
+
+  window.addEventListener("beforeunload", unsubscribe);
+</script>

@@ -1,0 +1,251 @@
+---
+
+---
+
+<div id="player-step" data-step="player" class="config-step bg-[var(--configurator-bg)] border border-[#FFFFFF]/12 rounded-2xl p-4 md:p-6">
+  <div class="flex items-start gap-4 mb-2">
+    <div
+      class="step-badge  flex-shrink-0 w-12 h-12 text-[34px] rounded-lg bg-[var(--configurator-text)] text-white flex items-center justify-center">
+      1
+    </div>
+    <div class="flex-1">
+      <h5 class="text-white text-[26px]" data-i18n="stepconfiguregameComponent.configureGameInstallation">Configure Game Installation</h5>
+      <p class="font-[200]" style="font-size: 16px;">
+        We need a few details about your game installation in order to recommend the best plan for you.
+      </p>
+    </div>
+  </div>
+
+  <div class="border-b border-[#D9D9D9]/12 mb-4"></div>
+
+  <!-- Player Slider -->
+  <div class="space-y-2">
+    <div class="grid grid-cols-1 min-[480px]:grid-cols-[1fr_auto] gap-x-4 items-end">
+      <label class="text-[var(--text-secondary)] text-[22px] font-[200]"
+        >How many players do you expect to be on the server at once?</label
+      >
+      <div class="hidden min-[480px]:block text-center w-[3.7rem]">
+        <span class="text-[var(--text-muted)] text-md" data-i18n="stepconfiguregameComponent.players">players</span>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 min-[480px]:grid-cols-[1fr_auto] gap-x-4 items-center">
+      <div class="slider-wrapper w-full">
+        <input
+          type="range"
+          min="1"
+          max="100"
+          value="1"
+          class="w-full h-3 bg-white/6 border border-white/16 rounded-full appearance-none cursor-pointer slider"
+          id="player-slider"
+        />
+      </div>
+      <div class="flex flex-col items-end gap-1">
+        <span class="min-[480px]:hidden text-[var(--text-muted)] text-md" data-i18n="stepconfiguregameComponent.players">players</span>
+        <div
+          class="slider-value-box bg-[var(--configurator-inner-button)] border border-[var(--accent)] text-[var(--accent)] text-[28px]"
+          id="player-static-value">
+          1
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .slider-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: 550px) {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+  }
+
+  .slider-wrapper {
+    position: relative;
+    flex: 1;
+    width: 100%;
+  }
+
+  .value-box-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .slider-value-box {
+    flex-shrink: 0;
+    width: 3.7rem;
+    height: 3rem;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  /* Custom Range Slider Styling */
+  .slider {
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 3px solid rgba(255, 255, 255);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+      margin-top: -4px; /* Center thumb: (12px track - 20px thumb) / 2 */
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      cursor: pointer;
+      border: 3px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    }
+
+    &::-webkit-slider-runnable-track {
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        var(--accent) 0%,
+        var(--accent) var(--value),
+        rgba(255, 255, 255, 0.06) var(--value),
+        rgba(255, 255, 255, 0.06) 100%
+      );
+      border-radius: 9999px;
+      border: none;
+    }
+
+    &::-moz-range-track {
+      height: 100%;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 9999px;
+      border: none;
+    }
+
+    &::-moz-range-progress {
+      background: var(--accent);
+      border-radius: 9999px 0 0 9999px;
+      height: 100%;
+    }
+  
+</style>
+
+
+<script  >
+  // @ts-nocheck
+  import { configStore, setPlayers } from "/src/stores/configuratorStore";
+  import { recalculatePrice } from "/src/stores/priceStore";
+  const playerValueEl = document.getElementById("player-static-value");
+
+
+  window.addEventListener("DOMContentLoaded", () => {
+    // console.log("[Players] DOM Ready");
+
+    const slider = document.getElementById("player-slider");
+    const staticEl = document.getElementById("player-static-value");
+
+    if (!slider) {
+      console.warn("[Players] Slider not found");
+      return;
+    }
+
+    /* -------------------------
+       Apply API Limits
+    --------------------------*/
+   function applyLimits() {
+  const state = configStore.get();
+  const game = state.gameData;
+  if (!game) return;
+
+  const min = Number(game.minPlayers || 1);
+  const max = Number(game.maxPlayers || 100);
+
+  slider.min = String(min);
+  slider.max = String(max);
+
+  let current = Number(slider.value || min);
+  if (current < min) current = min;
+  if (current > max) current = max;
+
+  slider.value = String(current);
+
+  // ✅ Only update store if value changed
+  if (state.players !== current) {
+    setPlayers(current);
+  }
+
+  // console.log("[Players] Limits applied:", { min, max, current });
+}
+
+
+    /* -------------------------
+       Sync UI from Store
+    --------------------------*/
+    function syncUI() {
+      const { players } = configStore.get();
+      if (players == null) return;
+
+      slider.value = String(players);
+      if (staticEl) staticEl.textContent = players;
+
+      const min = Number(slider.min);
+      const max = Number(slider.max);
+      const percent = ((players - min) / (max - min)) * 100;
+      slider.style.setProperty("--value", `${percent}%`);
+
+      // console.log("[Players] UI synced:", players);
+    }
+
+    /* -------------------------
+       Slider Events
+    --------------------------*/
+    slider.addEventListener("input", (e) => {
+      const raw = Number(e.target.value);
+      const min = Number(slider.min);
+      const max = Number(slider.max);
+
+      const safe = Math.min(Math.max(raw, min), max);
+
+      slider.value = safe;
+      setPlayers(safe);
+      recalculatePrice();
+
+      // console.log("[Players] Changed:", safe);
+    });
+
+    /* -------------------------
+       Store Subscription
+    --------------------------*/
+    const unsubscribe = configStore.subscribe(() => {
+      applyLimits();
+     
+    });
+    configStore.subscribe((state) => {
+  if (!state) return;
+
+  if (playerValueEl) {
+    playerValueEl.textContent = String(state.players || 1);
+  }
+});
+
+
+    /* -------------------------
+       Initial Sync
+    --------------------------*/
+    applyLimits();
+    syncUI();
+
+    window.addEventListener("beforeunload", unsubscribe);
+  });
+</script>
+
+

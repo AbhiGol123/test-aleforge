@@ -1,0 +1,341 @@
+---
+const { game } = Astro.props;
+import firstPlanIcon from "../../assets/images/pages/gameServers/server-details/first-plan-icon.webp";
+import secondPlanIcon from "../../assets/images/pages/gameServers/server-details/second-plan-icon.webp";
+import thirdPlanIcon from "../../assets/images/pages/gameServers/server-details/third-plan-icon.webp";
+import fourthPlanIcon from "../../assets/images/pages/gameServers/server-details/fourth-plan-icon.webp";
+
+const categories = game?.hasBudget
+  ? [
+      { id: "budget", label: "Budget" },
+      { id: "standard", label: "Standard" },
+      { id: "premium", label: "Premium" },
+    ]
+  : [
+      { id: "standard", label: "Standard" },
+      { id: "premium", label: "Premium" },
+    ];
+
+async function getDynamicPlans() {
+  try {
+    const res = await fetch(
+      "plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=plans.json"
+    );
+    if (!res.ok) throw new Error("Failed to fetch plans");
+    const allPlans = await res.json();
+    const allPlansData = allPlans?.data || {};
+    const minRam = Number(game?.minRam);
+    console.log('min ram', minRam)
+    const excludedGameIds = [2771, 2772];
+    const showAllPlans = excludedGameIds.includes(Number(game?.game_id));
+    const generatedPlans: any[] = [];
+    const cfg = [
+      { id: "budget", key: "budget_plans", basePrice: "Starting at $30.99" },
+      { id: "standard", key: "standard_plans", basePrice: "Starting at $40.99" },
+      { id: "premium", key: "premium_plans", basePrice: "Starting at $40.99" },
+    ];
+    cfg.forEach((tier: any) => {
+        if (tier.id === "budget" && game?.hasBudget === false) {
+    return;
+  }
+      // Filter plans >= minRam and sort
+      const validPlans = (allPlansData?.[tier.key]?.plans || [])
+        .filter((p: any) => p.ram >= minRam)
+        .sort((a: any, b: any) => a.ram - b.ram);
+
+      // ✅ Only show top 3 unless excluded game
+      const visiblePlans = showAllPlans
+        ? validPlans
+        : validPlans.slice(0, 3);
+
+      visiblePlans.forEach((plan: any, idx: number) => {
+        const layout = [
+          {
+            name: "Compact Table",
+            desc: "For a small friend group",
+            icon: firstPlanIcon,
+          },
+          {
+            name: "Standard Table",
+            desc: "Perfect for starting out",
+            icon: secondPlanIcon,
+          },
+          {
+            name: "Legendary table",
+            desc: "More power for mods",
+            icon: thirdPlanIcon,
+          },
+        ];
+        const active =
+          layout[idx] || {
+            ...layout[2],
+            name: `${plan.ram}GB Performance`,
+          };
+        generatedPlans.push({
+          id: `${tier.id}-${idx + 1}`,
+          pid: plan.pid,
+          category: tier.id,
+          name: active.name,
+          description: active.desc,
+          icon: active.icon,
+          features: [
+  `${plan.ram}GB Memory`,
+  `${plan.disk}GB NVMe Storage`,
+  `${plan.cpu} vCPU Cores`,
+  `${plan.user_backups} Cloud Backups`
+],
+          price: `$${plan.pricing.monthly}`,
+          offer: "Save 20% with annual billing",
+          highlight: false,
+          styles:
+            idx === 0
+              ? {
+                  button:
+                    "bg-orange-500/10 text-orange-500 hover:bg-orange-500",
+                  cardBg:
+                    "linear-gradient(180deg, rgba(10, 11, 21, 0.1) 0%, rgba(255, 181, 3, 0.1) 100%)",
+                  glow: "rgba(255, 181, 3, 0.20)",
+                }
+              : idx === 1
+              ? {
+                  button:
+                    "bg-purple-500/20 text-purple-400 hover:bg-purple-500",
+                  cardBg:
+                    "linear-gradient(180deg, rgba(10, 11, 21, 0.1) 0%, rgba(179, 18, 224, 0.1) 100%)",
+                  glow: "rgba(179, 18, 224, 0.20)",
+                }
+              : {
+                  button:
+                    "bg-green-500/10 text-green-500 hover:bg-green-500",
+                  cardBg:
+                    "linear-gradient(180deg, rgba(10, 11, 21, 0.1) 0%, rgba(191, 239, 19, 0.1) 100%)",
+                  glow: "rgba(191, 239, 19, 0.20)",
+                },
+        });
+      });
+
+      // ✅ Always add Custom Plan
+      generatedPlans.push({
+        id: `${tier.id}-custom`,
+        category: tier.id,
+        name: "Custom Plan",
+        description: `${tier.basePrice}/month`,
+        icon: fourthPlanIcon,
+        features: [
+          "Flexible RAM & NVMe",
+          "Backups & Add-ons",
+          "Custom vCPU",
+          "Built for unique communities",
+        ],
+        price: "Help Me Decide",
+        offer: "Save 20% with annual billing",
+        highlight: false,
+        styles: {
+          button: "bg-green-500/10 text-green-500 hover:bg-green-500",
+          cardBg:
+            "linear-gradient(180deg, rgba(10, 11, 21, 0.1) 0%, rgba(9, 116, 225, 0.1) 100%)",
+          glow: "rgba(9, 116, 225, 0.20)",
+        },
+      });
+    });
+    return generatedPlans;
+  } catch (e) {
+    console.error("Error generating dynamic plans:", e);
+    return [];
+  }
+}
+const plans = await getDynamicPlans();
+
+---
+
+<section class="plan-section" id="serverplan">
+    <div class="section-padding global-padding">
+        <div class="container-large">
+        <h2 class="text-center" data-i18n="serverPlanComponent.choosePerfectServerPlan">Choose Your Perfect Server Plan</h2>
+        <!-- Toggle Switch -->
+        <div class="flex justify-center pt-[30px]">
+            <div
+                class="bg-[var(--bg-card-strong)] p-[2px] md:p-[8px] rounded-full inline-flex border border-[var(--border-light)] relative"
+            >
+                {
+                    categories.map((cat, index) => (
+                        <button
+                            data-plan-trigger={cat.id}
+                            class:list={[
+                                "px-[20px] md:px-[40px] py-[12px] rounded-full text-[16px] md:text-[18px]  transition-all duration-300",
+                                index === 0 
+                                    ? "bg-[var(--accent)] text-white shadow-lg"
+                                    : "text-[var(--text-muted)] hover:text-white",
+                            ]}
+                        >
+                            {cat.label}
+                        </button>
+                    ))
+                }
+            </div>
+        </div>
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4  max-w-[800px] xl:max-w-none  mx-auto mt-[50px]">
+            {
+                plans.map((plan) => (
+                    <div
+                        data-plan-card={plan.id}
+                        data-category={plan.category}
+                        data-pid={plan.pid}
+                        style={`background: ${plan.styles.cardBg}`}
+                        class:list={[
+                            "relative  group rounded-[20px] p-[26px] transition-all duration-300 hover:-translate-y-2 border border-[#E5E7EB]/20 overflow-hidden",
+                          plan.category !== categories[0].id ? "hidden" : "",
+                            plan.highlight ? "scale-105 shadow-2xl z-10" : "",
+                        ]}
+                    >
+                        <div
+                            style={`background: linear-gradient(to bottom, ${plan.styles.glow}, transparent)`}
+                            class:list={[
+                                "absolute top-0 left-0 w-full h-full transition-opacity glow-effect",
+                                plan.highlight ? "opacity-60" : "opacity-30",
+                                "group-hover:opacity-100",
+                            ]}
+                        />
+
+                        <div class="relative z-10 flex flex-col items-center text-center h-full">
+                            <!-- Icon -->
+                            <div class="w-32 h-32 mb-4 relative flex items-center justify-center">
+                                <div class="relative" style={`filter: drop-shadow(0 0 15px ${plan.styles.glow})`}>
+                                    <img src={plan.icon.src} alt={plan.name} class="w-24 h-24 object-contain" />
+                                </div>
+                            </div>
+
+
+                            <h3 class="text-[22px] font-medium text-white tracking-wide">
+                                {plan.name}
+                            </h3>
+
+                            <p class="text-white/40 mb-8 font-light" style="font-size: 15px;">
+                                {plan.description}
+                            </p>
+
+                            <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 w-full mb-7 text-sm text-[var(--text-secondary)]">
+                                {
+                                    plan.features?.map((feature: any) => (
+                                        <div class="flex items-center gap-2">
+                                            <span class="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                                            <span>{feature}</span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+
+                            <div class="mt-auto w-full">
+                              
+                                <button 
+                                class="py-[8px] px-[20px] cursor-pointer" 
+                                    data-get-started-btn
+                                    data-game-name={game.name}
+                                      data-pid={plan.pid}
+                                    class:list={[
+                                        "w-full rounded-full border bg-transparent text-white transition-all duration-300 mb-2 group-hover:border-white/30 group-hover:bg-white/5",
+                                        plan.highlight ? "border-[var(--accent)] shadow-[0_0_15px_rgba(59,130,246,0.2)]" : "border-white/30",
+                                    ]}
+                                >
+                                    <span class="text-[20px]">{plan.price}</span>
+                                    {plan.name !== "Custom Plan" && (
+                                        <span class="text-white/40 text-sm font-light" data-i18n="serverPlanComponent.month">/month</span>
+                                    )}
+                                </button>
+                                <p class="flex items-center justify-center gap-1.5" style="font-size: 12px;">
+                                    {plan.offer}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+        <div class="mx-auto flex flex-col items-center justify-center text-center mt-10 max-w-md space-y-4">
+            <p>See the performance difference and choose the best server for your needs.</p>
+            <a href="#servercomparison" class="button-primary" data-i18n="serverPlanComponent.comparePlans">Compare Plans</a>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script define:vars={{ game }}>
+  const tabButtons = document.querySelectorAll("[data-plan-trigger]");
+  const planCards  = document.querySelectorAll("[data-plan-card]");
+  const getStartedButtons = document.querySelectorAll("[data-get-started-btn]");
+
+  // -----------------------
+  // SHOW TAB FUNCTION
+  // -----------------------
+  function showTab(tabName) {
+    // Toggle cards
+    planCards.forEach((card) => {
+      if (card.dataset.category === tabName) {
+        card.classList.remove("hidden");
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+
+    // Toggle active button
+    tabButtons.forEach((btn) => {
+      if (btn.dataset.planTrigger === tabName) {
+        btn.classList.add("bg-[var(--accent)]", "text-white", "shadow-lg");
+        btn.classList.remove("text-[var(--text-muted)]");
+      } else {
+        btn.classList.remove("bg-[var(--accent)]", "text-white", "shadow-lg");
+        btn.classList.add("text-[var(--text-muted)]");
+      }
+    });
+  }
+
+  // -----------------------
+  // CLICK HANDLERS
+  // -----------------------
+  tabButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tab = btn.dataset.planTrigger;
+      showTab(tab);
+    });
+  });
+
+  // -----------------------
+  // DEFAULT TAB
+  // -----------------------
+  const hasBudget = game?.hasBudget;
+  let  defaultTab;
+  if(hasBudget == true){
+     defaultTab =  "budget"
+  }else{
+     defaultTab = "standard"
+  }
+showTab(defaultTab);
+  getStartedButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const gameName  = button.dataset.gameName;
+    const pid = button.dataset.pid;
+     const hasBudget = game?.hasBudget ?? false;
+
+      // ✅ Store in localStorage
+    localStorage.setItem(
+      "configurator",
+      JSON.stringify({
+        game: gameName,
+        pid,
+        hasBudget,
+      })
+    );
+
+    const params = new URLSearchParams({
+      game: gameName,
+      pid
+    });
+    const url = new URL("/configurator", window.location.origin);
+    url.search = params.toString();
+    window.location.assign(url.toString());
+  });
+});
+</script>
+
+

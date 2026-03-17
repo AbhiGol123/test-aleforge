@@ -1,0 +1,268 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+---
+
+<Layout>
+  <div class="contact_page_wrapper">
+    <Navigation />
+    <Breadcrumbs pageName="Contact Us" />
+
+    <section class="contact_Us_Form">
+      <div class="global-padding section-padding">
+        <div class="container-large">
+          <div class="mx-auto border border-white/10 border-2 backdrop-blur rounded-3xl p-8 lg:p-[100px] shadow-2xl">
+            <!-- Header -->
+            <div class="title-wrapper">
+              <h1 data-i18n="contactusPage.contactUs">Contact Us</h1>
+              <p data-i18n="contactusPage.whetherReLaunchingNewServer">
+                Whether You're Launching A New Server Or Need Technical Help, Our Experts Are Available 24/7 To Keep
+                Your Game Running Smoothly.
+              </p>
+            </div>
+            <!-- Form -->
+            <form class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Name -->
+                <div>
+                  <label for="name" data-i18n="contactusPage.name">Name:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder="Your Name"
+                    class="w-full bg-[#F7F8F8]/4 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                  />
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label for="email" data-i18n="contactusPage.email">Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Your Email address"
+                    class="w-full bg-[#F7F8F8]/4 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                  />
+                </div>
+
+                <!-- Subject -->
+                <div>
+                  <label for="subject" data-i18n="contactusPage.subject">Subject:</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    placeholder="Enter Subject"
+                    class="w-full bg-[#F7F8F8]/4 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-[var(--accent)] transition-colors"
+                  />
+                </div>
+
+                <!-- Priority -->
+                <div>
+                  <label for="priority" data-i18n="contactusPage.priority">Priority:</label>
+                  <div class="relative">
+                    <select
+                      id="priority"
+                      class="w-full bg-[#F7F8F8]/4 border border-white/10 rounded-lg px-4 py-3 text-white appearance-none focus:outline-none focus:border-[var(--accent)] transition-colors cursor-pointer flex items-center"
+                    >
+                      <option data-i18n="contactusPage.medium">Medium</option>
+                      <option data-i18n="contactusPage.high">High</option>
+                      <option data-i18n="contactusPage.low">Low</option>
+                    </select>
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/50">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label for="message " data-i18n="contactusPage.message">Message:</label>
+                <div class="bg-[#F7F8F8]/4 border border-white/10 rounded-lg overflow-hidden mt-[8px]">
+                  <!-- Toolbar -->
+                  <div class="flex items-center gap-4 px-4 py-2 border-b border-white/10 text-white/60">
+                    <div class="flex items-center gap-2 border-r border-white/10 pr-4">
+                      <button type="button" class="hover:text-white transition-colors font-bold" data-i18n="contactusPage.b">B</button>
+                      <button type="button" class="hover:text-white transition-colors italic" data-i18n="contactusPage.i">I</button>
+                      <button type="button" class="hover:text-white transition-colors underline" data-i18n="contactusPage.u">U</button>
+                      <button type="button" class="hover:text-white transition-colors line-through" data-i18n="contactusPage.s">S</button>
+                    </div>
+                    <div class="flex items-center gap-2 border-r border-white/10 pr-4">
+                      <button type="button" class="hover:text-white transition-colors">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                          ></path></svg
+                        >
+                      </button>
+                      <button type="button" class="hover:text-white transition-colors">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          ></path></svg
+                        >
+                      </button>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <button type="button" class="hover:text-white transition-colors">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path></svg
+                        >
+                      </button>
+                      <button type="button" class="hover:text-white transition-colors">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          ><path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h8m-8 6h16"></path></svg
+                        >
+                      </button>
+                    </div>
+                  </div>
+                  <textarea
+                    id="message"
+                    rows="6"
+                    placeholder="Write Here"
+                    class="w-full bg-transparent px-4 py-3 text-white placeholder-white/30 focus:outline-none resize-none"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Attachments -->
+              <div>
+                <label data-i18n="contactusPage.attachments">Attachments</label>
+                <div class="flex gap-4 items-center flex-wrap">
+                  <input
+                    type="text"
+                    id="file-name-display"
+                    placeholder="No file selected"
+                    readonly
+                    class="flex-1 bg-[#F7F8F8]/4 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none"
+                  />
+                  <input
+                    type="file"
+                    id="file-upload"
+                    class="hidden"
+                    accept=".jpg,.gif,.jpeg,.png,.txt,.pdf,.log,.zip"
+                  />
+                  <button
+                    type="button"
+                    id="upload-btn"
+                    class="bg-[var(--accent)] text-white px-6 py-2 rounded-[8px] transition-colors flex items-center gap-2 whitespace-nowrap h-[50px] text-[18px]"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                    </svg>
+                    Upload File
+                  </button>
+                </div>
+                <p style="color: rgba(255, 255, 255, 0.4); font-size:16px; font-weight:300; margin-top:8px" data-i18n="contactusPage.allowedFileExtensionsJpgGif">
+                  Allowed File Extensions: .jpg, .gif, .jpeg, .png, .txt, .pdf, .log, .zip (Max file size: 1024MB)
+                </p>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="button-wrapper pt-4">
+                <button type="submit" class="button-primary" data-i18n="contactusPage.submit"> Submit </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .contact_page_wrapper {
+    background-image: var(--bg-contactUs-first-img);
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
+  input,
+  select,
+  textarea {
+    padding: 15px 20px;
+    margin-top: 8px;
+    border-radius: 8px;
+    height: 50px;
+  }
+  ::placeholder {
+    font-size: 18px;
+  }
+  label {
+    font-size: 20px;
+    font-weight: 400;
+  }
+</style>
+
+<script is:inline>
+  const uploadBtn = document.getElementById("upload-btn");
+  const fileInput = document.getElementById("file-upload");
+  const fileNameDisplay = document.getElementById("file-name-display");
+
+  if (uploadBtn && fileInput && fileNameDisplay) {
+    uploadBtn.addEventListener("click", () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files && e.target.files.length > 0) {
+        fileNameDisplay.value = e.target.files[0].name;
+      } else {
+        fileNameDisplay.value = "";
+      }
+    });
+  }
+</script>

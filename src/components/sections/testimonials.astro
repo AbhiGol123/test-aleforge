@@ -1,0 +1,235 @@
+<section class="testimonials-section">
+  <div class="section-padding">
+    <div class="title-wrapper global-padding">
+      <h2 data-i18n="testimonialsComponent.trusted50000GamersWorldwide">Trusted By 50,000+ Gamers Worldwide</h2>
+    </div>
+    <div class="gradient-overlay left"></div>
+    <div class="gradient-overlay right"></div>
+    <div id="infinite-carousel" class="carousel-container mt-[60px]">
+      <template id="card-template">
+        <div class="card">
+          <div class="card-header">
+            <img src="" class="avatar" />
+            <div>
+              <h3 class="name"></h3>
+              <p class="role"></p>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p class="quote"></p>
+        </div>
+      </template>
+    </div>
+  </div>
+
+</section>
+  <style lang="scss">
+    @use "/src/styles/core/mixins.scss" as *;
+    .testimonials-section {
+      overflow: hidden;
+      user-select: none;
+      position: relative;
+    }
+    .gradient-overlay {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 6rem;
+      z-index: 10;
+      &.left {
+        left: 0;
+        background: linear-gradient(to right, var(--bg-body), transparent);
+      }
+      &.right {
+        right: 0;
+        background: linear-gradient(to left, var(--bg-body), transparent);
+      }
+      @include sm {
+        width: 3rem;
+      }
+    }
+    .carousel-container {
+      margin: 0 auto;
+      display: flex;
+      gap: 1.7rem;
+      overflow-x: scroll;
+      position: relative;
+      cursor: grab;
+      padding: 1rem 0; /* Add padding to avoid cutting off shadows */
+      align-items: stretch; /* Ensure cards stretch to fill height */
+
+      /* Hide scrollbar */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+
+      @include md {
+        gap: 2rem;
+      }
+      @include sm {
+        gap: 1.5rem;
+      }
+    }
+    .carousel-container.dragging {
+      cursor: grabbing;
+      * {
+        user-select: none !important;
+        pointer-events: none;
+      }
+    }
+
+    .card {
+      max-width: 350px;
+      min-width: 300px;
+      scroll-snap-align: center;
+      background-color: rgba(#505265, 0.1);
+      border: 1px solid var(--border-light);
+      border-radius: 1rem;
+      padding:40px 30px;
+      flex-shrink: 0;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s ease;
+      opacity: 0.9;
+      height: auto; /* Allow height to adjust */
+      display: flex;
+      flex-direction: column;
+      &:hover {
+        opacity: 1;
+        transform: translateY(-5px);
+      }
+      @include md {
+        max-width: 300px;
+        min-width: 280px;
+        padding: 1.75rem;
+      }
+      @include sm {
+        max-width: 280px;
+        min-width: 260px;
+        padding: 1.5rem;
+      }
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      .avatar {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        border: 1px solid var(--border-mid);
+      }
+      .name {
+        font-size: 1.125rem;
+        color: var(--text-primary);
+        margin: 0;
+
+        @include sm {
+          font-size: 1rem;
+        }
+      }
+      .role {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        opacity: 0.9;
+        margin: 0;
+
+        @include sm {
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .stars {
+      display: flex;
+      gap: 0.25rem;
+      color: #facc15; /* Yellow-400 */
+      font-size: 2rem;
+    }
+    .quote {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  </style>
+
+<script is:inline>
+const carousel = document.getElementById("infinite-carousel");
+const template = document.getElementById("card-template");
+
+const testimonials = [
+  {
+    img: "https://i.pravatar.cc/100?img=12",
+    name: "Jon Blackburn",
+    role: "Co-Founder Of Gaminghub",
+    quote:
+      "I've been running a Rust community for a while, and finding a stable server host has always been a challenge. Since switching to AleForge, our players noticed the difference immediately — no lag spikes, fast connections, and reliable uptime."
+  },
+  {
+    img: "https://i.pravatar.cc/100?img=25",
+    name: "Emily Carter",
+    role: "Game Server Admin",
+    quote:
+      "I've been running a Rust community for a while, and finding a stable server host has always been a challenge. Since switching to AleForge, our players noticed the difference immediately — no lag spikes, fast connections, and reliable uptime."
+  },
+  {
+    img: "https://i.pravatar.cc/100?img=36",
+    name: "Ryan Lee",
+    role: "Streamer & Gamer",
+    quote:
+      "I've been running a Rust community for a while, and finding a stable server host has always been a challenge. Since switching to AleForge, our players noticed the difference immediately — no lag spikes, fast connections, and reliable uptime."
+  },
+  {
+    img: "https://i.pravatar.cc/100?img=45",
+    name: "Sophia Turner",
+    role: "Community Manager",
+    quote:
+      "I've been running a Rust community for a while, and finding a stable server host has always been a challenge. Since switching to AleForge, our players noticed the difference immediately — no lag spikes, fast connections, and reliable uptime."
+  }
+];
+
+// duplicate testimonials for infinite effect
+[...testimonials, ...testimonials].forEach((t) => {
+  const card = template.content.cloneNode(true);
+  card.querySelector(".avatar").src = t.img;
+  card.querySelector(".name").textContent = t.name;
+  card.querySelector(".role").textContent = t.role;
+  card.querySelector(".quote").textContent = t.quote;
+  carousel.appendChild(card);
+});
+
+let scrollPos = 0;
+const speed = 0.5;
+let isPaused = false;
+
+// ✅ pause when hovering ANY card
+carousel.querySelectorAll(".card").forEach((card) => {
+  card.addEventListener("mouseenter", () => {
+    isPaused = true;
+  });
+  card.addEventListener("mouseleave", () => {
+    isPaused = false;
+  });
+});
+
+function autoScroll() {
+  if (!isPaused) {
+    scrollPos += speed;
+    carousel.scrollLeft = scrollPos;
+
+    const halfWidth = carousel.scrollWidth / 2;
+    if (scrollPos >= halfWidth) {
+      scrollPos -= halfWidth;
+    }
+  }
+  requestAnimationFrame(autoScroll);
+}
+
+autoScroll();
+
+</script>

@@ -1,0 +1,109 @@
+---
+const { servers, CPU_LOGOS } = Astro.props;
+---
+
+<div class="lg:col-span-9 overflow-x-auto server-list-container">
+
+  <!-- List Header (Desktop) -->
+  <div class="grid grid-cols-14 gap-4 px-6 text-[17px] uppercase tracking-wider mb-2 min-w-[900px]">
+    <div class="col-span-4" data-i18n="serverlistComponent.cpu">CPU</div>
+    <div class="col-span-2" data-i18n="serverlistComponent.ram">RAM</div>
+    <div class="col-span-2" data-i18n="serverlistComponent.storage">Storage</div>
+    <div class="col-span-2" data-i18n="serverlistComponent.transfer">Transfer</div>
+    <div class="col-span-2" data-i18n="serverlistComponent.price">Price</div>
+  </div>
+
+  <!-- Server Items -->
+  <div class="space-y-[18px] mt-[10px]">
+    {servers.map((server:any) => (
+      <div
+        class="server-card bg-[#505265]/10 border border-[var(--border-light)] rounded-xl p-5 md:p-0 md:px-6 md:py-4 transition-all duration-300 group min-w-[900px]"
+        data-cpu={server.cpuBrand?.toLowerCase()}
+  data-cores={server.cores}
+  data-price={server.price}
+  data-memory={parseInt(server.ram)} 
+  data-locations={server.locations?.join(",")}
+
+  data-storage={server.storageLabel} 
+      >
+        <div class="grid grid-cols-14 gap-4 items-center">
+
+          <!-- CPU -->
+          <div class="col-span-4">
+            <div class="flex items-center gap-3">
+              <div class="w-[28px] h-auto flex items-center justify-center">
+                <img src={CPU_LOGOS[server.cpuBrand?.toLowerCase()]} />
+              </div>
+
+              <div>
+                <h4 class="text-lg leading-tight">{server.cpu}</h4>
+                <p class="text-[22px]">{server.cpuModel}</p>
+              </div>
+            </div>
+
+            <div class="text-[15px] mt-[8px] mb-[12px]">
+              <span>{server.cores} Cores</span>
+              <span> / {server.threads} Threads</span>
+              <span> @ {server.cpuFrequency}</span>
+            </div>
+
+            <div class="flex items-center gap-2 mt-1 text-xs">
+              <span class="text-[18px]" data-i18n="serverlistComponent.available">Available in :</span>
+
+              <div class="flex gap-1">
+                {server.locations?.map((loc:any) => (
+                  <img
+                    src={`https://flagcdn.com/w40/${loc}.png`}
+                    alt={loc}
+                    class="w-[32px] h-[21px] rounded-sm border border-[#DFDFDF]"
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- RAM -->
+          <div class="col-span-2">
+            <div class="font-medium text-[21px]">{server.ram}</div>
+            <div class="text-[16px]">{server.ramLabel}</div>
+          </div>
+
+          <!-- Storage -->
+          <div class="col-span-2">
+            <div class="font-medium text-[21px]">{server.storage}</div>
+            <div class="text-[16px]" style="font-style: uppercase;">{server.storageLabel}</div>
+          </div>
+
+          <!-- Transfer -->
+          <div class="col-span-2">
+            <div class="font-medium text-[21px]">{server.transfer}</div>
+            <div class="text-[16px]">{server.networkSpeed}</div>
+          </div>
+
+          <!-- Price -->
+          <div class="col-span-2">
+            <div class="flex items-baseline gap-1">
+              <span class="font-medium text-[21px] text-white">
+                ${server.price}
+              </span>
+              <small data-i18n="serverlistComponent.mo">/mo</small>
+            </div>
+            <div class="text-[16px]" data-i18n="serverlistComponent.price2">price</div>
+          </div>
+
+          <!-- Action -->
+          <div class="col-span-2">
+            <button class="button-primary" data-i18n="serverlistComponent.buyNow">Buy Now</button>
+          </div>
+
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {servers.length === 0 && (
+    <div class="text-center py-12 text-[var(--text-muted)]">
+      <p class="text-lg" data-i18n="serverlistComponent.noServersMatchFilters">No servers match your filters.</p>
+    </div>
+  )}
+</div>

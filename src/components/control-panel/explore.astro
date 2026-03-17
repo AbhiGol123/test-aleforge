@@ -1,0 +1,158 @@
+---
+const features = [
+  {
+    id: "console",
+    title: "Console",
+    icon: "dashboard",
+    description: "Real-Time Console Access With Command History And Server Log Monitoring.",
+    image: "../../assets/images/pages/control-panel/first.webp"
+  },
+  {
+    id: "databases",
+    title: "Databases",
+    icon: "database",
+    description: "Easily Create, Manage, And Backup Your MySQL Databases Directly From The Panel.",
+    image: "../../assets/images/pages/control-panel/first.webp"
+  },
+  {
+    id: "files",
+    title: "File Manager",
+    icon: "folder_managed",
+    description: "Full Access To Your Server Files. Upload, Edit, And Manage Configuration Files With Ease.",
+    image: "../../assets/images/pages/control-panel/first.webp"
+  },
+  {
+    id: "swap",
+    title: "Game Swap",
+    icon: "swap_vert",
+    description: "Switch Between Different Game Servers Instantly Without Losing Your Data.",
+    image: "../../assets/images/pages/control-panel/first.webp"
+  },
+  {
+    id: "schedules",
+    title: "Schedules",
+    icon: "schedule",
+    description: "Automate Tasks Like Restarts, Backups, And Updates With A Powerful Scheduling System.",
+    image: "../../assets/images/pages/control-panel/first.webp"
+  },
+  {
+    id: "networking",
+    title: "Networking",
+    icon: "assistant_on_hub",
+    description: "Manage Ports, Allocations, And Network Settings To Ensure Smooth Connectivity.",
+    image: "../../assets/images/pages/control-panel/first.webp"
+  }
+];
+---
+
+<section class="explore_control_panel">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="explore_control_panel_wrapper">
+        <div class="title-wrapper">
+          <span class="overline" style="color: var(--accent)" data-i18n="exploreComponent.panelScreenshots">Panel Screenshots</span>
+          <h2 data-i18n="exploreComponent.exploreControlPanel">Explore The Control Panel</h2>
+          <p class="subtitle" data-i18n="exploreComponent.takeDetailedLookAdvancedGame">
+            Take A Detailed Look At Our Advanced Game Server Control Panel Interface And Discover The Powerful Features
+            That Make Server Management Effortless.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mt-[50px]">
+          <!-- Left Column: Accordion/Menu -->
+          <div class="lg:col-span-4 flex flex-col gap-4">
+            {
+              features.map((feature, index) => (
+                <div
+                  class={`feature-item group rounded-xl border transition-all duration-500 p-5 cursor-pointer ${
+                    index === 0
+                      ? "active border-[2px] border-[var(--accent)]/20 bg-[var(--feature-bg-active)]"
+                      : "border-white/10 bg-transparent"
+                  }`}
+                  data-id={feature.id}
+                  data-image={feature.image}
+                >
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <span class="material-symbols-outlined ">{feature.icon}</span>
+                      <span class={`title text-lg md:text-[20px] transition-colors `}>{feature.title}</span>
+                    </div>
+                    <span class="material-icons down_arrow transition-transform duration-300">keyboard_arrow_down</span>
+                  </div>
+                  <p class={`description mt-2 transition-all duration-500   ${index === 0 ? "block" : "hidden"}`}>
+                    {feature.description}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+          <!-- Right Column: Image Preview -->
+          <div
+            class="lg:col-span-8 relative rounded-[20px] overflow-hidden border border-white/10 shadow-[0_4px_40px_rgba(0,0,0,0.45)] bg-[#0C0D18] w-full">
+            <!-- Main Image -->
+            <img
+              id="preview-image"
+              src="../../assets/images/pages/control-panel/first.webp"
+              alt="Control Panel Interface"
+              class="w-full h-auto object-cover transition-opacity duration-300"
+            />
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0C0D18]/60 to-transparent pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-item {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--feature-bg);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  /* Active container */
+  .feature-item.active {
+    border: 2px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    background: var(--feature-bg-active);
+  }
+
+  /* Description */
+  .feature-item .description {
+    display: none;
+  }
+  .feature-item.active .description {
+    display: block;
+  }
+
+  /* Arrow */
+  .feature-item.active .down_arrow {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script is:inline>
+  const items = document.querySelectorAll(".feature-item");
+  const preview = document.getElementById("preview-image");
+
+  const activateItem = (item) => {
+    items.forEach((el) => el.classList.remove("active"));
+    item.classList.add("active");
+
+    preview.style.opacity = 0;
+    setTimeout(() => {
+      preview.src = item.dataset.image;
+      preview.style.opacity = 1;
+    }, 300);
+  };
+
+  items.forEach((item) => {
+    item.addEventListener("click", () => activateItem(item));
+  });
+
+  // activate first item
+  activateItem(items[0]);
+</script>

@@ -1,0 +1,107 @@
+<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+<el-dropdown class="inline-block">
+  <button class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md px-3 py-2 text-[18px]">
+    <span id="langButtonLabel">English</span>
+    <span class="material-icons arrow">keyboard_arrow_down</span>
+  </button>
+  <el-menu
+    id="langSelect"
+    anchor="bottom end"
+    popover
+    class="w-56 origin-top-right rounded-md bg-[var(--accent)]/20 outline-1 -outline-offset-1 outline-white/10 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in text-white"
+  >
+    <div class="py-1">
+      <a href="#" data-lang="en" class="lang-item block px-4 py-1 text-[18px]" data-i18n="selectlangComponent.english">English</a>
+      <a href="#" data-lang="nl" class="lang-item block px-4 py-1 text-[18px]" data-i18n="selectlangComponent.nederlands">Nederlands</a>
+      <a href="#" data-lang="de" class="lang-item block px-4 py-1 text-[18px]" data-i18n="selectlangComponent.deutsch">Deutsch</a>
+      <a href="#" data-lang="es" class="lang-item block px-4 py-1 text-[18px]" data-i18n="selectlangComponent.espaOl">Español</a>
+    </div>
+  </el-menu>
+</el-dropdown>
+
+<script is:inline>
+  const LANG_LABELS = {
+    en: "English",
+    nl: "Nederlands",
+    de: "Deutsch",
+    es: "Español"
+  };
+  const SUPPORTED_LANGS = Object.keys(LANG_LABELS);
+
+  function splitPath(pathname) {
+    const parts = String(pathname || "/")
+      .split("/")
+      .filter(Boolean);
+
+    const maybeLang = parts[0];
+    if (SUPPORTED_LANGS.includes(maybeLang)) {
+      return {
+        lang: maybeLang,
+        rest: `/${parts.slice(1).join("/")}`.replace(/\/+$/, "") || "/"
+      };
+    }
+
+    return {lang: null, rest: pathname || "/"};
+  }
+
+  function buildLangPath(lang) {
+    const current = splitPath(window.location.pathname);
+    const base = current.rest === "/" ? "" : current.rest;
+    return `/${lang}${base}`;
+  }
+
+  function applyLanguage(lang) {
+    localStorage.setItem("siteLang", lang);
+    document.documentElement.setAttribute("lang", lang);
+    highlightActive(lang);
+
+    // Update button label
+    const label = document.getElementById("langButtonLabel");
+    if (label) {
+      label.textContent = LANG_LABELS[lang] || LANG_LABELS.en;
+    }
+
+    window.dispatchEvent(new CustomEvent("site-lang-change", {detail: {lang}}));
+
+    const target = buildLangPath(lang);
+    const nextUrl = `${target}${window.location.search || ""}${window.location.hash || ""}`;
+    const currentUrl = `${window.location.pathname}${window.location.search || ""}${window.location.hash || ""}`;
+    if (nextUrl !== currentUrl) {
+      window.location.href = nextUrl;
+    }
+  }
+
+  function highlightActive(lang) {
+    document.querySelectorAll(".lang-item").forEach((el) => {
+      el.classList.toggle("bg-white/10", el.dataset.lang === lang);
+    });
+  }
+  function initLang() {
+    const menu = document.getElementById("langSelect");
+    if (!menu) return;
+
+    // Handle click on language item
+    menu.addEventListener("click", (e) => {
+      const item = e.target.closest(".lang-item");
+      if (!item) return;
+
+      e.preventDefault();
+      const lang = item.dataset.lang;
+      applyLanguage(lang);
+    });
+
+    // Load saved language
+    const currentPathLang = splitPath(window.location.pathname).lang;
+    const savedLang = currentPathLang || localStorage.getItem("siteLang") || "en";
+    applyLanguage(savedLang);
+  }
+
+  // ------------------------
+  // Init safely after DOM ready
+  // ------------------------
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLang);
+  } else {
+    initLang();
+  }
+</script>

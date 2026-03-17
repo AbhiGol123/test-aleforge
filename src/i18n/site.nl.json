@@ -1,0 +1,714 @@
+{
+  "slugPage": {},
+  "webHostingPage": {
+    "sharedWebHosting": "Shared Web Hosting",
+    "webHostingDesignedProvideCutting": "Web Hosting Designed To Provide Cutting Edge Performance With Free SSL Certificates, And Daily Backups Included By Default.",
+    "seeHostingPackages": "See Hosting Packages",
+    "getStarted": "Get Started",
+    "riskFreeCancelAnytime": "Risk-Free, Cancel Anytime",
+    "affordableWebHosting": "Affordable Web Hosting"
+  },
+  "dedicatedServersPage": {},
+  "404Page": {
+    "getStarted": "Get Started",
+    "pageNotFound": "Page Not Found",
+    "looksLikePageWentOffline": "Looks like this page went offline or never existed in the first place.",
+    "goBackHome": "Go Back Home",
+    "viewGameServers": "View Game Servers"
+  },
+  "blogSlugPage": {
+    "relatedPosts": "Related Posts",
+    "hostOver20GamesInstantly": "Host Over 20 Games Instantly With AleForge, Powered By High-Performance Hardware And 24/7 Expert Support.",
+    "viewMoreBlog": "View more Blog"
+  },
+  "blogPage": {
+    "newsInsights": "News & Insights",
+    "shareTipsTricksStoriesHelp": "We Share Tips, Tricks, And Stories To Help You Build And Grow Amazing Gaming Communities.",
+    "200TutorialsPublished": "200+ Tutorials Published",
+    "covering10Games": "Covering 10+ Games",
+    "category": "Category :",
+    "all": "All",
+    "popularity": "Popularity :",
+    "latest": "Latest",
+    "latest2": "Latest",
+    "oldest": "Oldest"
+  },
+  "gamePage": {},
+  "wordpressHostingPage": {},
+  "pagesPage": {},
+  "gameServerPage": {
+    "gameServerHosting": "Game Server Hosting",
+    "everythingNeed": "Everything You Need In",
+    "oneServer": "One Server",
+    "affordableReliablePackedPowerfulFeatures": "Affordable, reliable, and packed with powerful features to keep your community thriving."
+  },
+  "controlPanelPage": {},
+  "configuratorPage": {},
+  "aboutPage": {},
+  "termsOfServicePage": {
+    "legalInfo": "Legal Info",
+    "termsService": "Terms Of Service",
+    "introductionMinecraftServerCommunities": "Introduction To Minecraft Server Communities",
+    "iOverview": "I. Overview",
+    "theseTermsConditionsGovernUse": "These Terms and Conditions govern your use and access to AleForge LLC services. By accessing or using AleForge (“we”, “us”), you agree to these Terms. Whether you are a new user or an existing member, these Terms apply universally.",
+    "hostingServicesIncludeGameServers": "Our hosting services include game servers such as Minecraft, Valheim, ARK, and more. Your continued use of our platform confirms your acceptance of these Terms.",
+    "iiServiceTerm": "II. Service Term",
+    "initialServiceTermBeginsWhen": "The initial service term begins when AleForge sends an activation message. Services renew automatically unless canceled via the client dashboard. All payments are billed in advance on a recurring cycle unless otherwise stated.",
+    "failedLatePayments": "Failed or late payments",
+    "abuseServiceResources": "Abuse of service resources",
+    "repeatedViolationsTerms": "Repeated violations of Terms",
+    "manualServerConfigurationModifications": "Manual server configuration modifications",
+    "whatMakesGoodHostingProvider": "What Makes a Good Hosting Provider?",
+    "strongGameServerHostingExperience": "A strong game server hosting experience includes:",
+    "reliablePerformance": "Reliable performance",
+    "robustSecurity": "Robust security",
+    "responsiveSupport": "Responsive support",
+    "lowLatencyGlobalLocations": "Low latency global locations",
+    "consistentUptime": "Consistent uptime",
+    "maintainingSafeOnlineCommunityRequires": "Maintaining a safe online community requires effective moderation. Game admins must enforce guidelines fairly and consistently.",
+    "noHarassmentAbuse": "No harassment or abuse",
+    "noCheatingExploitingBypassingSecurity": "No cheating, exploiting, or bypassing security",
+    "noDisruptingGameplayCommunityPeace": "No disrupting gameplay or community peace",
+    "iiiServiceTermAdditionalNotes": "III. Service Term (Additional Notes)",
+    "sectionDemonstratesHowLongText": "This section demonstrates how long text blocks will appear in layout. Additional terms may be added depending on game server type, subscription model, or usage patterns.",
+    "ivAdditionalNotes": "IV. Additional Notes",
+    "aleforgeReservesRightUpdateThese": "AleForge reserves the right to update these Terms at any time. Continued use of the service signifies acceptance of the latest version."
+  },
+  "refundPolicyPage": {
+    "legalInfo": "Legal Info",
+    "refundPolicy": "Refund Policy",
+    "iOverview": "I. Overview",
+    "allServicesBilledAdvanceRenew": "All services are billed in advance and renew automatically unless canceled by the customer.",
+    "iiRefundEligibility": "II. Refund Eligibility",
+    "refundsMayGrantedUnderFollowing": "Refunds may be granted under the following circumstances:",
+    "duplicateAccidentalPayments": "Duplicate or accidental payments",
+    "serviceMalfunctionUnableResolve": "A service malfunction that we are unable to resolve",
+    "confirmedUnauthorizedTransactions": "Confirmed unauthorized transactions",
+    "iiiNonRefundableSituations": "III. Non-Refundable Situations",
+    "partiallyUsedSubscriptionPeriods": "Partially used subscription periods",
+    "serviceDissatisfactionCausedUserConfiguration": "Service dissatisfaction caused by user configuration issues",
+    "oneTimeAddOnsUpgrades": "One-time add-ons or upgrades once activated",
+    "ivRequestProcess": "IV. Request Process",
+    "usersMustContactSupportWithin": "Users must contact support within 7 days of the transaction with:",
+    "accountEmail": "Account email",
+    "invoicePaymentId": "Invoice or payment ID",
+    "detailsAboutRefundRequest": "Details about the refund request",
+    "vChargebacks": "V. Chargebacks",
+    "viPolicyUpdates": "VI. Policy Updates",
+    "aleforgeMayModifyRefundPolicy": "AleForge may modify this Refund Policy at any time, and changes take effect once published."
+  },
+  "usePolicyPage": {
+    "legalInfo": "Legal Info",
+    "termsUse": "Terms of Use",
+    "iOverview": "I. Overview",
+    "theseTermsUseGovernAccess": "These Terms of Use govern your access to and use of AleForge's hosting services. By creating an account or using our platform, you agree to these Terms.",
+    "theseTermsApplyAllUsers": "These Terms apply to all users, including customers, visitors, and server administrators.",
+    "iiAcceptableUseRequirements": "II. Acceptable Use Requirements",
+    "usersMustNotEngageFollowing": "Users must not engage in the following activities:",
+    "hostingIllegalContentViolatingCopyright": "Hosting illegal content or violating copyright laws",
+    "harassingAbusingThreateningOthers": "Harassing, abusing, or threatening others",
+    "usingCheatsExploitsUnauthorizedModifications": "Using cheats, exploits, or unauthorized modifications",
+    "runningHarmfulScriptsToolsAffect": "Running harmful scripts or tools that affect server stability",
+    "attemptingBypassSecurityAccessRestricted": "Attempting to bypass security or access restricted areas",
+    "iiiAccountResponsibilities": "III. Account Responsibilities",
+    "agree": "You agree to:",
+    "maintainAccurateAccountInformation": "Maintain accurate account information",
+    "protectLoginCredentials": "Protect your login credentials",
+    "ivBillingPayments": "IV. Billing and Payments",
+    "lateFailedPayments": "Late or failed payments",
+    "fraudulentActivity": "Fraudulent activity",
+    "repeatedPolicyViolations": "Repeated policy violations",
+    "vServiceLimitations": "V. Service Limitations",
+    "whileAleforgeStrivesProvideStable": "While AleForge strives to provide stable hosting performance, no service can guarantee 100% uptime. Scheduled maintenance or unexpected issues may cause temporary interruptions.",
+    "viTermination": "VI. Termination",
+    "aleforgeReservesRightSuspendTerminate": "AleForge reserves the right to suspend or terminate accounts that violate these Terms, misuse resources, or create security risks.",
+    "viiUpdatesTerms": "VII. Updates to Terms",
+    "theseTermsMayUpdatedAny": "These Terms may be updated at any time. Continued use of AleForge services constitutes acceptance of the latest version."
+  },
+  "privacyPolicyPage": {
+    "legalInfo": "Legal Info",
+    "privacyPolicy": "Privacy Policy",
+    "iOverview": "I. Overview",
+    "privacyPolicyExplainsHowAleforge": "This Privacy Policy explains how AleForge (“we”, “us”, “our”) collects, uses, stores, and protects your personal information when you access or use our services. By using our platform, you acknowledge and agree to the practices described in this policy.",
+    "iiInformationCollect": "II. Information We Collect",
+    "mayCollectFollowingTypesInformation": "We may collect the following types of information:",
+    "accountInformationNameEmailContact": "Account information (name, email, contact details)",
+    "billingPaymentDetails": "Billing and payment details",
+    "serverUsageDataLogs": "Server usage data and logs",
+    "deviceBrowserIpInformation": "Device, browser, and IP information",
+    "supportMessagesCommunicationHistory": "Support messages and communication history",
+    "iiiHowUseInformation": "III. How We Use Your Information",
+    "useCollectedDataProvideImprove": "We use collected data to provide and improve our services, including:",
+    "settingUpMaintainingGameServers": "Setting up and maintaining game servers",
+    "processingPaymentsManagingSubscriptions": "Processing payments and managing subscriptions",
+    "respondingSupportRequestsInquiries": "Responding to support requests and inquiries",
+    "enhancingPerformanceSecurityUserExperience": "Enhancing performance, security, and user experience",
+    "preventingFraudEnsuringFairUsage": "Preventing fraud and ensuring fair usage",
+    "ivSharingInformation": "IV. Sharing of Information",
+    "doNotSellPersonalData": "We do not sell your personal data. We may share limited information with trusted third parties such as payment processors, infrastructure providers, and support platforms when necessary to operate our services.",
+    "vSecurityMeasures": "V. Security Measures",
+    "aleforgeImplementsReasonableSecurityPractices": "AleForge implements reasonable security practices to safeguard personal data. However, no method of transmission or electronic storage is completely secure. Users are encouraged to maintain strong passwords and protect their account credentials.",
+    "viRights": "VI. Your Rights",
+    "mayRequestFollowingDependingJurisdiction": "You may request the following, depending on your jurisdiction:",
+    "accessPersonalDataHoldAbout": "Access to the personal data we hold about you",
+    "correctionDeletionInformation": "Correction or deletion of your information",
+    "restrictionsHowDataProcessed": "Restrictions on how your data is processed",
+    "portabilityData": "Portability of your data",
+    "viiUpdatesPolicy": "VII. Updates to This Policy",
+    "aleforgeMayUpdatePrivacyPolicy": "AleForge may update this Privacy Policy at any time. Continued use of our services indicates acceptance of the latest version."
+  },
+  "layoutLayout": {},
+  "contactusPage": {
+    "contactUs": "Contact Us",
+    "whetherReLaunchingNewServer": "Whether You're Launching A New Server Or Need Technical Help, Our Experts Are Available 24/7 To Keep Your Game Running Smoothly.",
+    "name": "Name:",
+    "email": "Email:",
+    "subject": "Subject:",
+    "priority": "Priority:",
+    "medium": "Medium",
+    "high": "High",
+    "low": "Low",
+    "message": "Message:",
+    "b": "B",
+    "i": "I",
+    "u": "U",
+    "s": "S",
+    "attachments": "Attachments",
+    "uploadFile": "Upload File",
+    "allowedFileExtensionsJpgGif": "Allowed File Extensions: .jpg, .gif, .jpeg, .png, .txt, .pdf, .log, .zip (Max file size: 1024MB)",
+    "submit": "Submit"
+  },
+  "favoriteComponent": {
+    "allFavoriteApplications": "All of Your Favorite Applications",
+    "getStartedCreatingNewSite": "Get started creating your new site quickly with one of our 100+ one-click installs.",
+    "security": "security",
+    "bolt": "bolt",
+    "settings": "settings"
+  },
+  "webhostingpricingComponent": {
+    "plansPricing": "Plans And Pricing",
+    "exploreFlexiblePlansPricingOptions": "Explore Our Flexible Plans And Pricing Options, That Scale As Your Requirements Grow.",
+    "customPlansCreatedRequest": "Custom Plans Created On Request.",
+    "month": "/month",
+    "whatSIncluded": "What's Included:",
+    "powered": "Powered by",
+    "nginx": "NGINX"
+  },
+  "oneclickapplicationComponent": {
+    "allFavoriteApplications": "All of Your Favorite Applications",
+    "getStartedCreatingNewSite": "Get Started Creating Your New Site Quickly With One Of Our 100+ One-Click Installs."
+  },
+  "cpanelComponent": {
+    "poweredCpanel": "Powered By CPanel",
+    "cpanelUndoubtedlyLeadingWebHosting": "CPanel Is Undoubtedly The Leading Web Hosting Control Panel On The Market Today, Designed To Provide You With An Unbeatable Hosting Experience Which Is Fast, Reliable And Secure.",
+    "hostOver20GamesInstantly": "Host Over 20 Games Instantly With AleForge, Powered By High-Performance Hardware And 24/7 Expert Support.",
+    "startServer": "Start Your Server"
+  },
+  "serverFeatureComponent": {
+    "speedPowerValue": "Speed. Power. Value.",
+    "powerPerformanceReliabilityBuilt": "Power, Performance, And Reliability Built In.",
+    "everyDedicatedServerEquippedEnterprise": "Every Dedicated Server Is Equipped With Enterprise Hardware, Robust Security, And Scalable Resources Delivering Unbeatable Performance, Uptime, And Control."
+  },
+  "headerComponent": {
+    "dedicatedServers": "Dedicated Servers",
+    "experienceHighPerformanceDedicatedServers": "Experience High-Performance Dedicated Servers With Affordable Pricing, Full DDoS Protection, And 24/7 Enterprise Support All With No Long-Term Contracts.",
+    "viewServers": "View Servers",
+    "getStarted": "Get Started"
+  },
+  "blogcardComponent": {},
+  "filterspanelComponent": {
+    "filters": "Filters",
+    "reset": "Reset",
+    "all": "ALL",
+    "intel": "Intel",
+    "amd": "AMD",
+    "cores": "Cores:",
+    "memory": "Memory:",
+    "16gb1024gb": "16GB–1024GB",
+    "16gb": "16GB",
+    "1024gb": "1024GB",
+    "nvme": "NVMe",
+    "ssd": "SSD",
+    "hdd": "HDD",
+    "allLocations": "All Locations",
+    "price": "Price:"
+  },
+  "filtersectionComponent": {},
+  "serverlistComponent": {
+    "ram": "RAM",
+    "storage": "Storage",
+    "transfer": "Transfer",
+    "price": "Price",
+    "price2": "price",
+    "cpu": "CPU",
+    "available": "Available in :",
+    "mo": "/mo",
+    "buyNow": "Buy Now",
+    "noServersMatchFilters": "No servers match your filters."
+  },
+  "serverPricingComponent": {
+    "dedicatedServerPricing": "Dedicated Server Pricing",
+    "experienceHighPerformanceDedicatedServers": "Experience High-Performance Dedicated Servers With Affordable Pricing.",
+    "contactUs": "Contact Us"
+  },
+  "supportComponent": {
+    "needHelp": "Need Help?",
+    "supportWizardsHere247": "Our Support Wizards Are Here 24/7.",
+    "whetherItSSetupScaling": "Whether It's Setup, Scaling, Or Troubleshooting Our Support Team Is Always Ready To Assist Through Discord, Live Chat, Or Support Tickets.",
+    "joinDiscord": "Join Discord",
+    "connectCommunity": "Connect with our community",
+    "liveChat": "Live Chat",
+    "talkSupportWizardNow": "Talk to a support wizard now",
+    "openTicket": "Open a Ticket",
+    "247TechnicalSupport": "24/7 technical support"
+  },
+  "whyAleforgeComponent": {
+    "whyChooseAleforge": "Why Choose AleForge?",
+    "expertTechniciansHandleServerSetup": "Our expert technicians handle server setup, maintenance, and security, allowing you to focus on your core business operations."
+  },
+  "experienceComponent": {
+    "noExperienceNoWorriesGot": "No Experience? No Worries! We Got You",
+    "teamExpertTechniciansHandleAll": "With Our Team Of Expert Technicians, We Handle All Technical Aspects, Including Server Setup, Maintenance, And Security, Allowing You To Concentrate On Your Core Business Operations."
+  },
+  "customComponent": {
+    "lookingSomethingMoreCustom": "Looking For Something More Custom?",
+    "haveSolutionsAvailable": "We Have Solutions Available To You!",
+    "behaviouralHereSWhenIt": "The Behavioural And To Here's When It And Have Target Should Texting.",
+    "contactUs": "Contact Us",
+    "chatUs": "Chat with Us"
+  },
+  "modpackComponent": {
+    "allFavoriteModpacks": "All Of Your Favorite Modpacks",
+    "poweringEveryModpack": "Powering Every Modpack,",
+    "platformPlugin": "Platform, And Plugin",
+    "label": "From",
+    "instant": "Instant",
+    "oneClickInstallersFullManual": "One-Click Installers To Full Manual Customization, Our Panel Is",
+    "engineeredSupport": "Engineered To Support",
+    "everyWayWantPlay": "Every Way You Want To Play.",
+    "viewThemAll": "View them all"
+  },
+  "technicalStrangthComponent": {
+    "technicalStrength": "Technical Strength",
+    "aleforgeAdvantageLagFreeProtected": "The AleForge Advantage: Lag-Free, Protected Servers",
+    "stopPayingExtraBasicDefense": "Stop Paying Extra For Basic Defense. Our MRP Security Suite Guarantees Continuous Uptime And A Smoother Experience For All Players.",
+    "ownToday": "Own Today!",
+    "additionalInformationCanAskedHere": "Additional information can be asked here."
+  },
+  "serverManagementComponent": {
+    "serverManagementSimplified": "Server Management Simplified",
+    "hostOver20GamesInstantly": "Host Over 20 Games Instantly With AleForge, Powered By High-Performance Hardware And 24/7 Expert Support.",
+    "startServer": "Start Your Server"
+  },
+  "serverPlanComponent": {
+    "choosePerfectServerPlan": "Choose Your Perfect Server Plan",
+    "month": "/month",
+    "comparePlans": "Compare Plans"
+  },
+  "gameServerDetailAstroHeaderComponent": {
+    "ownToday": "Own Today!",
+    "helpMeChoose": "Help Me Choose!"
+  },
+  "communitiesPlanComponent": {
+    "month": "/month",
+    "getStarted": "Get started",
+    "whatSIncluded": "What's Included:",
+    "needSomethingCheaper": "Need something cheaper?",
+    "newMinecraftServersSmallerCommunities": "For new Minecraft servers or smaller communities",
+    "month2": "/month",
+    "whatSIncluded2": "What's Included:",
+    "unlimitedNvmeSsdStorage": "Unlimited NVMe SSD Storage",
+    "up2040Players": "Up to 20–40 Players",
+    "ddosProtectionAutoBackups": "DDoS Protection + Auto Backups",
+    "fullAccessControlPanelMods": "Full Access to Control Panel (Mods, Plugins, FTP, etc.)",
+    "stars2": "stars_2",
+    "only4SlotsAvailablePrice": "Only 4 slots available at this price"
+  },
+  "serverComparisionComponent": {
+    "premiumVsStandard": "Premium Vs Standard",
+    "hardwareEveryBudgetNoPerformance": "Hardware For Every Budget — No Performance Compromises. Need Ultimate Power For Modded Mayhem? We've Got You Covered.",
+    "budget": "Budget",
+    "standard": "Standard",
+    "premium": "Premium",
+    "whyItMatters": "Why it matters?"
+  },
+  "aboutComponent": {},
+  "includeComponent": {
+    "whatSIncluded": "What's Included?"
+  },
+  "controlPanelHeaderComponent": {
+    "advancedGameServerManagement": "Advanced Game Server Management",
+    "blacksmithSPortalManageSmarter": "Blacksmith’s Portal Manage Smarter, Play Harder.",
+    "startServerToday": "Start Server Today!",
+    "exploreFeatures": "Explore Features"
+  },
+  "advanceComponent": {
+    "advancedGameServerControlPanel": "Advanced Game Server Control Panel",
+    "edgeCaching": "Edge Caching",
+    "deliversContentFasterServersCloser": "Delivers Content Faster From Servers Closer To Your Users, Ensuring Better Loading Times And User Experience.",
+    "fileManager": "File Manager",
+    "accessWordpressFilesEasilyThrough": "Access Your WordPress Files Easily Through Our Web-Based Manager Or Connect Directly Via SFTP.",
+    "oneClickBackups": "One Click Backups",
+    "effortlessBackupsProtectSiteUnexpected": "Effortless Backups Protect Your Site From Unexpected Issues, Allowing Quick Recovery When Needed."
+  },
+  "exploreComponent": {
+    "panelScreenshots": "Panel Screenshots",
+    "exploreControlPanel": "Explore The Control Panel",
+    "takeDetailedLookAdvancedGame": "Take A Detailed Look At Our Advanced Game Server Control Panel Interface And Discover The Powerful Features That Make Server Management Effortless."
+  },
+  "mostAdvanceComponent": {
+    "howStackUp": "How We Stack Up",
+    "mostAdvancedPanelOutThere": "The Most Advanced Panel Out There",
+    "compareGameServerControlPanel": "Compare Our Game Server Control Panel Features With Other Hosting Providers And See Why AleForge Offers The Most Comprehensive Management Tools In The Industry."
+  },
+  "advancePanelTableComponent": {
+    "howStackUp": "How We Stack Up",
+    "howAleforgeCompares": "How AleForge Compares",
+    "seeHowAleforgeStacksUp": "See how AleForge stacks up against other popular Minecraft server hosting providers. Our transparent comparison highlights the features and pricing that set us apart.",
+    "bisectHosting": "Bisect Hosting",
+    "shockbyte": "ShockByte",
+    "pebbleHost": "Pebble Host",
+    "bloomHost": "Bloom Host",
+    "price8gbServer": "Price For 8GB Server",
+    "comparisonDataCollected": "Comparison Data Collected In",
+    "april2024": "April 2024",
+    "comparisonDataCollectedApril2024": "Comparison Data Collected in April 2024"
+  },
+  "featureComponent": {
+    "howStackUp": "How We Stack UP",
+    "moreFeaturesLess": "More Features For Less",
+    "discoverComprehensiveSuiteAdvancedFeatures": "Discover the comprehensive suite of advanced features included free with every game server hosting plan."
+  },
+  "advancegameserverCarouselComponent": {},
+  "orderComponent": {
+    "hostServerToday": "Host Your Server Today!",
+    "readyOrder": "Ready To Order?",
+    "aleforgeProvidesQualityGameHosting": "AleForge Provides Quality Game Hosting Services Protected By",
+    "cuttingEdgeSecuritySystems": "Cutting-Edge Security Systems.",
+    "contactUs": "Contact Us",
+    "chatUs": "Chat with Us"
+  },
+  "wordpressHostingHeaderComponent": {
+    "wordpressHosting": "WordPress Hosting",
+    "seeHostingPackages": "See Hosting Packages",
+    "getStarted": "Get Started",
+    "riskFreeCancelAnytime": "Risk-Free, Cancel Anytime."
+  },
+  "gamelistComponent": {
+    "category": "Category :",
+    "all": "All",
+    "all2": "All",
+    "platform": "Platform :",
+    "starting": "Starting At :"
+  },
+  "pricingComponent": {
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "save20": "Save 20%",
+    "month": "/month",
+    "getStarted": "Get started",
+    "whatSIncluded": "What's Included:",
+    "50Off": "50% OFF",
+    "loremIpsumDolorSitAmet": "Lorem Ipsum Dolor Sit Amet Consectetur. Proin Eget Ac Sit Diam Massa Lorem Adipiscing. Dictum Eget Rhoncus Ut In Morbi Rhoncus Duis Sodales Suspendisse.",
+    "compareAllPlans": "Compare All Plans"
+  },
+  "securityComponent": {
+    "builtPerformanceSecurityGrowth": "Built For Performance, Security, And Growth",
+    "wordpressHostingEngineeredSpeedStability": "Our WordPress Hosting Is Engineered For Speed, Stability, And Scalability—Powered By Modern Infrastructure And Optimized Specifically For WordPress And WooCommerce Sites.",
+    "exploreFeatures": "Explore Features"
+  },
+  "whyChooseAleforgeComponent": {
+    "whyChooseAleforgeWordpressHosting": "Why Choose AleForge For WordPress Hosting?",
+    "enjoyLatestFeaturesFriendsLuxury": "Enjoy the latest features with friends. Luxury gaming at budget prices on extreme-performance hardware."
+  },
+  "performanceCardComponent": {
+    "speedPowerValue": "Speed. Power. Value.",
+    "performanceSpeaksItself": "Performance That Speaks For Itself",
+    "experienceUnmatchedReliabilitySpeedOptimized": "Experience Unmatched Reliability And Speed Optimized For Gamers Who Demand The Best Performance At The Best Price.",
+    "morePerformancePerDollar": "More Performance Per Dollar",
+    "25Gbit": "25 Gbit",
+    "networkCapacity": "Network Capacity",
+    "fasterLoadingTimes": "Faster Loading Times"
+  },
+  "wordpressHostingFeatureComponent": {
+    "wordpressManagementTools": "WordPress Management Tools",
+    "professionalWordpressHostingFeatures": "Professional WordPress Hosting Features",
+    "advancedToolsDesigningTestingOptimizing": "Advanced Tools For Designing, Testing, And Optimizing Your WordPress Website. Everything You Need For Professional WordPress Development And Management.",
+    "1ClickWordpressStagingEnvironment": "1-Click WordPress Staging Environment",
+    "buildTestSafelySpinUp": "Build And Test Safely. Spin Up A 1-Click Staging Environment To Perfect Plugin Updates Or New Designs Without Ever Touching Your Live Site. Perfect For Agency Workflows.",
+    "safeWordpressTesting": "Safe WordPress Testing",
+    "code": "code",
+    "fasterWordpressDevelopment": "Faster WordPress Development",
+    "zeroDowntimeUpdates": "Zero Downtime Updates",
+    "edgeCaching": "Edge Caching",
+    "deliversContentFasterServersCloser": "Delivers Content Faster From Servers Closer To Your Users, Ensuring Better Loading Times And User Experience.",
+    "fileManager": "File Manager",
+    "accessWordpressFilesEasilyThrough": "Access Your WordPress Files Easily Through Our Web-Based Manager Or Connect Directly Via SFTP.",
+    "oneClickBackups": "One Click Backups",
+    "effortlessBackupsProtectSiteUnexpected": "Effortless Backups Protect Your Site From Unexpected Issues, Allowing Quick Recovery When Needed."
+  },
+  "comparsionComponent": {
+    "premiumVsStandard": "Premium Vs Standard",
+    "hardwareEveryBudgetNoPerformance": "Hardware For Every Budget No Performance Compromises. Need Ultimate Power For Modded Mayhem? We've Got You Covered.",
+    "getStarted": "Get started",
+    "pricing": "Pricing"
+  },
+  "performanceComponent": {
+    "enterpriseGradePerformance": "Enterprise-Grade Performance",
+    "poweredHighPerformanceAmdEpyc": "Powered By High-Performance AMD EPYC Servers",
+    "wordpressHostingBuiltCuttingEdge": "Our WordPress Hosting Is Built On Cutting-Edge AMD EPYC Processors With NVMe SSD Storage, Delivering Exceptional Processing Power And Lightning-Fast Load Times. Perfect For High-Traffic WordPress Sites And WooCommerce Stores.",
+    "wantLearnMoreAboutOptimizing": "Want To Learn More About Optimizing Your WordPress Site? Check Out Our Hosting Blog For Expert Tips And Tutorials On WordPress Performance Optimization."
+  },
+  "wordpressHostingCustomComponent": {
+    "customSolutionsAvailable": "Custom Solutions Available",
+    "needSomethingMoreCustom": "Need Something More Custom?",
+    "notSeeingPlanFitsNeeds": "Not seeing a plan that fits your needs? We offer fully tailored WordPress hosting solutions designed around your traffic, performance, and growth goals.",
+    "compareAllPlans": "Compare All Plans",
+    "contactUs": "Contact Us"
+  },
+  "ratingComponent": {
+    "ratedExcellent": "We are Rated Excellent"
+  },
+  "platformiconComponent": {},
+  "topbarComponent": {
+    "minimalDowntimeExpectedTryIt": "Minimal Downtime Expected. Try it now ↗",
+    "holidaySaleGet25Off": "🎉 Holiday Sale! Get 25% OFF all new Game Servers! ↗",
+    "ddosProtectionUpgradeSingapore": "🛡️ DDoS Protection Upgrade in Singapore ↗"
+  },
+  "navigationComponent": {
+    "starting": "Starting at"
+  },
+  "selectlangComponent": {
+    "english": "English",
+    "english2": "English",
+    "nederlands": "Nederlands",
+    "deutsch": "Deutsch",
+    "espaOl": "Español"
+  },
+  "footerComponent": {
+    "forgeWorldPowerfulGameServer": "Forge Your World with Powerful Game Server Hosting",
+    "aleforgePlanning": "Aleforge Planning",
+    "australiaSydney2000": "Australia – Sydney 2000",
+    "call": "call",
+    "mail": "mail",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "contactUs": "Contact Us",
+    "blog": "Blog",
+    "support": "Support",
+    "knowledgebase": "Knowledgebase",
+    "liveChat": "Live Chat",
+    "new": "New",
+    "discord": "Discord",
+    "status": "Status",
+    "sales": "Sales",
+    "openTicket": "Open a Ticket",
+    "social": "Social",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
+    "legalResources": "Legal Resources",
+    "termsService": "Terms of Service",
+    "acceptableUsePolicy": "Acceptable Use Policy",
+    "privacyPolicy": "Privacy Policy",
+    "refundPolicy": "Refund Policy"
+  },
+  "utilitybarComponent": {
+    "blue": "Blue",
+    "copper": "Copper"
+  },
+  "aboutusHeaderComponent": {
+    "powerReliable": "We Power Reliable,",
+    "fastScalableGame": "Fast & Scalable Game",
+    "servers": "Servers.",
+    "smallFriendGroupsMassiveGaming": "From Small Friend Groups To Massive Gaming Communities, AleForge Delivers The Performance, Security, And Uptime You Need To Play Without Limits.",
+    "getStarted": "Get Started",
+    "acrossAllMajorTitlesNew": "Across All Major Titles, With New Ones Added Regularly.",
+    "becauseCommunityDeservesUninterruptedPlay": "Because Your Community Deserves Uninterrupted Play.",
+    "trustedGamersAroundWorld": "Trusted By Gamers Around The World."
+  },
+  "missionComponent": {
+    "buildingFutureGameHosting": "Building The Future of Game Hosting",
+    "mission": "Our Mission",
+    "label": "At",
+    "aleforge": "AleForge",
+    "makeGameServerHosting": ", We Make Game Server Hosting",
+    "effortlessReliable": "Effortless, Reliable",
+    "label2": ", And",
+    "accessible": "Accessible",
+    "everyoneCasualPlayersGamingCommunities": "For Everyone From Casual Players To Gaming Communities. We Focus On Speed, Automation, And Security, Giving Gamers The Freedom To Play, Create, And Connect.",
+    "vision": "Our Vision",
+    "visionBecomeMost": "Our Vision Is To Become The Most",
+    "trusted": "Trusted",
+    "innovativeGame": "And Innovative Game",
+    "hostingPlatform": "Hosting Platform",
+    "worldAimEmpowerPlayersCommunities": "In The World. We Aim To Empower Players And Communities To Build, Grow, And Share Their Worlds With Technology That's",
+    "fastScalableSecure": "Fast, Scalable, And Secure"
+  },
+  "timeLineComponent": {
+    "timeline": "Timeline",
+    "evolutionAleforge": "The Evolution Of AleForge",
+    "lookBackMilestonesShapedAleforge": "A Look Back At The Milestones That Shaped AleForge Into A Trusted Game Hosting Platform — Driven By Technology, Speed, And The Gaming Community We Serve.",
+    "yearInitialGrowthInfrastructureUpgrade": "Year of Initial Growth & Infrastructure Upgrade",
+    "since2019": "SINCE: 2019"
+  },
+  "aboutctaComponent": {
+    "startServerToday": "Start Your Server Today",
+    "readyLaunchGame": "Ready to Launch Your Game?",
+    "powerfulReliableGameHostingInstant": "Powerful, reliable game hosting with instant setup, full control, mod support, and low-latency performance.",
+    "getStartedToday": "Get Started Today",
+    "viewGameServers": "View Game Servers"
+  },
+  "configuratorHeaderComponent": {
+    "buildPerfect": "Build Your Perfect",
+    "gameServer": "Game Server",
+    "installedGame": "Installed game:",
+    "change": "Change >",
+    "viewAllPlans": "VIEW ALL PLANS"
+  },
+  "stepchoosemodsComponent": {
+    "selectHowManyModsPlan": "Select how many mods you plan to run on your server.",
+    "setNumberModsWantServer": "Set the number of mods you want your server to run.",
+    "howManyModsWillUse": "How Many Mods Will You Use?",
+    "min": "Min:",
+    "max": "Max:"
+  },
+  "stepbillingoptionsComponent": {
+    "00Gb": "$.00 / GB",
+    "billingOptions": "Billing Options",
+    "chooseBillingPeriodWhichFir": "Choose a billing period which fir your needs, and apply any promo codes you have.",
+    "selectPlans": "Select Plans :",
+    "monthly": "Monthly",
+    "quarterly": "Quarterly",
+    "270Gb": "$2.70/GB",
+    "10Off": "10% OFF",
+    "semiAnnual": "Semi_annual",
+    "255Gb": "$2.55/GB",
+    "15Off": "15% OFF",
+    "annually": "Annually",
+    "240Gb": "$2.40/GB",
+    "20Off": "20% OFF"
+  },
+  "stepchooselocationComponent": {
+    "change": "CHANGE",
+    "chooseLocations": "Choose a locations",
+    "chooseServerLocationWhichOther": "Choose the server location which you and other players will connect to.",
+    "usCentralDallas": "US CENTRAL (Dallas)",
+    "n": "• N/A",
+    "autoDetected": "Auto-detected",
+    "selectLocation": "Select Location",
+    "allRegions": "All Regions",
+    "allRegions2": "All Regions",
+    "loadingLocations": "Loading locations..."
+  },
+  "stepchooseservertierComponent": {
+    "chooseServerTier": "Choose Your Server Tier",
+    "chooseServerTierSelectPerformance": "Choose Your Server Tier | Select the performance level that best fits your gameplay needs and budget.",
+    "serverTierSelection": "Server Tier Selection:",
+    "learnMoreAboutTiers": "Learn more about tiers",
+    "i": "i",
+    "serverTierComparison": "Server Tier Comparison"
+  },
+  "buygameplanpreviewComponent": {
+    "buyPlan": "BUY PLAN",
+    "preview": "Preview"
+  },
+  "promocodeComponent": {
+    "promoCode": "Promo Code",
+    "apply": "APPLY"
+  },
+  "addonsComponent": {
+    "addons": "Addons"
+  },
+  "stepconfiguregameComponent": {
+    "configureGameInstallation": "Configure Game Installation",
+    "howManyPlayersDoExpect": "How many players do you expect to be on the server at once?",
+    "players": "players"
+  },
+  "themetoggleComponent": {},
+  "testimonialsComponent": {
+    "trusted50000GamersWorldwide": "Trusted By 50,000+ Gamers Worldwide"
+  },
+  "breadcrumbsComponent": {
+    "home": "Home"
+  },
+  "featuresInsidebordersComponent": {},
+  "faqComponent": {
+    "frequentlyAskedQuestions": "Frequently Asked Questions",
+    "findAnswersCommonQuestionsAbout": "Find answers to common questions about our hosting, performance, and support. Need more help? Our team is here 24/7 to assist you.",
+    "stillHaveQuestions": "Still have questions?",
+    "bookCallFriendlyTeamGet": "Book a call with our friendly team to get all your questions answered.",
+    "talkTeamQuery": "Talk To Our Team For Your Query"
+  },
+  "clientsComponent": {
+    "grandFoundryPlatform": "The Grand Foundry Platform",
+    "onePowerfulPlan": "One powerful plan.",
+    "40SupportedGames": "40+ supported games",
+    "switchAnytime": "Switch anytime at",
+    "noExtraCost": "no extra cost."
+  },
+  "contactComponent": {
+    "haveQuestionLetSSolve": "Have a Question? Let's Solve It Together.",
+    "reachOutUsIfHad": "Reach Out To Us If You Had Common Problems And Questions.",
+    "readFaqs": "Read FAQs",
+    "openLiveChat": "Open Live Chat",
+    "sendMessage": "Send Message",
+    "readFaqs2": "Read FAQs",
+    "learnMore": "Learn more",
+    "name": "Name*",
+    "email": "Email*",
+    "issues": "Issues*",
+    "submit": "Submit"
+  },
+  "heroCarouselComponent": {
+    "discoverPlan": "Discover Plan"
+  },
+  "howownserverComponent": {
+    "howOwnServer": "How Own Server",
+    "loremIpsumDolorSitAmet": "Lorem Ipsum Dolor Sit Amet Consectetur.",
+    "getStarted": "Get started"
+  },
+  "homeHeaderComponent": {
+    "reliableAffordableServers": "Reliable & Affordable Servers",
+    "forgeWorldPowerfulGameServer": "Forge Your World With Powerful Game Server Hosting",
+    "serversStarting": "Servers Starting From",
+    "just499Month": "Just $4.99/Month"
+  },
+  "featuresComponent": {
+    "number": "The Number",
+    "1GameHostingWorldwide": "#1 Game Hosting Worldwide"
+  },
+  "globalserversComponent": {
+    "buildLocallyLaunchWorldwide": "Build Locally, Launch Worldwide",
+    "deployGameServerAny": "Deploy your game server from any of our",
+    "checking": "• Checking..."
+  },
+  "hostingresourcesComponent": {
+    "hostingResources": "Hosting Resources",
+    "everythingNeedAllOnePlace": "Everything You Need, All In One Place",
+    "stayUpDateMakeManaging": "Stay up-to-date and make managing your hosting effortless. From setup guides to real-time status updates, everything is just a click away.",
+    "exploreNow": "Explore Now"
+  },
+  "discovergamesComponent": {
+    "discoverTrendingGames": "Discover Trending Games",
+    "checkOutSomeMostPopular": "Check Out Some Of The Most Popular Game Servers You Can Instantly Deploy With AleForge.",
+    "starting": "Starting at",
+    "orderNow": "Order Now"
+  },
+  "comparisonsectionComponent": {
+    "seeWhyAleforgeLeadsGame": "See Why AleForge Leads The Game",
+    "feature": "Feature",
+    "aleforge": "AleForge",
+    "info": "info",
+    "abc": "ABC",
+    "xyz": "XYZ",
+    "hostOver20GamesInstantly": "Host over 20 games instantly with AleForge, powered by high-performance hardware and 24/7 expert support.",
+    "startServer": "Start Your Server"
+  },
+  "hostingplansComponent": {
+    "hostingScalesVision": "Hosting That Scales With Your Vision",
+    "fastSecureReliableHostingDesigned": "Fast, Secure, And Reliable Hosting Designed To Power Your Online Success.",
+    "starting": "Starting At",
+    "getStarted": "Get started"
+  }
+}

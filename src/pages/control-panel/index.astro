@@ -1,0 +1,55 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Testimonials from "@components/sections/testimonials.astro";
+import Header from "@components/control-panel/header.astro";
+import Advance from "@components/control-panel/advance.astro";
+import Explore from "@components/control-panel/explore.astro";
+import AdvancePanelTable from "@components/control-panel/advance-panel-table.astro";
+import Feature from "@components/control-panel/feature.astro";
+import Order from "@components/control-panel/order.astro";
+import MostAdvance from "@components/control-panel/most-advance.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+---
+
+<Layout>
+  <Navigation />
+  <Breadcrumbs pageName="Control Panel" />
+  <div class="control-panel-bg">
+    <Header />
+    <Advance />
+  </div>
+  <div class="explore-bg">
+    <Explore />
+    <AdvancePanelTable />
+  </div>
+  <Feature />
+
+  <div class="most-bg">
+    <MostAdvance />
+    <Testimonials />
+  </div>
+
+  <Order />
+</Layout>
+
+<style>
+  .control-panel-bg {
+    background-image: var(--bg-control-panel-first-img);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center 10%;
+  }
+  .explore-bg {
+    background-image: var(--bg-control-panel-second-img);
+    background-size: contain;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+  }
+  .most-bg {
+    background-image: var(--bg-control-panel-third-img);
+    background-size: 100% auto;
+    background-position: bottom;
+    background-repeat: no-repeat;
+  }
+</style>

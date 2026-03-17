@@ -1,0 +1,166 @@
+---
+import AdvanceGameServerCarousel from "./advanceGameServer_carousel.astro";
+
+const features = [
+  {
+    icon: "var(--icon-file)",
+    title: "Advanced File Manager"
+  },
+  {
+    icon: "var(--icon-user)",
+    title: "Sub-User Management"
+  },
+  {
+    icon: "var(--icon-backup)",
+    title: "Automated Backup System"
+  },
+  {
+    icon: "var(--icon-real-server)",
+    title: "Real-Time Server Console"
+  },
+  {
+    icon: "var(--icon-database)",
+    title: "Database Administration"
+  },
+  {
+    icon: "var(--icon-config)",
+    title: "Config File Editor"
+  }
+];
+---
+
+<section class="advance_gameServer_section">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="advance_gameServer_wrapper">
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-12 lg:gap-16 items-center mb-10">
+          <div class="left_column">
+            <h2 data-i18n="advanceComponent.advancedGameServerControlPanel">Advanced Game Server Control Panel</h2>
+            <p class="advance_gameServer_text mt-[12px] text-center sm:text-left">
+              Blacksmith’s Portal transforms game server management with an intuitive, powerful interface. Monitor
+              performance, install mods instantly, and fine-tune every setting all with professional-grade tools built
+              for gamers.Whether you’re hosting Minecraft or Terraria, Blacksmith’s Portal makes server management
+              simple, fast, and effortless.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-[22px]">
+              {
+                features.map((feature) => (
+                  <div class="flex items-center gap-3 justify-center xl:justify-start w-[250px] xl:w-auto mx-auto xl:mx-0">
+                    <div
+                      class="w-[24px] h-[24px] bg-contain bg-no-repeat bg-center flex-shrink-0"
+                      style={{backgroundImage: feature.icon}}
+                      role="img"
+                      aria-label={feature.title}
+                    />
+                    <span class="feature_title">{feature.title}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div class="right_column">
+            <AdvanceGameServerCarousel />
+          </div>
+        </div>
+
+        <!-- **************************   bottom features *************************** -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 border-l lg:border-l-0 lg:border-b border-[#32333A]/60 mt-[80px]">
+          <!-- *************************  feature 1 **************************** -->
+          <div class="bottom_grid_item border-b lg:border-b-0 lg:border-r border-[#32333A]/60">
+            <div class="flex items-center gap-[8px]">
+              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-[28px] h-[28px] bg-contain bg-no-repeat bg-left-center"
+                  style={`background-image:
+                  var(--icon-edge)`}
+                  role="img"
+                  aria-label="Edge Caching"
+                >
+                </div>
+              </div>
+              <h4 class="bottom_feature_title" data-i18n="advanceComponent.edgeCaching">Edge Caching</h4>
+            </div>
+            <p class="bottom_feature_description" data-i18n="advanceComponent.deliversContentFasterServersCloser">
+              Delivers Content Faster From Servers Closer To Your Users, Ensuring Better Loading Times And User
+              Experience.
+            </p>
+          </div>
+          <!-- *************************  feature 2 **************************** -->
+          <div class="bottom_grid_item border-b lg:border-b-0 lg:border-r border-[#32333A]/60">
+            <div class="flex items-center gap-[8px]">
+              <div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
+                <div
+                  class="w-[28px] h-[28px] bg-contain bg-no-repeat bg-left-center"
+                  style={`background-image:var(--icon-file-manager)`}
+                  role="img"
+                  aria-label="Edge Caching"
+                >
+                </div>
+              </div>
+              <h4 class="bottom_feature_title" data-i18n="advanceComponent.fileManager">File Manager</h4>
+            </div>
+            <p class="bottom_feature_description" data-i18n="advanceComponent.accessWordpressFilesEasilyThrough">
+              Access Your WordPress Files Easily Through Our Web-Based Manager Or Connect Directly Via SFTP.
+            </p>
+          </div>
+          <!-- *************************  feature 3 **************************** -->
+          <div class="bottom_grid_item">
+            <div class="flex items-center gap-[8px]">
+              <div
+                class="w-[28px] h-[28px] bg-contain bg-no-repeat bg-left-center"
+                style={`background-image:var(--icon-backup)`}
+                role="img"
+                aria-label="Edge Caching"
+              >
+              </div>
+              <h4 class="bottom_feature_title" data-i18n="advanceComponent.oneClickBackups">One Click Backups</h4>
+            </div>
+            <p class="bottom_feature_description" data-i18n="advanceComponent.effortlessBackupsProtectSiteUnexpected">
+              Effortless Backups Protect Your Site From Unexpected Issues, Allowing Quick Recovery When Needed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style lang="scss">
+    @use "src/styles/core/mixins.scss" as *;
+
+    .advance_gameServer_text {
+      @include type-responsive(20px, 18px, 16px, 16px, 16px);
+      font-weight: 300;
+      line-height: 1.6em;
+    }
+
+    .feature_title {
+      @include type-responsive(20px, 18px, 16px, 16px, 16px);
+    }
+
+    .bottom_feature_title {
+      // @include type-responsive(22px, 20px, 18px, 18px, 18px);
+      font-size: 22px;
+      font-weight: 400;
+    }
+
+    .bottom_feature_description {
+      // @include type-responsive(18px, 18px, 16px, 16px, 16px);
+      font-size: 18px;
+      font-weight: 300;
+    }
+
+    .left_column {
+      @include xl {
+        text-align: center;
+        margin: auto;
+      }
+    }
+    .bottom_grid_item {
+      padding: 34px;
+
+      @include lg {
+        padding: 24px;
+      }
+    }
+  </style>
+</section>

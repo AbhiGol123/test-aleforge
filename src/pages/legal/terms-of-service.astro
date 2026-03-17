@@ -1,0 +1,87 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Contact from "@components/sections/contact.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+---
+
+<Layout>
+  <Navigation />
+  <Breadcrumbs />
+  <section class="terms_of_service">
+    <div class="global-padding section-padding">
+      <div class="container-large">
+        <div class="title-wrapper">
+          <span class="overline" data-i18n="termsOfServicePage.legalInfo">Legal Info</span>
+          <h1 data-i18n="termsOfServicePage.termsService">Terms Of Service</h1>
+        </div>
+        <div class="policy-wrapper">
+          <h2 data-i18n="termsOfServicePage.introductionMinecraftServerCommunities">Introduction To Minecraft Server Communities</h2>
+
+          <h3 data-i18n="termsOfServicePage.iOverview">I. Overview</h3>
+          <p data-i18n="termsOfServicePage.theseTermsConditionsGovernUse">
+            These Terms and Conditions govern your use and access to AleForge LLC services. By accessing or using
+            AleForge (“we”, “us”), you agree to these Terms. Whether you are a new user or an existing member, these
+            Terms apply universally.
+          </p>
+          <p data-i18n="termsOfServicePage.hostingServicesIncludeGameServers">
+            Our hosting services include game servers such as Minecraft, Valheim, ARK, and more. Your continued use of
+            our platform confirms your acceptance of these Terms.
+          </p>
+
+          <h3 data-i18n="termsOfServicePage.iiServiceTerm">II. Service Term</h3>
+          <p data-i18n="termsOfServicePage.initialServiceTermBeginsWhen">
+            The initial service term begins when AleForge sends an activation message. Services renew automatically
+            unless canceled via the client dashboard. All payments are billed in advance on a recurring cycle unless
+            otherwise stated.
+          </p>
+          <p>Reasons for suspension may include:</p>
+          <ul>
+            <li data-i18n="termsOfServicePage.failedLatePayments">Failed or late payments</li>
+            <li data-i18n="termsOfServicePage.abuseServiceResources">Abuse of service resources</li>
+            <li data-i18n="termsOfServicePage.repeatedViolationsTerms">Repeated violations of Terms</li>
+            <li data-i18n="termsOfServicePage.manualServerConfigurationModifications">Manual server configuration modifications</li>
+          </ul>
+
+          <h3 data-i18n="termsOfServicePage.whatMakesGoodHostingProvider">What Makes a Good Hosting Provider?</h3>
+          <p data-i18n="termsOfServicePage.strongGameServerHostingExperience">A strong game server hosting experience includes:</p>
+          <ul>
+            <li data-i18n="termsOfServicePage.reliablePerformance">Reliable performance</li>
+            <li data-i18n="termsOfServicePage.robustSecurity">Robust security</li>
+            <li data-i18n="termsOfServicePage.responsiveSupport">Responsive support</li>
+            <li data-i18n="termsOfServicePage.lowLatencyGlobalLocations">Low latency global locations</li>
+            <li data-i18n="termsOfServicePage.consistentUptime">Consistent uptime</li>
+          </ul>
+
+          <h3>Moderation Techniques for a Safe Environment</h3>
+          <p data-i18n="termsOfServicePage.maintainingSafeOnlineCommunityRequires">
+            Maintaining a safe online community requires effective moderation. Game admins must enforce guidelines
+            fairly and consistently.
+          </p>
+          <ul>
+            <li data-i18n="termsOfServicePage.noHarassmentAbuse">No harassment or abuse</li>
+            <li data-i18n="termsOfServicePage.noCheatingExploitingBypassingSecurity">No cheating, exploiting, or bypassing security</li>
+            <li data-i18n="termsOfServicePage.noDisruptingGameplayCommunityPeace">No disrupting gameplay or community peace</li>
+          </ul>
+
+          <h3 data-i18n="termsOfServicePage.iiiServiceTermAdditionalNotes">III. Service Term (Additional Notes)</h3>
+          <p data-i18n="termsOfServicePage.sectionDemonstratesHowLongText">
+            This section demonstrates how long text blocks will appear in layout. Additional terms may be added
+            depending on game server type, subscription model, or usage patterns.
+          </p>
+
+          <h3 data-i18n="termsOfServicePage.ivAdditionalNotes">IV. Additional Notes</h3>
+          <p data-i18n="termsOfServicePage.aleforgeReservesRightUpdateThese">
+            AleForge reserves the right to update these Terms at any time. Continued use of the service signifies
+            acceptance of the latest version.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Contact />
+</Layout>
+
+<style lang="scss">
+  @use "src/styles/pages/legal.scss" as *;
+</style>

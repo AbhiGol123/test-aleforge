@@ -1,0 +1,242 @@
+<div
+  class="rounded-2xl border border-[#E5E7EB]/50 px-[15px] py-[30px] text-white relative isolate mt-6 max-w-md mx-auto lg:max-w-none"
+  style="background: var(--recommended-gradient);"
+>
+  <!-- Badge -->
+  <div
+    class="absolute -top-4 bg-[var(--accent)] border-[var(--accent)] border rounded-full backdrop-blur-xs left-1/2 -translate-x-1/2 z-20"
+  >
+    <span class="inline-block text-white text-sm font-bold px-12 md:px-20 py-1" data-i18n="buygameplanpreviewComponent.preview"> Preview </span>
+  </div>
+
+  <!-- Background -->
+  <div
+    class="absolute inset-0 bg-cover bg-center opacity-10 -z-10 rounded-2xl overflow-hidden"
+    style="background-image: url(assets/images/backgrounds/BLUE_theme/configurator/pricing-card.webp);"
+  >
+  </div>
+
+  <!-- RAM -->
+  <div class="text-left pt-4 mb-2 ml-4">
+    <div id="ram-display" class="text-5xl md:text-7xl font-bold mb-2 italic">--</div>
+  </div>
+
+  <!-- Title -->
+  <div id="preview-title" class="ml-4 mb-3 text-lg font-semibold"></div>
+
+  <!-- Base Features -->
+  <div id="preview-features" class="space-y-1 mb-3 ml-4"></div>
+
+  <!-- Addons -->
+  <div id="preview-addons" class="space-y-1 mb-4 ml-4"></div>
+
+  <!-- Price -->
+  <div class="text-left ml-4 mb-5">
+    <div id="price-display"></div>
+  </div>
+
+  <!-- Buy Button -->
+  <button id="buy-plan-btn" class="button-primary w-full" data-i18n="buygameplanpreviewComponent.buyPlan"> BUY PLAN </button>
+</div>
+
+<script>
+  // @ts-nocheck
+  import {priceStore} from "/src/stores/priceStore";
+  import {configStore} from "/src/stores/configuratorStore";
+
+  // ----------------------------
+  // DOM references
+  // ----------------------------
+  const ramEl = document.getElementById("ram-display");
+  const priceEl = document.getElementById("price-display");
+  const titleEl = document.getElementById("preview-title");
+  const featuresEl = document.getElementById("preview-features");
+  const addonsEl = document.getElementById("preview-addons");
+
+  // ----------------------------
+  // State
+  // ----------------------------
+  let addonTotal = 0;
+  let selectedAddonList = [];
+
+  // ----------------------------
+  // Listen for addon updates (ONCE)
+  // ----------------------------
+  window.addEventListener("addon-price-updated", () => {
+    addonTotal = window.addonTotal || 0;
+    selectedAddonList = window.selectedAddonList || [];
+    renderPreview();
+  });
+
+  // ----------------------------
+  // Helpers
+  // ----------------------------
+  function getBillingLabel(period) {
+    if (period === "monthly") return "/month";
+    if (period === "quarterly") return "/quarter";
+    if (period === "semi_annual") return "/6 months";
+    if (period === "annually") return "/year";
+    return "/month";
+  }
+
+  function getBasePrice(price, period) {
+    if (period === "quarterly") return price.quarterly;
+    if (period === "semi_annual") return price.semiAnnual;
+    if (period === "annually") return price.annually;
+    return price.monthly;
+  }
+
+  function getBillingMultiplier(billing) {
+    if (billing === "quarterly") return 3;
+    if (billing === "semi_annual") return 6;
+    if (billing === "annually") return 12;
+    return 1;
+  }
+
+  function getBaseFeatures(price, billing) {
+    const base = getBasePrice(price, billing) * getBillingMultiplier(billing);
+
+    return [
+      {label: `${price.ram}GB Memory`, price: base},
+      {label: "NVMe Storage", price: 0},
+      {label: "vCPU Cores", price: 0},
+      {label: "Cloud Backup", price: 0}
+    ];
+  }
+
+  function getAddonPrice(addon, billing) {
+    if (!addon?.pricing) return 0;
+
+    switch (billing) {
+      case "quarterly":
+        return addon.pricing.quarterly ?? addon.pricing.monthly ?? 0;
+
+      case "semi_annual":
+        return addon.pricing.semi_annual ?? addon.pricing.semiAnnual ?? addon.pricing.monthly ?? 0;
+
+      case "annually":
+        return addon.pricing.annually ?? addon.pricing.monthly ?? 0;
+
+      default:
+        return addon.pricing.monthly ?? 0;
+    }
+  }
+
+  // ----------------------------
+  // Render Preview
+  // ----------------------------
+  function renderPreview() {
+    const price = priceStore.get();
+    const config = configStore.get();
+
+    // ✅ Show loading while game data is not ready
+    if (!config.gameData) {
+      if (ramEl) ramEl.textContent = "--";
+      if (priceEl) priceEl.innerHTML = "<div>Loading...</div>";
+      return;
+    }
+
+    const billing = config.selectedPeriod || "monthly";
+    const monthlyBase = getBasePrice(price, billing);
+    const basePrice = monthlyBase * getBillingMultiplier(billing);
+    let total = basePrice + addonTotal;
+
+    // if (billing === "annually") total;
+    // if (billing === "quarterly") total;
+    // if (billing === "semi_annual") total;
+
+    // RAM
+    if (ramEl) {
+      ramEl.textContent = `${price.ram}GB`;
+    }
+
+    // Title (Game | Tier)
+    if (titleEl) {
+      const game = config.gameData?.name || "Game";
+      const tier = config.selectedTier || "Tier";
+
+      titleEl.textContent = `${game} | ${tier.charAt(0).toUpperCase() + tier.slice(1)}`;
+    }
+
+    // Base features
+    if (featuresEl) {
+      const features = getBaseFeatures(price, billing);
+
+      featuresEl.innerHTML = features
+        .map(
+          (item) => `
+        <div class="flex items-center justify-between text-lg">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined">check</span>
+            <span>${item.label}</span>
+          </div>
+          <span>$${item.price.toFixed(2)} USD</span>
+        </div>
+      `
+        )
+        .join("");
+    }
+
+    // ----------------------------
+    // Addons + Addon Total
+    // ----------------------------
+    let addonsTotal = 0;
+
+    if (addonsEl) {
+      if (!selectedAddonList.length) {
+        addonsEl.innerHTML = "";
+      } else {
+        const addonRows = selectedAddonList
+          .map((addon) => {
+            // const key = billing.replace("-", "_");
+            // const addonPrice = addon.pricing?.[key] ?? addon.pricing?.monthly ?? 0;
+            const addonPrice = getAddonPrice(addon, billing);
+
+            addonsTotal += addonPrice;
+
+            return `
+          <div class="flex items-center justify-between text-lg px-3 py-2 rounded-md bg-white/10 backdrop-blur">
+            <span>${addon.name}</span>
+            <span>$${addonPrice.toFixed(2)} USD</span>
+          </div>
+        `;
+          })
+          .join("");
+
+        addonsEl.innerHTML = `
+      <div class="text-sm font-semibold opacity-80 mb-2">
+        Addons
+      </div>
+      ${addonRows}
+      <div class="flex justify-between text-md font-semibold mt-2 border-t border-white/20 pt-2">
+        <span>Addons Total</span>
+        <span>$${addonsTotal.toFixed(2)} USD</span>
+      </div>
+    `;
+      }
+    }
+
+    // Price
+    if (priceEl) {
+      priceEl.innerHTML = `
+        <div style="display:flex; align-items:baseline; gap:6px;">
+          <h4 style="font-size:50px;font-weight:500">
+            $${total.toFixed(2)}
+          </h4>
+          <small class="text-[18px]">
+           ${getBillingLabel(billing)}
+          </small>
+        </div>
+      `;
+    }
+  }
+
+  // ----------------------------
+  // Live updates
+  // ----------------------------
+  priceStore.subscribe(renderPreview);
+  configStore.subscribe(renderPreview);
+
+  // Initial render
+  renderPreview();
+</script>

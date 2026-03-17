@@ -1,0 +1,379 @@
+:root {
+  --text-primary: #ffffff;
+  --text-secondary: #dddddd;
+  --text-muted: #9a9aaa;
+  --text-grediant: linear-gradient(90deg, #0974e1 0%, #b609e1 100%);
+
+  /* BASE UI COLORS (Blue Theme Default) */
+  --accent: #0974e1;
+  --accent-hover: #1a9bff;
+  --accent-soft: #0a84ff33;
+  --accent-contrast: #ffffff;
+
+  /* PAGE BACKGROUNDS */
+  --bg-body: #090a13;
+  --bg-card: #141720cc;
+  --bg-card-hover: #1b1f29cc;
+  --bg-card-strong: #1a1c25;
+  --top-nav-label-bg: #003c78;
+  --contact-us-bg-grediant: linear-gradient(58deg, rgba(7, 116, 226, 0.6), rgba(12, 13, 24, 0.2));
+  --web-hosting-card-grediant: linear-gradient(
+    180deg,
+    rgba(10, 11, 21, 0.12) 0%,
+    rgba(0, 63, 126, 0.12) 100%
+  );
+  --web-hosting-card-full-bg-grediant: linear-gradient(
+    180deg,
+    rgba(10, 11, 21, 0.08) 0%,
+    rgba(74, 82, 164, 0.08) 100%
+  );
+  --web-hosting-card-grediant: linear-gradient(
+    180deg,
+    rgba(10, 11, 21, 0.12) 0%,
+    rgba(0, 63, 126, 0.12) 100%
+  );
+
+  /*WORDPRESS HOSTING CARD*/
+  --wordpress-card-full-bg-grediant: linear-gradient(
+    180deg,
+    rgba(10, 11, 21, 0.1) 0%,
+    rgba(59, 64, 123, 0.1) 100%
+  );
+  --wordpress-selected-card-grediant: linear-gradient(
+    180deg,
+    rgba(10, 11, 21, 0.24) 0%,
+    rgba(59, 64, 123, 0.24) 100%
+  ) !important;
+
+  /* CONFIGURATOR COLORS */
+  --configurator-bg: #16192b;
+  --configurator-text: #242547;
+  --configurator-inner-bg: #232847;
+  --configurator-inner-border: #3b457e;
+  --configurator-inner-button: #15223d;
+  --configurator-inner-button-selected-bg: #103c72;
+  --configurator-inner-button-disselected-bg: #232743;
+  --configurator-inner-button-border: #0b5eb5;
+  --promo-bg: #232847;
+  --promo-border: #3b457e;
+  --recommended-gradient: linear-gradient(180deg, #4a52a4, #16192b);
+  --side-arrow-bg: #1b1e3d;
+  --side-arrow-border: #4c55b5;
+  --card-bg: #141728;
+  --inner-card-bg: #4a5181;
+  --location-card-bg: #141723;
+  --server-tier-popup-bg: #16192b;
+
+  /* FOOTER COLORS */
+  --footer-bg: #12141f;
+
+  /* STROKES + BORDERS */
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-mid: rgba(255, 255, 255, 0.15);
+  --border-accent: #0a84ff;
+
+  /* SHADOWS */
+  --shadow-card: 0 0 20px rgba(0, 0, 0, 0.4);
+  --shadow-accent: 0 0 20px rgba(10, 132, 255, 0.4);
+
+  /* GRADIENTS */
+  --gradient-accent: linear-gradient(90deg, #0a84ff, #1a9bff);
+  --gradient-section: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+
+  /* TOGGLE SWITCH */
+  --toggle-track: #0a84ff33;
+  --toggle-circle: #0a84ff;
+
+  /* Control Panel Page colors */
+  --feature-bg-active: rgba(9, 116, 225, 0.04);
+  --feature-bg: rgba(255, 255, 255, 0.04);
+
+  /* pricing plan menu background */
+  --pricingPlans-menu-bg: #15161f;
+
+  /*BLUE THEME ICONS*/
+  --fav-icon: url("/blue_favicon.png");
+
+  --icon-computer: url("/assets/images/icons/BLUE_theme/computer-blue.webp");
+  --icon-knowledge: url("/assets/images/icons/BLUE_theme/knowledge-blue.webp");
+  --icon-server: url("/assets/images/icons/BLUE_theme/server-blue.webp");
+  --icon-hosting: url("/assets/images/icons/BLUE_theme/hosting-blue.webp");
+  --icon-faq: url("/assets/images/icons/BLUE_theme/faq-blue.webp");
+  --icon-email: url("/assets/images/icons/BLUE_theme/email-blue.webp");
+  --icon-device: url("/assets/images/icons/BLUE_theme/device-blue.webp");
+  --icon-location: url("/assets/images/icons/BLUE_theme/location-blue.webp");
+
+  --icon-recovery: url("/assets/images/icons/BLUE_theme/controlPanel/recovery-blue.webp");
+  --icon-config: url("/assets/images/icons/BLUE_theme/controlPanel/config-blue.webp");
+  --icon-database: url("/assets/images/icons/BLUE_theme/controlPanel/database-blue.webp");
+  --icon-user: url("/assets/images/icons/BLUE_theme/controlPanel/user-blue.webp");
+  --icon-real-server: url("/assets/images/icons/BLUE_theme/controlPanel/real-server-blue.webp");
+  --icon-file: url("/assets/images/icons/BLUE_theme/controlPanel/file-blue.webp");
+
+  --icon-file-manager: url("/assets/images/icons/BLUE_theme/Management_tools/file-manager-blue.webp");
+  --icon-edge: url("/assets/images/icons/BLUE_theme/Management_tools/edge-blue.webp");
+  --icon-backup: url("/assets/images/icons/BLUE_theme/Management_tools/backup-blue.webp");
+
+  --icon-strength-one: url("/assets/images/icons/BLUE_theme/gameServer/advantages/strength-one-blue.webp");
+  --icon-strength-two: url("/assets/images/icons/BLUE_theme/gameServer/advantages/strength-two-blue.webp");
+  --icon-strength-three: url("/assets/images/icons/BLUE_theme/gameServer/advantages/strength-three-blue.webp");
+  --icon-strength-four: url("/assets/images/icons/BLUE_theme/gameServer/advantages/strength-four-blue.webp");
+
+  --icon-home-first: url("/assets/images/icons/BLUE_theme/home/home-icon-blue.webp");
+
+  --icon-game-one: url("/assets/images/icons/BLUE_theme/gameServer/hero/game-icon-one-blue.webp");
+  --icon-game-two: url("/assets/images/icons/BLUE_theme/gameServer/hero/game-icon-two-blue.webp");
+  --icon-game-three: url("/assets/images/icons/BLUE_theme/gameServer/hero/game-icon-three-blue.webp");
+  --icon-game-four: url("/assets/images/icons/BLUE_theme/gameServer/hero/game-icon-four-blue.webp");
+  --icon-game-five: url("/assets/images/icons/BLUE_theme/gameServer/hero/game-icon-five-blue.webp");
+  --icon-game-six: url("/assets/images/icons/BLUE_theme/gameServer/hero/game-icon-six-blue.webp");
+  --icon-game-seven: url("/assets/images/icons/BLUE_theme/gameServer/hero/game-icon-seven-blue.webp");
+
+  /* BLUE THEME IMAGES*/
+  --logo: url("/logo-blue.svg");
+  --bg-home-first-img: url("/assets/images/backgrounds/BLUE_theme/home/home_blue_first.webp");
+  --bg-home-second-img: url("/assets/images/backgrounds/BLUE_theme/home/home_blue_second.webp");
+  --bg-home-third-img: url("/assets/images/backgrounds/BLUE_theme/home/home_blue_third.webp");
+  --hero-carousel: url("/assets/images/backgrounds/BLUE_theme/home/HomeHeroCarousel_blue_shadow.webp");
+
+  /* ABOUT */
+  --bg-first-img: url("/assets/images/backgrounds/BLUE_theme/about/about_blue_first.webp");
+  --bg-second-img: url("/assets/images/backgrounds/BLUE_theme/about/about_blue_second.webp");
+
+  /*GAME SERVER */
+  --bg-game-server-first-img: url("/assets/images/backgrounds/BLUE_theme/gameServers/game-server_blue_first.webp");
+  --bg-server-details-first-img: url("/assets/images/backgrounds/BLUE_theme/gameServers/server-detail-blue-first.webp");
+
+  /*BLOG*/
+  --bg-blog-first-img: url("/assets/images/backgrounds/BLUE_theme/blog/blog-blue-first.webp");
+  --blog-hero-published-icon: url("/assets/images/icons/BLUE_theme/blog/blogs_hero/tutorial_published_blue.svg");
+  --blog-hero-covering-icon: url("/assets/images/icons/BLUE_theme/blog/blogs_hero/covering_games_blue.svg");
+
+  /* DEDICATED SERVER  */
+  --bg-dedicated-first-img: url("/assets/images/backgrounds/BLUE_theme/hosting/dedicatedServer/dedicated-blue-first.webp");
+  --bg-dedicated-second-img: url("/assets/images/backgrounds/BLUE_theme/hosting/dedicatedServer/dedicated-blue-second.webp");
+  --bg-dedicated-third-img: url("/assets/images/backgrounds/BLUE_theme/hosting/dedicatedServer/dedicated-blue-third.webp");
+  --dedicated-server-ellipse: url("/assets/images/backgrounds/BLUE_theme/hosting/dedicatedServer/Ellipse\ 1623.webp");
+  --experience-img: url("/assets/images/pages/hosting/dedicatedServers/dedicated-exprience-blue.webp");
+  --right-tick: url("/assets/images/icons/BLUE_theme/right-tick-blue.svg");
+
+  /* WEB HOSTING  */
+  --bg-web-hosting-first-img: url("/assets/images/backgrounds/BLUE_theme/hosting/web/web-hosting-blue-first.webp");
+  --bg-web-hosting-second-img: url("/assets/images/backgrounds/BLUE_theme/hosting/web/web-hosting-blue-second.webp");
+  --bg-web-hosting-third-img: url("/assets/images/backgrounds/BLUE_theme/hosting/web/web-hosting-blue-third.webp");
+
+  /* WORDPRESS HOSTING */
+  --bg-wordpress-hosting-first-img: url("/assets/images/backgrounds/BLUE_theme/hosting/wordpress/wordPress-blue-first.webp");
+  --bg-wordpress-hosting-second-img: url("/assets/images/backgrounds/BLUE_theme/hosting/wordpress/wordPress-blue-second.webp");
+  --bg-wordpress-hosting-third-img: url("/assets/images/backgrounds/BLUE_theme/hosting/wordpress/wordPress-blue-third.webp");
+  --wordpress-ellipse: url("/assets/images/backgrounds/BLUE_theme/hosting/wordpress/statestics_blue_shadow.webp");
+  --feature-img: url("/assets/images/pages/hosting/wordPress-hosting/feature-img-blue.webp");
+  --performance-img: url("/assets/images/pages/hosting/wordPress-hosting/Layer_1.webp");
+  --security-img: url("/assets/images/pages/hosting/wordPress-hosting/security-section-img.webp");
+  /* CONTROL PANEL  */
+  --bg-control-panel-first-img: url("/assets/images/backgrounds/BLUE_theme/controlPanel/control-panel-blue-first.webp");
+  --bg-control-panel-second-img: url("/assets/images/backgrounds/BLUE_theme/controlPanel/control-panel-blue-second.webp");
+  --bg-control-panel-third-img: url("/assets/images/backgrounds/BLUE_theme/controlPanel/control-panel-blue-third.webp");
+  --cta_bg_left: url("/assets/images/backgrounds/BLUE_theme/controlPanel/CTA_left_wave_blue.webp");
+  --cta_bg_right: url("/assets/images/backgrounds/BLUE_theme/controlPanel/CTA_right_wave_blue.webp");
+
+  /* CONFIGURATOR PAGE FIRST IMAGE */
+  --bg-configurator-first-img: url("/assets/images/backgrounds/BLUE_theme/configurator/configurator-blue-first.webp");
+
+  --bg-contactUs-first-img: url("/assets/images/backgrounds/BLUE_theme/contactUs/contactUs-blue-first.webp");
+  --faq-bg-img: url("/assets/images/backgrounds/BLUE_theme/faq-bg-blue.webp");
+  --img-footer-border: url("/assets/images/backgrounds/BLUE_theme/footer/footer-top-waves-blue.png");
+  --map-img: url("/assets/images/backgrounds/BLUE_theme/map-blue.webp");
+  --not-found-img: url("/assets/images/icons/BLUE_theme/404/404-blue.svg");
+  --not-found-img-glow: url("/assets/images/icons/BLUE_theme/404/blue-glow.png");
+}
+
+/* -------------------------------------------------
+   COPPER THEME OVERRIDES
+--------------------------------------------------*/
+[data-theme="copper"] {
+  --accent: #a05e2c;
+  --accent-hover: #ffa042;
+  --accent-soft: #ff8b3133;
+  --accent-contrast: #ffffff;
+
+  /* TEXT COLORS remain same */
+  --text-grediant: linear-gradient(90deg, #c27f3e 0%, #c23e3e 100%);
+
+  /* BACKGROUNDS*/
+  --bg-body: #0a0806;
+  --bg-card: #191a1dcc;
+  --bg-card-hover: #222327cc;
+  --bg-card-strong: #1c1c22;
+
+  --contact-us-bg-grediant: linear-gradient(58deg, rgba(216, 106, 0, 0.6), rgba(12, 13, 24, 0.2));
+  --top-nav-label-bg: #6d3f1c;
+  --web-hosting-card-grediant: linear-gradient(
+    180deg,
+    rgba(10, 11, 21, 0.12) 0%,
+    rgba(104, 51, 0, 0.12) 100%
+  );
+  --web-hosting-card-full-bg-grediant: linear-gradient(
+    180deg,
+    rgba(10, 8, 6, 0.08) 0%,
+    rgba(183, 139, 96, 0.08) 100%
+  );
+  --web-hosting-card-grediant: linear-gradient(
+    180deg,
+    rgba(10, 11, 21, 0.12) 0%,
+    rgba(104, 51, 0, 0.12) 100%
+  );
+
+  /*WORDPRESS HOSTING CARD*/
+  --wordpress-card-full-bg-grediant: linear-gradient(
+    180deg,
+    rgba(10, 8, 6, 0.1) 0%,
+    rgba(158, 118, 78, 0.1) 100%
+  );
+  --wordpress-selected-card-grediant: linear-gradient(
+    180deg,
+    rgba(10, 8, 6, 0.24) 0%,
+    rgba(158, 118, 78, 0.24) 100%
+  ) !important;
+
+  /* CONFIGURATOR COLORS */
+  --configurator-bg: #1f1712;
+  --configurator-text: #4d3727;
+  --configurator-inner-bg: #4d3727;
+  --configurator-inner-border: #7d583d;
+  --configurator-inner-button: #2b1d13;
+  --configurator-inner-button-selected-bg: #53341d;
+  --configurator-inner-button-disselected-bg: #47372a;
+  --configurator-inner-button-border: #814d26;
+  --promo-bg: #4d3727;
+  --promo-border: #7d583d;
+  --recommended-gradient: linear-gradient(180deg, #b37f58, #241a13);
+  --side-arrow-bg: #5c3619;
+  --side-arrow-border: #af6f3e;
+  --card-bg: #1f1813;
+  --inner-card-bg: #866850;
+  --location-card-bg: #281f18;
+  --server-tier-popup-bg: #372719;
+
+  /* BORDERS */
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-mid: rgba(255, 255, 255, 0.12);
+  --border-accent: #ff8b31;
+
+  /* SHADOWS */
+  --shadow-accent: 0 0 20px rgba(255, 139, 49, 0.45);
+
+  /* GRADIENTS */
+  --gradient-accent: linear-gradient(90deg, #ff8b31, #ffa042);
+  --gradient-section: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(40, 20, 5, 0.4));
+
+  --footer-bg: #0a0806;
+
+  /* TOGGLE SWITCH */
+  --toggle-track: #ff8b3133;
+  --toggle-circle: #ff8b31;
+
+  /* Control Panel Page colors */
+  --feature-bg-active: rgba(160, 94, 44, 0.04);
+  --feature-bg: rgba(255, 255, 255, 0.1);
+
+  /* pricing plan menu background */
+  --pricingPlans-menu-bg: #1a1716;
+
+  /* COPPER ICONS  */
+  --fav-icon: url("/copper_favicon.png");
+
+  --icon-computer: url("/assets/images/icons/COPPER_theme/computer-copper.webp");
+  --icon-knowledge: url("/assets/images/icons/COPPER_theme/knowledge-copper.webp");
+  --icon-server: url("/assets/images/icons/COPPER_theme/server-copper.webp");
+  --icon-hosting: url("/assets/images/icons/COPPER_theme/hosting-copper.webp");
+  --icon-faq: url("/assets/images/icons/COPPER_theme/faq-copper.webp");
+  --icon-email: url("/assets/images/icons/COPPER_theme/email-copper.webp");
+  --icon-device: url("/assets/images/icons/COPPER_theme/device-copper.webp");
+  --icon-location: url("/assets/images/icons/COPPER_theme/location-copper.webp");
+
+  --icon-recovery: url("/assets/images/icons/COPPER_theme/controlPanel/recovery-copper.webp");
+  --icon-config: url("/assets/images/icons/COPPER_theme/controlPanel/config-copper.webp");
+  --icon-database: url("/assets/images/icons/COPPER_theme/controlPanel/database-copper.webp");
+  --icon-user: url("/assets/images/icons/COPPER_theme/controlPanel/user-copper.webp");
+  --icon-real-server: url("/assets/images/icons/COPPER_theme/controlPanel/real-server-copper.webp");
+  --icon-file: url("/assets/images/icons/COPPER_theme/controlPanel/file-copper.webp");
+
+  --icon-file-manager: url("/assets/images/icons/COPPER_theme/Management_tools/file-manager-copper.webp");
+  --icon-edge: url("/assets/images/icons/COPPER_theme/Management_tools/edge-copper.webp");
+  --icon-backup: url("/assets/images/icons/COPPER_theme/Management_tools/backup-copper.webp");
+
+  --icon-strength-one: url("/assets/images/icons/COPPER_theme/gameServer/advantages/strength-one-copper.webp");
+  --icon-strength-two: url("/assets/images/icons/COPPER_theme/gameServer/advantages/strength-two-copper.webp");
+  --icon-strength-three: url("/assets/images/icons/COPPER_theme/gameServer/advantages/strength-three-copper.webp");
+  --icon-strength-four: url("/assets/images/icons/COPPER_theme/gameServer/advantages/strength-four-copper.webp");
+
+  --icon-home-first: url("/assets/images/icons/COPPER_theme/home/home-icon-copper.webp");
+
+  --icon-game-one: url("/assets/images/icons/COPPER_theme/gameServer/hero/game-icon-one-copper.webp");
+  --icon-game-two: url("/assets/images/icons/COPPER_theme/gameServer/hero/game-icon-two-copper.webp");
+  --icon-game-three: url("/assets/images/icons/COPPER_theme/gameServer/hero/game-icon-three-copper.webp");
+  --icon-game-four: url("/assets/images/icons/COPPER_theme/gameServer/hero/game-icon-four-copper.webp");
+  --icon-game-five: url("/assets/images/icons/COPPER_theme/gameServer/hero/game-icon-five-copper.webp");
+  --icon-game-six: url("/assets/images/icons/COPPER_theme/gameServer/hero/game-icon-six-copper.webp");
+  --icon-game-seven: url("/assets/images/icons/COPPER_theme/gameServer/hero/game-icon-seven-copper.webp");
+
+  /* COPPER THEME BACKGROUNDS */
+
+  --logo: url("/logo-copper.svg");
+  --bg-home-first-img: url("/assets/images/backgrounds/COPPER_theme/home/home_copper_first.webp");
+  --bg-home-second-img: url("/assets/images/backgrounds/COPPER_theme/home/home_copper_second.webp");
+  --bg-home-third-img: url("/assets/images/backgrounds/COPPER_theme/home/home_copper_third.webp");
+  --hero-carousel: url("/assets/images/backgrounds/COPPER_theme/home/HomeHeroCarousel_copper_shadow.webp");
+
+  /* ABOUT */
+  --bg-first-img: url("/assets/images/backgrounds/COPPER_theme/about/about_copper_first.webp");
+  --bg-second-img: url("/assets/images/backgrounds/COPPER_theme/about/about_copper_second.webp");
+
+  /*GAME SERVER */
+  --bg-game-server-first-img: url("/assets/images/backgrounds/COPPER_theme/gameServers/game-server_copper_first.webp");
+  --bg-server-details-first-img: url("/assets/images/backgrounds/COPPER_theme/gameServers/server-detail-copper-first.webp");
+
+  /* DEDICATED SERVER  */
+  --bg-dedicated-first-img: url("/assets/images/backgrounds/COPPER_theme/hosting/dedicatedServer/dedicated-copper-first.webp");
+  --bg-dedicated-second-img: url("/assets/images/backgrounds/COPPER_theme/hosting/dedicatedServer/dedicated-copper-second.webp");
+  --bg-dedicated-third-img: url("/assets/images/backgrounds/COPPER_theme/hosting/dedicatedServer/dedicated-copper-third.webp");
+  --dedicated-server-ellipse: url("/assets/images/backgrounds/COPPER_theme/hosting/dedicatedServer Ellipse 1623(1).webp");
+  --experience-img: url("/assets/images/pages/hosting/dedicatedServers/dedicated-exprience-copper.webp");
+  --right-tick: url("/assets/images/icons/COPPER_theme/right-tick-copper.svg");
+  /* WEB HOSTING */
+  --bg-web-hosting-first-img: url("/assets/images/backgrounds/COPPER_theme/hosting/web/web-hosting-copper-first.webp ");
+  --bg-web-hosting-second-img: url("/assets/images/backgrounds/COPPER_theme/hosting/web/web-hosting-copper-second.webp");
+  --bg-web-hosting-third-img: url("/assets/images/backgrounds/COPPER_theme/hosting/web/web-hosting-copper-third.webp");
+
+  /* WORDPRESS HOSTING */
+  --bg-wordpress-hosting-first-img: url("/assets/images/backgrounds/COPPER_theme/hosting/wordpress/wordPress-copper-first.webp");
+  --bg-wordpress-hosting-second-img: url("/assets/images/backgrounds/COPPER_theme/hosting/wordpress/wordPress-copper-second.webp");
+  --bg-wordpress-hosting-third-img: url("/assets/images/backgrounds/COPPER_theme/hosting/wordpress/wordPress-copper-third.webp");
+  --wordpress-ellipse: url("/assets/images/backgrounds/COPPER_theme/hosting/wordpress/statestics_copper_shadow.webp");
+  --feature-img: url("/assets/images/pages/hosting/wordPress-hosting/feature-img-copper.webp");
+  --performance-img: url("/assets/images/pages/hosting/wordPress-hosting/frame_427322461.webp");
+  --security-img: url("/assets/images/pages/hosting/wordPress-hosting/group_3.webp");
+
+  /* CONTROL PANEL*/
+  --bg-control-panel-first-img: url("/assets/images/backgrounds/COPPER_theme/controlPanel/control-panel-copper-first.webp");
+  --bg-control-panel-second-img: url("/assets/images/backgrounds/COPPER_theme/controlPanel/control-panel-copper-second.webp");
+  --bg-control-panel-third-img: url("/assets/images/backgrounds/COPPER_theme/controlPanel/control-panel-copper-third.webp");
+  --cta_bg_left: url("/assets/images/backgrounds/COPPER_theme/controlPanel/CTA_left_Wave_copper.webp");
+  --cta_bg_right: url("/assets/images/backgrounds/COPPER_theme/controlPanel/CTA_right_wave_copper.webp");
+
+  /* CONFIGURATOR PAGE FIRST IMAGE */
+  --bg-configurator-first-img: url("/assets/images/backgrounds/COPPER_theme/configurator/configurator-copper-first.png");
+
+  /* Blog Page */
+  --bg-blog-first-img: url("/assets/images/backgrounds/COPPER_theme/blog/blog-copper-first.webp");
+  --blog-hero-published-icon: url("/assets/images/icons/COPPER_theme/blog/blogs_hero/tutorial_published_copper.svg");
+  --blog-hero-covering-icon: url("/assets/images/icons/COPPER_theme/blog/blogs_hero/covering_games_copper.svg");
+
+  --bg-contactUs-first-img: url("/assets/images/backgrounds/COPPER_theme/contactUs/contactUs-copper-first.webp");
+  --map-img: url("/assets/images/backgrounds/COPPER_theme/map-copper.webp");
+  --faq-bg-img: url("/assets/images/backgrounds/COPPER_theme/faq-bg-copper.webp");
+  --img-footer-border: url("/assets/images/backgrounds/COPPER_theme/footer/footer-waves-copper.webp");
+  --not-found-img: url("/assets/images/icons/COPPER_theme/404/404-copper.svg");
+  --not-found-img-glow: url("/assets/images/icons/COPPER_theme/404/copper-glow.png");
+}

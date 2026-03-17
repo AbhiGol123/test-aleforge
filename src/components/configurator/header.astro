@@ -1,0 +1,133 @@
+<section class="bg-transparent">
+  <div class="pt-[60px] global-padding">
+    <div class="container-large mx-auto">
+      <div class="flex flex-col lg:flex-row justify-between items-start mb-0 gap-4">
+        <h2 class="header-title text-white">
+          Build Your Perfect<br />Game Server
+        </h2>
+        <div class="game-selector-wrapper">
+          <div>
+            <p class="game-selector-label" data-i18n="configuratorHeaderComponent.installedGame">Installed game:</p>
+            <div class="game-selector md:gap-15">
+              <span class="game-name" id="game-name-display"></span>
+              <button onclick="window.location.href='/game-server'" class="change-button"> Change > </button>
+            </div>
+          </div>
+          <button onclick="window.history.back()" class="view-plans-button" data-i18n="configuratorHeaderComponent.viewAllPlans"> VIEW ALL PLANS </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../../styles/core/mixins" as *;
+  .game-selector-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-direction: row;
+    width: auto;
+
+    @include lg {
+      flex-direction: column;
+      width: 100%;
+      align-items: stretch;
+    }
+  }
+  .game-selector-label {
+    color: var(--text-muted);
+    text-align: left;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  .game-selector {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--configurator-bg);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    width: auto;
+
+    @include lg {
+      width: 100%;
+      min-width: 500;
+    }
+  }
+  .change-button {
+    color: var(--accent);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-left: 1rem;
+    transition: color 0.2s;
+  }
+  .view-plans-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: medium;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.2s;
+    height: 53px;
+    width: auto;
+
+    @include lg {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+
+  // @ts-nocheck
+  import {configStore, setGameData} from "/src/stores/configuratorStore";
+  import {recalculatePrice} from "/src/stores/priceStore";
+
+  let loaded = false;
+
+  async function loadGameFromUrl() {
+    if (loaded) return;
+    loaded = true;
+    const params = new URLSearchParams(window.location.search);
+    const gameName = params.get("game");
+    if (!gameName) {
+      console.warn("⚠️ Missing game param in URL");
+      return;
+    }
+    try {
+      const res = await fetch(
+        `https://api.aleforge.net/?handler=pulldata&file=games.json&game=${encodeURIComponent(gameName)}`
+      );
+      const json = await res.json();
+      let data = json?.data ?? json;
+      if (Array.isArray(data)) {
+        data = data[0];
+      }
+      if (!data || !data.name) {
+        console.warn("❌ Invalid game data:", data);
+        return;
+      }
+      setGameData(data);
+      recalculatePrice();
+    } catch (err) {
+      console.error("❌ Failed to load game:", err);
+    }
+  }
+
+  loadGameFromUrl();
+
+  // ✅ Update header UI when game loads
+  configStore.subscribe((state) => {
+    if (!state?.gameData?.name) return;
+    const el = document.getElementById("game-name-display");
+    if (el) {
+      el.textContent = state.gameData.name;
+    }
+  });
+
+  
+</script>

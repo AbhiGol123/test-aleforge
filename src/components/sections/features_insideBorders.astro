@@ -1,0 +1,194 @@
+---
+const {items = []} = Astro.props;
+---
+
+<div class="feature-grid" data-count={items.length}>
+  {
+    items.map((item: any) => (
+      <div class="child">
+       <div class="flex items-center gap-3 mb-3">
+  {item.icon && (
+    typeof item.icon === "string" && item.icon.startsWith("http") ? (
+      <!-- CMS image icon -->
+      <img
+        src={item.icon}
+        alt={item.title}
+        class="w-10 h-10 object-contain"
+        loading="lazy"
+      />
+    ) : (
+      <!-- Static CSS icon -->
+      <div
+        class="w-10 h-10 bg-contain bg-no-repeat bg-center"
+        style={{ backgroundImage: item.icon }}
+      />
+    )
+  )}
+
+  <h3 class="feature_title">{item.title}</h3>
+</div>
+
+        <p class="text-light text-[16px] " style="font-weight:300;">
+          {item.desc}
+        </p>
+      </div>
+    ))
+  }
+</div>
+
+<style lang="scss">
+  @use "/src/styles/core/mixins.scss" as *;
+
+  // **********************************  Feature Grid Styles  **********************************
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .child {
+    padding: 2rem;
+    position: relative;
+
+    @include lg {
+      padding: 1.2rem;
+    }
+
+    @include sm {
+      padding: 20px 10px;
+    }
+  }
+  .feature_title{
+    font-size: 24px;
+    font-weight: 400;
+
+    @include lg {
+      font-size: 20px;
+    }
+  }
+
+  // **********************************  Divider Variables  **********************************
+  @mixin divider-horizontal-left {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.35), white);
+  }
+
+  @mixin divider-horizontal-center {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+
+    background: linear-gradient(white, white);
+  }
+  @mixin divider-horizontal-right {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+
+    background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.35), white);
+  }
+  // ------------------------------------------------------------------------------------------
+
+  @mixin divider-vertical-top {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 2px;
+
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.25), white);
+  }
+  @mixin divider-vertical-bottom {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 2px;
+
+    background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.25), white);
+  }
+  @mixin divider-vertical-center {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: white;
+  }
+
+  // **********************************  Divider Styles  **********************************
+
+  @media (min-width: 768px) {
+    .feature-grid > .child:nth-child(3n + 1):not(:nth-last-child(-n + 3))::after {
+      @include divider-horizontal-left();
+    }
+    .feature-grid > .child:nth-child(3n):not(:last-child)::after {
+      @include divider-horizontal-right;
+    }
+    .feature-grid > .child:nth-child(3n + 2):not(:nth-last-child(-n + 3))::after {
+      @include divider-horizontal-center();
+    }
+
+    .feature-grid > .child:nth-child(-n + 2)::before {
+      @include divider-vertical-top();
+    }
+    .feature-grid > .child:nth-last-child(3)::before,
+    .feature-grid > .child:nth-last-child(2)::before {
+      @include divider-vertical-bottom();
+    }
+    /* Full white border on center items (5, 8, 11…) */
+    .feature-grid[data-count]:not([data-count="6"])
+      > .child:nth-child(3n + 2):not(:nth-child(-n + 3)):not(:nth-last-child(-n + 3)) {
+      border: 1px solid white;
+      border-left: 3px solid white;
+      border-right: 3px solid white;
+      margin-left: -2px;
+    }
+  }
+
+  /*--------------------------------------------------------------- ----------------------------- */
+  /*                                     Mobile Responsive */
+  /* -------------------------------------------------------------------------------------------- */
+  @media (max-width: 768px) {
+    .feature-grid {
+      grid-template-columns: 1fr;
+      position: relative;
+      text-align: center;
+    }
+
+    .feature-grid .child > div {
+      justify-content: center;
+    }
+
+    /* ********************************** Horizontal divider between items *************************** */
+    .feature-grid .child {
+      position: relative;
+      padding-bottom: 32px;
+    }
+    .feature-grid .child:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+
+      background: linear-gradient(to right, transparent, white, transparent);
+    }
+  }
+</style>

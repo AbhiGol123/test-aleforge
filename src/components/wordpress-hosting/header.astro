@@ -1,0 +1,43 @@
+---
+const features = [
+  {icon: "storage", text: "Free Site Migration"},
+  {icon: "settings_b_roll", text: "1-Click Staging & Updates"},
+  {icon: "security", text: "30-Day Guarantee"}
+];
+---
+
+<section class="header max-w-[900px] mx-auto">
+  <div class="section-padding global-padding">
+    <div class="container-large mx-auto relative z-30 text-center">
+      <h1 data-i18n="wordpressHostingHeaderComponent.wordpressHosting">WordPress Hosting</h1>
+
+      <p class="subtitle mb-3">
+        Enjoy fast, secure WordPress hosting with automatic updates, daily backups, and expert support built for
+        businesses and online stores.
+      </p>
+
+      <!-- Feature Pills -->
+      <div class="flex flex-wrap justify-center gap-2 mb-6 max-w-3xl mx-auto">
+        {
+          features.map(({icon, text}) => (
+            <div class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium text-[var(--text-secondary)]">
+              <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FFFFFF]/6">
+                <span class="material-symbols-outlined text-[var(--accent)]">{icon}</span>
+              </div>
+
+              <span class="text-[18px] font-[400]">{text}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
+        <a href="#pricing" class="button-primary" data-i18n="wordpressHostingHeaderComponent.seeHostingPackages"> See Hosting Packages </a>
+        <a href="/contactUs" class="button-secondary" data-i18n="wordpressHostingHeaderComponent.getStarted"> Get Started </a>
+      </div>
+
+      <small class="text-sm text-[var(--text-muted)]" data-i18n="wordpressHostingHeaderComponent.riskFreeCancelAnytime">Risk-Free, Cancel Anytime.</small>
+    </div>
+  </div>
+</section>

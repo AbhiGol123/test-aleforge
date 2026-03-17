@@ -1,0 +1,149 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Contact from "@components/sections/contact.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import BlogCard from "@components/blog/BlogCard.astro";
+import {sanity} from "../../lib/sanity";
+import imageUrlBuilder from "@sanity/image-url";
+import {PortableText} from "astro-portabletext";
+
+
+export async function getStaticPaths() {
+  const posts = await sanity.fetch(
+    `*[_type=="post" && defined(slug.current)]{
+      _id,
+      "slug": slug.current
+    }`
+  );
+
+  return posts.map((post: any) => ({
+    params: {slug: post.slug},
+    props: {id: post._id}
+  }));
+}
+
+const {id} = Astro.props;
+const post = await sanity.fetch(
+  `*[_type=="post" && _id==$id][0]{
+    _id,
+    title,
+    publishedAt,
+    mainImage,
+    body,
+    category,
+    author->{name}
+  }`,
+  {id}
+);
+
+const relatedPosts = await sanity.fetch(
+  `*[_type=="post" && _id != $id][0...3]{
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage,
+    category
+  }`,
+  {id}
+);
+
+const builder = imageUrlBuilder(sanity);
+const imageUrl = post?.mainImage ? builder.image(post.mainImage).width(1200).auto("format").url() : null;
+
+if (!post) {
+  throw new Error("Post not found");
+}
+---
+
+<Layout>
+  <Navigation />
+  <Breadcrumbs />
+
+  <section class="blog-detail">
+    <div class="global-padding section-padding">
+      <div class="container-large mx-auto">
+        <div class="mb-10">
+          {imageUrl && <img src={imageUrl} alt={post.title} class="w-full rounded-xl mb-8" />}
+        </div>
+        <p class="text-center text-sm mb-1">{new Date(post.publishedAt).toDateString()}</p>
+        <h1 class="text-center mb-5">{post.title}</h1>
+        <div class="border-t border-[#D9D9D9]/20 my-5"></div>
+        <article class="blog-content prose prose-invert max-w-none">
+          <PortableText value={post.body} />
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- RELATED POSTS SECTION -->
+  <section class="related-posts-section">
+    <div class="global-padding section-padding">
+      <div class="container-large">
+        <h2 class="mb-8" data-i18n="slugPage.relatedPosts">Related Posts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {relatedPosts.map((p: any) => <BlogCard post={p} />)}
+        </div>
+        <!-- Bottom Promo Row -->
+        <div class="flex flex-col sm:flex-row justify-center sm:justify-between items-center mt-10 gap-[15px]">
+          <p class="sm:max-w-[50%] max-w-full text-center sm:text-left" data-i18n="slugPage.hostOver20GamesInstantly">
+            Host Over 20 Games Instantly With AleForge, Powered By High-Performance Hardware And 24/7 Expert Support.
+          </p>
+          <a href="/blog" class="button-primary" data-i18n="slugPage.viewMoreBlog"> View more Blog </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+</Layout>
+
+<style is:global lang="scss">
+  @use "/src/styles/core/mixins.scss" as *;
+  .blog-content img {
+    width: 100%;
+    border-radius: 12px;
+    margin: 2rem 0;
+  }
+  .blog-content {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    h3 {
+      font-size: 30px;
+
+      @include sm {
+        font-size: 24px;
+      }
+    }
+
+    p,
+    li {
+      font-size: 22px;
+      line-height: 1.6;
+      font-weight: 200;
+      color: var(--text-secondary);
+
+      @include sm {
+        font-size: 16px;
+      }
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      // margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>

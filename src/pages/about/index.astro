@@ -1,0 +1,42 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Header from "@components/aboutUs/header.astro";
+import Mission from "@components/aboutUs/mission.astro";
+import TimeLine from "@components/aboutUs/time_line.astro";
+import Testimonials from "@components/sections/testimonials.astro";
+import Contact from "@components/sections/contact.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import AboutCTA from "@components/aboutUs/aboutCTA.astro";
+---
+
+<Layout>
+  <div class="header">
+    <Navigation />
+    <Breadcrumbs />
+    <Header />
+  </div>
+  <Mission />
+  <AboutCTA />
+  <div class="hosting_res">
+    <TimeLine />
+    <Testimonials />
+  </div>
+  <Contact />
+
+  <style>
+    .header {
+      background-image: var(--bg-first-img);
+      background-size: 100% auto;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    .hosting_res {
+      background-image: var(--bg-second-img);
+      background-size: contain;
+      background-position: center 15%;
+      background-repeat: no-repeat;
+    }
+  </style>
+</Layout>

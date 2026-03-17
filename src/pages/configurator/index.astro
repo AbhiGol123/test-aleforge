@@ -1,0 +1,184 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Header from "@components/configurator/header.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import BuyGamePlanPreview from "@components/configurator/BuyGamePlanPreview.astro";
+import StepConfigureGame from "@components/configurator/StepConfigureGame.astro";
+import StepChooseServerTier from "@components/configurator/StepChooseServerTier.astro";
+import StepChooseLocation from "@components/configurator/StepChooseLocation.astro";
+import StepChooseMods from "@components/configurator/StepChooseMods.astro";
+import StepBillingOptions from "@components/configurator/StepBillingOptions.astro";
+import AddOns from "@components/configurator/AddOns.astro";
+---
+
+<Layout>
+  <div class="Configurator-Page">
+    <Navigation />
+    <Breadcrumbs />
+    <Header client:load />
+    <section class="Configurator">
+      <div class="py-[30px] global-padding">
+        <div class="container-large mx-auto">
+          <div class="flex flex-col lg:flex-row gap-4 lg:gap-8">
+            <div class="w-full lg:w-2/3 space-y-6">
+              <StepConfigureGame client:load />
+              <StepChooseServerTier client:load />
+              <StepChooseLocation client:load />
+              <StepChooseMods client:load />
+              <StepBillingOptions client:load />
+              <AddOns client:load />
+            </div>
+            <div class="w-full lg:w-1/3 sticky top-20 self-start lg:max-w-[400px]">
+              <BuyGamePlanPreview client:load />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .Configurator-Page {
+    background-image: var(--bg-configurator-first-img);
+    background-size: 100% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+import {configStore, setHasBudget, setTier, setPricing} from "/src/stores/configuratorStore";
+  import {priceStore, recalculatePrice} from "/src/stores/priceStore";
+   const stored = localStorage.getItem("configurator");
+   const config = stored ? JSON.parse(stored) : null;
+   const params = new URLSearchParams(window.location.search);
+  
+  const hasBudget = config?.hasBudget ?? false;
+  setHasBudget(hasBudget);
+
+  const pid = config?.pid;
+
+
+async function hydratePlanFromPid() {
+  try {
+    const res = await fetch(
+      "https://api.aleforge.net/v2?handler=pulldata&file=plans.json"
+    );
+    if (!res.ok) {
+      console.warn("⚠️ Plans API failed, keeping defaults");
+      return;
+    }
+    const json = await res.json();
+    const data = json?.data || {};
+    const allPlans = [
+      ...(data.budget_plans?.plans || []).map(p => ({ ...p, tier: "budget" })),
+      ...(data.standard_plans?.plans || []).map(p => ({ ...p, tier: "standard" })),
+      ...(data.premium_plans?.plans || []).map(p => ({ ...p, tier: "premium" })),
+    ];
+    const selectedPlan = allPlans.find(
+      p => String(p.pid) === String(pid)
+    );
+    if (!selectedPlan) {
+      console.warn("⚠️ pid not found, keeping defaults:", pid);
+      return;
+    }
+    console.log("✅ Hydrated plan from pid:", selectedPlan);
+    setTier(selectedPlan.tier);
+    setPricing({
+      ram : selectedPlan.ram,
+      pricing : selectedPlan.pricing.monthly,
+    })
+    recalculatePrice();
+  } catch (err) {
+    console.error("❌ Error hydrating pid, keeping defaults:", err);
+  }
+}
+
+hydratePlanFromPid();
+
+
+/*----------------------------------
+steps
+-----------------------------------*/
+function updateStepNumbers() {
+  const steps = document.querySelectorAll("[data-step]");
+
+  let stepNumber = 1;
+
+  steps.forEach((step) => {
+    // skip hidden steps
+    if (step.offsetParent === null) return;
+
+    const badge = step.querySelector(".step-badge");
+    if (!badge) return;
+
+    badge.textContent = stepNumber;
+    stepNumber++;
+  });
+}
+window.addEventListener("load", () => {
+  updateStepNumbers();
+});
+
+
+
+  /* -------------------------
+   Checkout
+------------------------- */
+  const buyBtn = document.getElementById("buy-plan-btn");
+
+  async function buildAndRedirect() {
+    const config = configStore.get();
+    const price = priceStore.get();
+    if (!config.gameData) {
+      alert("Game not loaded yet");
+      return;
+    }
+    if (!config.selectedLocation) {
+      alert("Please select location");
+      return;
+    }
+    // ✅ read addons from URL (set by Addons component)
+    const url = new URL(window.location.href);
+    const addonsParam = url.searchParams.get("addons") || "";
+    // ✅ build checkout params
+    const params = new URLSearchParams({
+      handler: "buildlink",
+      game: config.gameData.name,
+      players: String(config.players || 0),
+      location: config.selectedLocation.id,
+      mods: String(config.mods || 0),
+      planType: config.selectedTier,
+      billingCycle: config.selectedPeriod
+    });
+    // only append addons if selected
+    if (addonsParam) {
+      params.set("addons", addonsParam);
+    }
+
+    const apiUrl = `https://api.aleforge.net/v2?${params}`;
+
+    try {
+      buyBtn.disabled = true;
+      buyBtn.textContent = "Preparing...";
+      const res = await fetch(apiUrl);
+      const json = await res.json();
+      const link = json?.data?.link || json?.link || json?.url || json?.["cart-link"];
+      if (!link) throw new Error("No checkout link returned");
+      window.location.href = link;
+    } catch (err) {
+      console.error("[Checkout] Failed:", err);
+      alert("Checkout failed");
+    } finally {
+      buyBtn.disabled = false;
+      buyBtn.textContent = "BUY PLAN";
+    }
+  }
+
+  if (buyBtn) {
+    buyBtn.addEventListener("click", buildAndRedirect);
+  }
+</script>

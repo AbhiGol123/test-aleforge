@@ -1,0 +1,31 @@
+{
+  "name": "aleforge",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "i18n:generate": "node scripts/generate-i18n-html.mjs"
+  },
+  "dependencies": {
+    "@sanity/client": "^7.14.0",
+    "@sanity/image-url": "^2.0.2",
+    "astro": "^5.15.3",
+    "astro-portabletext": "^0.13.0",
+    "i18n-iso-countries": "^7.14.0",
+    "nanostores": "^1.1.0",
+    "sharp": "^0.34.5",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "prettier": "^3.7.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "sass": "^1.94.2",
+    "sass-embedded": "^1.93.3",
+    "tailwindcss": "^4.1.17",
+    "vite-plugin-static-copy": "^3.1.4"
+  }
+}

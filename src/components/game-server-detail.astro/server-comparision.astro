@@ -1,0 +1,426 @@
+---
+// Server comparison data
+const comparisonData = [
+    {
+        id: 1,
+        title: "CPU/Processors",
+        description: "How Fast Your Server Changes To The Game Process.",
+        expandLabel: "Compare Speeds",
+        budget: {
+            badge: "Budget",
+            badgeIcon: "🎯",
+            value: "Intel E3-1270v6 or Better (3.6 GHz+)"
+        },
+        standard: {
+            badge: "Standard",
+            badgeIcon: "👑",
+            value: "AMD Ryzen 9 5950X Or Better (4.0 GHz+)"
+        },
+        premium: {
+            badge: "Premium",
+            badgeIcon: "👑",
+            value: "AMD Ryzen 9 7950X Or Better (4.9 GHz+)"
+        },
+        bars: [
+            { label: "Aleforge Budget", value: 3.6, max: 5.0, suffix: " GHz", color: "#60A5FA" },
+            { label: "Aleforge Standard", value: 4.0, max: 5.0, suffix: " GHz", color: "#818CF8" },
+            { label: "Aleforge Premium", value: 4.9, max: 5.0, suffix: " GHz", color: "#A855F7" },
+            { label: "Nitrado", value: 2.5, max: 5.0, suffix: " GHz", color: "#F59E0B" },
+            { label: "HostHavoc", value: 3.0, max: 5.0, suffix: " GHz", color: "#F43F5E" }
+        ]
+    },
+    {
+        id: 2,
+        title: "Memory",
+        description: "Holds The Data That Is Regularly Used To Keep Track Of All The Monsters You Kill.",
+        expandLabel: "Compare Speeds",
+        budget: {
+            value: "DDR4 3200 MHz"
+        },
+        standard: {
+            value: "DDR4 3200 MHz"
+        },
+        premium: {
+            value: "DDR5 ECC 3600 MHz (Minimum)"
+        },
+        bars: [
+            { label: "Aleforge Budget", value: 3200, max: 3600, suffix: " MHz", color: "#60A5FA" },
+            { label: "Aleforge Standard", value: 3200, max: 3600, suffix: " MHz", color: "#818CF8" },
+            { label: "Aleforge Premium", value: 3600, max: 3600, suffix: " MHz", color: "#A855F7" },
+            { label: "Nitrado", value: 2666, max: 3600, suffix: " MHz", color: "#F59E0B" },
+            { label: "HostHavoc", value: 3000, max: 3600, suffix: " MHz", color: "#F43F5E" }
+        ]
+    },
+    {
+        id: 3,
+        title: "SSD",
+        description: "Controls How Fast The Large Portions Of Your Games Data Loads.",
+        expandLabel: "Compare Speeds",
+        budget: {
+            value: "Enterprise SSD (550 MB/S)"
+        },
+        standard: {
+            value: "Enterprise SSD (4300 MB/S)"
+        },
+        premium: {
+            value: "Samsung NVMe (5100 MB/S)"
+        },
+        bars: [
+            { label: "Aleforge Budget", value: 550, max: 5100, suffix: " MB/s", color: "#60A5FA" },
+            { label: "Aleforge Standard", value: 4300, max: 5100, suffix: " MB/s", color: "#818CF8" },
+            { label: "Aleforge Premium", value: 5100, max: 5100, suffix: " MB/s", color: "#A855F7" },
+            { label: "Nitrado", value: 4000, max: 5100, suffix: " MB/s", color: "#F59E0B" },
+            { label: "HostHavoc", value: 4300, max: 5100, suffix: " MB/s", color: "#F43F5E" }
+        ]
+    },
+    {
+        id: 4,
+        title: "Player Slots",
+        description: "Max Players Allowed In Your Server.",
+        expandLabel: "Compare Speeds",
+        budget: {
+            value: "Unlimited"
+        },
+        standard: {
+            value: "Unlimited"
+        },
+        premium: {
+            value: "Unlimited"
+        },
+        bars: [
+            { label: "Aleforge Budget", value: 100, max: 100, suffix: "%", color: "#60A5FA" },
+            { label: "Aleforge Standard", value: 100, max: 100, suffix: "%", color: "#818CF8" },
+            { label: "Aleforge Premium", value: 100, max: 100, suffix: "%", color: "#A855F7" },
+            { label: "Nitrado", value: 80, max: 100, suffix: "%", color: "#F59E0B" },
+            { label: "HostHavoc", value: 90, max: 100, suffix: "%", color: "#F43F5E" }
+        ]
+    },
+    {
+        id: 5,
+        title: "Cloud Backups",
+        description: "Number Of Backups You Can Create Per Server.",
+        expandLabel: "Compare Speeds",
+        budget: {
+            value: "04"
+        },
+        standard: {
+            value: "Up To 2",
+            subtext: "+$2.00/Mo Per 2 Additional Backups"
+        },
+        premium: {
+            value: "Up To 2",
+            subtext: "+$2.00/Mo Per 2 Additional Backups"
+        },
+        bars: [
+            { label: "Aleforge Budget", value: 4, max: 4, suffix: " Backups", color: "#60A5FA" },
+            { label: "Aleforge Standard", value: 2, max: 4, suffix: " Backups", color: "#818CF8" },
+            { label: "Aleforge Premium", value: 2, max: 4, suffix: " Backups", color: "#A855F7" },
+            { label: "Nitrado", value: 1, max: 4, suffix: " Backups", color: "#F59E0B" },
+            { label: "HostHavoc", value: 1, max: 4, suffix: " Backups", color: "#F43F5E" }
+        ]
+    },
+    {
+        id: 6,
+        title: "Locations",
+        description: "Worldwide Sites To House Your Game Server.",
+        expandLabel: "Compare Speeds",
+        budget: {
+            value: "4 Locations"
+        },
+        standard: {
+            value: "7 Locations"
+        },
+        premium: {
+            value: "5 Locations"
+        },
+        bars: [
+            { label: "Aleforge Budget", value: 4, max: 7, suffix: " Locations", color: "#60A5FA" },
+            { label: "Aleforge Standard", value: 7, max: 7, suffix: " Locations", color: "#818CF8" },
+            { label: "Aleforge Premium", value: 5, max: 7, suffix: " Locations", color: "#A855F7" },
+            { label: "Nitrado", value: 3, max: 7, suffix: " Locations", color: "#F59E0B" },
+            { label: "HostHavoc", value: 4, max: 7, suffix: " Locations", color: "#F43F5E" }
+        ]
+    }
+];
+---
+
+<section class="server-comparison" id="servercomparison">
+    <div class="section-padding global-padding">
+    <div class="container-large mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-2" data-i18n="serverComparisionComponent.premiumVsStandard">Premium Vs Standard</h2>
+            <p class="text-[var(--text-muted)] mx-auto max-w-2xl text-lg mb-4" data-i18n="serverComparisionComponent.hardwareEveryBudgetNoPerformance">
+                Hardware For Every Budget — No Performance Compromises. Need Ultimate Power For Modded Mayhem? We've Got You Covered.
+            </p>
+        </div>
+
+        <!-- Comparison Cards -->
+         <div class="hidden md:grid md:grid-cols-15 gap-6 items-end px-8">
+            <div class="md:col-span-6">
+                <!-- Spacer for Title column -->
+            </div>
+            <div class="md:col-span-3 text-center">
+                <div class="flex justify-center mb-3">
+                    <img src="../../assets/images/icons/General/gameServer/plans/budget_icons.webp" alt="Budget Plan" class="h-10" />
+                </div>
+            </div>
+            <div class="md:col-span-3 text-center">
+                <div class="flex justify-center mb-3">
+                    <img src="../../assets/images/icons/General/gameServer/plans/standard_plan.webp" alt="Budget Plan" class="h-10" />
+                </div>
+            </div>
+            <div class="md:col-span-3 text-center">
+                <div class="flex justify-center mb-3">
+                    <img src="../../assets/images/icons/General/gameServer/plans/premium_plan.webp" alt="Standard Plan" class="h-10" />
+                </div>
+            </div>
+        </div>
+         
+        <div class="space-y-4">
+            {comparisonData.map((item, index) => (
+                <div class="comparison-card bg-[#2D304E]/10 border border-[var(--border-light)] rounded-2xl overflow-hidden">
+                    <div class="p-4 md:p-6">
+                        <!-- Desktop Layout -->
+                        <div class="hidden md:grid md:grid-cols-15 gap-6 items-center">
+                            <!-- Left: Title & Description -->
+                            <div class="md:col-span-6">
+                                <h3 class="text-2xl font-bold text-[var(--text-primary)]">
+                                    {item.title}
+                                </h3>
+                                <p class="text-[var(--text-secondary)] text-sm mb-4">
+                                    {item.description}
+                                </p>
+                                {index < 3 && (
+                                    <button class="compare-toggle text-[var(--text-muted)] text-sm flex items-center gap-2 hover:text-[var(--accent)] transition-colors" data-id={item.id}>
+                                        {item.expandLabel}
+                                        <svg class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                )}
+                            </div>
+
+                            <!-- Middle: Budget Column -->
+                            <div class="md:col-span-3 text-center">
+                                {index === 0 && (
+                                    <div class="flex justify-center mb-3">
+                                        <img src="/assets/images/icons/General/gameServer/plans/intel.webp" alt="AMD Ryzen" class="h-8" />
+                                    </div>
+                                )}
+                                <p class="text-[var(--text-primary)]">
+                                    {item.budget.value}
+                                </p>
+                            </div>
+
+                            <!-- Middle: Standard Column -->
+                            <div class="md:col-span-3 text-center">
+                                {index === 0 && (
+                                    <div class="flex justify-center mb-3">
+                                        <img src="/assets/images/icons/General/gameServer/plans/ryzen-seeklogo 1.webp" alt="AMD Ryzen" class="h-8" />
+                                    </div>
+                                )}
+                                <p class="text-[var(--text-primary)]">
+                                    {item.standard.value}
+                                </p>
+                            </div>
+
+                            <!-- Right: Premium Column -->
+                            <div class="md:col-span-3 text-center">
+                                {index === 0 && (
+                                    <div class="flex justify-center mb-3">
+                                        <img src="../../assets/images/icons/General/gameServer/plans/ryzen-seeklogo 1.webp" alt="AMD Ryzen" class="h-8" />
+                                    </div>
+                                )}
+                                <p class="text-[var(--text-primary)]">
+                                    {item.premium.value}
+                                </p>
+                                {item.premium.subtext && (
+                                    <p class="text-[var(--text-muted)] text-xs mt-1">
+                                        {item.premium.subtext}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+
+                        <!-- Mobile Layout -->
+                        <div class="md:hidden">
+                            <!-- Title & Description -->
+                            <div class="mb-4">
+                                <h3 class="text-xl font-bold text-[var(--text-primary)] mb-2">
+                                    {item.title}
+                                </h3>
+                                <p class="text-[var(--text-secondary)] text-sm mb-3">
+                                    {item.description}
+                                </p>
+                            </div>
+
+                            <!-- Premium and Standard Columns -->
+                            <div class="grid grid-cols-2 gap-4 mb-3">
+                                <!-- Premium Column -->
+                                <div>
+                                    <div class="text-sm text-[var(--text-muted)] mb-2 font-medium" data-i18n="serverComparisionComponent.budget">Budget</div>
+                                    {index === 0 && (
+                                        <div class="flex justify-start mb-2">
+                                            <img src="../../assets/images/icons/General/gameServer/plans/ryzen-seeklogo 1.webp" alt="AMD Ryzen" class="h-6" />
+                                        </div>
+                                    )}
+                                    <p class="text-[var(--text-primary)] font-semibold">
+                                        {item.budget.value}
+                                    </p>
+                                </div>
+
+                                <!-- Standard Column -->
+                                <div>
+                                    <div class="text-sm text-[var(--text-muted)] mb-2 font-medium" data-i18n="serverComparisionComponent.standard">Standard</div>
+                                    {index === 0 && (
+                                        <div class="flex justify-start mb-2">
+                                            <img src="../../assets/images/icons/General/gameServer/plans/ryzen-seeklogo 1.webp" alt="AMD Ryzen" class="h-6" />
+                                        </div>
+                                    )}
+                                    <p class="text-[var(--text-primary)] font-semibold">
+                                        {item.standard.value}
+                                    </p>
+                                    {item.standard.subtext && (
+                                        <p class="text-[var(--text-muted)] text-xs mt-1">
+                                            {item.standard.subtext}
+                                        </p>
+                                    )}
+                                </div>
+
+                                <!-- Premium Column -->
+                                <div>
+                                    <div class="text-sm text-[var(--text-muted)] mb-2 font-medium" data-i18n="serverComparisionComponent.premium">Premium</div>
+                                    {index === 0 && (
+                                        <div class="flex justify-start mb-2">
+                                            <img src="../../assets/images/icons/General/gameServer/plans/ryzen-seeklogo 1.webp" alt="AMD Ryzen" class="h-6" />
+                                        </div>
+                                    )}
+                                    <p class="text-[var(--text-primary)] font-semibold">
+                                        {item.premium.value}
+                                    </p>
+                                    {item.premium.subtext && (
+                                        <p class="text-[var(--text-muted)] text-xs mt-1">
+                                            {item.premium.subtext}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <!-- Compare Toggle -->
+                            {index < 3 && (
+                                <button class="compare-toggle text-[var(--text-muted)] text-sm flex items-center gap-2 hover:text-[var(--accent)] transition-colors" data-id={item.id}>
+                                    {item.expandLabel}
+                                    <svg class="w-4 h-4 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+
+                        <!-- Bar Chart Comparison (Hidden by default) -->
+                        {index < 3 && (
+                            <div class="comparison-details max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out" id={`details-${item.id}`}>
+                                <div class="mt-8 pt-8 border-t border-[var(--border-light)]">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                                        <div class="space-y-6">
+                                            {item.bars.map((bar) => (
+                                                <div class="space-y-2">
+                                                    <div class="flex justify-between items-center text-sm">
+                                                        <span class="text-[var(--text-secondary)] font-medium">{bar.label}</span>
+                                                        <span class="text-[var(--text-primary)] font-bold">{bar.value}{bar.suffix}</span>
+                                                    </div>
+                                                    <div class="h-2 w-full bg-[var(--bg-card)] rounded-full overflow-hidden border border-[var(--border-light)]">
+                                                        <div 
+                                                            class="bar-fill h-full rounded-full transition-all duration-1000 ease-out" 
+                                                            style={`width: 0%; background: ${bar.color}; box-shadow: 0 0 10px ${bar.color}40;`}
+                                                            data-width={`${(bar.value / bar.max) * 100}%`}
+                                                        ></div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div class="hidden md:block">
+                                            <div class="bg-gradient-to-br from-[var(--bg-card)] to-transparent p-6 rounded-2xl border border-[var(--border-light)]">
+                                                <h4 class="text-lg font-bold mb-3 text-[var(--text-primary)]" data-i18n="serverComparisionComponent.whyItMatters">Why it matters?</h4>
+                                                <p class="text-[var(--text-muted)] text-sm leading-relaxed">
+                                                    Higher performance leads to better stability, lower latency, and a smoother gaming experience for all players. Our {item.title} are optimized for maximum efficiency.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+    </div>
+</section>
+
+<style>
+    .server-comparison {
+        background-color: transparent;
+    }
+
+    .comparison-card {
+        transition: all 0.3s ease;
+    }
+
+    .comparison-card:hover {
+        border-color: var(--border-mid);
+        box-shadow: 0 8px 24px var(--shadow-card);
+    }
+
+    .compare-toggle svg {
+        transition: transform 0.3s ease;
+    }
+
+    .comparison-details.open {
+        max-height: 500px;
+        opacity: 1;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<script>
+    const toggleButtons = document.querySelectorAll('.compare-toggle');
+    
+    toggleButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+            const details = document.getElementById(`details-${id}`);
+            const svg = button.querySelector('svg');
+            
+            if (details && svg) {
+                const isOpen = details.classList.contains('open');
+                
+                // Toggle current
+                if (isOpen) {
+                    details.classList.remove('open');
+                    svg.classList.remove('rotate-180');
+                    
+                    // Reset bars
+                    const bars = details.querySelectorAll('.bar-fill');
+                    bars.forEach(bar => {
+                        (bar as HTMLElement).style.width = '0%';
+                    });
+                } else {
+                    details.classList.add('open');
+                    svg.classList.add('rotate-180');
+                    
+                    // Animate bars after a short delay
+                    setTimeout(() => {
+                        const bars = details.querySelectorAll('.bar-fill');
+                        bars.forEach(bar => {
+                            const width = (bar as HTMLElement).getAttribute('data-width') || '0%';
+                            (bar as HTMLElement).style.width = width;
+                        });
+                    }, 100);
+                }
+            }
+        });
+    });
+</script>

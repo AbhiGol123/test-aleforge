@@ -1,0 +1,140 @@
+---
+const features = [
+  {
+    icon: "settings",
+    title: "Configuration",
+    description: "System Hardening, CSF Firewall Optimization & Maintenance"
+  },
+  {
+    icon: "server",
+    title: "Server Setup",
+    description: "Control Panel Installation & Configuration"
+  },
+  {
+    icon: "monitor",
+    title: "Continuous Patching",
+    description: "Operating System Updates And Security Patches"
+  },
+  {
+    icon: "shield",
+    title: "Monitoring & Support",
+    description: "Network & DDoS Protection & Monitoring"
+  }
+];
+---
+
+<section class="experience-section">
+  <div class="section-padding global-padding">
+    <div class="container-large mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12  items-center">
+        <!-- Left Content -->
+        <div class="content-side">
+          <h2 class="text-4xl text-center lg:text-left  mb-5" data-i18n="experienceComponent.noExperienceNoWorriesGot">No Experience? No Worries! We Got You</h2>
+          <p class="mb-7 text-center lg:text-left mx-auto lg:mx-0" data-i18n="experienceComponent.teamExpertTechniciansHandleAll">
+            With Our Team Of Expert Technicians, We Handle All Technical Aspects, Including Server Setup, Maintenance,
+            And Security, Allowing You To Concentrate On Your Core Business Operations.
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {
+              features.map((feature) => (
+                <div class="feature-item flex items-start gap-4 bg-[#FFFFFF]/2 p-3 rounded-xl border border-[#FFFFFF]/10 transition-colors duration-300">
+                  <div class="icon-wrapper w-10 h-10 flex items-center justify-center text-[var(--accent)]">
+                    {feature.icon === "settings" && (
+                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                        />
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    )}
+                    {feature.icon === "server" && (
+                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M4 6a2 2 0 012-2h12a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 15v4m-4-4v4m-6-9l2 2 4-4"
+                        />
+                      </svg>
+                    )}
+                    {feature.icon === "monitor" && (
+                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                    )}
+                    {feature.icon === "shield" && (
+                      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <h3 class="text-white" style="font-size: 20px">
+                      {feature.title}
+                    </h3>
+                    <p class=" leading-snug max-w-[300px]" style="font-size: 16px">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Right Image -->
+        <div class="image-side relative flex justify-center lg:justify-end">
+          <div class="relative overflow-hidden max-w-md w-full">
+            <!-- Image -->
+            <!-- <img
+              src="/assets/images/pages/hosting/dedicatedServers/dedicated-exprience.webp"
+              alt="Server Infrastructure"
+              class="w-full h-full object-cover"
+            /> -->
+            <img
+              alt="Server Infrastructure"
+              class="w-full h-full object-cover"
+              style="content: var(--experience-img);"
+            />
+
+            <!-- Corner Accents (Simulating the frame style) -->
+            <!-- <div
+                            class="absolute inset-0 pointer-events-none border-[1px] border-white/10 rounded-[2rem] m-1"
+                        >
+                        </div>
+
+÷                        <div
+                            class="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent pointer-events-none"
+                        >
+                        </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    /* background-color: var(--bg-body); */
+  }
+</style>

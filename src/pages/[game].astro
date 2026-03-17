@@ -1,0 +1,114 @@
+---
+
+import Layout from "src/layouts/Layout.astro";
+import ServerPlan from "@components/game-server-detail.astro/server-plan.astro";
+import TechnicalStrangth from "@components/game-server-detail.astro/technical-strangth.astro";
+import ServerManagement from "@components/game-server-detail.astro/server-management.astro";
+import ServerComparision from "@components/game-server-detail.astro/server-comparision.astro";
+import Include from "@components/game-server-detail.astro/include.astro";
+import GlobalServers from "@components/home/GlobalServers.astro";
+import Testimonials from "@components/sections/testimonials.astro";
+import Faq from "@components/sections/faq.astro";
+import HostingResources from "@components/home/hostingResources.astro";
+import Contact from "@components/sections/contact.astro";
+import Header from "@components/game-server-detail.astro/header.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import About from "@components/game-server-detail.astro/about.astro";
+import CommunitiesPlan from "@components/game-server-detail.astro/communities-plan.astro";
+import Modpack from "@components/game-server-detail.astro/modpack.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import {getGameBySlug} from "src/services/gameService";
+import { sanity } from "src/lib/sanity";
+
+interface Props {
+  slugOverride?: string;
+}
+
+/* ----------------------------------
+   Build all dynamic routes
+----------------------------------- */
+export async function getStaticPaths() {
+  const games = await sanity.fetch(`
+    *[_type == "game"]{
+      name
+    }
+  `);
+
+  return games.map((game: any) => ({
+    params: {
+      game: game.name.replace(/\s+/g, "-")   // URL slug
+    }
+  }));
+}
+
+/* ----------------------------------
+   Page logic
+----------------------------------- */
+const {slugOverride} = Astro.props as Props;
+const { game: paramSlug } = Astro.params;
+const slug = slugOverride || paramSlug;
+
+if (!slug) {
+  throw new Error("Missing game slug");
+}
+console.log("Received slug:", slug);
+const game = await getGameBySlug(slug);
+
+if (!game) {
+  return Astro.redirect("/404");
+}
+---
+
+
+<Layout>
+  <div class="header">
+    <Navigation />
+    <Breadcrumbs />
+    <Header game={game} />
+    <ServerPlan game={game} />
+  </div>
+  <Include game={game} />
+  {(game.game_id == 2772 || game.game_id == 2771) && <CommunitiesPlan />}
+  <div class="section-padding global-padding">
+    <div class="container-large">
+      <GlobalServers />
+    </div>
+  </div>
+  <About game={game} />
+  <!-- <Modpack /> -->
+  {(game.game_id == 2772 || game.game_id == 2771) && <Modpack />}
+  <div class="server-management-bg">
+    <ServerManagement />
+    <ServerComparision />
+  </div>
+
+  <div class="technical-strength-bg">
+    <TechnicalStrangth />
+    <Testimonials />
+  </div>
+
+  <Faq />
+  <HostingResources />
+  <Contact />
+</Layout>
+
+<style>
+  .server-management-bg {
+    background-image: var(--bg-web-hosting-second-img);
+    background-size: 100% auto;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+  .technical-strength-bg {
+    background-image: var(--bg-web-hosting-third-img);
+    background-size: 100% auto;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+  .header {
+    background-image: var(--bg-server-details-first-img);
+    background-size: 100% auto;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+</style>

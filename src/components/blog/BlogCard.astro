@@ -1,0 +1,79 @@
+---
+import imageUrlBuilder from "@sanity/image-url";
+import {sanity} from "../../lib/sanity";
+const {post} = Astro.props;
+const builder = imageUrlBuilder(sanity);
+const imageUrl = post.mainImage ? builder.image(post.mainImage).width(600).auto("format").url() : null;
+---
+
+<a
+  href={`/blog/${post.slug.current}`}
+  class="blog-card"
+  data-title={post.title.toLowerCase()}
+  data-category={post.category}
+  data-date={post.publishedAt}>
+  <div class="img_wrapper h-[180px] sm:h-[240px] rounded-[10px]">
+    <img
+      src={imageUrl}
+      class="blog-img h-full w-full"
+      alt="blogImg"
+      title="blogImg"
+      width="800"
+      height="450"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <div class="blog_content_wrapper mt-[20px]">
+    <span class="bg-[var(--accent)] text-white text-[16px] px-[12px] py-[5px] rounded-full">
+      {post.category}
+    </span>
+
+    <h3 class="blog-title mt-[12px] truncate-1">
+      {post.title}
+    </h3>
+    <p class="desc opacity-[0.6] text-[18px] truncate-1">
+      {post.excerpt}
+    </p>
+
+    <div class="meta flex flex-wrap justify-between items-center mt-[30px] gap-4">
+      <span class="flex gap-[6px] text-[18px] opacity-[0.6]">
+        <img src="../../assets/images/icons/General/blog/blog_author.webp" alt="author" title="blog author" />
+        {post.author}
+      </span>
+      <span class="text-[16px] opacity-[0.6] flex gap-[6px]">
+        <span class="material-icons">calendar_month</span>
+        {new Date(post.publishedAt).toDateString()}
+      </span>
+    </div>
+  </div>
+</a>
+
+<style is:global lang="scss">
+  @use "/src/styles/core/mixins.scss" as *;
+
+  .blog-card {
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(25, 26, 43, 0.2);
+    backdrop-filter: blur(2px);
+    display: block;
+
+    @include sm {
+      padding: 15px;
+    }
+  }
+
+  .blog-title {
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .truncate-1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+</style>

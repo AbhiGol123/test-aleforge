@@ -1,0 +1,153 @@
+---
+import HomePage from "../index.astro";
+import WebHostingPage from "../web-hosting/index.astro";
+import GameServerPage from "../game-server/index.astro";
+import TermsPage from "../legal/terms-of-service.astro";
+import RefundPage from "../legal/refund-policy.astro";
+import UsePolicyPage from "../legal/use-policy.astro";
+import PrivacyPage from "../legal/privacy-policy.astro";
+import ConfiguratorPage from "../configurator/index.astro";
+import ContactPage from "../contactUs/index.astro";
+import BlogIndexPage from "../blog/index.astro";
+import AboutPage from "../about/index.astro";
+import ControlPanelPage from "../control-panel/index.astro";
+import WordPressPage from "../wordpress-hosting/index.astro";
+import DedicatedPage from "../dedicated-servers/index.astro";
+import NotFoundPage from "../404.astro";
+import GameDetailPage from "../[game].astro";
+import BlogDetailPage from "../blog/[slug].astro";
+import {sanity} from "../../lib/sanity";
+
+const SUPPORTED_LANGS = ["en", "nl", "de", "es"];
+
+export async function getStaticPaths() {
+  const supportedLangs = ["en", "nl", "de", "es"];
+  const staticRoutes = [
+    "",
+    "web-hosting",
+    "game-server",
+    "legal/terms-of-service",
+    "legal/refund-policy",
+    "legal/use-policy",
+    "legal/privacy-policy",
+    "configurator",
+    "contactUs",
+    "blog",
+    "about",
+    "control-panel",
+    "wordpress-hosting",
+    "dedicated-servers",
+    "404"
+  ];
+
+  let posts: Array<{slug: string}> = [];
+  let games: Array<{name: string}> = [];
+
+  try {
+    posts = await sanity.fetch<Array<{slug: string}>>(`
+      *[_type=="post" && defined(slug.current)]{
+        "slug": slug.current
+      }
+    `);
+  } catch (err) {
+    console.warn("[i18n routes] blog paths fetch failed, continuing with static routes", err);
+  }
+
+  try {
+    games = await sanity.fetch<Array<{name: string}>>(`
+      *[_type == "game"]{
+        name
+      }
+    `);
+  } catch (err) {
+    console.warn("[i18n routes] game paths fetch failed, continuing with static routes", err);
+  }
+
+  const dynamicBlogRoutes = posts.map((post: {slug: string}) => `blog/${post.slug}`);
+  const dynamicGameRoutes = games.map((game: {name: string}) =>
+    String(game.name || "")
+      .trim()
+      .replace(/\s+/g, "-")
+  );
+
+  const allRoutes = [...staticRoutes, ...dynamicBlogRoutes, ...dynamicGameRoutes];
+
+  return supportedLangs.flatMap((lang) =>
+    allRoutes.map((route) => ({
+      params: {
+        lang,
+        slug: route || undefined
+      }
+    }))
+  );
+}
+
+const {lang, slug} = Astro.params;
+
+if (!SUPPORTED_LANGS.includes(lang || "")) {
+  return Astro.redirect("/404");
+}
+
+const routeKey = Array.isArray(slug) ? slug.join("/") : "";
+
+const routeMap: Record<string, any> = {
+  "": HomePage,
+  "web-hosting": WebHostingPage,
+  "game-server": GameServerPage,
+  "legal/terms-of-service": TermsPage,
+  "legal/refund-policy": RefundPage,
+  "legal/use-policy": UsePolicyPage,
+  "legal/privacy-policy": PrivacyPage,
+  configurator: ConfiguratorPage,
+  contactUs: ContactPage,
+  blog: BlogIndexPage,
+  about: AboutPage,
+  "control-panel": ControlPanelPage,
+  "wordpress-hosting": WordPressPage,
+  "dedicated-servers": DedicatedPage,
+  "404": NotFoundPage
+};
+
+let ResolvedPage = routeMap[routeKey];
+let blogPostId: string | null = null;
+let gameSlug: string | null = null;
+
+if (!ResolvedPage && routeKey.startsWith("blog/")) {
+  const postSlug = routeKey.replace(/^blog\//, "");
+  let post = null;
+
+  try {
+    post = await sanity.fetch(
+      `*[_type=="post" && slug.current == $slug][0]{ _id }`,
+      {slug: postSlug}
+    );
+  } catch (err) {
+    console.warn("[i18n routes] blog detail lookup failed", err);
+  }
+
+  if (!post?._id) {
+    return Astro.redirect("/404");
+  }
+
+  blogPostId = post._id;
+}
+
+// Remaining single-segment routes are treated as game detail slugs.
+if (!ResolvedPage && !blogPostId && !routeKey.includes("/")) {
+  gameSlug = routeKey;
+}
+
+if (!ResolvedPage && !blogPostId && !gameSlug) {
+  return Astro.redirect("/404");
+}
+---
+
+{
+  ResolvedPage ? (
+    <ResolvedPage />
+  ) : blogPostId ? (
+    <BlogDetailPage id={blogPostId} />
+  ) : (
+    <GameDetailPage slugOverride={gameSlug || ""} />
+  )
+}

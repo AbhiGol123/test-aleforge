@@ -1,0 +1,231 @@
+---
+const faqs = [
+  {
+    q: "How long does it take for my server to go live?",
+    a: "Your game server deploys instantly after checkout. Most servers are online and ready to play within 30–60 seconds — no waiting, no manual setup required."
+  },
+  {
+    q: "Do you provide full DDoS protection?",
+    a: "Yes. Every server includes enterprise-grade DDoS protection at no extra cost. Our mitigation systems block attacks automatically so your players never experience downtime."
+  },
+  {
+    q: "Can I upgrade or change my server plan anytime?",
+    a: "Absolutely. You can upgrade CPU, RAM, and player slots instantly from your dashboard. No data loss, no reinstallation, and no interruptions for your players."
+  },
+  {
+    q: "Do you support mods, plugins, and custom configurations?",
+    a: "Yes. You get full file access, plugin management, mod support, and configuration control. Install mods easily or upload your own custom builds anytime."
+  },
+  {
+    q: "Where are your server locations?",
+    a: "We offer 20+ global server locations, including North America, Europe, Asia, and Oceania. This ensures the lowest ping and best possible connection for your community."
+  },
+  {
+    q: "Is your support team available 24/7?",
+    a: "Yes. Our expert support team is available 24/7 to help with setup, troubleshooting, performance tuning, and custom configuration requests."
+  },
+  {
+    q: "Is your support team available 24/7?",
+    a: "Yes. Our expert support team is available 24/7 to help with setup, troubleshooting, performance tuning, and custom configuration requests."
+  }
+];
+---
+
+<section class="relative text-[var(--text-primary)] overflow-hidden">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <!-- Left Content -->
+        <div class="flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:w-[472px]">
+          <h2 class="faq-heading" data-i18n="faqComponent.frequentlyAskedQuestions">Frequently Asked Questions</h2>
+
+          <p class="faq-subtitle mt-[14px]" data-i18n="faqComponent.findAnswersCommonQuestionsAbout">
+            Find answers to common questions about our hosting, performance, and support. Need more help? Our team is
+            here 24/7 to assist you.
+          </p>
+
+          <!-- CTA Box (DESKTOP/TABLET) -->
+          <div class="hidden lg:block pt-[40px]">
+            <div class="CTA_box relative max-w-md overflow-hidden mx-auto lg:mx-0 ">
+              <div class="relative p-8 text-center">
+                <h3 class="text-[1.05rem]" data-i18n="faqComponent.stillHaveQuestions">Still have questions?</h3>
+                <p class="mb-4 text-[16px]" data-i18n="faqComponent.bookCallFriendlyTeamGet">
+                  Book a call with our friendly team to get all your questions answered.
+                </p>
+                <a href="/contactUs" class="button-primary" style="font-size: 15px;" data-i18n="faqComponent.talkTeamQuery">
+                  Talk To Our Team For Your Query
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side FAQ Section -->
+        <div class="space-y-3">
+          {
+            faqs.map((faq, i) => (
+              <div class="faq-item " data-index={i}>
+                <button class="faq-toggle w-full flex justify-between items-center gap-4 px-4 py-4 text-left cursor-pointer focus:outline-none">
+                  <h3 class="faq-question">{faq.q}</h3>
+                  <span class="faq-icon flex items-center justify-center min-w-6 min-h-6 w-6 h-6 rounded-full bg-[var(--bg-card-hover)] text-[var(--text-secondary)] transition-transform duration-300">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </span>
+                </button>
+                <div class="faq-answer max-h-0 overflow-hidden transition-[max-height] duration-500 ease-in-out">
+                  <div class="faq-answer-text px-5 pb-5">{faq.a}</div>
+                </div>
+              </div>
+            ))
+          }
+
+          <!-- CTA Box (MOBILE/TABLET: shows AFTER FAQs) -->
+          <div class="mt-4 lg:hidden">
+            <div
+              class="CTA_box relative rounded-2xl overflow-hidden border border-white/10 bg-[#050614]/80 backdrop-blur-sm"
+            >
+              <div class="relative py-[35px] px-[15px] text-center">
+                <h3 class="text-[32px] font-medium" data-i18n="faqComponent.stillHaveQuestions">Still have questions?</h3>
+                <p class="mb-[16px]" data-i18n="faqComponent.bookCallFriendlyTeamGet">Book a call with our friendly team to get all your questions answered.</p>
+                <a
+                  href="/contact"
+                  class="button-primary"
+                  style=" white-space: nowrap; padding-left:10px; padding-right:10px;"
+                 data-i18n="faqComponent.talkTeamQuery">
+                  Talk To Our Team For Your Query
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Expand Script -->
+<script is:inline>
+  if (typeof window !== "undefined") {
+    window.addEventListener("DOMContentLoaded", () => {
+      const toggles = document.querySelectorAll(".faq-toggle");
+
+      toggles.forEach((toggle) => {
+        toggle.addEventListener("click", () => {
+          const parent = toggle.parentElement;
+          const answer = parent.querySelector(".faq-answer");
+          const icon = toggle.querySelector(".faq-icon");
+
+          const isOpen = answer.style.maxHeight && answer.style.maxHeight !== "0px";
+
+          // Close all
+          document.querySelectorAll(".faq-answer").forEach((el) => {
+            el.style.maxHeight = null;
+            // Reset parent border
+            const p = el.parentElement;
+            p.classList.remove("border-[var(--accent)]");
+            p.classList.add("border-[#FFFFFF]/10");
+          });
+          document.querySelectorAll(".faq-icon").forEach((ic) => {
+            ic.classList.remove("active");
+          });
+
+          // Open clicked if it wasn't open
+          if (!isOpen) {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+            icon.classList.add("active");
+            // Highlight parent border
+            parent.classList.remove("border-[#FFFFFF]/10");
+            parent.classList.add("border-[var(--accent)]");
+          }
+        });
+      });
+    });
+  }
+</script>
+
+<style>
+  .faq-item {
+    width: 100%;
+    border-radius: 20px;
+    background: rgba(80, 82, 101, 0.1); /* #505265 @ 10% */
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    will-change: transform;
+  }
+  .CTA_box {
+    border-radius: 30px;
+  }
+
+  .CTA_box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--faq-bg-img);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  .faq-icon.active {
+    transform: rotate(180deg);
+    background-color: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  /* Title & subtitle responsive behavior (works with your typography system) */
+  .faq-heading {
+    /* Uses h2 defaults from typography.scss, just controlling width & alignment via layout classes */
+  }
+
+  .faq-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  @media (min-width: 768px) {
+    .faq-subtitle {
+      max-width: 100%;
+      font-size: 1.05rem;
+    }
+  }
+
+  /* FAQ text sizes */
+  .faq-question {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .faq-question {
+      font-size: 1.05rem;
+    }
+  }
+
+  .faq-answer-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  @media (min-width: 768px) {
+    .faq-answer-text {
+      font-size: 1rem;
+    }
+  }
+</style>

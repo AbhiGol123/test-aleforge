@@ -1,0 +1,47 @@
+<section class="CTA">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="CTA_wrapper rounded-[30px] bg-[#0C0D18]/12 border border-white/10 text-center group">
+        <div class="title-wrapper">
+          <span class="overline" style="color: var(--accent);" data-i18n="orderComponent.hostServerToday"> Host Your Server Today! </span>
+          <h2 data-i18n="orderComponent.readyOrder">Ready To Order?</h2>
+          <p class="max-w-2xl mx-auto">
+            AleForge Provides Quality Game Hosting Services Protected By<br class="hidden md:block" /> Cutting-Edge Security
+            Systems.
+          </p>
+        </div>
+
+        <div class="button_wrapper flex flex-col sm:flex-row justify-center gap-4 items-center">
+          <a href="/contactUs" class="button-primary" data-i18n="orderComponent.contactUs">Contact Us</a>
+          <a href="#" class="button-secondary flex items-center justify-center gap-2">
+            <img src="../../assets/images/icons/General/chatWithUs.webp" alt="" />
+            Chat with Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "/src/styles/core/mixins.scss" as *;
+  .CTA_wrapper {
+    padding: 100px 65px;
+    background-image: var(--cta_bg_left), var(--cta_bg_right);
+    background-position:
+      left top,
+      right bottom;
+    background-repeat: no-repeat, no-repeat;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Safari */
+
+    @include md {
+      padding: 60px 30px;
+    }
+  }
+  .button_wrapper {
+    @include sm {
+      justify-content: stretch;
+    }
+  }
+</style>

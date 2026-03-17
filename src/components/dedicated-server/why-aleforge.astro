@@ -1,0 +1,67 @@
+---
+import FeaturesInsideBorders from "@components/sections/features_insideBorders.astro";
+
+export const features = [
+    {
+        icon: "var(--icon-computer)",
+        title: "99.9% Uptime",
+        desc: "Support for servers running the highest possible tick rates."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "Public Stats",
+        desc: "Install your mods and their dependencies with our one-click plugin installer."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "Quick Deployment",
+        desc: "High-availability means our game servers remain fully operational guaranteed."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "Free DDoS Protection",
+        desc: "Locations worldwide for the fastest gaming near you."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "Dwarven Machines",
+        desc: "Powerful hardware and networking for smooth play."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "Dwarven Tunneling",
+        desc: "All our game servers come equiped with gigabit networking standard."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "Affordable Pricing",
+        desc: "Create a custom url for your friends to join your game through."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "Proactive Monitoring",
+        desc: "Gaming at every price point, so no one is left out."
+    },
+    {
+        icon: "var(--icon-computer)",
+        title: "DDoS Protection",
+        desc: "Smart protection keeps you safe from DDoS attacks."
+    }
+];
+---
+
+<section class="why-aleforge-section max-w-[1300px] mx-auto">
+    <div class="section-padding global-padding">
+        <div class="container-large">
+            <div class="title-wrapper">
+                <h2 class="section-title font-bold mb-4" data-i18n="whyAleforgeComponent.whyChooseAleforge">Why Choose AleForge?</h2>
+                <p class="subtitle max-w-4xl mx-auto" data-i18n="whyAleforgeComponent.expertTechniciansHandleServerSetup">
+                    Our expert technicians handle server setup, maintenance, and security, allowing you to focus on your
+                    core business operations.
+                </p>
+            </div>
+
+            <FeaturesInsideBorders items={features} data-count="9" />
+        </div>
+    </div>
+</section>

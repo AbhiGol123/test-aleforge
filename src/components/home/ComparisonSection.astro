@@ -1,0 +1,166 @@
+---
+const features = [
+  {name: "Instant Setup", aleforge: "✅", abc: "❌", xyz: "⚠️"},
+  {name: "DDoS Protection", aleforge: "✅", abc: "✅", xyz: "❌"},
+  {name: "Unlimited Player Slots", aleforge: "✅", abc: "❌", xyz: "❌"},
+  {name: "NVMe SSD Storage", aleforge: "✅", abc: "⚠️", xyz: "❌"},
+  {
+    name: "Global Server Locations",
+    aleforge: "🌍 9+",
+    abc: "🌍 4",
+    xyz: "🌍 3"
+  },
+  {name: "24/7 Expert Support", aleforge: "✅", abc: "✅", xyz: "⚠️"},
+  {
+    name: "Starting Price",
+    aleforge: "$5.00/GB",
+    abc: "$7.00/GB",
+    xyz: "$8.00/GB"
+  }
+];
+---
+
+<section class="comparison-section">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <!-- Title -->
+      <div class="title-wrapper">
+        <h2 data-i18n="comparisonsectionComponent.seeWhyAleforgeLeadsGame">See Why AleForge Leads The Game</h2>
+        <p class="subtitle">
+          Compare AleForge with other hosting providers and discover why thousands of gamers trust us for speed, uptime,
+          and unmatched value.
+        </p>
+      </div>
+
+      <!-- Table Wrapper (horizontal scroll on mobile) -->
+      <div class="comparison-table-wrapper max-w-[1200px] mx-auto bg-[var(--bg-card)] mt-[60px]">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="col-feature text-[22px] font-medium" data-i18n="comparisonsectionComponent.feature">Feature</th>
+              <th>
+                <div class="col-heading text-[22px] font-medium">
+                  <span data-i18n="comparisonsectionComponent.aleforge">AleForge</span>
+                  <span class="material-symbols-outlined" data-i18n="comparisonsectionComponent.info"> info </span>
+                </div>
+              </th>
+              <th>
+                <div class="col-heading text-[22px] font-medium">
+                  <span data-i18n="comparisonsectionComponent.abc">ABC</span>
+                  <span class="material-symbols-outlined" data-i18n="comparisonsectionComponent.info"> info </span>
+                </div>
+              </th>
+              <th>
+                <div class="col-heading text-[22px] font-medium">
+                  <span data-i18n="comparisonsectionComponent.xyz">XYZ</span>
+                  <span class="material-symbols-outlined" data-i18n="comparisonsectionComponent.info"> info </span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              features.map((feature, i) => (
+                <tr class={`comparison-row ${i === features.length - 1 ? "is-last" : ""}`}>
+                  <td class="feature-name text-[20px]">{feature.name}</td>
+                  <td class="cell-value is-aleforge">{feature.aleforge}</td>
+                  <td class="cell-value">{feature.abc}</td>
+                  <td class="cell-value">{feature.xyz}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer -->
+      <div class="comparison-footer max-w-[1200px] mx-auto">
+        <p class="comparison-footer-text lg:w-[50%]" data-i18n="comparisonsectionComponent.hostOver20GamesInstantly">
+          Host over 20 games instantly with AleForge, powered by high-performance hardware and 24/7 expert support.
+        </p>
+        <a href="/game-server" class="button-primary" data-i18n="comparisonsectionComponent.startServer"> Start Your Server </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison-table-wrapper {
+    border-radius: 1rem;
+    border: 1px solid var(--border-light);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: var(--shadow-card);
+  }
+  .comparison-table-wrapper::-webkit-scrollbar {
+    height: 6px;
+  }
+  .comparison-table-wrapper::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+  }
+  .comparison-table-wrapper::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 3px;
+  }
+  .comparison-table {
+    width: 100%;
+    min-width: 640px; /* force horizontal scroll on small screens */
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  .comparison-table thead {
+    background-color: var(--bg-card-hover);
+    color: var(--text-primary);
+  }
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.9rem 1.5rem;
+    white-space: nowrap;
+  }
+  @media (min-width: 768px) {
+        .comparison-table th,
+    .comparison-table td {
+      padding: 1rem 1.75rem;
+    }
+  }
+  .comparison-table th {
+    text-align: left;
+  }
+  .comparison-table .col-feature {
+    min-width: 10rem;
+  }
+  .comparison-table .col-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .comparison-table tbody tr {
+    border-top: 1px solid var(--border-light);
+    transition: background-color 0.2s ease;
+  }
+  .comparison-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+  .comparison-table tbody tr.is-last {
+    border-bottom: none;
+  }
+  .comparison-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    align-items: center;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .comparison-footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      text-align: left;
+    }
+  }
+</style>

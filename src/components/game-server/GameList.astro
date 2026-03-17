@@ -1,0 +1,180 @@
+---
+import PlatformIcon from "./platformIcon.astro";
+import {urlFor} from "src/lib/sanityImage";
+const {games = []} = Astro.props;
+const dynamicCategories = Array.from(new Set(games.flatMap((g: any) => g.api.category || []))).sort();
+const categories = ["All", ...dynamicCategories];
+---
+
+<section class="games_list">
+  <div class="global-padding">
+    <div class="container-large">
+      <!-- SEARCH -->
+      <div class="max-w-4xl mx-auto mb-10">
+        <input
+          id="search"
+          placeholder="Get Your Favorite Game Server…"
+          class="w-full h-[64px] rounded-full bg-black/60 border border-[var(--accent)] px-8 text-white placeholder-white/40 outline-none backdrop-blur-md"
+        />
+        <!-- FILTERS -->
+        <div class="mt-6 flex flex-col sm:flex-row justify-center sm:gap-10 text-white/80 text-lg">
+          <!-- CATEGORY -->
+          <div class="flex items-center gap-2">
+            <span class="text-white/50" data-i18n="gamelistComponent.category">Category :</span>
+            <el-dropdown class="relative inline-block">
+              <button
+                class="inline-flex items-center gap-2 rounded-md px-2 py-2 text-lg text-white transition-all duration-300"
+              >
+                <span id="category-label" data-i18n="gamelistComponent.all2">All</span>
+                <span class="material-symbols-outlined"> keyboard_arrow_down </span>
+              </button>
+              <el-menu
+                anchor="bottom start"
+                popover
+                class="mt-2 w-52 rounded-md bg-[#0b0b0b] outline outline-1 outline-white/10"
+                style="height: 300px; overflow-y: auto; min-width: 300px;"
+              >
+                <div class="py-1">
+                  <!-- ALL -->
+                  <button
+                    data-category="All"
+                    class="category-item block w-full px-4 py-2 text-left text-md text-white/70 hover:bg-white/10 hover:text-white"
+                   data-i18n="gamelistComponent.all2">
+                    All
+                  </button>
+                  {
+                    categories
+                      .filter((c) => c !== "All")
+                      .map((c) => (
+                        <button
+                          data-category={c}
+                          class="category-item block w-full px-4 py-2 text-left text-md text-white/70 hover:bg-white/10 hover:text-white"
+                        >
+                          {c}
+                        </button>
+                      ))
+                  }
+                </div>
+              </el-menu>
+            </el-dropdown>
+          </div>
+          <!-- PLATFORM -->
+          <div class="flex items-center gap-3">
+            <span class="text-white/50" data-i18n="gamelistComponent.platform">Platform :</span>
+            {
+              ["steam", "xbox", "playstation", "mobile", "pc"].map((p) => (
+                <button class="platform-btn" data-platform={p} aria-label={p}>
+                  <PlatformIcon platform={p} />
+                </button>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+      <!-- GAME LIST -->
+      <div id="list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          games.map((g: any) => (
+            <a
+              href={`/${g.name.replace(/\s+/g, "-")}`}
+              class="game-card group relative h-[420px] rounded-[16px] overflow-hidden
+         border border-white/10 bg-black/40
+         shadow-[0_20px_60px_rgba(0,0,0,0.6)]
+         transition-transform duration-500 hover:scale-[1.02]"
+              data-title={g.api.name.toLowerCase()}
+              data-category={g.api.category}
+              data-platforms={(g.api.platforms || []).map((p: string) => p.toLowerCase()).join(",")}
+            >
+              <img
+                src={g.coverImg ? urlFor(g.coverImg) : "https://placehold.co/600x800?text=No+Image"}
+                alt={g.api.name}
+                class="absolute inset-0 w-full h-full object-cover object-center"
+              />
+
+              <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+              <div class="absolute bottom-[30px] left-[30px] right-[30px]">
+                <h3 class="text-white" style="font-size: 30px; font-weight:500 ">
+                  {g.api.name}
+                </h3>
+                <div class="flex items-center gap-2 ">
+                  <small class="text-[rgba(195, 195, 195, 1)]" data-i18n="gamelistComponent.starting"> Starting At : </small>
+                  <span class="text-[15px] text-white font-bold text-[20px]">{g.minPrice}</span>
+                </div>
+                <div class="mt-3 flex gap-3">
+                  {(g.api.platforms || []).map((p: string) => (
+                    <span class="text-white/60 hover:text-[var(--accent)] transition" title={p}>
+                      <PlatformIcon platform={p.toLowerCase()} />
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+<script is:inline>
+  const search = document.getElementById("search");
+  const categoryLabel = document.getElementById("category-label");
+  const categoryItems = document.querySelectorAll(".category-item");
+  const platformButtons = document.querySelectorAll(".platform-btn");
+  const cards = document.querySelectorAll(".game-card");
+  let selectedCategory = "All";
+  const selectedPlatforms = new Set();
+
+  categoryItems.forEach((btn) => {
+    btn.onclick = () => {
+      selectedCategory = btn.dataset.category;
+      categoryLabel.textContent = selectedCategory;
+      btn.closest("el-dropdown")?.removeAttribute("open");
+      filter();
+    };
+  });
+
+  /* PLATFORM FILTER */
+  platformButtons.forEach((btn) => {
+    btn.onclick = () => {
+      const p = btn.dataset.platform;
+      if (selectedPlatforms.has(p)) {
+        selectedPlatforms.delete(p);
+        btn.classList.remove("is-active");
+      } else {
+        selectedPlatforms.add(p);
+        btn.classList.add("is-active");
+      }
+      filter();
+    };
+  });
+
+  function filter() {
+    const term = search.value.toLowerCase().trim();
+    cards.forEach((card) => {
+      const title = card.dataset.title || "";
+      const category = card.dataset.category || "";
+      const platforms = (card.dataset.platforms || "").split(",");
+      const matchesSearch = title.includes(term);
+      const matchesCategory =
+        selectedCategory === "All" || category.toLowerCase().includes(selectedCategory.toLowerCase());
+      const matchesPlatform = selectedPlatforms.size === 0 || [...selectedPlatforms].some((p) => platforms.includes(p));
+      card.style.display = matchesSearch && matchesCategory && matchesPlatform ? "" : "none";
+    });
+  }
+  search.addEventListener("input", filter);
+  filter();
+</script>
+
+<style>
+  .platform-btn {
+    color: #a9a9a9;
+  }
+  .platform-btn.is-active {
+    color: var(--accent);
+  }
+  .platform-btn svg {
+    transition: color 0.2s ease;
+  }
+</style>

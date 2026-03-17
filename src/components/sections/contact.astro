@@ -1,0 +1,307 @@
+---
+
+---
+
+<section class="contact-section">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="contact-card">
+        <!-- Left Content -->
+        <div class="contact-info">
+          <div class="info-header">
+            <h2 data-i18n="contactComponent.haveQuestionLetSSolve">Have a Question? Let's Solve It Together.</h2>
+            <p class=" pt-3" data-i18n="contactComponent.reachOutUsIfHad">Reach Out To Us If You Had Common Problems And Questions.</p>
+          </div>
+          <a href="https://help.aleforge.net/" class="button-primary" data-i18n="contactComponent.readFaqs2"> Read FAQs </a>
+          <!-- Bottom Links -->
+          <div class="contact-methods">
+            <div class="method-item">
+              <div class="method-icon items-start">
+                <img class="mt-[5px] mr-[10px]" src="/assets/images/icons/General/chatWithUs.webp" alt="" />
+              </div>
+              <div class="method-details items-start">
+                <span style="font-size: 20px; font-weight:500;" data-i18n="contactComponent.openLiveChat">Open Live Chat</span>
+                <a href="#" class="method-link text-xs" data-i18n="contactComponent.sendMessage"> Send Message </a>
+              </div>
+            </div>
+            <div class="method-item">
+              <div class="method-icon items-start">
+                <img class="mt-[5px] mr-[10px]" src="../../assets/images/icons/General/info-icon.webp" alt="" />
+              </div>
+              <div class="method-details items-start">
+                <span style="font-size: 20px; font-weight:500;" data-i18n="contactComponent.readFaqs2">Read FAQs</span>
+                <a href="#" class="method-link text-xs" data-i18n="contactComponent.learnMore"> Learn more </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Form -->
+        <div class="contact-form-wrapper">
+          <form class="contact-form">
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name" data-i18n="contactComponent.name">Name*</label>
+              <input class="bg-[#13141D]" type="text" id="name" placeholder="Your Name" />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email" data-i18n="contactComponent.email">Email*</label>
+              <input type="email" id="email" placeholder="Your Email address" />
+            </div>
+
+            <!-- Issues -->
+            <div class="form-group">
+              <label for="issues" data-i18n="contactComponent.issues">Issues*</label>
+              <textarea id="issues" rows="4" placeholder="Message & description"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-submit">
+              <button class="button-primary" data-i18n="contactComponent.submit"> Submit </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "../../styles/core/mixins" as *;
+
+
+  .contact-card {
+    // Desktop (Base)
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--contact-us-bg-grediant);
+      opacity: 0.1;
+      z-index: -1;
+    }
+    // background-opacity: 2;
+    // background-color: rgba(7, 116, 226, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: 1.5rem;
+    padding: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+
+    // Tablet (< 1024px)
+    @include lg {
+      grid-template-columns: 1fr;
+      padding: 3rem;
+      gap: 3rem;
+    }
+
+    // Mobile (< 768px)
+    @include md {
+      border-radius: 2rem;
+      padding: 1.5rem;
+      gap: 2.5rem;
+    }
+  }
+
+  .contact-info {
+    // Desktop (Base)
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+    text-align: left;
+    align-items: flex-start;
+
+    // Tablet/Mobile (< 1024px)
+    @include lg {
+      text-align: center;
+      align-items: center;
+    }
+  }
+
+  .contact-title {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+
+    @include md {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .contact-description {
+    color: var(--text-secondary);
+    margin-bottom: 0; // Margin handled by parent gap or button margin
+    max-width: 28rem;
+
+    // Tablet/Mobile (< 1024px)
+    @include lg {
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0rem;
+    }
+  }
+
+  .contact-methods {
+    // Desktop (Base)
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    margin-top: auto;
+    // padding-top: 1rem;
+    width: 100%;
+    justify-content: flex-start;
+
+    // Tablet/Mobile (< 1024px)
+    @include lg {
+      justify-content: center;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      // padding-top: 1rem;
+    }
+
+    @include md {
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      // flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 462px) {
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+  }
+
+  .method-item {
+    display: flex;
+    gap: 0.02rem;
+    align-items: flex-start;
+    text-align: left;
+
+    @include md {
+      gap: 0.75rem;
+    }
+  }
+
+  .method-details {
+    h4 {
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+      text-align: start;
+
+      @include md {
+        margin-bottom: 0.125rem;
+      }
+    }
+  }
+
+  .method-link {
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: color 0.3s ease;
+    text-decoration: underline;
+    text-decoration-color: var(--text-muted);
+    text-underline-offset: 4px;
+
+    &:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
+    }
+  }
+
+  .contact-form-wrapper {
+    width: 100%;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include md {
+      gap: 1rem;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+      color: var(--text-primary);
+      font-weight: 400;
+      font-size: 1rem;
+
+      @include md {
+        font-size: 0.875rem;
+      }
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      background: rgba(247, 248, 248, 0.04);
+      border: 1px solid rgba(237, 238, 241, 0.2);
+      border-radius: 0.4rem;
+      padding: 0.75rem 1rem;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+
+      &::placeholder {
+        color: var(--text-muted);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent);
+      }
+
+      @include md {
+      }
+    }
+
+    textarea {
+      resize: none;
+    }
+  }
+
+  .form-submit {
+    padding-top: 1rem;
+
+    @include md {
+      padding-top: 0.5rem;
+    }
+
+    .button-primary {
+      @include md {
+        width: 100%;
+      }
+    }
+  }
+</style>

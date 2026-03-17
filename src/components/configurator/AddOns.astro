@@ -1,0 +1,344 @@
+<div id="addons-step" data-step="addons" class="config-step bg-[var(--configurator-bg)] border border-[#FFFFFF]/12 rounded-2xl p-4 md:p-6">
+  <div class="flex items-start gap-4 mb-2">
+    <div
+      class="step-badge  flex-shrink-0 w-12 h-12 text-[34px] rounded-lg bg-[var(--configurator-text)] text-white flex items-center justify-center"
+    >
+      6
+    </div>
+    <div class="flex-1">
+      <h4 class="text-white text-[26px]" data-i18n="addonsComponent.addons">Addons</h4>
+      <p class="font-[200]" style="font-size: 16px;">
+        Enhance your server with extra features for better performance, security, and convenience.
+      </p>
+    </div>
+  </div>
+
+  <div class="border-b mb-4 border-white/10"></div>
+
+  <!-- ✅ JS will render cards here (layout unchanged) -->
+  <div class="addons-grid grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch"></div>
+</div>
+<!-- 🔍 Addon Learn More Modal -->
+<div id="addon-modal" class="fixed inset-0 hidden z-[9999] bg-black/60 backdrop-blur-sm">
+  <div
+    class="bg-[var(--configurator-bg)] rounded-xl max-w-lg w-full p-6 fixed"
+    style="top:70%; left:50%; transform:translate(-30%, -50%);"
+  >
+    <!-- Close -->
+    <button id="addon-modal-close" class="absolute right-4 top-4 text-white text-xl hover:opacity-70"> ✕ </button>
+
+    <h3 id="addon-modal-title" class="text-2xl font-semibold mb-2"></h3>
+    <p id="addon-modal-desc" class="text-white/80 mb-4"></p>
+
+    <ul id="addon-modal-features" class="space-y-2 text-lg"></ul>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  import {configStore} from "/src/stores/configuratorStore";
+
+  const grid = document.querySelector(".addons-grid");
+
+  let addonsRaw = null;
+  let addons = [];
+  let selectedAddons = new Set();
+  let lastTier = null;
+  let lastBilling = null;
+
+  // ----------------------------
+  // Fetch addons once
+  // ----------------------------
+  async function loadAddons() {
+    try {
+      const res = await fetch("https://plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=plans.json");
+
+      const json = await res.json();
+      addonsRaw = json?.data?.addons || {};
+
+      const current = configStore.get();
+      if (current) updateAddons(current);
+    } catch (err) {
+      console.error("❌ Failed to load addons:", err);
+    }
+  }
+
+  // ----------------------------
+  // Update addons from store
+  // ----------------------------
+  function updateAddons(state) {
+    if (!addonsRaw) return;
+
+    addons.length = 0;
+
+    if (state.selectedTier === "budget") {
+      addons.push(...(addonsRaw.budget_addons || []));
+    }
+
+    if (state.selectedTier === "standard") {
+      addons.push(...(addonsRaw.standard_addons || []));
+    }
+
+    // Always append Dedicated IP
+    if (addonsRaw.dedicated_ip) {
+      addons.push(addonsRaw.dedicated_ip);
+    }
+
+    renderAddons(state.selectedPeriod);
+  }
+
+  // ----------------------------
+  // Render cards (UI preserved)
+  // ----------------------------
+  function renderAddons(billingCycle) {
+    grid.innerHTML = "";
+
+    addons.forEach((addon) => {
+      const card = document.createElement("div");
+      card.className = "addon-card";
+      card.dataset.pid = addon.pid;
+      card.dataset.addon = JSON.stringify(addon);
+
+      // ⚠️ Markup matches your original layout exactly
+      card.innerHTML = `
+      <div class="addon-card" 
+           style="border-radius: 18px;
+                  overflow: hidden;
+                  background: var(--configurator-bg);
+                  border: 1px solid rgba(255, 255, 255, 0.12); padding:15px; height:100%; ">
+
+        <div class="addon-image" style=" height: 170px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);">
+          <img
+            src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?q=80&w=1200"
+            alt="${addon.name}"
+            style=" width: 100%;
+    height: 100%;
+    object-fit: cover; border-radius:12px"
+          />
+        </div>
+
+        <div class="addon-body p-[20px] pb-[30px]">
+          <div class="addon-title flex items-center justify-between">
+            <h4 class="text-[26px] font-medium">
+              ${addon.name}
+            </h4>
+
+            <label class="custom-checkbox" >
+              <input type="checkbox" value="${addon.pid}"   class="  accent-[var(--accent)]" style="width:25px; height:25px; border-radius:12px" background:transparent; />
+              <span class="checkmark"></span>
+            </label>
+          </div>
+<p class="addon-desc py-[16px]">
+  ${addon.description || ""}
+
+  ${
+    addon.name === "Legendary Loadout"
+      ? `
+       <button
+  data-addon-pid="${addon.pid}"
+  class="learn-more-btn mt-2 block text-[var(--accent)] text-sm underline hover:opacity-80">
+  Learn more
+</button>
+
+      `
+      : ""
+  }
+</p>
+
+
+          <ul class="addon-list space-y-1 text-[18px]">
+            ${addon.cpu ? `<li>✔ +${addon.cpu} vCPU</li>` : ""}
+            ${addon.disk ? `<li>✔ +${addon.disk}GB NVMe</li>` : ""}
+            ${addon.user_backups ? `<li>✔ +${addon.user_backups} Backups</li>` : ""}
+            ${
+              addon.pid === 47
+                ? `
+                <li>✔ Unique IP Address</li>
+                <li>✔ No Port Required</li>
+                <li>✔ Better Connectivity</li>
+              `
+                : ""
+            }
+          </ul>
+
+          <div 
+            class="addon-price free text-[32px] font-medium pt-[16px]"
+            data-price
+            data-monthly="${addon?.pricing?.monthly ?? 0}"
+            data-quarterly="${addon?.pricing?.quarterly ?? 0}"
+            data-semi_annual="${addon?.pricing?.semi_annual ?? 0}"
+            data-annually="${addon?.pricing?.annually ?? 0}"
+          >
+            ${getAddonPrice(addon, billingCycle)}
+            ${
+              getAddonPrice(addon, billingCycle) !== "Free"
+                ? `<span class="text-sm text-white/60">/${billingCycle}</span>`
+                : ""
+            }
+          </div>
+
+        </div> </div>
+      `;
+
+      grid.appendChild(card);
+    });
+    bindSelectionHandlers(billingCycle);
+  }
+
+  // ----------------------------
+  // Price helper
+  // ----------------------------
+  function getAddonPrice(addon, billingCycle) {
+    const price = addon.pricing?.[billingCycle];
+
+    if (price === undefined) {
+      console.error(`❌ Missing price for billing cycle "${billingCycle}"`, addon);
+
+      // 🚨 Throw error for testing
+      throw new Error(`Missing price for "${billingCycle}" in addon "${addon.name}"`);
+    }
+
+    return price === 0 ? "Free" : `$${price}`;
+  }
+
+  function bindSelectionHandlers(billingCycle) {
+    const checkboxes = grid.querySelectorAll("input[type='checkbox']");
+
+    checkboxes.forEach((checkbox) => {
+      const pid = Number(checkbox.value);
+
+      // ✅ Restore checked state after re-render
+      checkbox.checked = selectedAddons.has(pid);
+
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          selectedAddons.add(pid);
+        } else {
+          selectedAddons.delete(pid);
+        }
+
+        updateAddonTotal(billingCycle);
+      });
+    });
+  }
+
+  function updateAddonTotal(billingCycle) {
+    const key = billingCycle.replace("-", "_");
+    let total = 0;
+    const selectedList = [];
+
+    selectedAddons.forEach((pid) => {
+      const addon = addons.find((a) => a.pid === pid);
+      if (!addon) return;
+
+      const price = Number(addon.pricing?.[key] || 0);
+      total += price;
+      selectedList.push(addon);
+    });
+
+    // ✅ Store globally for Preview
+    window.addonTotal = total;
+    window.selectedAddonList = selectedList;
+
+    // ✅ Update URL with addon PIDs
+    const addonIds = selectedList.map((a) => a.pid).join(",");
+    const url = new URL(window.location.href);
+
+    if (addonIds) {
+      url.searchParams.set("addons", addonIds);
+    } else {
+      url.searchParams.delete("addons");
+    }
+
+    window.history.replaceState({}, "", url.toString());
+
+    // ✅ Notify preview
+    window.dispatchEvent(new Event("addon-price-updated"));
+  }
+
+  // ----------------------------
+  // Store listener
+  // ----------------------------
+  configStore.subscribe((state) => {
+    if (!state || !addonsRaw) return;
+
+    const tierChanged = lastTier && lastTier !== state.selectedTier;
+    const billingChanged = lastBilling && lastBilling !== state.selectedPeriod;
+
+    lastTier = state.selectedTier;
+    lastBilling = state.selectedPeriod;
+
+    // ✅ Always update UI first
+    updateAddons(state);
+
+    // ✅ Clear addons ONLY on tier change
+    if (tierChanged) {
+      console.log("♻️ Tier changed → clearing addon selections");
+
+      selectedAddons.clear();
+
+      grid.querySelectorAll("input[type='checkbox']").forEach((cb) => (cb.checked = false));
+
+      window.addonTotal = 0;
+      window.selectedAddonList = [];
+      window.dispatchEvent(new Event("addon-price-updated"));
+    }
+
+    // ✅ Recalculate price on billing change (keep selections)
+    if (billingChanged) {
+      console.log("🔁 Billing changed → recalculating addon price");
+      updateAddonTotal(state.selectedPeriod);
+    }
+  });
+
+  // ----------------------------
+  // Init
+  // ----------------------------
+  loadAddons();
+
+  // ----------------------------
+  // Learn More Modal Logic
+  // ----------------------------
+  const modal = document.getElementById("addon-modal");
+  const modalTitle = document.getElementById("addon-modal-title");
+  const modalDesc = document.getElementById("addon-modal-desc");
+  const modalFeatures = document.getElementById("addon-modal-features");
+  const modalClose = document.getElementById("addon-modal-close");
+
+  // Open modal (event delegation)
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".learn-more-btn");
+    if (!btn) return;
+
+    const pid = Number(btn.dataset.addonPid);
+    const addon = addons.find((a) => a.pid === pid);
+    if (!addon) return;
+
+    modalTitle.textContent = addon.name;
+    modalDesc.textContent = addon.description || "";
+
+    modalFeatures.innerHTML = `
+    ${addon.cpu ? `<li>✔ +${addon.cpu} vCPU</li>` : ""}
+    ${addon.disk ? `<li>✔ +${addon.disk}GB NVMe Storage</li>` : ""}
+    ${addon.user_backups ? `<li>✔ +${addon.user_backups} Backups</li>` : ""}
+    <li>✔ Optimized for high performance workloads</li>
+    <li>✔ Ideal for modded or high-traffic servers</li>
+  `;
+
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  });
+
+  // Close modal
+  modalClose.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  function closeModal() {
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+</script>

@@ -1,0 +1,144 @@
+<section class="feature-section">
+  <div class="section-padding global-padding">
+    <div class="container-large">
+      <div class="text-center title-wrapper">
+        <span class="overline" style="color: var(--accent) !important;" data-i18n="wordpressHostingFeatureComponent.wordpressManagementTools"> WordPress Management Tools </span>
+        <h2 class="mb-4" data-i18n="wordpressHostingFeatureComponent.professionalWordpressHostingFeatures">Professional WordPress Hosting Features</h2>
+        <p class="subtitle" data-i18n="wordpressHostingFeatureComponent.advancedToolsDesigningTestingOptimizing">
+          Advanced Tools For Designing, Testing, And Optimizing Your WordPress Website. Everything You Need For
+          Professional WordPress Development And Management.
+        </p>
+      </div>
+      <div class="md:p-5 mt-[60px]">
+        <div class="grid lg:grid-cols-2 gap-13 items-center">
+          <!-- Left - Image -->
+          <div class="flex justify-center">
+            <div class="relative">
+              <img
+                alt="WordPress Staging Environment"
+                class="max-w-[600px] w-full h-auto"
+                style="content: var(--feature-img);"
+              />
+            </div>
+          </div>
+          <!-- Right - Content -->
+          <div class="flex flex-col items-center lg:items-start space-y-6 text-center lg:text-left">
+            <h2 data-i18n="wordpressHostingFeatureComponent.1ClickWordpressStagingEnvironment">1-Click WordPress Staging Environment</h2>
+            <p data-i18n="wordpressHostingFeatureComponent.buildTestSafelySpinUp">
+              Build And Test Safely. Spin Up A 1-Click Staging Environment To Perfect Plugin Updates Or New Designs
+              Without Ever Touching Your Live Site. Perfect For Agency Workflows.
+            </p>
+            <!-- Feature Tags -->
+            <div class="flex flex-wrap gap-4 max-w-xl justify-center lg:justify-start">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[var(--accent)]"> check_circle </span>
+                <span class="text-[var(--text-secondary)]  md:text-base" data-i18n="wordpressHostingFeatureComponent.safeWordpressTesting">Safe WordPress Testing</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[var(--accent)]" data-i18n="wordpressHostingFeatureComponent.code"> code </span>
+                <span class="text-[var(--text-secondary)]  md:text-base" data-i18n="wordpressHostingFeatureComponent.fasterWordpressDevelopment">Faster WordPress Development</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[var(--accent)]"> more_time </span>
+                <span class="text-[var(--text-secondary)]  md:text-base" data-i18n="wordpressHostingFeatureComponent.zeroDowntimeUpdates">Zero Downtime Updates</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bottom Feature Cards -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 border-l lg:border-l-0 lg:border-b border-[#32333A]/60 mt-[20px]">
+        <!-- *************************  feature 1 **************************** -->
+        <div class="bottom_grid_item border-b lg:border-b-0 lg:border-r border-[#32333A]/60">
+          <div class="flex items-center gap-[8px]">
+            <div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
+              <div
+                class="w-[28px] h-[28px] bg-contain bg-no-repeat bg-left-center"
+                style={`background-image:
+                var(--icon-edge)`}
+                role="img"
+                aria-label="Edge Caching">
+              </div>
+            </div>
+            <h4 class="bottom_feature_title" data-i18n="wordpressHostingFeatureComponent.edgeCaching">Edge Caching</h4>
+          </div>
+          <p class="bottom_feature_description" data-i18n="wordpressHostingFeatureComponent.deliversContentFasterServersCloser">
+            Delivers Content Faster From Servers Closer To Your Users, Ensuring Better Loading Times And User
+            Experience.
+          </p>
+        </div>
+        <!-- *************************  feature 2 **************************** -->
+        <div class="bottom_grid_item border-b lg:border-b-0 lg:border-r border-[#32333A]/60">
+          <div class="flex items-center gap-[8px]">
+            <div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
+              <div
+                class="w-[28px] h-[28px] bg-contain bg-no-repeat bg-left-center"
+                style={`background-image:var(--icon-file-manager)`}
+                role="img"
+                aria-label="Edge Caching">
+              </div>
+            </div>
+            <h4 class="bottom_feature_title" data-i18n="wordpressHostingFeatureComponent.fileManager">File Manager</h4>
+          </div>
+          <p class="bottom_feature_description" data-i18n="wordpressHostingFeatureComponent.accessWordpressFilesEasilyThrough">
+            Access Your WordPress Files Easily Through Our Web-Based Manager Or Connect Directly Via SFTP.
+          </p>
+        </div>
+        <!-- *************************  feature 3 **************************** -->
+        <div class="bottom_grid_item">
+          <div class="flex items-center gap-[8px]">
+            <div
+              class="w-[28px] h-[28px] bg-contain bg-no-repeat bg-left-center"
+              style={`background-image:var(--icon-backup)`}
+              role="img"
+              aria-label="Edge Caching">
+            </div>
+            <h4 class="bottom_feature_title" data-i18n="wordpressHostingFeatureComponent.oneClickBackups">One Click Backups</h4>
+          </div>
+          <p class="bottom_feature_description mt-[8px]" data-i18n="wordpressHostingFeatureComponent.effortlessBackupsProtectSiteUnexpected">
+            Effortless Backups Protect Your Site From Unexpected Issues, Allowing Quick Recovery When Needed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "src/styles/core/mixins.scss" as *;
+
+  .advance_gameServer_text {
+    @include type-responsive(20px, 18px, 16px, 16px, 16px);
+    font-weight: 300;
+    line-height: 1.6em;
+  }
+
+  .feature_title {
+    @include type-responsive(20px, 18px, 16px, 16px, 16px);
+  }
+
+  .bottom_feature_title {
+    font-size: 22px;
+    font-weight: 400;
+  }
+
+  .bottom_feature_description {
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  .left_column {
+    @include sm {
+      text-align: center;
+      margin: auto;
+    }
+  }
+
+  .bottom_grid_item {
+    padding: 34px;
+
+    @include lg {
+      padding: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,371 @@
+---
+import {urlFor} from "src/lib/sanityImage";
+import {getGamesWithMinPrice} from "src/services/gameService";
+
+const games = await getGamesWithMinPrice();
+const visibleGames = games.slice(0, 5);
+---
+
+<div class="hero-carousel border border-[var(--border-light)]">
+  <div class="window-controls">
+    <span class="control red"></span>
+    <span class="control yellow"></span>
+    <span class="control green"></span>
+  </div>
+  <div class="carousel-container">
+    <div class="carousel-track">
+      {
+        visibleGames.map((game, i) => (
+          <img
+            src={game.coverImg ? urlFor(game.coverImg) : "https://placehold.co/600x800?text=No+Image"}
+            alt={game.name}
+            class={`carousel-item ${i === 0 ? "active" : ""}`}
+            data-index={i}
+            data-title={game.name}
+            data-desc={`${game.name} Server Hosting Plans Begin At.`}
+            data-price={`$${game.minPrice}/GB`}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="carousel-dots">
+    {visibleGames.map((_, i) => <span class={`dot ${i === 0 ? "active" : ""}`} data-index={i} />)}
+  </div>
+
+  <div class="carousel-content">
+    <h2 class="carousel-title"></h2>
+    <p class="carousel-desc"></p>
+    <p class="carousel-price pb-6 mt-[-10px]"></p>
+    <a href="/game-server" class="button-secondary" style="margin-top: 14px;" data-i18n="heroCarouselComponent.discoverPlan">Discover Plan</a>
+  </div>
+
+  <!-- Bottom corner ellipses -->
+  <img
+    src="../../assets/images/backgrounds/General/HomeHeroCarousel_green_Shadow.webp"
+    alt=""
+    class="ellipse-bottom-left"
+  />
+  <img class="ellipse-bottom-right" alt="" />
+</div>
+
+<style lang="scss">
+  @use "../../styles/core/mixins" as *;
+
+  .hero-carousel {
+    position: relative;
+    width: 500px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.03);
+    box-shadow: none;
+    text-align: center;
+    color: var(--text-primary);
+    overflow: hidden;
+
+    @include sm {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      min-height: auto;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      background-color: rgba(255, 255, 255, 0.04);
+      padding: 1rem;
+      justify-content: flex-start;
+
+      @include md {
+        gap: 6px;
+        padding: 0.75rem 1rem;
+      }
+
+      .control {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+
+        @include md {
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      .control.red {
+        background-color: #ff5f56;
+        opacity: 0.5;
+      }
+      .control.yellow {
+        background-color: #ffbd2e;
+        opacity: 0.5;
+      }
+      .control.green {
+        background-color: #27c93f;
+        opacity: 0.5;
+      }
+    }
+
+    .carousel-container {
+      height: 330px;
+      overflow: hidden;
+      padding-top: 1rem;
+
+      @include lg {
+        height: 240px;
+      }
+
+      @include md {
+        height: 200px;
+        padding-top: 0.75rem;
+      }
+
+      .carousel-track {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 100%;
+        transition: transform 0.8s ease;
+        // width: 650px;
+        overflow: hidden;
+      }
+
+      .carousel-item {
+        position: absolute;
+        width: 200px;
+        height: 260px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 30px;
+        transition: all 0.8s ease;
+        box-shadow: var(--shadow-card);
+        opacity: 0;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        transform: scale(0.7);
+        flex-shrink: 0;
+
+        @include lg {
+          width: 150px;
+          height: 200px;
+          border-radius: 25px;
+        }
+
+        @include md {
+          width: 120px;
+          height: 160px;
+          border-radius: 20px;
+        }
+      }
+
+      .carousel-item.active {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+        z-index: 3;
+      }
+
+      .carousel-item.left {
+        opacity: 0.6;
+        transform: scale(0.8) translateX(-250px);
+        z-index: 2;
+
+        @include lg {
+          transform: scale(0.8) translateX(-200px);
+        }
+
+        @include md {
+          transform: scale(0.8) translateX(-150px);
+        }
+      }
+
+      .carousel-item.right {
+        opacity: 0.6;
+        transform: scale(0.8) translateX(250px);
+        z-index: 2;
+
+        @include lg {
+          transform: scale(0.8) translateX(200px);
+        }
+
+        @include md {
+          transform: scale(0.8) translateX(150px);
+        }
+      }
+
+      .carousel-item.hidden {
+        opacity: 0;
+        transform: scale(0.5);
+        z-index: 1;
+      }
+    }
+
+    .carousel-dots {
+      margin-bottom: 1.3rem;
+      display: flex;
+      justify-content: center;
+      // opacity: 0.5;
+      gap: 8px;
+
+      @include lg {
+        margin-top: 1.25rem;
+      }
+
+      @include md {
+        margin-top: 1rem;
+        gap: 6px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--text-muted);
+        cursor: pointer;
+        transition: background 0.3s ease;
+
+        @include md {
+          width: 8px;
+          height: 8px;
+        }
+      }
+
+      .dot.active {
+        background: var(--accent);
+      }
+    }
+
+    .carousel-content {
+      margin-top: 0.5rem;
+      transition: opacity 0.4s ease;
+      padding-bottom: 15%;
+
+      @include lg {
+        padding-left: 12%;
+        padding-right: 12%;
+      }
+
+      @include md {
+        padding-left: 10%;
+        padding-right: 10%;
+      }
+    }
+
+    .carousel-title {
+      font-size: 1.75rem;
+      font-weight: 500;
+
+      @include lg {
+        font-size: 1.5rem;
+      }
+
+      @include md {
+        font-size: 1.25rem;
+      }
+    }
+
+    .carousel-desc {
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .ellipse-bottom-left,
+    .ellipse-bottom-right {
+      position: absolute;
+      bottom: 0;
+      width: 250px;
+      height: 250px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.6;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+
+      @include lg {
+        width: 250px;
+        height: 250px;
+      }
+
+      @include md {
+        width: 250px;
+        height: 250px;
+      }
+    }
+
+    .ellipse-bottom-left {
+      left: 0;
+    }
+
+    .ellipse-bottom-right {
+      right: 0;
+      content: var(--hero-carousel);
+    }
+  }
+</style>
+
+<script>
+  const items = document.querySelectorAll<HTMLImageElement>(".carousel-item");
+  const dots = document.querySelectorAll<HTMLSpanElement>(".dot");
+  const titleEl = document.querySelector(".carousel-title") as HTMLElement;
+  const descEl = document.querySelector(".carousel-desc") as HTMLElement;
+  const priceEl = document.querySelector(".carousel-price") as HTMLElement;
+
+  let index = 0;
+  let interval: number | undefined;
+
+  function updateCarousel() {
+    const total = items.length;
+
+    items.forEach((item, i) => {
+      const diff = (i - index + total) % total;
+
+      item.classList.remove("active", "left", "right", "hidden");
+
+      if (diff === 0) item.classList.add("active");
+      else if (diff === 1) item.classList.add("right");
+      else if (diff === total - 1) item.classList.add("left");
+      else item.classList.add("hidden");
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+
+    // ✅ Dynamic title & description
+    const activeItem = items[index];
+    titleEl.textContent = activeItem.dataset.title || "";
+    descEl.textContent = activeItem.dataset.desc || "";
+    priceEl.textContent = activeItem.dataset.price || "";
+  }
+
+  function nextSlide() {
+    index = (index + 1) % items.length;
+    updateCarousel();
+  }
+
+  function goToSlide(i: number) {
+    index = i;
+    updateCarousel();
+    restartAutoPlay();
+  }
+
+  function startAutoPlay() {
+    interval = window.setInterval(nextSlide, 4000);
+  }
+
+  function restartAutoPlay() {
+    clearInterval(interval);
+    startAutoPlay();
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener("click", () => goToSlide(i));
+  });
+
+  // Init
+  updateCarousel();
+  startAutoPlay();
+</script>

@@ -1,0 +1,181 @@
+---
+// Server management features data
+const features = [
+    {
+        title: "Real-Time Statistics",
+        description:
+            "Monitor Your Server CPU, Memory, And Network Performance Instantly To Spot Issues Before They Become A Significant Concern.",
+        isOpen: false
+    },
+    {
+        title: "Offsite Backups And Restores",
+        description:
+            "Automatically backup your server data to secure offsite locations and restore with one click whenever needed.",
+        isOpen: false
+    },
+    {
+        title: "One Click Mod Installers",
+        description:
+            "Install popular mods and plugins instantly with our one-click installer. No technical knowledge required.",
+        isOpen: false
+    },
+    {
+        title: "Game Swap",
+        description: "Easily swap between supported games with zero downtime and no additional cost.",
+        isOpen: false
+    }
+];
+---
+
+<section class="server-management">
+    <div class="section-padding global-padding">
+        <div class="container-large">
+            <div class="title-wrapper pb-10 text-center">
+                <h2 data-i18n="serverManagementComponent.serverManagementSimplified">Server Management Simplified</h2>
+                <p class="sub-title max-w-3xl mx-auto">
+                    Our dwarven-forged panel sets the standard for game server management. With powerful support and
+                    fair pricing, running your server has never been easier.
+                </p>
+            </div>
+            <div class="management-grid">
+                <!-- LEFT IMAGE -->
+                <div class="dashboard-preview">
+                    <div class="dashboard-image">
+                        <img
+                            src="../../assets/images/pages/gameServers/server-details/server-management.webp"
+                            alt="Server Dashboard"
+                        />
+                        <div class="overlay"></div>
+                    </div>
+                </div>
+
+                <!-- RIGHT ACCORDION -->
+                <div class="space-y-3">
+                    {
+                        features.map((feature, index) => (
+                            <div
+                                class={`accordion-item border border-2 rounded-xl bg-[#FFFFFF]/4 backdrop-blur-[2px] overflow-hidden transition-all duration-300 ${
+                                    feature.isOpen ? "border-[var(--accent)]" : "border-[#FFFFFF]/10"
+                                }`}
+                            >
+                                <button
+                                    class="w-full flex items-center justify-between p-[12px] pl-4 text-left focus:outline-none"
+                                    onclick="toggleAccordion(this)"
+                                    aria-expanded={feature.isOpen ? "true" : "false"}
+                                >
+                                    <span class="text-[20px] font-weight-200  text-white">{feature.title}</span>
+                                    <svg
+                                        class={`w-5 h-5 text-[var(--text-muted)] transform transition-transform duration-300 ${feature.isOpen ? "rotate-180" : ""}`}
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 9l-7 7-7-7"
+                                        />
+                                    </svg>
+                                </button>
+                                <div
+                                    class={`accordion-content overflow-hidden transition-all duration-300 ${feature.isOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"}`}
+                                >
+                                    <p class="px-6 pl-4 pb-4 ">{feature.description}</p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <!-- Bottom CTA -->
+            <div
+                class="mt-10 flex flex-col md:flex-row items-center justify-between gap-8 border-[var(--border-light)]"
+            >
+                <p class=" max-w-xl text-center md:text-left" data-i18n="serverManagementComponent.hostOver20GamesInstantly">
+                    Host Over 20 Games Instantly With AleForge, Powered By High-Performance Hardware And 24/7 Expert
+                    Support.
+                </p>
+                <a href="#serverplan" class="button-primary" data-i18n="serverManagementComponent.startServer">Start Your Server</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CSS ================= -->
+<style>
+    .server-management {
+        padding-top: 50px;
+        color: var(--text-primary);
+    }
+
+    .sub-title {
+        color: var(--text-secondary);
+    }
+
+    .management-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+        .management-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .dashboard-preview {
+            order: 2;
+            display: flex;
+            justify-content: center;
+        }
+    }
+</style>
+
+<!-- ================= JS ================= -->
+<script is:inline>
+    function toggleAccordion(button) {
+        const item = button.parentElement;
+        const content = button.nextElementSibling;
+        const icon = button.querySelector("svg");
+        const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+        // Close all other items
+        document.querySelectorAll(".accordion-item").forEach((el) => {
+            if (el !== item) {
+                const btn = el.querySelector("button");
+                btn.setAttribute("aria-expanded", "false");
+                el.querySelector(".accordion-content").style.maxHeight = "0";
+                el.querySelector(".accordion-content").style.opacity = "0";
+                el.querySelector("svg").classList.remove("rotate-180");
+
+                // Reset border
+                el.classList.remove("border-[var(--accent)]");
+                el.classList.add("border-[var(--border-light)]");
+                // el.classList.add("hover:border-[var(--accent)]");
+            }
+        });
+
+        // Toggle current item
+        button.setAttribute("aria-expanded", !isExpanded);
+        if (!isExpanded) {
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.style.opacity = "1";
+            icon.classList.add("rotate-180");
+
+            // Set active border
+            item.classList.remove("border-[var(--border-light)]");
+            // item.classList.remove("hover:border-[var(--accent)]");
+            item.classList.add("border-[var(--accent)]");
+        } else {
+            content.style.maxHeight = "0";
+            content.style.opacity = "0";
+            icon.classList.remove("rotate-180");
+
+            // Reset border
+            item.classList.remove("border-[var(--accent)]");
+            item.classList.add("border-[var(--border-light)]");
+            item.classList.add("hover:border-[var(--accent)]");
+        }
+    }
+</script>

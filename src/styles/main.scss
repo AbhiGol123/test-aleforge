@@ -1,0 +1,96 @@
+@use "./core/variable.scss" as *;
+@use "./core/mixins.scss" as *;
+@use "./core/typography.scss";
+
+body {
+  margin: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: var(--bg-body);
+  color: #dddddd;
+}
+
+/* -----------------------------------------
+   GLOBAL layout 
+------------------------------------------ */
+.global-padding {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.section-padding {
+  padding-top: 5%;
+  padding-bottom: 5%;
+
+  @include sm {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.container-large {
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* -----------------------------------------
+   All Section comon styles
+------------------------------------------ */
+.subtitle {
+  font-weight: 300;
+  @include type-responsive(1.25rem, 1.25rem, 1.125rem, 1.125rem, 1.125rem);
+  line-height: 1.5em;
+}
+
+.title-wrapper {
+  text-align: center;
+  margin-bottom: 1rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.overline {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.25rem;
+  color: #dddddd;
+  text-transform: capitalize;
+  text-decoration: none;
+
+  @include sm {
+    font-size: 16px;
+  }
+}
+
+strong {
+  color: var(--accent);
+}
+
+/* -----------------------------------------
+  Buttons Styles 
+------------------------------------------ */
+.button-primary {
+  @include button-base;
+  background-color: var(--accent);
+  color: white;
+  border: 1px solid transparent;
+
+  &:hover {
+    border: 1px solid white;
+  }
+}
+
+.button-secondary {
+  @include button-base;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+
+  &:hover {
+    background-color: var(--accent);
+
+  }
+}

@@ -1,0 +1,146 @@
+---
+import {sanity} from "src/lib/sanity";
+const CmsData = await sanity.fetch(`
+*[_type == "wordpressHostingPage"][0]
+`);
+---
+
+<section class="pricing-section" id="pricing">
+  <div class="section-padding global-padding">
+    <div class="container-large">
+      <div class="title-wrapper">
+        <h2>
+          {CmsData.title}
+        </h2>
+        <p class="subtitle">
+          {CmsData.subtitle}
+        </p>
+      </div>
+      <div class="flex justify-center mb-8 mt-[40px]">
+        <div
+          class="bg-[var(--bg-secondary)] p-1.5 rounded-full border-2 inline-flex items-center relative border border-white/5"
+        >
+          <div
+            id="toggle-bg"
+            class="absolute left-1.5 top-1.5 bottom-1.5 w-[150px] bg-[var(--accent)] rounded-full transition-all duration-300"
+          >
+          </div>
+          <button
+            onclick="switchPlan('monthly')"
+            class="relative py-[10px] rounded-full text-[18px] text-white transition-colors duration-300 w-[150px]"
+            id="btn-standard"
+           data-i18n="pricingComponent.monthly">
+            Monthly
+          </button>
+          <button
+            onclick="switchPlan('yearly')"
+            class="relative py-[10px] text-center rounded-full text-[18px] text-[var(--text-muted)] transition-colors duration-300 w-[150px] hover:text-white"
+            id="btn-premium"
+          >
+            Yearly <small class="text-[#98E534] ml-[1px] text-[14px]" data-i18n="pricingComponent.save20">Save 20%</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto relative items-stretch">
+      <div id="standard-plans" class="contents transition-opacity duration-300">
+        {
+          CmsData.plans.map((plan: any) => (
+            <div
+              class={`pricing-card relative p-[32px] pb-12 rounded-[20px] transition-all duration-300 flex
+                    flex-col items-center text-center group h-full cursor-pointer ${
+                      plan.highlight
+                        ? "border-2 border-[var(--border-light)] hover:shadow-[0_20px_60px_var(--accent)]/30"
+                        : " hover:opacity-100  hover:scale-105 hover:shadow-md"
+                    }`}
+            >
+              <div class="w-full mb-[24px]">
+                <h3 class="text-[18px] text-left" style="font-weight: 200;">
+                  {plan.name}
+                </h3>
+                <div class="text-left">
+                  <span
+                    class="text-5xl font-medium price-value"
+                    data-monthly={plan.monthlyPrice}
+                    data-yearly={plan.yearlyPrice}
+                  >
+                    ${plan.monthlyPrice}
+                  </span>
+
+                  <small class="text-lg opacity-60" data-i18n="pricingComponent.month">/month</small>
+
+                  <p
+                    class="opacity-[0.5] text-left mb-5 renewal-text"
+                    style="font-size:14px;"
+                    data-monthly={`${plan.monthlyPrice}/mo billed monthly`}
+                    data-yearly={`${plan.yearlyPrice}/mo billed monthly`}
+                  >
+                    {plan.monthlyPrice}/mo billed monthly
+                  </p>
+                </div>
+
+                <a href="#" class="button-secondary block w-full text-center py-3 rounded-full transition-colors" data-i18n="pricingComponent.getStarted">
+                  Get started
+                </a>
+              </div>
+
+              <div class="w-full flex-grow">
+                <p class="text-start mb-[8px]" style="font-size: 14px;" data-i18n="pricingComponent.whatSIncluded">
+                  What's Included:
+                </p>
+                <ul class="space-y-[8px] text-left">
+                  {plan.features.map((feature: any) => (
+                    <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
+                      <span class="material-icons" style="font-size:24px; color:white;">
+                        check_circle
+                      </span>
+                      <span class="text-white">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[var(--accent)] text-white px-8 py-1 rounded-full text-[14px]  shadow-lg shadow-[var(--accent)]/30 whitespace-nowrap" data-i18n="pricingComponent.50Off">
+                50% OFF
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <div
+      class="mt-[60px] flex flex-col md:flex-row items-center justify-between gap-6 text-[var(--text-muted)] max-w-6xl mx-auto"
+    >
+      <p class="max-w-2xl text-center md:text-left" data-i18n="pricingComponent.loremIpsumDolorSitAmet">
+        Lorem Ipsum Dolor Sit Amet Consectetur. Proin Eget Ac Sit Diam Massa Lorem Adipiscing. Dictum Eget Rhoncus Ut In
+        Morbi Rhoncus Duis Sodales Suspendisse.
+      </p>
+      <a href="#comparsion" class="button-secondary" data-i18n="pricingComponent.compareAllPlans"> Compare All Plans </a>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function switchPlan(type) {
+    // move toggle bg
+    const toggleBg = document.getElementById("toggle-bg");
+    toggleBg.style.transform = type === "monthly" ? "translateX(0)" : "translateX(100%)";
+    // switch button colors
+    document.getElementById("btn-standard").classList.toggle("text-white", type === "monthly");
+    document.getElementById("btn-premium").classList.toggle("text-white", type === "yearly");
+    // update prices
+    document.querySelectorAll(".price-value").forEach((el) => {
+      el.textContent = "$" + el.dataset[type];
+    });
+    // update renewal text
+    document.querySelectorAll(".renewal-text").forEach((el) => {
+      el.textContent = el.dataset[type];
+    });
+  }
+</script>
+
+<style lang="scss">
+  .pricing-card {
+    background: var(--wordpress-card-full-bg-grediant);
+  }
+</style>

@@ -1,0 +1,194 @@
+---
+const tabs = [
+  {
+    title: "World Manager",
+    desc: "Lorem Ipsum Dolor Sit Amet Consectetur. Ce Cras Viverra Bibendum Ultricies Mi.",
+    image: "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?q=80&w=1600"
+  },
+  {
+    title: "Modpack Installer",
+    desc: "Lorem Ipsum Dolor Sit Amet Consectetur. Ce Cras Viverra Bibendum Ultricies Mi.",
+    image: "../../assets/images/control-panel/second.png"
+  },
+  {
+    title: "Plugin Manager",
+    desc: "Lorem Ipsum Dolor Sit Amet Consectetur. Ce Cras Viverra Bibendum Ultricies Mi.",
+    image: "../../assets/images/control-panel/third.png"
+  },
+  {
+    title: "Mod Installer",
+    desc: "Lorem Ipsum Dolor Sit Amet Consectetur. Ce Cras Viverra Bibendum Ultricies Mi.",
+    image: "../../assets/images/control-panel/fourth.png"
+  }
+];
+
+interface GameLogo {
+  name: string;
+  src: string;
+}
+
+const gameLogos: GameLogo[] = [
+  {
+    name: "Bedrock_Edition",
+    src: "../../assets/images/icons/General/controlPanel/Bedrock_Edition.webp"
+  },
+  {
+    name: "Rust",
+    src: "../../assets/images/icons/General/controlPanel/rust.webp"
+  },
+  {
+    name: "Terraria",
+    src: "../../assets/images/icons/General/controlPanel/terraria.webp"
+  },
+  {
+    name: "Bedrock_Edition 2",
+    src: "../../assets/images/icons/General/controlPanel/Bedrock_Edition.webp"
+  },
+  {
+    name: "Rust 2",
+    src: "../../assets/images/icons/General/controlPanel/rust.webp"
+  },
+  {
+    name: "Terraria 2",
+    src: "../../assets/images/icons/General/controlPanel/terraria.webp"
+  }
+];
+---
+
+<section class="how_we_stack_up">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="title-wrapper">
+        <span class="overline" style="color:var(--accent)" data-i18n="mostAdvanceComponent.howStackUp">How We Stack Up</span>
+        <h2 data-i18n="mostAdvanceComponent.mostAdvancedPanelOutThere">The Most Advanced Panel Out There</h2>
+        <p class="subtitle" data-i18n="mostAdvanceComponent.compareGameServerControlPanel">
+          Compare Our Game Server Control Panel Features With Other Hosting Providers And See Why AleForge Offers The
+          Most Comprehensive Management Tools In The Industry.
+        </p>
+      </div>
+
+      <!-- GAMES LIST -->
+      <div class="flex justify-center flex-wrap gap-8 mx-auto pb-[50px]">
+        {
+          gameLogos.map((game) => (
+            <img
+              src={game.src}
+              alt={game.name}
+              class="opacity-25 transition-all duration-300 hover:opacity-100"
+              style="max-width: 150px;"
+            />
+          ))
+        }
+      </div>
+
+      <!-- TABS WRAPPER -->
+      <div
+        class="tabs-container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 relative mb-6 border-b border-white/10"
+      >
+        {
+          tabs.map((tab, index) => (
+            <div
+              class={`tab-item cursor-pointer px-2 pt-3 text-center transition-colors duration-300 ${
+                index === 0 ? "active" : ""
+              }`}
+              data-index={index}
+            >
+              <h3 class="tab_title">{tab.title}</h3>
+              <p class="text-center text-[16px] text-light mt-2" style="line-height:1.5em">
+                {tab.desc}
+              </p>
+            </div>
+          ))
+        }
+
+        <!-- Underline -->
+        <div id="tab-underline" class="tab-underline"></div>
+      </div>
+
+      <!-- IMAGE PREVIEW -->
+      <div class="mt-10 mx-auto">
+        <img
+          id="tab-image"
+          src={tabs[0].image}
+          alt="Preview"
+          class="w-full rounded-xl border border-white/10 shadow-xl transition-opacity duration-300"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<style lang="scss">
+  @use "src/styles/core/variable.scss" as *;
+  .tabs-container {
+    position: relative;
+  }
+
+  .tab-item {
+    background: transparent;
+    border-radius: 10px;
+    padding-bottom: 14px;
+    position: relative;
+  }
+
+  .tab-item.active {
+    color: var(--accent);
+  }
+
+  .tab-underline {
+    position: absolute;
+    height: 3px;
+    background: var(--accent);
+    transition:
+      transform 0.35s ease,
+      width 0.35s ease;
+    pointer-events: none;
+    border-radius: 4px;
+  }
+</style>
+<script is:inline>
+  const tabs = document.querySelectorAll(".tab-item");
+  const underline = document.getElementById("tab-underline");
+  const image = document.getElementById("tab-image");
+
+  const images = [
+    "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?q=80&w=1600",
+    "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?q=80&w=1600",
+    "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1600",
+    "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?q=80&w=1600"
+  ];
+
+  function moveUnderline(tab) {
+    underline.style.width = `${tab.offsetWidth}px`;
+    underline.style.transform = `
+      translateX(${tab.offsetLeft}px)
+      translateY(${tab.offsetTop + tab.offsetHeight - 2}px)
+    `;
+  }
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.classList.remove("active"));
+      tab.classList.add("active");
+
+      moveUnderline(tab);
+
+      image.style.opacity = "0";
+      setTimeout(() => {
+        image.src = images[i];
+        image.style.opacity = "1";
+      }, 250);
+    });
+  });
+
+  // Initialize underline when page loads
+  window.addEventListener("load", () => {
+    const active = document.querySelector(".tab-item.active");
+    moveUnderline(active);
+  });
+
+  // Recalculate underline on window resize (important for breakpoints)
+  window.addEventListener("resize", () => {
+    const active = document.querySelector(".tab-item.active");
+    moveUnderline(active);
+  });
+</script>

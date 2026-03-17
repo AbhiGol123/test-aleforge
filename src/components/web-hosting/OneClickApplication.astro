@@ -1,0 +1,47 @@
+---
+const oneClickAppLogos = [
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"},
+  {name: "WordPress", src: "../../assets/images/icons/General/hosting/oneClickAppLogo.webp", alt: "WordPress"}
+];
+---
+
+<section class="oneCLickApplications">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="content-wrapper">
+        <div class="title-wrapper">
+          <h2 data-i18n="oneclickapplicationComponent.allFavoriteApplications">All of Your Favorite Applications</h2>
+          <p class="subtitle" data-i18n="oneclickapplicationComponent.getStartedCreatingNewSite">Get Started Creating Your New Site Quickly With One Of Our 100+ One-Click Installs.</p>
+        </div>
+        <div class="appLogoWrapper flex items-center justify-center flex-wrap gap-[24px] mt-[30px]">
+          {
+            oneClickAppLogos.map((app) => (
+              <a
+                class="
+                flex 
+                items-center 
+                justify-center 
+                p-4 
+                bg-white/6 
+                rounded-[12px]  
+              filter grayscale hover:grayscale-0
+                transition-all duration-400"
+                style="padding: 24px 32px; width:240px border:1px solid rgba(255, 255, 255, 0.1)"
+                aria-label={`Install ${app.name}`}
+              >
+                <img src={app.src} alt={app.alt} loading="lazy" width="150px" height="32px" />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

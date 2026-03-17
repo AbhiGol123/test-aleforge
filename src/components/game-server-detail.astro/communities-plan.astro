@@ -1,0 +1,257 @@
+---
+const standardPlans = [
+  {
+    name: "Community Plus",
+    price: "30.90",
+    description: "Perfect for growing communities.",
+    features: [
+      "16GB RAM (DDR4/DDR5)",
+      "Unlimited NVMe SSD",
+      "3 High-Clock CPU Cores",
+      "150+ player slots",
+      "Daily & on-demand backups"
+    ],
+    highlight: false,
+    renewal: "Save 15% with quarterly billing"
+  },
+  {
+    name: "Creator Pro",
+    price: "69.90",
+    description: "Ideal for growing website.",
+    features: [
+      "32GB RAM (DDR4/DDR5)",
+      "Unlimited NVMe SSD",
+      "4 High-Clock CPU Cores",
+      "300+ player slots",
+      "Scheduled backups + Priority support"
+    ],
+    highlight: false,
+    renewal: "Save 20% with annual billing"
+  },
+  {
+    name: "Enterprise Network",
+    price: "119.90",
+    description: "Built got high-traffic sites.",
+    features: [
+      "48-64GB RAM (DDR4/DDR5)",
+      "Unlimited NVMe SSD",
+      "6 High-Clock CPU Cores (Ryzen 9)",
+      "500+ player slots/proxy-ready",
+      "Disaster recovery + Account manager"
+    ],
+    highlight: false,
+    renewal: "Talk to us for custom scaling"
+  }
+];
+---
+
+<section class="pricing-section max-w-[1300px] mx-auto" id="pricing">
+  <div class="section-padding global-padding">
+    <div class="container-large mx-auto">
+      <div class="text-center mb-8 title-wrapper">
+        <h2>High-Performance Plans for Growing Communities</h2>
+        <p class="subtitle">
+          Designed for large servers that need more power, capacity, and stability to support massive worlds and player
+          bases.
+        </p>
+      </div>
+
+      <!-- Plans Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mx-auto relative items-stretch mt-[40px]">
+        <!-- Standard Plans Container -->
+        <div id="standard-plans" class="contents transition-opacity duration-300">
+          {
+            standardPlans.map((plan) => (
+              <div
+                class={`pricing-card relative p-8 pb-12 rounded-[1rem] transition-all duration-300 flex flex-col items-center text-center group h-full cursor-pointer ${
+                  plan.highlight
+                    ? "text-white border-2 border-[var(--accent)] hover:scale-105 hover:shadow-[0_20px_60px_var(--accent)]/30"
+                    : "text-white border border-[var(--border-light)] hover:opacity-100  hover:-translate-y-2"
+                }`}>
+                <div class="w-full mb-6">
+                  <h4 class="text-[16px] text-left">{plan.name}</h4>
+                  <div class="flex items-baseline gap-1 text-left">
+                    <>
+                      <span class="text-[40px] font-medium">${plan.price}</span>
+                      <small class="text-lg opacity-60" data-i18n="communitiesPlanComponent.month2">/month</small>
+                    </>
+                  </div>
+                  <p class="text-left mb-5" style="color:rgba(221, 221, 221, 0.8); font-size:16px">
+                    {plan.description}
+                  </p>
+                  <a
+                    href="#"
+                    class:list={[
+                      "get-started-btn block w-full text-center mb-3",
+                      plan.highlight ? "button-primary" : "button-secondary"
+                    ]} data-i18n="communitiesPlanComponent.getStarted">
+                    Get started
+                  </a>
+                  <span class="text-[12px] text-[#dddddd]">{plan.renewal}</span>
+                </div>
+
+                <div class="w-full space-y-4 mb-0 flex-grow">
+                  <h5 class=" text-[14px] text-start mb-4" data-i18n="communitiesPlanComponent.whatSIncluded2">What's Included:</h5>
+                  <ul class="space-y-3 text-left">
+                    {plan.features.map((feature) => (
+                      <li class="flex items-start gap-3 text-sm text-[var(--text-secondary)]">
+                        <span class="material-icons" style="font-size:24px; color:white;">
+                          check_circle
+                        </span>
+                        <span class="text-white text-[16px]">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div
+      class="rounded-xl border border-[#E5E7EB]/6 p-6 md:p-8 mt-10 relative overflow-hidden"
+      style="background: linear-gradient(180deg, rgba(10, 11, 21, 0.1) 0%, rgba(59, 64, 123, 0.1) 100%);">
+      <div class="grid grid-cols-1 min-[1115px]:grid-cols-12 gap-10 items-start">
+        <!-- Pricing Card (Left) -->
+        <div class="min-[1115px]:col-span-5 bg-[#FFFFFF]/4 border border-[#373844] rounded-2xl p-5 relative">
+          <h3 class="text-white mb-2" data-i18n="communitiesPlanComponent.needSomethingCheaper">Need something cheaper?</h3>
+          <p class="text-[var(--text-secondary)] mb-1" style="font-size: 16px" data-i18n="communitiesPlanComponent.newMinecraftServersSmallerCommunities">
+            For new Minecraft servers or smaller communities
+          </p>
+
+          <div class="border-t border-dashed border-gray-700 my-1"></div>
+
+          <div class="flex items-baseline gap-1 mt-5 mb-3">
+            <span class="text-4xl font-bold text-white">$XX.xx</span>
+            <span class="text-lg text-gray-400" data-i18n="communitiesPlanComponent.month2">/month</span>
+          </div>
+
+          <a href="#" class="button-primary block w-full text-center py-3 rounded-full transition-colors" data-i18n="communitiesPlanComponent.getStarted">
+            Get started
+          </a>
+        </div>
+
+        <!-- Features (Right) -->
+        <div class="min-[1115px]:col-span-7 pt-2 relative flex flex-col">
+          <h4 class="text-xl text-white mb-6" data-i18n="communitiesPlanComponent.whatSIncluded2">What's Included:</h4>
+
+          <div class="grid sm:grid-cols-2 gap-y-2 gap-x-6 mb-8">
+            <div class="flex items-start gap-3">
+              <span class="material-icons" style="font-size:24px; color:white;"> check_circle </span>
+              <span class="text-[var(--text-secondary)] text-[16px]">4–6 GB RAM (Perfect for small worlds & SMPs)</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="material-icons" style="font-size:24px; color:white;"> check_circle </span>
+              <span class="text-[var(--text-secondary)] text-[16px]" data-i18n="communitiesPlanComponent.unlimitedNvmeSsdStorage">Unlimited NVMe SSD Storage</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="material-icons" style="font-size:24px; color:white;"> check_circle </span>
+              <span class="text-[var(--text-secondary)] text-[16px]" data-i18n="communitiesPlanComponent.up2040Players">Up to 20–40 Players</span>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="material-icons" style="font-size:24px; color:white;"> check_circle </span>
+              <span class="text-[var(--text-secondary)] text-[16px]" data-i18n="communitiesPlanComponent.ddosProtectionAutoBackups">DDoS Protection + Auto Backups</span>
+            </div>
+            <div class="flex items-start gap-3 sm:col-span-2">
+              <span class="material-icons" style="font-size:24px; color:white;"> check_circle </span>
+              <span class="text-[var(--text-secondary)] text-[16px]"
+                >Full Access to Control Panel (Mods, Plugins, FTP, etc.)</span
+              >
+            </div>
+          </div>
+
+          <p class="leading-relaxed mb-6 md:mb-0" style="font-size: 16px">
+            Start your Minecraft server without overspending. The Budget Plan gives you reliable performance and
+            essential features perfect for small worlds, friends, or starter communities.
+          </p>
+
+          <!-- Badge -->
+          <div
+            class="bg-[var(--accent)] text-white text-sm px-4 py-1.5 rounded-full flex items-center order-last self-center mt-6 min-[1115px]:absolute min-[1115px]:top-0 min-[1115px]:right-0 min-[1115px]:mt-0 min-[1115px]:order-none">
+            <span class="material-icons" data-i18n="communitiesPlanComponent.stars2"> stars_2 </span>
+            <span data-i18n="communitiesPlanComponent.only4SlotsAvailablePrice">Only 4 slots available at this price</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function switchPlan(type) {
+    const standardPlans = document.getElementById("standard-plans");
+    const premiumPlans = document.getElementById("premium-plans");
+    const toggleBg = document.getElementById("toggle-bg");
+    const btnStandard = document.getElementById("btn-standard");
+    const btnPremium = document.getElementById("btn-premium");
+
+    if (type === "standard") {
+      standardPlans.classList.remove("hidden");
+      premiumPlans.classList.add("hidden");
+      toggleBg.style.transform = "translateX(0)";
+      btnStandard.classList.add("text-white");
+      btnStandard.classList.remove("text-[var(--text-muted)]");
+      btnPremium.classList.remove("text-white");
+      btnPremium.classList.add("text-[var(--text-muted)]");
+    } else {
+      standardPlans.classList.add("hidden");
+      premiumPlans.classList.remove("hidden");
+      toggleBg.style.transform = "translateX(100%)";
+
+      btnPremium.classList.add("text-white");
+      btnPremium.classList.remove("text-[var(--text-muted)]");
+      btnStandard.classList.remove("text-white");
+      btnStandard.classList.add("text-[var(--text-muted)]");
+    }
+  }
+
+  // Card selection functionality
+  function selectCard(cardElement) {
+    // Get all pricing cards
+    const allCards = document.querySelectorAll(".pricing-card");
+
+    // Remove selected state from all cards
+    allCards.forEach((card) => {
+      card.classList.remove("selected-card");
+      const button = card.querySelector(".get-started-btn");
+      if (button) {
+        button.classList.remove("button-primary");
+        button.classList.add("button-secondary");
+      }
+    });
+
+    // Add selected state to clicked card
+    cardElement.classList.add("selected-card");
+    const button = cardElement.querySelector(".get-started-btn");
+    if (button) {
+      button.classList.remove("button-secondary");
+      button.classList.add("button-primary");
+    }
+  }
+
+  // Add click listeners to all pricing cards when page loads
+  document.addEventListener("DOMContentLoaded", function () {
+    const allCards = document.querySelectorAll(".pricing-card");
+    allCards.forEach((card) => {
+      card.addEventListener("click", function () {
+        selectCard(this);
+      });
+    });
+  });
+</script>
+
+<style>
+  .pricing-card {
+    background: var(--wordpress-card-full-bg-grediant);
+  }
+  .pricing-card.selected-card {
+    background: var(--wordpress-selected-card-grediant) !important;
+  }
+</style>
+
+<style>
+  .pricing-card:hover {
+    background: var(--wordpress-selected-card-grediant) !important;
+  }
+</style>

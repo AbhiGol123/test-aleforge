@@ -1,0 +1,85 @@
+<div class="wc-topbar" id="topBar">
+  <div class="wc-marquee">
+    <div class="wc-marquee-track">
+      <a href="#" data-i18n="topbarComponent.minimalDowntimeExpectedTryIt">Minimal Downtime Expected. Try it now ↗</a>
+      <a href="#" data-i18n="topbarComponent.holidaySaleGet25Off">🎉 Holiday Sale! Get 25% OFF all new Game Servers! ↗</a>
+      <a href="#" data-i18n="topbarComponent.ddosProtectionUpgradeSingapore">🛡️ DDoS Protection Upgrade in Singapore ↗</a>
+      <a href="#" data-i18n="topbarComponent.minimalDowntimeExpectedTryIt">Minimal Downtime Expected. Try it now ↗</a>
+      <a href="#" data-i18n="topbarComponent.holidaySaleGet25Off">🎉 Holiday Sale! Get 25% OFF all new Game Servers! ↗</a>
+      <a href="#" data-i18n="topbarComponent.ddosProtectionUpgradeSingapore">🛡️ DDoS Protection Upgrade in Singapore ↗</a>
+    </div>
+  </div>
+  <button class="wc-marquee-close" aria-label="Close announcement"> ✕ </button>
+</div>
+
+<style>
+  .wc-topbar {
+    height: 32px;
+    background: var(--top-nav-label-bg);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-right: 10px;
+  }
+  .wc-marquee {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .wc-marquee-track {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: wc-marquee 25s linear infinite;
+    will-change: transform;
+  }
+  .wc-marquee:hover .wc-marquee-track {
+    animation-play-state: paused;
+  }
+  .wc-marquee-track a {
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    opacity: 0.9;
+    text-decoration: none;
+  }
+  .wc-marquee-close {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  @keyframes wc-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>
+
+<script is:inline>
+  const bar = document.getElementById("topBar");
+  const closeBtn = bar?.querySelector(".wc-marquee-close");
+  if (localStorage.getItem("hideTopBar") === "true") {
+    bar?.remove();
+  }
+  closeBtn?.addEventListener("click", () => {
+    bar?.remove();
+    localStorage.setItem("hideTopBar", "true");
+  });
+</script>

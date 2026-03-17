@@ -1,0 +1,57 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import HostingResources from "@components/home/hostingResources.astro";
+import Faq from "@components/sections/faq.astro";
+import ComparisonSection from "@components/home/ComparisonSection.astro";
+import Testimonials from "@components/sections/testimonials.astro";
+import Features from "@components/home/features.astro";
+import HostingPlans from "@components/home/hostingPlans.astro";
+import DiscoverGames from "@components/home/discoverGames.astro";
+import HowOwnServer from "@components/home/HowOwnServer.astro";
+import Clients from "@components/sections/clients.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Header from "@components/home/header.astro";
+import Contact from "@components/sections/contact.astro";
+---
+
+<Layout>
+  <div class="header">
+    <Navigation />
+    <Header />
+  </div>
+  <Clients />
+  <HowOwnServer />
+  <div class="discoverTrendingGames">
+    <DiscoverGames />
+    <HostingPlans />
+  </div>
+
+  <Features />
+  <ComparisonSection />
+  <Testimonials />
+  <div class="hosting_res">
+    <HostingResources />
+    <Faq />
+    <Contact />
+  </div>
+</Layout>
+
+<style>
+  .header {
+    background-image: var(--bg-home-first-img);
+    background-size: 100% auto;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+  .discoverTrendingGames {
+    background-image: var(--bg-home-second-img);
+    background-position: bottom;
+    background-repeat: no-repeat;
+  }
+  .hosting_res {
+    background-image: var(--bg-home-third-img);
+    background-size: 100% auto;
+    background-position: fixed;
+    background-repeat: no-repeat;
+  }
+</style>

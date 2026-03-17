@@ -1,0 +1,24 @@
+---
+import FeaturesInsideBorders from "@components/sections/features_insideBorders.astro";
+import {urlFor} from "src/lib/sanityImage";
+const {game} = Astro.props;
+const features = game.whatsIncluded.items.map((item: any) => ({
+  icon: urlFor(item.icon),
+  title: item.title,
+  desc: item.description
+}));
+---
+
+<section class="include_section max-w-[1300px] mx-auto">
+  <div class="section-padding global-padding">
+    <div class="container-large mx-auto">
+      <div class="title-wrapper">
+        <h2 class="section-title mb-4" data-i18n="includeComponent.whatSIncluded">What's Included?</h2>
+        <p class="subtitle max-w-3xl mx-auto">
+          {game.whatsIncluded.description}
+        </p>
+      </div>
+      <FeaturesInsideBorders items={features} data-count="9" />
+    </div>
+  </div>
+</section>

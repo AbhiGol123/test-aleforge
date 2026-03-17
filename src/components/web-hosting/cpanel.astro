@@ -1,0 +1,141 @@
+---
+const features = [
+  {
+    title: "Premium WordPress Themes & Plugins",
+    content:
+      "Install Professional WordPress Themes And Plugins With Just A Few Clicks. Access To Thousands Of Premium Designs And Functionality Extensions To Create Stunning Websites.",
+    isOpen: true
+  },
+  {
+    title: "WordPress Content Management Made Easy",
+    content: "Effortlessly manage your content with an intuitive interface designed for users of all skill levels.",
+    isOpen: false
+  },
+  {
+    title: "Extensive WordPress Plugin Ecosystem",
+    content: "Access a vast library of plugins to enhance your site's functionality, security, and performance.",
+    isOpen: false
+  },
+  {
+    title: "WooCommerce E-Commerce Integration",
+    content: "Seamlessly integrate WooCommerce to build powerful online stores with ease.",
+    isOpen: false
+  }
+];
+---
+
+<section class="cpanel-section">
+  <div class="section-padding global-padding">
+    <div class="container-large">
+      <div class="title-wrapper">
+        <h2 data-i18n="cpanelComponent.poweredCpanel">Powered By CPanel</h2>
+        <p class="subtitle" data-i18n="cpanelComponent.cpanelUndoubtedlyLeadingWebHosting">
+          CPanel Is Undoubtedly The Leading Web Hosting Control Panel On The Market Today, Designed To Provide You With
+          An Unbeatable Hosting Experience Which Is Fast, Reliable And Secure.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-center mt-[50px]">
+        <!-- Left Column: Accordion -->
+        <div class="space-y-4">
+          {
+            features.map((feature, index) => (
+              <div
+                class={`accordion-item border rounded-xl bg-[var(--bg-card)]/30 backdrop-blur-[2px] overflow-hidden transition-all duration-300 ${
+                  feature.isOpen ? "border-[var(--accent)]" : "border-[var(--border-light)]"
+                }`}
+              >
+                <button
+                  class="w-full flex items-center justify-between p-[20px]  text-left focus:outline-none"
+                  onclick="toggleAccordion(this)"
+                  aria-expanded={feature.isOpen ? "true" : "false"}
+                >
+                  <span class=" text-[18px] xl:text-[22px]  text-white">{feature.title}</span>
+                  <svg style="min-width: 20px; min-height: 20px;"
+                    class={`w-5 h-5 text-[var(--text-muted)] transform transition-transform duration-300 ${feature.isOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div
+                  class={`accordion-content overflow-hidden transition-all duration-300 ${feature.isOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"}`}
+                >
+                  <p class="px-6 pb-6 " style="font-size: 16px;">{feature.content}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <!-- Right Column: Image -->
+        <div class="relative">
+          <div class="relative rounded-xl overflow-hidden shadow-2xl border border-[var(--border-light)]">
+            <!-- Placeholder for the image - Replace src with your actual image path -->
+            <img
+              src="../../assets/images/pages/hosting/webHosting/cpanel.webp"
+              alt="CPanel Dashboard"
+              class="w-full h-auto object-cover"
+              onerror="this.src='https://placehold.co/800x600/1a1c25/ffffff?text=CPanel+Dashboard+Image'"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- Bottom CTA -->
+      <div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 border-[var(--border-light)]">
+        <p class=" max-w-xl text-center md:text-left" data-i18n="cpanelComponent.hostOver20GamesInstantly">
+          Host Over 20 Games Instantly With AleForge, Powered By High-Performance Hardware And 24/7 Expert Support.
+        </p>
+        <a href="#pricing" class="button-primary" data-i18n="cpanelComponent.startServer">Start Your Server</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  function toggleAccordion(button) {
+    const item = button.parentElement;
+    const content = button.nextElementSibling;
+    const icon = button.querySelector("svg");
+    const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+    // Close all other items
+    document.querySelectorAll(".accordion-item").forEach((el) => {
+      if (el !== item) {
+        const btn = el.querySelector("button");
+        btn.setAttribute("aria-expanded", "false");
+        el.querySelector(".accordion-content").style.maxHeight = "0";
+        el.querySelector(".accordion-content").style.opacity = "0";
+        el.querySelector("svg").classList.remove("rotate-180");
+
+        // Reset border
+        el.classList.remove("border-[var(--accent)]");
+        el.classList.add("border-[var(--border-light)]");
+        // el.classList.add("hover:border-[var(--accent)]");
+      }
+    });
+
+    // Toggle current item
+    button.setAttribute("aria-expanded", !isExpanded);
+    if (!isExpanded) {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.style.opacity = "1";
+      icon.classList.add("rotate-180");
+
+      // Set active border
+      item.classList.remove("border-[var(--border-light)]");
+      // item.classList.remove("hover:border-[var(--accent)]");
+      item.classList.add("border-[var(--accent)]");
+    } else {
+      content.style.maxHeight = "0";
+      content.style.opacity = "0";
+      icon.classList.remove("rotate-180");
+
+      // Reset border
+      item.classList.remove("border-[var(--accent)]");
+      item.classList.add("border-[var(--border-light)]");
+      item.classList.add("hover:border-[var(--accent)]");
+    }
+  }
+</script>

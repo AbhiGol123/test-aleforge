@@ -1,0 +1,167 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer relative text-[var(--text-primary)] overflow-hidden bg-[var(--footer-bg)] pt-24 pb-6">
+  <div class="container-large global-padding">
+
+    <!-- MAIN GRID -->
+    <div class="grid grid-cols-1 lg:grid-cols-[1.3fr_2fr] gap-14">
+
+      <!-- LEFT COLUMN -->
+      <div class="flex flex-col gap-6">
+        <div>
+          <a href="/" class="block w-fit">
+            <div
+              class="h-20 w-48 bg-contain bg-no-repeat bg-left"
+              style={{ backgroundImage: "var(--logo)" }}
+              role="img"
+              aria-label="Aleforge Logo"
+            />
+          </a>
+          <p class="max-w-[360px] text-[var(--text-secondary)] leading-relaxed" data-i18n="footerComponent.forgeWorldPowerfulGameServer">
+            Forge Your World with Powerful Game Server Hosting
+          </p>
+        </div>
+
+        <!-- CONTACT -->
+        <div class="pt-3">
+          <p class="font-medium text-lg mb-3" data-i18n="footerComponent.aleforgePlanning">Aleforge Planning</p>
+
+          <div class="flex flex-col gap-3 text-[var(--text-secondary)] text-sm sm:text-base">
+            <span class="inline-flex items-center gap-3">
+              <span class="material-symbols-outlined text-[var(--accent)]">location_on</span>
+              Australia – Sydney 2000
+            </span>
+
+            <span class="inline-flex items-center gap-3">
+              <span class="material-symbols-outlined text-[var(--accent)]" data-i18n="footerComponent.call">call</span>
+              (415) 931-1616
+            </span>
+
+            <span class="inline-flex items-center gap-3">
+              <span class="material-symbols-outlined text-[var(--accent)]" data-i18n="footerComponent.mail">mail</span>
+              hello@Ex.com
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-10 mt-4">
+
+        <!-- COMPANY -->
+        <div>
+          <h3 class="footer-title" data-i18n="footerComponent.company">Company</h3>
+          <ul class="footer-links">
+            <li><a href="/about" data-i18n="footerComponent.aboutUs">About Us</a></li>
+            <li><a href="/contactUs" data-i18n="footerComponent.contactUs">Contact Us</a></li>
+            <li><a href="/blog" data-i18n="footerComponent.blog">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- SUPPORT -->
+        <div>
+          <h3 class="footer-title" data-i18n="footerComponent.support">Support</h3>
+          <ul class="footer-links">
+            <li><a href="https://help.aleforge.net/" data-i18n="footerComponent.knowledgebase">Knowledgebase</a></li>
+            <li class="flex items-center gap-2">
+              <span data-i18n="footerComponent.liveChat">Live Chat</span>
+              <span class="badge-new" data-i18n="footerComponent.new">New</span>
+            </li>
+            <li><a href="https://discord.com/invite/e5aRjKJ" data-i18n="footerComponent.discord">Discord</a></li>
+            <li data-i18n="footerComponent.status">Status</li>
+            <li><a href="https://billing.aleforge.net/" data-i18n="footerComponent.sales">Sales</a></li>
+            <li>
+              <a href="https://billing.aleforge.net/submitticket.php?step=2&deptid=1" data-i18n="footerComponent.openTicket">
+                Open a Ticket
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SOCIAL -->
+        <div>
+          <h3 class="footer-title" data-i18n="footerComponent.social">Social</h3>
+          <ul class="footer-links">
+            <li data-i18n="footerComponent.facebook">Facebook</li>
+            <li data-i18n="footerComponent.twitter">Twitter</li>
+            <li><a href="https://discord.com/invite/e5aRjKJ" data-i18n="footerComponent.discord">Discord</a></li>
+            <li data-i18n="footerComponent.linkedin">LinkedIn</li>
+          </ul>
+        </div>
+
+        <!-- LEGAL -->
+        <div>
+          <h3 class="footer-title" data-i18n="footerComponent.legalResources">Legal Resources</h3>
+          <ul class="footer-links">
+            <li><a href="/legal/terms-of-service" data-i18n="footerComponent.termsService">Terms of Service</a></li>
+            <li><a href="/legal/use-policy" data-i18n="footerComponent.acceptableUsePolicy">Acceptable Use Policy</a></li>
+            <li><a href="/legal/privacy-policy" data-i18n="footerComponent.privacyPolicy">Privacy Policy</a></li>
+            <li><a href="/legal/refund-policy" data-i18n="footerComponent.refundPolicy">Refund Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="border-t border-dashed border-[var(--border-light)] mt-14 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-[var(--text-muted)]">
+      <span>© Copyright {year} Ale Forge Ltd. All Rights Reserved.</span>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 90px;
+  background-image: var(--img-footer-border);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  pointer-events: none;
+}
+
+/* Titles */
+.footer-title {
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+/* Links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: clamp(16px, 1.6vw, 17px);
+  color: var(--text-muted);
+}
+
+.footer-links a,
+.footer-links li {
+  transition: color 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
+}
+
+.footer-links a:hover,
+.footer-links li:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+
+/* Badge */
+.badge-new {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  font-size: 11px;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.15);
+  color: var(--accent);
+}
+</style>

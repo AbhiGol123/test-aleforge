@@ -1,0 +1,84 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Contact from "@components/sections/contact.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+---
+
+<Layout>
+  <Navigation />
+  <Breadcrumbs />
+  <section class="terms_of_service">
+    <div class="global-padding section-padding">
+      <div class="container-large">
+        <div class="title-wrapper">
+          <span class="overline" data-i18n="usePolicyPage.legalInfo">Legal Info</span>
+          <h1 data-i18n="usePolicyPage.termsUse">Terms of Use</h1>
+        </div>
+        <div class="policy-wrapper">
+          <h2>Terms of Use for AleForge</h2>
+
+          <h3 data-i18n="usePolicyPage.iOverview">I. Overview</h3>
+          <p data-i18n="usePolicyPage.theseTermsUseGovernAccess">
+            These Terms of Use govern your access to and use of AleForge's hosting services. By creating an account or
+            using our platform, you agree to these Terms.
+          </p>
+          <p data-i18n="usePolicyPage.theseTermsApplyAllUsers">These Terms apply to all users, including customers, visitors, and server administrators.</p>
+
+          <h3 data-i18n="usePolicyPage.iiAcceptableUseRequirements">II. Acceptable Use Requirements</h3>
+          <p data-i18n="usePolicyPage.usersMustNotEngageFollowing">Users must not engage in the following activities:</p>
+          <ul>
+            <li data-i18n="usePolicyPage.hostingIllegalContentViolatingCopyright">Hosting illegal content or violating copyright laws</li>
+            <li data-i18n="usePolicyPage.harassingAbusingThreateningOthers">Harassing, abusing, or threatening others</li>
+            <li data-i18n="usePolicyPage.usingCheatsExploitsUnauthorizedModifications">Using cheats, exploits, or unauthorized modifications</li>
+            <li data-i18n="usePolicyPage.runningHarmfulScriptsToolsAffect">Running harmful scripts or tools that affect server stability</li>
+            <li data-i18n="usePolicyPage.attemptingBypassSecurityAccessRestricted">Attempting to bypass security or access restricted areas</li>
+          </ul>
+
+          <h3 data-i18n="usePolicyPage.iiiAccountResponsibilities">III. Account Responsibilities</h3>
+          <p data-i18n="usePolicyPage.agree">You agree to:</p>
+          <ul>
+            <li data-i18n="usePolicyPage.maintainAccurateAccountInformation">Maintain accurate account information</li>
+            <li data-i18n="usePolicyPage.protectLoginCredentials">Protect your login credentials</li>
+            <li>Monitor use of your account for unauthorized activity</li>
+          </ul>
+
+          <h3 data-i18n="usePolicyPage.ivBillingPayments">IV. Billing and Payments</h3>
+          <p>
+            All plans renew automatically unless canceled. Users are responsible for ensuring that payment methods
+            remain valid and up to date.
+          </p>
+          <p>Service may be suspended for:</p>
+          <ul>
+            <li data-i18n="usePolicyPage.lateFailedPayments">Late or failed payments</li>
+            <li data-i18n="usePolicyPage.fraudulentActivity">Fraudulent activity</li>
+            <li data-i18n="usePolicyPage.repeatedPolicyViolations">Repeated policy violations</li>
+          </ul>
+
+          <h3 data-i18n="usePolicyPage.vServiceLimitations">V. Service Limitations</h3>
+          <p data-i18n="usePolicyPage.whileAleforgeStrivesProvideStable">
+            While AleForge strives to provide stable hosting performance, no service can guarantee 100% uptime.
+            Scheduled maintenance or unexpected issues may cause temporary interruptions.
+          </p>
+
+          <h3 data-i18n="usePolicyPage.viTermination">VI. Termination</h3>
+          <p data-i18n="usePolicyPage.aleforgeReservesRightSuspendTerminate">
+            AleForge reserves the right to suspend or terminate accounts that violate these Terms, misuse resources, or
+            create security risks.
+          </p>
+
+          <h3 data-i18n="usePolicyPage.viiUpdatesTerms">VII. Updates to Terms</h3>
+          <p data-i18n="usePolicyPage.theseTermsMayUpdatedAny">
+            These Terms may be updated at any time. Continued use of AleForge services constitutes acceptance of the
+            latest version.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Contact />
+</Layout>
+
+<style lang="scss">
+  @use "src/styles/pages/legal.scss" as *;
+</style>

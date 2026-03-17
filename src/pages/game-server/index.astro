@@ -1,0 +1,113 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import GlobalServers from "@components/home/GlobalServers.astro";
+import Faq from "@components/sections/faq.astro";
+import Testimonials from "@components/sections/testimonials.astro";
+import Contact from "@components/sections/contact.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import FeaturesInsideBorders from "@components/sections/features_insideBorders.astro";
+import GameList from "@components/game-server/GameList.astro";
+import {getGamesWithMinPrice} from "src/services/gameService";
+
+const features = [
+  {
+    icon: "var(--icon-computer)",
+    title: "99.9% Uptime",
+    desc: "High-availability means our gamer servers remain fully operational with our guaranteed SLA of 99.9%."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Public Stats",
+    desc: "We go the extra mile and prove our service by publicly showing our server statistics for everyone to view."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Never Oversold",
+    desc: "We never over provision our servers, so customers never deal with noisy neighbor issues."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Free DDoS Protection",
+    desc: "Our smart protection services keep you safe from all distributed denial-of-service threats."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Dwarven Machines",
+    desc: `Top of the line AMD and Intel hardware, engineered for ultimate performance, so you can game without fear of lag.`
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Affordable Pricing",
+    desc: `Get stable hosting and rapid technical support for an exceptional deal. Our pricing starts at $2.99 per GB of RAM.`
+  }
+];
+
+const games = await getGamesWithMinPrice();
+---
+
+<Layout>
+  <Navigation />
+  <Breadcrumbs />
+  <div class="hosting_res pb-[5%]">
+    <section class="hero">
+      <div class="global-padding section-padding">
+        <div class="container-large">
+          <div class="max-w-6xl mx-auto text-center">
+            <h1 data-i18n="gameServerPage.gameServerHosting">Game Server Hosting</h1>
+            <p class="subtitle">
+              Rent powerful game servers for you and your friends with ultra-low latency, full customization, and
+              instant setup.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <GameList games={games} />
+  </div>
+  <section class="one-server-section">
+    <div class="global-padding section-padding">
+      <div class="container-large">
+        <div class="content_wrapper">
+          <div class="title-wrapper">
+            <h2>
+              Everything You Need In
+              <strong data-i18n="gameServerPage.oneServer">One Server</strong>
+            </h2>
+            <p class="subtitle" data-i18n="gameServerPage.affordableReliablePackedPowerfulFeatures">
+              Affordable, reliable, and packed with powerful features to keep your community thriving.
+            </p>
+          </div>
+          <div class="grid_wrapper mt-[60px]">
+            <FeaturesInsideBorders items={features} data-count="9" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="discoverTrendingGames">
+    <GlobalServers />
+    <Faq />
+    <Testimonials />
+  </div>
+  <Contact />
+</Layout>
+
+<style>
+  .discoverTrendingGames {
+    background-image: var(--bg-second-img);
+    background-size: contain;
+    background-position: center 50%;
+    background-repeat: no-repeat;
+
+  }
+
+  .hosting_res {
+    background-image: var(--bg-first-img);
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+</style>
+
+

@@ -1,0 +1,59 @@
+---
+import {urlFor} from "src/lib/sanityImage";
+const {game} = Astro.props;
+---
+
+<section class="header-section">
+  <div class="global-padding py-[40px] lg:py-[10px]">
+    <div class="container-large">
+      <div class="flex flex-col min-[1100px]:flex-row items-center justify-between">
+        <!-- Left Character -->
+        <div class="hidden min-[1100px]:block w-1/4 relative h-[500px]">
+          <img
+            src={urlFor(game.character1Img)}
+            alt={`${game.name} character illustration (left)`}
+            class="absolute bottom-0 left-0 w-[80%] h-full object-contain"
+            loading="eager"
+          />
+        </div>
+        <!-- Center Content -->
+        <div class="w-full min-[1100px]:w-1/2 text-center">
+          <h1 class="text-white mb-2">{game.name}</h1>
+          <p class="subtitle mb-8 max-w-2xl mx-auto">
+            {game.game_description}
+          </p>
+          <!-- Features -->
+          <ul class="flex flex-wrap justify-start md:justify-center gap-x-4 gap-y-3 mb-10 sm:text-[20px] mx-auto  w-[320px] md:w-full" role="list">
+            {
+              game.hero_features.map((feature: any) => (
+                <li class="flex items-center gap-2">
+                  <img src={urlFor(feature.icon)} alt="" class="color-[var(--accent)]" />
+                  <span>{feature.name}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <!-- Actions -->
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="#serverplan" class="button-primary" data-i18n="gameServerDetailAstroHeaderComponent.ownToday">Own Today!</a>
+            <a
+              href={`/configurator?game=${encodeURIComponent(game.name)}`}
+              class="button-secondary">Help Me Choose!</a
+            >
+          </div>
+        </div>
+
+        <!-- Right Character -->
+        <div class="hidden min-[1100px]:block w-1/4 relative h-[500px]">
+          <img
+            src={urlFor(game.character2Img)}
+            alt={`${game.name} character illustration (right)`}
+            class="absolute bottom-0 right-0 w-[80%] h-full object-contain"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,112 @@
+---
+const images = [
+  "../../assets/images/pages/gameServers/7_day_to_die.webp",
+  "../../assets/images/pages/gameServers/7_day_to_die.webp",
+  "../../assets/images/pages/gameServers/palworld.webp"
+];
+---
+
+<div class="carousel">
+  <div class="carousel-track" id="carouselTrack">
+    {images.map((img) => <div class="carousel-slide" style={`background-image: url('${img}')`} />)}
+  </div>
+
+  <div class="carousel-dots" id="carouselDots">
+    {images.map((_, i) => <button class="dot" data-index={i} />)}
+  </div>
+</div>
+
+<script is:inline>
+  const track = document.getElementById("carouselTrack");
+  const dots = [...document.querySelectorAll(".dot")];
+
+  let index = 0;
+  const total = dots.length;
+
+  function updateCarousel() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      index = Number(dot.dataset.index);
+      updateCarousel();
+    });
+  });
+
+  // Auto-slide
+  setInterval(() => {
+    index = (index + 1) % total;
+    updateCarousel();
+  }, 4000);
+
+  updateCarousel();
+</script>
+
+<style lang="scss">
+  @use "/src/styles/core/mixins" as *;
+
+  .carousel {
+    width: 100%;
+
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    width: 530px;
+
+    @include xl {
+      width: 100%;
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.6s ease;
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    height: 371px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 25px;
+
+    @include md {
+      height: 360px;
+    }
+
+    @include sm {
+      height: 280px;
+    }
+
+    @include xs {
+      height: 220px;
+    }
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffffff30;
+    border: 2px solid #ffffff20;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      width: 28px;
+      border-radius: 20px;
+    }
+  }
+</style>

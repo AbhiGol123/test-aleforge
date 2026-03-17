@@ -1,0 +1,69 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Contact from "@components/sections/contact.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+---
+
+<Layout>
+  <Navigation />
+  <Breadcrumbs />
+  <section class="terms_of_service">
+    <div class="global-padding section-padding">
+      <div class="container-large">
+        <div class="title-wrapper">
+          <span class="overline" data-i18n="refundPolicyPage.legalInfo">Legal Info</span>
+          <h1 data-i18n="refundPolicyPage.refundPolicy">Refund Policy</h1>
+        </div>
+        <div class="policy-wrapper">
+          <h2>Refund Policy for AleForge</h2>
+
+          <h3 data-i18n="refundPolicyPage.iOverview">I. Overview</h3>
+          <p>
+            This Refund Policy explains the conditions under which AleForge may issue refunds for purchased services. By
+            subscribing to our platform, you agree to the terms outlined below.
+          </p>
+          <p data-i18n="refundPolicyPage.allServicesBilledAdvanceRenew">All services are billed in advance and renew automatically unless canceled by the customer.</p>
+
+          <h3 data-i18n="refundPolicyPage.iiRefundEligibility">II. Refund Eligibility</h3>
+          <p data-i18n="refundPolicyPage.refundsMayGrantedUnderFollowing">Refunds may be granted under the following circumstances:</p>
+          <ul>
+            <li data-i18n="refundPolicyPage.duplicateAccidentalPayments">Duplicate or accidental payments</li>
+            <li data-i18n="refundPolicyPage.serviceMalfunctionUnableResolve">A service malfunction that we are unable to resolve</li>
+            <li data-i18n="refundPolicyPage.confirmedUnauthorizedTransactions">Confirmed unauthorized transactions</li>
+          </ul>
+
+          <h3 data-i18n="refundPolicyPage.iiiNonRefundableSituations">III. Non-Refundable Situations</h3>
+          <p>Refunds will not be provided for:</p>
+          <ul>
+            <li data-i18n="refundPolicyPage.partiallyUsedSubscriptionPeriods">Partially used subscription periods</li>
+            <li data-i18n="refundPolicyPage.serviceDissatisfactionCausedUserConfiguration">Service dissatisfaction caused by user configuration issues</li>
+            <li data-i18n="refundPolicyPage.oneTimeAddOnsUpgrades">One-time add-ons or upgrades once activated</li>
+          </ul>
+
+          <h3 data-i18n="refundPolicyPage.ivRequestProcess">IV. Request Process</h3>
+          <p data-i18n="refundPolicyPage.usersMustContactSupportWithin">Users must contact support within 7 days of the transaction with:</p>
+          <ul>
+            <li data-i18n="refundPolicyPage.accountEmail">Account email</li>
+            <li data-i18n="refundPolicyPage.invoicePaymentId">Invoice or payment ID</li>
+            <li data-i18n="refundPolicyPage.detailsAboutRefundRequest">Details about the refund request</li>
+          </ul>
+
+          <h3 data-i18n="refundPolicyPage.vChargebacks">V. Chargebacks</h3>
+          <p>
+            Initiating a chargeback without contacting us first may result in immediate account suspension while the
+            situation is reviewed.
+          </p>
+
+          <h3 data-i18n="refundPolicyPage.viPolicyUpdates">VI. Policy Updates</h3>
+          <p data-i18n="refundPolicyPage.aleforgeMayModifyRefundPolicy">AleForge may modify this Refund Policy at any time, and changes take effect once published.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Contact />
+</Layout>
+
+<style lang="scss">
+  @use "src/styles/pages/legal.scss" as *;
+</style>

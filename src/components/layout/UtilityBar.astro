@@ -1,0 +1,37 @@
+---
+import ThemeToggle from "@components/ThemeToggle.astro";
+---
+
+<div class="top-bar-info border-b pb-3 pt-3 border-[#FFFFFF]/20 flex items-center justify-between">
+  <!-- Left Side: Phone and Email -->
+  <div class="flex items-center gap-4 md:gap-4">
+    <span class="inline-flex max-[370px]:text-[12px] items-center gap-1">
+      <div
+        class="h-5 w-5 bg-contain bg-no-repeat bg-center opacity-70"
+        style={{backgroundImage: "var(--icon-device)"}}
+        role="img"
+        aria-label="Phone"
+      >
+      </div>
+      (415) 931-1616
+    </span>
+
+    <span class="inline-flex max-[370px]:text-[12px] items-center gap-1">
+      <div
+        class="h-5 w-5 bg-contain bg-no-repeat bg-center opacity-70"
+        style={{backgroundImage: "var(--icon-email)"}}
+        role="img"
+        aria-label="Email"
+      >
+      </div>
+      hello@Ex.com
+    </span>
+  </div>
+
+  <!-- Right Side: Theme Toggle -->
+  <div class="flex items-center gap-2 text-[16px] text-[var(--text-secondary)]">
+    <span class="hidden min-[520px]:inline" data-i18n="utilitybarComponent.blue">Blue</span>
+    <ThemeToggle />
+    <span class="hidden min-[520px]:inline" data-i18n="utilitybarComponent.copper">Copper</span>
+  </div>
+</div>

@@ -1,0 +1,154 @@
+---
+import HeroCarousel from "./hero_carousel.astro";
+
+const buttons = [
+  {label: "View All Plan", link: "/game-server"},
+  {label: "Explore Features", link: "#"}
+];
+---
+<section class="section-hero">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="mx-auto  flex flex-col xl:flex-row justify-between gap-4 hero-container">
+        <!-- LEFT SIDE -->
+        <div class="flex-1.25 space-y-6 text-center xl:text-left" data-reveal="fade-up">
+          <div
+            class="inline-flex bg-[#FFFFFF]/10 items-center gap-2 rounded-full border border-[#FFFFFF]/10 px-5 py-2 text-sm text-[var(--text-secondary)] backdrop-blur-md hero-badge"
+          >
+            <div class="w-4 h-4 bg-contain bg-no-repeat bg-center" style="background-image: var(--icon-home-first);">
+            </div>
+            Reliable &amp; Affordable Servers
+          </div>
+
+          <!-- Headline -->
+          <h1 class="home_hero_heading hero-heading max-w-xl" data-i18n="homeHeaderComponent.forgeWorldPowerfulGameServer">
+            Forge Your World
+            With Powerful Game
+            Server Hosting
+          </h1>
+          <span class="text-lg text-[var(--text-muted)]">
+            Servers Starting From
+            <span class="font-semibold text-[var(--text-primary)] underline underline-offset-2" data-i18n="homeHeaderComponent.just499Month">Just $4.99/Month</span>
+          </p>
+
+          <!-- Buttons -->
+          <div class="button-group">
+            {
+              buttons.map((btn) => (
+                <a href={btn.link} class="animated-btn">
+                  <span class="btn-text">{btn.label}</span>
+                  <span class="btn-icon">
+                    <svg
+                      width="11"
+                      height="11"
+                      viewBox="0 0 11 11"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 h-4 rotate-180"
+                    >
+                      <path
+                        d="M10.1341 5.46672H0.800781M0.800781 5.46672L5.46745 10.1334M0.800781 5.46672L5.46745 0.800049"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+          <div class="hidden min-[1151px]:block">
+            <img src="../../assets/images/Trust Pilot Review card.png" alt="Trustpilot Logo" />
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="relative flex justify-center" data-reveal="zoom-in">
+          <HeroCarousel />
+        </div>
+
+        <!-- Trustpilot Mobile -->
+        <div class="block min-[1151px]:hidden mx-auto">
+          <img src="../../assets/images/Trust Pilot Review card.png" alt="Trustpilot Logo" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .animated-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    overflow: hidden;
+    transition: color 0.3s ease;
+    isolation: isolate;
+    padding-left: 15px;
+
+    .btn-text {
+      position: relative;
+      z-index: 2;
+      transition: color 0.4s ease;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .btn-icon {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      z-index: 3;
+      flex-shrink: 0;
+      transition: transform 0.4s ease;
+    }
+
+    /* // animated background — starts hidden on the right */
+    &::before {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      border-radius: 50px;
+      z-index: 1;
+      transition: width 0.55s ease-in-out;
+      transform-origin: right center;
+    }
+
+    /* // hover effects */
+    &:hover::before {
+      width: 100%;
+      right: 0;
+      left: auto;
+    }
+
+    &:hover .btn-text {
+      color: #fff;
+    }
+
+    &:hover .btn-icon {
+      transform: translateX(4px);
+    }
+
+    /* // Smooth retract when hover ends */
+    &:not(:hover)::before {
+      transition: width 0.45s ease-in-out;
+    }
+  }
+</style>

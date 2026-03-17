@@ -1,0 +1,234 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import Navigation from "@components/layout/Nav/navigation.astro";
+import Breadcrumbs from "@components/sections/breadcrumbs.astro";
+import BlogCard from "@components/blog/BlogCard.astro";
+import { sanity } from "../../lib/sanity";
+
+const posts = await sanity.fetch(`
+  *[_type == "post"] | order(publishedAt desc){
+    _id,
+    title,
+    slug,
+    excerpt,
+    category,
+    publishedAt,
+    mainImage,
+    author
+  }
+`);
+const categories = [
+  "All",
+  ...new Set(posts.map((p:any) => p.category).filter(Boolean)),
+];
+
+---
+
+<Layout>
+  <div class="page_wrapper">
+    <Navigation />
+    <Breadcrumbs pageName="Blog" />
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="global-padding section-padding">
+        <div class="container-large">
+          <div class="max-w-6xl mx-auto text-center">
+            <h1 data-i18n="blogPage.newsInsights">News & Insights</h1>
+            <p class="subtitle" data-i18n="blogPage.shareTipsTricksStoriesHelp">
+              We Share Tips, Tricks, And Stories To Help You Build And Grow Amazing Gaming Communities.
+            </p>
+
+            <div class="flex md:gap-6 justify-center flex-col md:flex-row">
+              <div class="flex items-center justify-center gap-[8px] mt-4 text-[20px]">
+                <div
+                  class="h-8 w-8 bg-[#FFFFFF]/6 rounded-[10px] bg-no-repeat bg-center"
+                  style={{backgroundImage: "var(--blog-hero-published-icon)"}}>
+                </div>
+                <span data-i18n="blogPage.200TutorialsPublished"> 200+ Tutorials Published</span>
+              </div>
+              <div class="flex items-center justify-center gap-[8px] mt-4 text-[20px]">
+                <div
+                  class="h-8 w-8 bg-[#FFFFFF]/6 rounded-[10px] bg-no-repeat bg-center"
+                  style={{backgroundImage: "var(--blog-hero-covering-icon)"}}>
+                </div>
+                <span data-i18n="blogPage.covering10Games"> Covering 10+ Games </span>
+              </div>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="mt-8 flex justify-center">
+              <div
+                class="flex h-[60px] items-center border border-[var(--accent)] backdrop-blur-sm w-full max-w-3xl rounded-full px-4 bg-[var(--bg-body)]">
+                <input
+                  id="search-input"
+                  type="text"
+                  placeholder="Get Your Favorite Game Server……"
+                  class="flex-1 bg-transparent outline-none text-white placeholder-white/50 px-2"
+                />
+              </div>
+            </div>
+
+            <!-- FILTERS -->
+            <div class="mt-6 flex flex-col md:flex-row items-center gap-[10px] md:gap-[30px] md:justify-center">
+              <!-- CATEGORY FILTER -->
+              <div class="relative inline-block text-[20px]" id="category-filter">
+                <button id="category-btn" class="flex items-center gap-1 hover:text-white">
+                  <span class="text-[#7D7D7D] mr-[10px]" data-i18n="blogPage.category">Category :</span>
+                  <span id="category-text" data-i18n="blogPage.all">All</span>
+                  <span class="material-icons">keyboard_arrow_down</span>
+                </button>
+
+                <div
+                  id="category-menu"
+                  class="hidden absolute mt-2 w-40 bg-[#090A14]/70 backdrop-blur-md border border-white/10 rounded-lg shadow-lg text-left z-20">
+                  {
+                    categories.map((cat) => (
+                      <button
+                        class="block w-full text-left px-4 py-2 text-sm text-white/70 hover:bg-white/10 hover:text-white"
+                        data-value={cat}>
+                        {cat}
+                      </button>
+                    ))
+                  }
+                </div>
+              </div>
+
+              <!-- POPULARITY FILTER -->
+              <div class="relative inline-block text-[20px]" id="popularity-filter">
+                <button id="popularity-btn" class="flex items-center gap-1 hover:text-white">
+                  <span class="text-[#7D7D7D] mr-[10px]" data-i18n="blogPage.popularity">Popularity :</span>
+                  <span id="popularity-text" data-i18n="blogPage.latest2">Latest</span>
+                  <span class="material-icons">keyboard_arrow_down</span>
+                </button>
+
+                <div
+                  id="popularity-menu"
+                  class="hidden absolute mt-2 w-40 bg-[#090A14]/70 backdrop-blur-md border border-white/10 rounded-lg shadow-lg text-left z-20">
+                  <button
+                    class="block w-full text-left px-4 py-2 text-sm text-white/70 hover:bg-white/10 hover:text-white"
+                    data-value="Latest" data-i18n="blogPage.latest2">
+                    Latest
+                  </button>
+
+                  <button
+                    class="block w-full text-left px-4 py-2 text-sm text-white/70 hover:bg-white/10 hover:text-white"
+                    data-value="Oldest" data-i18n="blogPage.oldest">
+                    Oldest
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG GRID -->
+    <section class="blogs">
+      <div class="global-padding pb-[5%]">
+        <div class="container-large">
+          <div class="blog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[25px]">
+        {posts.map((post:any) => (
+  <BlogCard post={post} />
+))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<!-- STYLES -->
+<style lang="scss">
+  @use "/src/styles/core/mixins.scss" as *;
+
+  .page_wrapper {
+    background-image: var(--bg-blog-first-img);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size:contain
+  }
+</style>
+
+<!-- JS FILTER LOGIC -->
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("search-input");
+    const categoryBtn = document.getElementById("category-btn");
+    const categoryMenu = document.getElementById("category-menu");
+    const categoryText = document.getElementById("category-text");
+    const popularityBtn = document.getElementById("popularity-btn");
+    const popularityMenu = document.getElementById("popularity-menu");
+    const popularityText = document.getElementById("popularity-text");
+
+    const postsContainer = document.querySelector(".blog-grid");
+    const posts = Array.from(document.querySelectorAll(".blog-card"));
+
+    let selectedCategory = "All";
+    let popularity = "Latest";
+
+    /* CATEGORY DROPDOWN */
+    categoryBtn.onclick = (e) => {
+      e.stopPropagation();
+      categoryMenu.classList.toggle("hidden");
+    };
+
+    categoryMenu.querySelectorAll("button").forEach((btn) => {
+      btn.onclick = () => {
+        selectedCategory = btn.dataset.value;
+        categoryText.textContent = selectedCategory;
+        categoryMenu.classList.add("hidden");
+        applyFilters();
+      };
+    });
+
+    /* POPULARITY DROPDOWN */
+    popularityBtn.onclick = (e) => {
+      e.stopPropagation();
+      popularityMenu.classList.toggle("hidden");
+    };
+
+    popularityMenu.querySelectorAll("button").forEach((btn) => {
+      btn.onclick = () => {
+        popularity = btn.dataset.value;
+        popularityText.textContent = popularity;
+        popularityMenu.classList.add("hidden");
+        applyFilters();
+      };
+    });
+
+    /* SEARCH INPUT */
+    searchInput.oninput = applyFilters;
+
+    document.onclick = () => {
+      categoryMenu.classList.add("hidden");
+      popularityMenu.classList.add("hidden");
+    };
+
+    /* FILTER LOGIC */
+    function applyFilters() {
+      const searchTerm = searchInput.value.toLowerCase();
+
+      let filtered = posts.filter((post) => {
+        const title = post.dataset.title;
+        const category = post.dataset.category;
+
+        const matchesCategory = selectedCategory === "All" || category === selectedCategory;
+
+        const matchesSearch = title.includes(searchTerm);
+
+        return matchesCategory && matchesSearch;
+      });
+
+      filtered.sort((a, b) => {
+        const dateA = new Date(a.dataset.date);
+        const dateB = new Date(b.dataset.date);
+        return popularity === "Latest" ? dateB - dateA : dateA - dateB;
+      });
+
+      postsContainer.innerHTML = "";
+      filtered.forEach((post) => postsContainer.appendChild(post));
+    }
+  });
+</script>

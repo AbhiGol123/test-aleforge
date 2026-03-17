@@ -1,0 +1,303 @@
+---
+interface FeatureRow {
+name: string;
+tooltip?: string;
+values: (boolean | string)[];
+}
+
+const hosts = ["AleForge", "Bisect Hosting", "ShockByte", "Pebble Host", "Bloom Host"];
+
+const features: FeatureRow[] = [
+{ name: "Reserved CPU Cores", tooltip: "Dedicated CPU ensures no performance drops.", values: [true, true, false, true,
+true] },
+{ name: "Game Swap", tooltip: "Switch between games instantly.", values: [true, true, true, true, true] },
+{ name: "Free Reverse Proxy", tooltip: "Improves security and privacy.", values: [true, true, false, true, false] },
+{ name: "Free Dedicated IP", tooltip: "Permanent dedicated IP address.", values: [true, false, true, false, true] },
+{ name: "Create Multiple Servers", tooltip: "Run multiple servers on one plan.", values: [true, false, true, false,
+false] },
+{ name: "Free User Driven Remote Backups", tooltip: "Manual and automatic backups.", values: [true, true, true, false,
+false] },
+{ name: "Free Disaster Recovery Backups", tooltip: "Automatic disaster recovery.", values: [true, false, false, true,
+true] },
+];
+
+const pricing = ["$16/Mo", "$40/Mo", "$40/Mo", "$40/Mo", "$40/Mo"];
+const hardware = [
+"Standard  (Ryzen 9 5950X)",
+"Premium (Xenon 2276G)",
+"Emerald (Xenon E-2236)",
+"Premium (Ryzen 7 5800X)",
+"Performance (Ryzen 9 3950X)"
+];
+---
+<section class="comparison-section ">
+    <div class="global-padding section-padding">
+        <div class="container-large">
+            <div class="title-wrapper">
+                <span class="overline" style="color: var(--accent);" data-i18n="advancePanelTableComponent.howStackUp">How We Stack Up</span>
+                <h2 data-i18n="advancePanelTableComponent.howAleforgeCompares">How AleForge Compares</h2>
+                <p class="subtitle" data-i18n="advancePanelTableComponent.seeHowAleforgeStacksUp">
+                    See how AleForge stacks up against other popular Minecraft server hosting providers. Our
+                    transparent comparison highlights the features and pricing that set us apart.
+                </p>
+            </div>
+
+            <div class="table_wrapper ">
+
+                 <!-- DESKTOP TABLE -->
+                  <div class="comparison-desktop ">
+                <div class="scroll_container  ">
+                    <table class="overflow-x-auto border-collapse text-white mx-auto w-full min-w-auto xl:min-w-[1300px]">
+                        <thead data-astro-cid-3l5xrxz2="">
+                            <tr data-astro-cid-3l5xrxz2="">
+                                <th class="p-4 text-left w-1/4"></th>
+                                <th class="p-4 w-[15%] align-bottom pb-8">
+                                    <div class="w-[130px] h-[38px] bg-contain bg-no-repeat bg-left"
+                                        style={{ backgroundImage: "var(--logo)" }}></div>
+
+                                </th>
+                                <th class="p-4 " data-i18n="advancePanelTableComponent.bisectHosting">Bisect Hosting</th>
+                                <th class="p-4  " data-i18n="advancePanelTableComponent.shockbyte">ShockByte</th>
+                                <th class="p-4  " data-i18n="advancePanelTableComponent.pebbleHost">Pebble Host</th>
+                                <th class="p-4  " data-i18n="advancePanelTableComponent.bloomHost">Bloom Host</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {features.map((row) => (
+                            <tr class="border-t border-[#2F3034] w-[40%] py-[20px]">
+                                <!-- Feature name + tooltip -->
+                                <td class="p-5 font-base text-[18px] feature-label flex  justify-start" style="min-width: 250px; "
+                                    data-tooltip={row.tooltip}>
+                                      <span class="whitespace-nowrap"> {row.name }</span>
+                                    <span class="info-icon ml-[10px] mt-[5px]" data-tooltip={row.tooltip}></span>
+                                </td>
+
+                                <!-- Tick marks or empty -->
+                                {row.values.map((val) => (
+                                <td class="text-center">
+                                    {val === true ? (
+                                    <span class="text-[var(--accent)] text-xl">✔</span>
+                                    ) : val === false ? (
+                                    ""
+                                    ) : (
+                                    <span>{val}</span>
+                                    )}
+                                </td>
+                                ))}
+                            </tr>
+                            ))}
+
+                            <!-- Price Row -->
+                            <tr class="border-t border-[#2F3034]">
+                                <td class="p-5 text-[18px] font-semibold" data-i18n="advancePanelTableComponent.price8gbServer">Price For 8GB Server</td>
+                                {pricing.map((price, i) => (
+                                <td class="text-center text-lg font-semibold text-white">{price}</td>
+                                ))}
+                            </tr>
+
+                            <!-- Hardware Row -->
+                            <tr class="border-t border-[#2F3034]">
+                                <td class="p-5 text-[18px] " style="max-width: 100px;">Comparison Data Collected In<br />April 2024</td>
+                                {hardware.map((hw) => (
+                            <td class="text-center text-sm text-[var(--text-muted)] leading-snug">
+  {hw.split(" (")[0]}
+  <br />
+  ({hw.split(" (")[1]}
+</td>
+
+
+                                ))}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+
+                  <!-- MOBILE STACKED VERSION -->
+  <div class="comparison-mobile space-y-[10px] overflow-hidden">
+    {features.map((row) => (
+      <div class="mobile-feature border-b border-[#2F3034] p-4 pt-0">
+        <div class=" text-[22px] flex gap-[10px] item-center">{row.name}<span class="info-icon mt-2" data-tooltip={row.tooltip}></span></div>   
+
+        <div class="mt-2 space-y-1">
+          {row.values.map((val, i) => (
+            <div class="flex justify-between text-[15px]">
+              <span class="text-[18px]">{hosts[i]}</span>
+              <span class="text-[var(--accent)] text-[22px] ">
+                {val === true ? "✔" : val === false ? " " : val}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    <!-- Price -->
+    <div class="mobile-feature border-b border-[#2F3034] p-4 ">
+      <div class="font-semibold text-lg">Price for 8GB Server</div>
+      <div class="mt-2 space-y-1">
+        {pricing.map((price, i) => (
+          <div class="flex justify-between text-[15px]">
+            <span class="text-gray-400">{hosts[i]}</span>
+            <span class="text-white font-semibold">{price}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Hardware -->
+    <div class="mobile-feature border-b border-[#2F3034] p-4 ">
+      <div class="font-semibold text-lg" data-i18n="advancePanelTableComponent.comparisonDataCollectedApril2024">Comparison Data Collected in April 2024</div>
+      <div class="mt-2 space-y-1">
+        {hardware.map((hw, i) => (
+          <div class="flex justify-between  text-[15px]" >
+            <span class="text-gray-400">{hosts[i]}</span>
+            <span class="text-white ">{hw}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    table {
+        width: max-content;
+        border-collapse: collapse;
+       
+    }
+
+    td.feature-label {
+        min-width: 250px;
+        white-space: normal;
+    }
+    .scroll_container {
+        overflow-x: auto;
+        overflow-y: visible;
+        padding-bottom: 10px;
+    }
+    .scroll_container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .scroll_container::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 50px;
+    }
+
+   
+
+    /* Mobile (640px and below) */
+    @media (max-width: 640px) {
+        .table_wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .scroll_container {
+            width: 100%;
+        }
+
+        table th,
+        table td {
+            // padding: 10px;
+            min-width: 100px;
+            font-size: 13px;
+        }
+
+        td.feature-label {
+            min-width: 180px;
+            font-size: 14px;
+        }
+
+        /* Keep tooltip width reasonable */
+        .feature-label::before {
+            width: 180px;
+            font-size: 12px;
+        }
+    }
+
+    /* Small Mobile (<480px) */
+    @media (max-width: 480px) {
+        td.feature-label {
+            min-width: 160px;
+        }
+
+        table th,
+        table td {
+            min-width: 90px;
+            font-size: 12px;
+        }
+    }
+
+
+    /* Desktop table visible by default */
+.comparison-desktop {
+  display: block;
+}
+
+/* Mobile stacked layout hidden by default */
+.comparison-mobile {
+  display: none;
+}
+
+/* Enable mobile layout ONLY on small screens */
+@media (max-width: 768px) {
+  .comparison-desktop {
+    display: none;
+  }
+  
+  .comparison-mobile {
+    display: block;
+  }
+}
+
+/* Info tooltip icon beside text */
+.info-icon {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--text-muted);
+  color: var(--text-muted);
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  position: relative;
+}
+
+.info-icon::before {
+  content: "i";
+  font-weight: 600;
+}
+
+/* Tooltip bubble */
+.info-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -45px;
+  left: 0;
+  width: 220px;
+  background: var(--bg-card-strong);
+  padding: 10px 14px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.25s ease;
+  z-index: 10;
+}
+
+.info-icon:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+</style>

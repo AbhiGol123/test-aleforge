@@ -1,0 +1,281 @@
+---
+import { sanity } from "src/lib/sanity";
+import FiltersPanel from "./children/FiltersPanel.astro";
+import ServerList from "./children/ServerList.astro";
+const CPU_LOGOS: Record<string, string> = {
+  intel: "/assets/images/icons/General/hosting/Intel@2x.png",
+  amd: "/assets/images/icons/General/hosting/AMD@2x.png",
+};
+const servers = await sanity.fetch(`
+  *[_type == "dedicatedServer"] | order(price asc)
+`);
+
+let filters = {
+  cpu: "all",
+  location: "all",
+  minCores: 4,
+   maxCores: 64,
+   minPrice: 0,
+  maxPrice: 1000,
+   minMemory: 16,
+  maxMemory: 1024,
+   storage: "all", 
+
+};
+
+// derive locations from data
+const locations = [
+  ...new Set(servers.flatMap((s: any) => (s.locations || []).map((l: any) => l.toLowerCase()))),
+];
+
+const filteredServers = servers.filter((s: any) => {
+  return (
+    (filters.cpu === "all" || s.cpuBrand === filters.cpu) &&
+    s.cores >= filters.minCores &&
+    s.price <= filters.maxPrice &&
+    (filters.location === "all" || s.locations?.map((l: any) => l.toLowerCase()).includes(filters.location))
+  );
+});
+---
+
+<section class="server-pricing" id="dedicatedServerPricing">
+  <div class="section-padding global-padding">
+    <div class="container-large">
+      <!-- HEADER (UNCHANGED UI) -->
+      <div class="flex flex-col lg:flex-row justify-between mb-12 items-center gap-[6px]">
+        <div class="text-center lg:text-left lg:max-w-[35%] w-full">
+          <h2 data-i18n="serverPricingComponent.dedicatedServerPricing">Dedicated Server Pricing</h2>
+        </div>
+        <div class="flex flex-col items-center lg:items-end gap-4 w-full lg:max-w-[55%]">
+          <p class="subtitle text-center lg:text-right" data-i18n="serverPricingComponent.experienceHighPerformanceDedicatedServers">
+            Experience High-Performance Dedicated Servers With Affordable Pricing.
+          </p>
+          <a href="/contactUs" class="button-primary mt-[20px]" data-i18n="serverPricingComponent.contactUs">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- FILTERS -->
+        <div class="lg:col-span-3">
+          <FiltersPanel
+           
+            filters={filters}
+            locations={locations}
+            onFilterChange={(key: any, value: any) => {
+              filters = { ...filters, [key]: value };
+            }}
+          />
+        </div>
+
+        <!-- SERVER LIST -->
+        <div class="lg:col-span-9">
+          <ServerList servers={filteredServers} CPU_LOGOS={CPU_LOGOS} />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script >
+  // @ts-nocheck
+
+  const DEFAULT_FILTERS = {
+  cpu: "all",
+  location: "all",
+  storage: "all",
+  minCores: 4,
+  maxCores: 64,
+  minPrice: 0,
+  maxPrice: 1000,
+  minMemory: 16,
+  maxMemory: 1024,
+};
+
+
+  let filters = {
+    cpu: "all",
+  location: "all",
+  minCores: 4,
+   maxCores: 64,
+   minPrice: 0,
+  maxPrice: 1000,
+   minMemory: 16,
+  maxMemory: 1024,
+   storage: "all", 
+  };
+
+ function applyFilters() {
+  document.querySelectorAll(".server-card").forEach((card) => {
+    const cpu = card.dataset.cpu;
+    const cores = Number(card.dataset.cores);
+    const price = Number(card.dataset.price);
+    const memory = Number(card.dataset.memory);
+    const locations = card.dataset.locations || "";
+    const storage = card.dataset.storage;
+    const visible =
+      (filters.cpu === "all" || cpu === filters.cpu) &&
+      cores >= filters.minCores &&
+      cores <= filters.maxCores &&            
+      price >= filters.minPrice &&            
+      price <= filters.maxPrice &&            
+      memory >= filters.minMemory &&          
+      memory <= filters.maxMemory &&   
+       (filters.storage === "all" || storage === filters.storage) &&
+      (filters.location === "all" ||
+        locations.includes(filters.location));
+
+    card.style.display = visible ? "" : "none";
+  });
+}
+
+
+  // CPU buttons
+  const cpuButtons = document.querySelectorAll("[data-cpu-filter]");
+  cpuButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filters.cpu = btn.dataset.cpuFilter;
+      cpuButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      applyFilters();
+    });
+  });
+
+  // cores
+  const coresRange = document.querySelector("#coresRange");
+  coresRange?.addEventListener("input", (e) => {
+    filters.minCores = Number(e.target.value);
+    applyFilters();
+  });
+
+  // price
+  const priceRange = document.querySelector("#priceRange");
+  priceRange?.addEventListener("input", (e) => {
+    filters.maxPrice = Number(e.target.value);
+    applyFilters();
+  });
+
+  // location
+  const locationSelect = document.querySelector("#locationSelect");
+  locationSelect?.addEventListener("change", (e) => {
+    filters.location = e.target.value.toLowerCase();
+    applyFilters();
+  });
+
+  // storage type buttons
+  const storageButtons = document.querySelectorAll("[data-storage-filter]");
+
+storageButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    filters.storage = btn.dataset.storageFilter;
+
+    storageButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    applyFilters();
+  });
+});
+
+
+  // multi-range slider logic for cores
+  function initMultiRange(container) {
+    const minRange = container.querySelector(".range-min");
+    const maxRange = container.querySelector(".range-max");
+    const minBadge = container.querySelector(".badge-min");
+    const maxBadge = container.querySelector(".badge-max");
+    const track = container.querySelector(".range-track");
+
+    const minKey = container.dataset.filterMin;
+    const maxKey = container.dataset.filterMax;
+    const gap = Number(container.dataset.step || 1);
+
+    function update() {
+      let min = Number(minRange.min);
+      let max = Number(minRange.max);
+
+      let minVal = Number(minRange.value);
+      let maxVal = Number(maxRange.value);
+
+      if (maxVal - minVal < gap) {
+        if (event?.target === minRange) {
+          minRange.value = maxVal - gap;
+          minVal = minRange.value;
+        } else {
+          maxRange.value = minVal + gap;
+          maxVal = maxRange.value;
+        }
+      }
+
+      const minPct = ((minVal - min) / (max - min)) * 100;
+      const maxPct = ((maxVal - min) / (max - min)) * 100;
+
+      track.style.left = `${minPct}%`;
+      track.style.width = `${maxPct - minPct}%`;
+
+      minBadge.textContent = minVal.toString().padStart(2, "0");
+      maxBadge.textContent = maxVal.toString().padStart(2, "0");
+
+      minBadge.style.left = `${minPct}%`;
+      maxBadge.style.left = `${maxPct}%`;
+
+      filters[minKey] = minVal;
+      filters[maxKey] = maxVal;
+
+      applyFilters();
+    }
+
+    minRange.addEventListener("input", update);
+    maxRange.addEventListener("input", update);
+
+    update();
+  }
+
+  document.querySelectorAll(".multi-range").forEach(initMultiRange);
+// ========================================================================
+// reset filters
+// =========================================================================
+  const resetBtn = document.getElementById("resetFilters");
+resetBtn?.addEventListener("click", () => {
+  // reset filter state
+  filters = { ...DEFAULT_FILTERS };
+
+  // 🔁 CPU buttons
+  document.querySelectorAll("[data-cpu-filter]").forEach((btn) => {
+    btn.classList.toggle(
+      "active",
+      btn.dataset.cpuFilter === "all"
+    );
+  });
+
+  // 🔁 Storage buttons
+  document.querySelectorAll("[data-storage-filter]").forEach((btn) => {
+    btn.classList.toggle(
+      "active",
+      btn.dataset.storageFilter === "all"
+    );
+  });
+
+  // 🔁 Location dropdown
+  const locationSelect = document.getElementById("locationSelect");
+  if (locationSelect) locationSelect.value = "all";
+
+  // 🔁 Reset all multi-range sliders
+  document.querySelectorAll(".multi-range").forEach((container) => {
+    const minRange = container.querySelector(".range-min");
+    const maxRange = container.querySelector(".range-max");
+
+    const minKey = container.dataset.filterMin;
+    const maxKey = container.dataset.filterMax;
+
+    minRange.value = DEFAULT_FILTERS[minKey];
+    maxRange.value = DEFAULT_FILTERS[maxKey];
+
+    // force UI + filter refresh
+    minRange.dispatchEvent(new Event("input"));
+    maxRange.dispatchEvent(new Event("input"));
+  });
+
+  // apply filters
+  applyFilters();
+});
+
+</script>

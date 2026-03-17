@@ -1,0 +1,73 @@
+---
+const pathname = Astro.url.pathname;
+
+// URL parts split by "/"
+const parts = pathname.split("/").filter(Boolean);
+
+// Get all available routes: only pages that exist (index.astro)
+const modules = import.meta.glob("/src/pages/**/index.astro");
+
+const pageFiles = Object.values(modules).map((loader: any) => ({
+  url: loader.url
+}));
+
+// Convert file paths → real site URLs
+const existingRoutes = pageFiles
+  .map((file) => (file.url ? file.url.replace(/\/index\.html$/, "") : null))
+  .filter((url) => url !== null);
+
+// Build breadcrumb list
+let breadcrumbs: {label: string; href: string | null}[] = [];
+
+parts.forEach((part, index) => {
+  const segmentPath = "/" + parts.slice(0, index + 1).join("/");
+
+  const label = part.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+
+  const isLast = index === parts.length - 1;
+
+  // Last segment → ALWAYS show but no link
+  if (isLast) {
+    breadcrumbs.push({label, href: null});
+    return;
+  }
+
+  // Middle segment → only show if actual route exists
+  if (existingRoutes.includes(segmentPath)) {
+    breadcrumbs.push({label, href: segmentPath});
+  }
+});
+---
+
+<section class="breadcrumbs">
+  <div class="global-padding">
+    <div class="container-large">
+      <div class="flex items-center gap-2 text-md text-[var(--text-muted)]">
+        <a href="/" class="hover:text-[var(--text-primary)]" data-i18n="breadcrumbsComponent.home">Home</a>
+
+        {
+          breadcrumbs.map((crumb) => (
+            <>
+              <span>/</span>
+
+              {crumb.href ? (
+                <a href={crumb.href} class="hover:text-[var(--text-primary)]">
+                  {crumb.label}
+                </a>
+              ) : (
+                <span class="text-[var(--accent)]">{crumb.label}</span>
+              )}
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "/src/styles/core/mixins.scss" as *;
+  .breadcrumbs {
+   padding-top: 10px;
+  }
+</style>

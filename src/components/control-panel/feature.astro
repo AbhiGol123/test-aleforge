@@ -1,0 +1,64 @@
+---
+import FeaturesInsideBorders from "@components/sections/features_insideBorders.astro";
+
+const controlPanelFeatures = [
+  {
+    icon: "var(--icon-computer)",
+    title: "Reverse Proxy",
+    desc: "Support For Servers Running The Highest Possible Tick Rates."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Server Importer",
+    desc: "Install Your Mods And Their Dependencies With Our One-Click Plugin Installer."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Recycling Bin",
+    desc: "High-Availability Means Our Game Servers Remain Fully Operational Guaranteed."
+  },
+
+  {
+    icon: "var(--icon-computer)",
+    title: "Scheduled Backups",
+    desc: "Locations Worldwide For The Fastest Gaming Near You."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Activity Logs",
+    desc: "Powerful Hardware And Networking For Smooth Play."
+  },
+  {
+    icon: "var(--icon-computer)",
+    title: "Server Isolation",
+    desc: "All Our Game Servers Come Equipped With Gigabit Networking Standard."
+  }
+];
+---
+
+<section class="how_we_stack_up_secction" id="features">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="features_section lg:p-[60px] px-[20px] p-[60px] (--bg-feature-section)]">
+        <div class="title-wrapper">
+          <p class="overline" style="color: var(--accent);" data-i18n="featureComponent.howStackUp">How We Stack UP</p>
+          <h2 data-i18n="featureComponent.moreFeaturesLess">More Features For Less</h2>
+          <p class="subtitle" data-i18n="featureComponent.discoverComprehensiveSuiteAdvancedFeatures">
+            Discover the comprehensive suite of advanced features included free with every game server hosting plan.
+          </p>
+        </div>
+
+        <!-- GRID -->
+        <FeaturesInsideBorders items={controlPanelFeatures} data-count="6" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use "src/styles/core/mixins.scss" as *;
+  .features_section {
+    border: 1px solid var(--border-light);
+    border-radius: 30px;
+  }
+</style>

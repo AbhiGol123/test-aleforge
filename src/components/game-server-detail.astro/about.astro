@@ -1,0 +1,85 @@
+---
+import { urlFor } from "src/lib/sanityImage";
+
+const {game} = Astro.props;
+---
+
+<section class="about-section">
+  <div class="global-padding section-padding">
+    <div class="container-large">
+      <div class="about-content-wrapper">
+        <div class="title-wrapper">
+          <p class="overline mb-1" style="color: var(--accent)">
+            About {game.name}
+          </p>
+          <h2 class="font-bold">{game.about.title}</h2>
+          <p class="text-[var(--text-muted)] font-regular leading-relaxed mb-1">
+            {}
+          </p>
+          <p class="text-[var(--text-muted)] leading-relaxed">
+            {game.about.description}
+          </p>
+        </div>
+
+        <!-- Main Image -->
+        <div class="image-container">
+          <img
+            src={urlFor(game.about.image)}
+            alt={`${game.name} gameplay`}
+            class="w-full h-full object-cover rounded-lg"
+            width={1700}
+            height={1000}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  @media (min-width: 1200px) {
+    .about-content-wrapper {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-content-wrapper {
+      gap: 4rem;
+    }
+  }
+
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  @media (min-width: 1200px) {
+    .title-wrapper {
+      text-align: left;
+    }
+  }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+    aspect-ratio: 16 / 10;
+  }
+
+  .image-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+</style>

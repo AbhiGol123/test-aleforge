@@ -1,0 +1,178 @@
+---
+// Technical strength features data
+const technicalFeatures = [
+    {
+        id: 1,
+        icon: "var(--icon-strength-one)",
+        iconColor: "text-blue-500",
+        title: "Enterprise DDoS Defense",
+        description: "We stop malicious traffic up to 348 Tbps, proactively ensuring your community stays online and completely safe from all known attacks."
+    },
+    {
+        id: 2,
+        icon: "var(--icon-strength-two)",
+        iconColor: "text-blue-400",
+        title: "Lag-Free Gaming, Guaranteed",
+        description: "Cloudflare Argo Smart Routing gives you 10-30% faster routes, dramatically reducing ping and connection stability issues."
+    },
+    {
+        id: 3,
+        icon: "var(--icon-strength-three)",
+        iconColor: "text-blue-500",
+        title: "Game-Specific Security",
+        description: "Our custom firewall rules and panel updates help protect against common game exploits and server crashing attempts."
+    },
+    {
+        id: 4,
+        icon: "var(--icon-strength-four)",
+        iconColor: "text-blue-400",
+        title: "Included with Every Plan",
+        description: "This premium-level protection and performance package is integrated at no extra cost, unlike competitors who charge a premium."
+    }
+];
+---
+
+<section class="technical-strength">
+    <div class="section-padding global-padding">
+        <div class="container-large">
+            <div class="strength-layout">
+                <!-- Left Side: Content -->
+                <div class="content-side lg:text-left text-center">
+                    <p class="overline" data-i18n="technicalStrangthComponent.technicalStrength">Technical Strength</p>
+                    <h2 class=" pt-3" data-i18n="technicalStrangthComponent.aleforgeAdvantageLagFreeProtected">
+                        The AleForge Advantage:
+                        Lag-Free, Protected
+                        Servers
+                    </h2>
+                    <p class="subtitle pt-3" data-i18n="technicalStrangthComponent.stopPayingExtraBasicDefense">
+                        Stop Paying Extra For Basic Defense. Our MRP Security Suite Guarantees Continuous Uptime And A Smoother Experience For All Players.
+                    </p>
+                </div>
+
+                <!-- Right Side: Feature Cards -->
+                <div class="features-grid grid grid-cols-1 sm:grid-cols-2 gap-[1.5rem]">
+                    {technicalFeatures.map((feature) => (
+                        <div class="feature-card ">
+                            <div class="icon-wrapper">
+                                <div class="icon-container" style={`background-image: ${feature.icon}`}>
+                                </div>
+                            </div>
+                            <h3 class="feature-title" style="font-weight: 500; font-size: 20px;">
+                                {feature.title}
+                            </h3>
+                            <p class="feature-description" style="font-size: 16px; font-weight: 200;">
+                                {feature.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                <div class="cta-wrapper">
+                    <a href="#serverplan" class="button-primary" data-i18n="technicalStrangthComponent.ownToday">Own Today!</a>
+                    <p class="cta-info" data-i18n="technicalStrangthComponent.additionalInformationCanAskedHere">
+                        Additional information can be asked here.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    @use "../../styles/core/mixins" as *;
+
+    .technical-strength {
+        color: var(--text-primary);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .strength-layout {
+        display: grid;
+        grid-template-columns: 1.2fr 1.5fr;
+        grid-template-areas: 
+            "content features"
+            "cta features";
+        gap: 0rem 5rem;
+        align-items: start;
+
+        @include lg {
+            grid-template-columns: 1fr;
+            grid-template-areas: 
+                "content"
+                "features"
+                "cta";
+            gap: 2rem;
+            align-items: center;
+        }
+    }
+
+
+    .cta-wrapper {
+        grid-area: cta;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1rem;
+
+        @include lg {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    .cta-info {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+        line-height: 1.4;
+
+        @media (max-width: 500px) {
+            max-width: 160px; // Constraints text to wrap into approximately two lines
+            text-align: center;
+        }
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border-light);
+        border-radius: 1rem;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .icon-wrapper {
+        margin-bottom: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .icon-container {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 999px;
+        background-color: rgba(255, 255, 255, 0.06);
+        background-size: 24px;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon {
+        font-size: 1.50rem;
+    }
+
+    .feature-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+</style>

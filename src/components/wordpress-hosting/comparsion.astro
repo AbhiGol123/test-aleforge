@@ -1,0 +1,338 @@
+---
+// Comparison Component for WordPress Hosting
+const plans = [
+    {
+        name: "Quartz",
+        price: "$7.99",
+        period: "/mo",
+        offer: "+ 2 months free",
+        highlight: false,
+        button: "Get started",
+    },
+    {
+        name: "Ruby",
+        price: "$15.99",
+        period: "/mo",
+        offer: "+ 2 months free",
+        highlight: false,
+        button: "Get started",
+    },
+    {
+        name: "Diamond",
+        price: "$33.99",
+        period: "/mo",
+        offer: "+ 2 months free",
+        highlight: false,
+        button: "Get started",
+    },
+];
+
+const categories = [
+    {
+        title: "Technical Specifications",
+        isOpen: true,
+        features: [
+            {
+                name: "PHP Workers",
+                info: "Number of PHP workers per site",
+                values: ["2 Workers", "3 Workers", "5 Workers"],
+            },
+            {
+                name: "CPU Cores",
+                info: "Dedicated CPU cores",
+                values: ["2 CPU Cores", "3 CPU Cores", "5 CPU Cores"],
+            },
+            {
+                name: "NVMe SSD Storage",
+                info: "High-speed NVMe storage",
+                values: ["15 Gb", "25 Gb", "55 Gb"],
+            },
+            {
+                name: "Burstable PHP Workers",
+                info: "Handle traffic spikes",
+                values: ["Addon", "Addon", "Addon"],
+            },
+            {
+                name: "WP CLI",
+                info: "Command line interface for WordPress",
+                values: [true, true, true], // true renders a checkmark
+            },
+        ],
+    },
+    {
+        title: "Panel Features",
+        isOpen: false,
+        features: [
+            {
+                name: "Control Panel",
+                info: null,
+                values: ["Custom Panel", "Custom Panel", "Custom Panel"],
+            },
+            {
+                name: "1-Click Staging",
+                info: null,
+                values: [true, true, true],
+            },
+            {
+                name: "Team Management",
+                info: null,
+                values: [true, true, true],
+            },
+        ],
+    },
+    {
+        title: "Speed And Security",
+        isOpen: false,
+        features: [
+            {
+                name: "Free SSL",
+                info: null,
+                values: [true, true, true],
+            },
+            {
+                name: "DDoS Protection",
+                info: null,
+                values: ["Standard", "Advanced", "Enterprise"],
+            },
+            {
+                name: "CDN",
+                info: null,
+                values: [true, true, true],
+            },
+        ],
+    },
+    {
+        title: "Disaster Recovery",
+        isOpen: false,
+        features: [
+            {
+                name: "Daily Backups",
+                info: null,
+                values: [true, true, true],
+            },
+            {
+                name: "Retention Period",
+                info: null,
+                values: ["14 Days", "30 Days", "30 Days"],
+            },
+        ],
+    },
+    {
+        title: "Locations",
+        isOpen: false,
+        features: [
+            {
+                name: "Data Centers",
+                info: null,
+                values: ["Global", "Global", "Global"],
+            },
+        ],
+    },
+];
+---
+
+<section class="comparison-section" id="comparsion">
+    <div class="section-padding global-padding">
+    <div class="container-large">
+        <div class="title-wrapper">
+            <h2 class="mb-4" data-i18n="comparsionComponent.premiumVsStandard">
+                Premium Vs Standard
+            </h2>
+            <p class="subtitle " data-i18n="comparsionComponent.hardwareEveryBudgetNoPerformance">
+                Hardware For Every Budget No Performance Compromises. Need Ultimate Power For
+                Modded Mayhem? We've Got You Covered.
+            </p>
+        </div>
+        <!-- Comparison Table Container -->
+        <div class="server-list-container relative max-w-7xl mx-auto overflow-x-auto mt-[60px]">
+            <!-- Header for Desktop (Not Sticky) -->
+            <div class="grid grid-cols-4 gap-4 mb-4 py-4 min-w-[800px]">
+                <div class="col-span-1 flex items-end pb-4">
+                    <!-- Empty corner cell -->
+                </div>
+                {
+                    plans.map((plan) => (
+                        <div class="col-span-1 mx-auto text-center px-4">
+                            <h3 class="mb-0" style="font-size: 16px;">{plan.name}</h3>
+                            <!-- Desktop Layout -->
+                            <div class="hidden md:block">
+                                <div class="flex flex-col">
+                                <div class="flex items-center  gap-1 mb-1">
+                                    <span class="text-2xl font-bold text-white">{plan.price}</span>
+                                    <span class="text-xs">{plan.period}</span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#00CA00] shadow-[0_0_8px_#00CA00]"></span>
+                                    <span class="text-xs">{plan.offer}</span>
+                                </div>
+                                <a href="" style="display: flex; justify-items: flex-start;">
+                                <button class="button-secondary" data-i18n="comparsionComponent.getStarted">
+                                    Get started
+                                </button>
+                                </a>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Layout -->
+                            <div class="md:hidden">
+                                <div class="flex items-baseline justify-center gap-1 mb-1">
+                                    <span class="text-2xl font-bold text-white">{plan.price}</span>
+                                    <span class="text-xs text-[var(--text-secondary)]">{plan.period}</span>
+                                </div>
+                                <div class="flex items-center justify-center gap-2 mb-4">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#00CA00] shadow-[0_0_8px_#00CA00]"></span>
+                                    <span class="text-xs text-[var(--text-secondary)]">{plan.offer}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Categories -->
+            <div class="space-y-4">
+                {
+                    categories.map((category, index) => (
+                        <div class="border border-[var(--border-light)] rounded-2xl bg-transparent overflow-hidden transition-all duration-300 min-w-[800px]">
+                            <!-- Category Header (Accordion Toggle) -->
+                            <button
+                                class="w-full px-6 py-4 flex items-center justify-between gap-4 bg-[#2D304E]/10 hover:bg-[var(--bg-card-hover)] transition-colors cursor-pointer text-left"
+                                onclick={`toggleAccordion('cat-${index}')`}
+                            >
+                                <span class="text-lg  text-white">{category.title}</span>
+                                <svg
+                                    id={`icon-cat-${index}`}
+                                    class={`w-5 h-5 transform transition-all duration-300 ${category.isOpen ? "rotate-180 text-[var(--accent)]" : "text-white"}`}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+
+                            <!-- Category Content -->
+                            <div
+                                id={`content-cat-${index}`}
+                                class={`transition-all duration-300 ease-in-out overflow-hidden ${category.isOpen ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}
+                            >
+                                <div class="px-6 py-2">
+                                    {category.features.map((feature, fIndex) => (
+                                        <div class={`grid grid-cols-4 gap-4 py-4 items-center ${fIndex !== category.features.length - 1 ? "border-b border-[var(--border-light)]/50" : ""}`}>
+                                            <!-- Feature Name (Mobile: Full width, Desktop: 1 col) -->
+                                            <div class="col-span-1 flex items-center gap-2">
+                                                <span class=" text-md">{feature.name}</span>
+                                                {feature.info && (
+                                                    <div class="group relative cursor-help">
+                                                        <svg class="w-3 h-3 text-[var(--text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <circle cx="12" cy="12" r="10" stroke-width="2" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16v-4m0-4h.01" />
+                                                        </svg>
+                                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-48 p-2 bg-black text-xs text-white rounded shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                                                            {feature.info}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <!-- Values (Mobile: Grid, Desktop: 3 cols) -->
+                                            <div class="col-span-3 grid grid-cols-3 gap-4">
+                                                {feature.values.map((value, vIndex) => (
+                                                    <div class="text-center md:text-center">
+                                                        <span class="hidden  text-[var(--text-muted)] block mb-1">{plans[vIndex].name}</span>
+                                                        {value === true ? (
+                                                            <svg class="w-5 h-5 text-white mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                                            </svg>
+                                                        ) : (
+                                                            <span class="text-sm text-white font-medium">{value}</span>
+                                                        )}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Bottom Pricing Row -->
+             <div class="mt-4 border border-[var(--border-light)] rounded-2xl bg-transparent overflow-hidden min-w-[800px]">
+                <button
+                    class="w-full px-6 py-4 flex items-center justify-between gap-4 bg-[#2D304E]/10 hover:bg-[#2D304E]/20 transition-colors cursor-pointer text-left"
+                    onclick="toggleAccordion('pricing-footer')"
+                >
+                    <span class="text-lg  text-white" data-i18n="comparsionComponent.pricing">Pricing</span>
+                    <svg
+                        id="icon-pricing-footer"
+                        class="w-5 h-5 text-white transform transition-all duration-300"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="content-pricing-footer" class="max-h-0 opacity-0 overflow-hidden transition-all duration-300">
+                    <div class="p-6 grid grid-cols-4 gap-4 items-center">
+                        <div class="col-span-1"></div>
+                        <div class="col-span-3 grid grid-cols-3 gap-4">
+                            {plans.map((plan) => (
+                                <div class="text-center">
+                                    <div class="text-xs text-[var(--text-muted)] mb-1">{plan.name}</div>
+                                    <div class="flex items-baseline justify-center gap-1 mb-1">
+                                        <span class="text-xl font-bold text-white">{plan.price}</span>
+                                        <span >{plan.period}</span>
+                                    </div>
+                                    <div class=" text-[var(--accent)] mb-3">{plan.offer}</div>
+                                    <button class="button-secondary" data-i18n="comparsionComponent.getStarted">
+                                    Get started
+                                </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<script is:inline>
+    function toggleAccordion(id) {
+        const content = document.getElementById(`content-${id}`);
+        const icon = document.getElementById(`icon-${id}`);
+        
+        if (content.classList.contains('max-h-0')) {
+            // Open
+            content.classList.remove('max-h-0', 'opacity-0');
+            content.classList.add('max-h-[1000px]', 'opacity-100');
+            icon.classList.add('rotate-180');
+            icon.classList.remove('text-white');
+            icon.classList.add('text-[var(--accent)]');
+        } else {
+            // Close
+            content.classList.add('max-h-0', 'opacity-0');
+            content.classList.remove('max-h-[1000px]', 'opacity-100');
+            icon.classList.remove('rotate-180');
+            icon.classList.add('text-white');
+            icon.classList.remove('text-[var(--accent)]');
+        }
+    }
+</script>
+
+<style>
+    .server-list-container::-webkit-scrollbar {
+        height: 6px;
+    }
+    .server-list-container::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 3px;
+    }
+    .server-list-container::-webkit-scrollbar-thumb {
+        background: white;
+        border-radius: 3px;
+    }
+</style>

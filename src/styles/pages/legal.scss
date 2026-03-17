@@ -1,0 +1,43 @@
+ @use "/src/styles/core/mixins.scss" as *;
+ 
+ 
+ .policy-wrapper {
+     display: flex;
+     justify-content: center;
+     padding: 40px 0px;
+     color: white;
+     flex-direction: column;
+     border-top: 1px solid #333;
+
+     @include sm {
+         padding: 20px 0px;
+     }
+ }
+
+ .tos-container {
+     width: 100%;
+     max-width: 650px;
+     line-height: 1.7;
+ }
+
+ h3 {
+     margin-top: 30px;
+     margin-bottom: 10px;
+     font-size: 30px;
+     font-weight: 500;
+
+     @include md {
+         font-size: 24px;
+     }
+
+     @include sm {
+         font-size: 22px;
+     }
+ }
+
+ ul {
+     padding-left: 20px;
+     margin-bottom: 10px;
+     padding-top: 20px;
+     list-style: disc;
+ }

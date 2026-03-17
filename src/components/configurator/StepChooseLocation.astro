@@ -1,0 +1,328 @@
+<div id="location-step" data-step="location" class="config-step bg-[var(--configurator-bg)] border border-[#FFFFFF]/12 rounded-2xl p-4 md:p-6">
+  <div class="flex items-start gap-4 mb-2">
+    <div
+      class="step-badge  flex-shrink-0 w-12 h-12 text-[34px] rounded-lg bg-[var(--configurator-text)] text-white flex items-center justify-center"
+    >
+      3
+    </div>
+    <div class="flex-1">
+      <h4 class="text-white text-[26px]" data-i18n="stepchooselocationComponent.chooseLocations">Choose a locations</h4>
+      <p class="font-[200]" style="font-size: 16px;" data-i18n="stepchooselocationComponent.chooseServerLocationWhichOther">
+        Choose the server location which you and other players will connect to.
+      </p>
+    </div>
+  </div>
+
+  <div class="border-b border-[#D9D9D9]/12 mb-4"></div>
+
+  <!-- Location Selector -->
+  <div class="location-selector" id="location-display">
+    <div class="location-info">
+      <span class="text-2xl" id="location-flag">🇺🇸</span>
+      <span class="text-white text-sm" id="location-name" data-i18n="stepchooselocationComponent.usCentralDallas">US CENTRAL (Dallas)</span>
+      <span class="text-red-500 text-xs" id="location-status" data-i18n="stepchooselocationComponent.n">• N/A</span>
+      <span class="bg-[#FFFFFF]/10 text-white text-xs px-2 py-1 rounded" data-i18n="stepchooselocationComponent.autoDetected">Auto-detected</span>
+    </div>
+    <button class="change-location-btn text-[#C8C8C8]" id="change-location-btn" data-i18n="stepchooselocationComponent.change"> CHANGE </button>
+  </div>
+
+  <!-- Location Dropdown Modal -->
+  <div
+    id="location-modal"
+    class="hidden mt-4 bg-[var(--location-card-bg)] border border-white/10 rounded-lg p-4 max-h-96 overflow-y-auto"
+  >
+    <div class="flex justify-between items-center mb-4">
+      <h4 class="text-white font-semibold" data-i18n="stepchooselocationComponent.selectLocation">Select Location</h4>
+      <button id="close-location-modal" class="text-[var(--text-muted)] hover:text-white"> ✕ </button>
+    </div>
+
+    <!-- Custom Region Filter Dropdown -->
+    <div class="relative mb-4" id="region-dropdown-wrapper">
+      <button
+        id="region-dropdown-trigger"
+        class="w-full bg-[var(--configurator-inner-bg)] border border-white/10 rounded-lg p-2.5 text-sm text-white flex justify-between items-center hover:border-[var(--accent)] transition-all"
+      >
+        <span id="selected-region-text" data-i18n="stepchooselocationComponent.allRegions2">All Regions</span>
+        <svg
+          class="w-4 h-4 text-[var(--text-muted)] transition-transform duration-300"
+          id="dropdown-arrow"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+
+      <div
+        id="region-dropdown-list"
+        class="hidden absolute top-full left-0 right-0 mt-1 bg-[var(--location-card-bg)] border border-white/10 rounded-lg overflow-hidden z-[100] shadow-2xl backdrop-blur-md"
+      >
+        <div class="max-h-60 overflow-y-auto custom-scrollbar" id="region-options-container">
+          <button
+            class="region-option w-full text-left p-2.5 text-sm text-white hover:bg-[var(--accent)] transition-colors active"
+            data-value="all"
+           data-i18n="stepchooselocationComponent.allRegions2">
+            All Regions
+          </button>
+          <!-- Options will be populated dynamically -->
+        </div>
+      </div>
+    </div>
+    <div id="locations-list" class="space-y-2">
+      <!-- Locations will be populated here -->
+      <div class="text-center text-[var(--text-muted)] py-4" data-i18n="stepchooselocationComponent.loadingLocations">Loading locations...</div>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .location-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--configurator-inner-bg);
+    border: 1px solid var(--configurator-inner-border);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    gap: 1rem;
+
+    @media (max-width: 550px) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+  }
+
+  .location-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .change-location-btn {
+    border-bottom: 1px solid currentColor;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    @media (max-width: 550px) {
+      text-align: center;
+      border: 1px solid var(--border-light);
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      background: var(--accent);
+    }
+  }
+</style>
+<script>
+  // @ts-nocheck
+  import {configStore, setLocation} from "/src/stores/configuratorStore";
+
+  // console.log("[Location] Step mounted");
+
+  let locationsData = [];
+  let pings = {};
+  let lowestPingLocation = null;
+  let autoSelectedOnce = false;
+  let lastTier = null;
+  let manualSelectionMade = false;
+
+  /* ----------------------------
+     Fetch Locations (once)
+  -----------------------------*/
+  async function fetchLocations() {
+    try {
+      // console.log("[Location] Fetching locations...");
+
+      const response = await fetch("https://api.aleforge.net/?handler=pulldata&file=locations.json");
+
+      const json = await response.json();
+      locationsData = json.data || json;
+
+      populateLocations();
+    } catch (error) {
+      // console.error("[Location] Fetch failed:", error);
+    }
+  }
+
+  /* ----------------------------
+     React to Tier Change
+  -----------------------------*/
+  configStore.subscribe(() => {
+    const {selectedTier} = configStore.get();
+    if (!selectedTier) return;
+
+    // ✅ Ignore duplicate tier updates
+    if (selectedTier === lastTier) return;
+
+    // console.log("[Location] Tier changed:", selectedTier);
+    lastTier = selectedTier;
+
+    // Reset auto-selection per tier
+    lowestPingLocation = null;
+    autoSelectedOnce = false;
+    pings = {};
+
+    populateLocations();
+  });
+
+  /* ----------------------------
+     Ping Logic
+  -----------------------------*/
+  function pingLocation(location, element) {
+    if (!location.pingURL) return;
+
+    const pingDisplay = element.querySelector(".ping-value");
+    if (!pingDisplay) return;
+
+    const ws = new WebSocket(location.pingURL);
+    const timeout = setTimeout(() => ws.close(), 4000);
+
+    ws.onopen = () => {
+      const start = performance.now();
+      ws.send("ping");
+
+      ws.onmessage = () => {
+        const latency = Math.round(performance.now() - start);
+        clearTimeout(timeout);
+        ws.close();
+
+        pingDisplay.textContent = `${latency}ms`;
+        pings[location.id] = latency;
+
+        // ✅ Auto-select best once per tier
+        if (!autoSelectedOnce) {
+          if (!lowestPingLocation || latency < pings[lowestPingLocation.id]) {
+            lowestPingLocation = location;
+            autoSelectedOnce = true;
+
+            // console.log("[Location] Auto-selected:", location.name);
+            selectLocation(location, true);
+          }
+        }
+      };
+    };
+
+    ws.onerror = () => {
+      clearTimeout(timeout);
+      pingDisplay.textContent = "Offline";
+    };
+  }
+
+  /* ----------------------------
+     Render Locations
+  -----------------------------*/
+  function populateLocations() {
+    const list = document.getElementById("locations-list");
+    if (!list || !locationsData.length) return;
+
+    const {selectedTier} = configStore.get();
+    const tierKey = `has${selectedTier.charAt(0).toUpperCase()}${selectedTier.slice(1)}`;
+
+    // console.log("[Location] Rendering for tier:", selectedTier);
+
+    list.innerHTML = "";
+
+    locationsData.forEach((location) => {
+      const isAvailable = !!location[tierKey] && !location.comingSoon;
+      // console.log(
+      //   "[Location Check]",
+      //   location.name,
+      //   "tierKey:",
+      //   tierKey,
+      //   "value:",
+      //   location[tierKey],
+      //   "available:",
+      //   isAvailable
+      // );
+
+      const btn = document.createElement("button");
+      btn.className =
+        "w-full flex items-center justify-between p-3.5 bg-white/5 border border-white/5 rounded-xl transition-colors group mb-2";
+
+      const statusText = location.comingSoon ? "COMING SOON" : isAvailable ? "AVAILABLE" : "NOT AVAILABLE";
+
+      const statusColor = location.comingSoon ? "text-yellow-500" : isAvailable ? "text-green-500" : "text-red-500";
+
+      btn.innerHTML = `
+      <div class="flex items-center gap-3">
+        <span class="text-xl">${location.flag || "🌍"}</span>
+        <div class="text-left">
+          <div class="text-white text-sm font-medium">${location.name}</div>
+          <div class="text-[var(--text-muted)] text-[10px] ping-value">
+            ${isAvailable ? "Testing..." : "N/A"}
+          </div>
+        </div>
+      </div>
+
+      <span class="text-[10px] ${statusColor} uppercase font-bold tracking-tight">
+        • ${statusText}
+      </span>
+    `;
+
+      // -------------------
+      // Disabled locations
+      // -------------------
+      if (!isAvailable) {
+        btn.classList.add("opacity-50", "cursor-not-allowed");
+        btn.disabled = true;
+        list.appendChild(btn);
+        return;
+      }
+
+      // -------------------
+      // Clickable locations
+      // -------------------
+      btn.addEventListener("click", () => {
+        manualSelectionMade = true;
+        selectLocation(location, false);
+      });
+
+      list.appendChild(btn);
+
+      // Only ping available locations
+      pingLocation(location, btn);
+    });
+  }
+
+  /* ----------------------------
+     Select Location
+  -----------------------------*/
+  function selectLocation(location, isAuto) {
+    console.log("[Location] Selected:", location.name, "auto:", isAuto);
+    setLocation(location);
+
+    const locationFlag = document.getElementById("location-flag");
+    const locationName = document.getElementById("location-name");
+    const locationStatus = document.getElementById("location-status");
+
+    if (locationFlag) locationFlag.textContent = location.flag || "🌍";
+    if (locationName) locationName.textContent = location.name;
+    if (locationStatus) {
+      locationStatus.textContent = isAuto ? "• Auto" : "• Selected";
+      locationStatus.className = "text-xs text-green-500";
+    }
+  }
+
+  /* ----------------------------
+     Modal Controls
+  -----------------------------*/
+  const changeBtn = document.getElementById("change-location-btn");
+  const closeBtn = document.getElementById("close-location-modal");
+  const modal = document.getElementById("location-modal");
+
+  changeBtn?.addEventListener("click", () => {
+    modal?.classList.remove("hidden");
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    modal?.classList.add("hidden");
+  });
+
+  /* ----------------------------
+     Init
+  -----------------------------*/
+  fetchLocations();
+</script>

@@ -1,0 +1,120 @@
+---
+const modpacks = [
+  {name: "Tekkit", logo: "../../assets/images/icons/General/gameServer/Frame 2147226256.webp"},
+  {name: "Pixelmon", logo: "../../assets/images/icons/General/gameServer/idn_j6zXom_logos.webp"},
+  {name: "Forge", logo: "../../assets/images/icons/General/gameServer/logo-named 1.webp"},
+  {name: "Spigot", logo: "../../assets/images/icons/General/gameServer/PikPng.com_minecraft-logo-png_542906.webp"},
+  {name: "Bukkit", logo: "../../assets/images/icons/General/gameServer/spigot 1.webp"}
+];
+---
+
+<section class="modpack-section mt-10">
+  <div class="global-padding">
+    <div class="container-large">
+      <div class="relative overflow-hidden rounded-3xl border border-[#FFFFFF]/10 bg-[#0C0D18]/12 p-8 md:p-12 lg:p-16">
+        <div
+          class="relative z-10 flex flex-col lg:flex-row justify-between items-center lg:items-start text-center lg:text-left gap-8 lg:gap-16 mb-16"
+        >
+          <!-- Left Side -->
+          <div class="max-w-2xl">
+            <p class="overline" data-i18n="modpackComponent.allFavoriteModpacks">All Of Your Favorite Modpacks</p>
+            <h2 class="text-white leading-tight">
+              Powering Every Modpack, <br class="hidden md:block" /> Platform, And Plugin
+            </h2>
+          </div>
+
+          <!-- Right Side -->
+          <div class="max-w-md flex flex-col items-center lg:items-start">
+            <p class="text-[var(--text-secondary)] text-base md:text-lg mb-6 leading-relaxed">
+              From <span class="text-white" data-i18n="modpackComponent.instant">Instant</span> One-Click Installers To Full Manual Customization, Our Panel Is
+              <span class="text-white" data-i18n="modpackComponent.engineeredSupport">Engineered To Support </span>Every Way You Want To Play.
+            </p>
+            <a
+              href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=relevancy&class=modpacks"
+              class="button-secondary">View them all</a
+            >
+          </div>
+        </div>
+
+        <!-- Modpack Logos Grid/Marquee -->
+        <div class="relative z-10 w-full overflow-hidden">
+          <!-- Marquee for all screens -->
+          <div class="flex animate-marquee">
+            <div class="flex gap-4 md:gap-6 pr-4 md:pr-6 flex-shrink-0">
+              {
+                modpacks.map((mod) => (
+                  <div class="marquee-item group relative flex items-center justify-center rounded-xl border border-dashed border-[#FFFFFF]/10 bg-[#FFFFFF]/[0.02] hover:bg-[#FFFFFF]/[0.05] hover:border-[#FFFFFF]/20 transition-all duration-300">
+                    <img
+                      src={mod.logo}
+                      alt={mod.name}
+                      class="max-h-12 max-w-[80%] opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                    />
+                    <span class="hidden text-white/40 font-bold text-xl uppercase tracking-wider group-hover:text-white transition-colors">
+                      {mod.name}
+                    </span>
+                  </div>
+                ))
+              }
+            </div>
+            <!-- Duplicate for seamless scroll -->
+            <div class="flex gap-4 md:gap-6 pr-4 md:pr-6 flex-shrink-0" aria-hidden="true">
+              {
+                modpacks.map((mod) => (
+                  <div class="marquee-item group relative flex items-center justify-center rounded-xl border border-dashed border-[#FFFFFF]/10 bg-[#FFFFFF]/[0.02] hover:bg-[#FFFFFF]/[0.05] hover:border-[#FFFFFF]/20 transition-all duration-300">
+                    <img
+                      src={mod.logo}
+                      alt={mod.name}
+                      class="max-h-12 max-w-[80%] opacity-50 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+                    />
+                    <span class="hidden text-white/40 font-bold text-xl uppercase tracking-wider group-hover:text-white transition-colors">
+                      {mod.name}
+                    </span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .modpack-section {
+    overflow: hidden;
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+    display: flex;
+    width: max-content;
+  }
+
+  .marquee-item {
+    flex-shrink: 0;
+    width: 180px;
+    height: 80px;
+
+    @media (max-width: 640px) {
+      width: 160px;
+      height: 70px;
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Optional: Pause on hover */
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+</style>
