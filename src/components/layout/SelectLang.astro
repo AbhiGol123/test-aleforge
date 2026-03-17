@@ -67,7 +67,7 @@
     const nextUrl = `${target}${window.location.search || ""}${window.location.hash || ""}`;
     const currentUrl = `${window.location.pathname}${window.location.search || ""}${window.location.hash || ""}`;
     if (nextUrl !== currentUrl) {
-      // window.location.href = nextUrl;
+      window.location.href = nextUrl;
     }
   }
 
