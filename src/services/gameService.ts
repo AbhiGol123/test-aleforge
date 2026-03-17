@@ -43,7 +43,7 @@ export async function getGamesWithMinPrice() {
     `);
 
     if (!Array.isArray(cmsGames) || cmsGames.length === 0) {
-      console.warn("⚠️ No games found in CMS");
+      console.warn("⚠️ No games Test found in CMS");
       return [];
     }
 
