@@ -64,9 +64,26 @@
     window.dispatchEvent(new CustomEvent("site-lang-change", {detail: {lang}}));
 
     const target = buildLangPath(lang);
-    const nextUrl = `${target}${window.location.search || ""}${window.location.hash || ""}`;
+
+    // const nextUrl = `${target}${window.location.search || ""}${window.location.hash || ""}`;
+    // const currentUrl = `${window.location.pathname}${window.location.search || ""}${window.location.hash || ""}`;
+    // if (nextUrl !== currentUrl) {
+    //   window.location.href = nextUrl;
+    // }
+    
+    let finalTarget = target;
+    if (window.location.pathname !== '/' && window.location.pathname.endsWith('/') && !finalTarget.endsWith('/')) {
+        finalTarget += '/';
+    }
+
+    const nextUrl = `${finalTarget}${window.location.search || ""}${window.location.hash || ""}`;
     const currentUrl = `${window.location.pathname}${window.location.search || ""}${window.location.hash || ""}`;
-    if (nextUrl !== currentUrl) {
+
+    // Normalize slashes for comparison to prevent redirect loops
+    const normNext = nextUrl.replace(/\/(?=[?#]|$)/g, '');
+    const normCurrent = currentUrl.replace(/\/(?=[?#]|$)/g, '');
+
+    if (normNext !== normCurrent) {
       window.location.href = nextUrl;
     }
   }
