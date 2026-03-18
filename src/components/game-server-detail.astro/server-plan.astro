@@ -4,6 +4,7 @@ import firstPlanIcon from "../../assets/images/pages/gameServers/server-details/
 import secondPlanIcon from "../../assets/images/pages/gameServers/server-details/second-plan-icon.webp";
 import thirdPlanIcon from "../../assets/images/pages/gameServers/server-details/third-plan-icon.webp";
 import fourthPlanIcon from "../../assets/images/pages/gameServers/server-details/fourth-plan-icon.webp";
+import { getAllPlansData } from "../../services/planService";
 
 const categories = game?.hasBudget
   ? [
@@ -18,12 +19,8 @@ const categories = game?.hasBudget
 
 async function getDynamicPlans() {
   try {
-    const res = await fetch(
-      "https://plans-api.aleforge-llc.workers.dev/v2?handler=pulldata&file=plans.json"
-    );
-    if (!res.ok) throw new Error("Failed to fetch plans");
-    const allPlans = await res.json();
-    const allPlansData = allPlans?.data || {};
+    const allPlansData = await getAllPlansData();
+    if (!allPlansData) throw new Error("Failed to fetch plans");
     const minRam = Number(game?.minRam);
     console.log('min ram', minRam)
     const excludedGameIds = [2771, 2772];
