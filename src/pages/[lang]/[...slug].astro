@@ -88,7 +88,7 @@ if (!SUPPORTED_LANGS.includes(lang || "")) {
   return Astro.redirect("/404");
 }
 
-const routeKey = Array.isArray(slug) ? slug.join("/") : "";
+const routeKey = Array.isArray(slug) ? slug.join("/") : (slug || "");
 
 const routeMap: Record<string, any> = {
   "": HomePage,

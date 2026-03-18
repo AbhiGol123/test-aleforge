@@ -66,8 +66,13 @@
     const target = buildLangPath(lang);
     const nextUrl = `${target}${window.location.search || ""}${window.location.hash || ""}`;
     const currentUrl = `${window.location.pathname}${window.location.search || ""}${window.location.hash || ""}`;
-    if (nextUrl !== currentUrl) {
-      // window.location.href = nextUrl;
+    
+    // Normalize trailing slashes for comparison to prevent infinite reload loops
+    const normNext = nextUrl === "/" ? "/" : nextUrl.replace(/\/($|\?|#)/, '$1');
+    const normCur = currentUrl === "/" ? "/" : currentUrl.replace(/\/($|\?|#)/, '$1');
+
+    if (normNext !== normCur) {
+      window.location.href = nextUrl;
     }
   }
 
