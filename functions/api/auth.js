@@ -6,6 +6,6 @@ export async function onRequest(context) {
     return new Response("Missing GITHUB_CLIENT_ID in Cloudflare environment variables.", { status: 500 });
   }
 
-  const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=repo,user`;
+  const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${client_id}&scope=repo`;
   return Response.redirect(githubAuthUrl, 302);
 }
