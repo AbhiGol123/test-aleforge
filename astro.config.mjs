@@ -3,8 +3,11 @@ import tailwindcss from '@tailwindcss/vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'node:path';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   output: 'static',
+
   vite: {
     resolve: {
       alias: {
@@ -30,4 +33,6 @@ export default defineConfig({
       allowedHosts: ['.ngrok-free.app'],
     },
   },
+
+  adapter: cloudflare()
 });

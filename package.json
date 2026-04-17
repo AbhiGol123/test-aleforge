@@ -5,11 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "pnpm run build && wrangler dev",
     "astro": "astro",
-    "i18n:generate": "node scripts/generate-i18n-html.mjs"
+    "i18n:generate": "node scripts/generate-i18n-html.mjs",
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "12",
     "@sanity/client": "^7.14.0",
     "@sanity/image-url": "^2.0.2",
     "astro": "^5.15.3",
@@ -26,6 +29,7 @@
     "sass": "^1.94.2",
     "sass-embedded": "^1.93.3",
     "tailwindcss": "^4.1.17",
-    "vite-plugin-static-copy": "^3.1.4"
+    "vite-plugin-static-copy": "^3.1.4",
+    "wrangler": "^4.83.0"
   }
 }
